@@ -1,0 +1,34 @@
+[
+    {
+      "Name": "Defender for cloud V2",
+      "Language": "English",
+      "BaseURL": "https://github.com/CloudLabsAI-Azure/Defender-for-Cloud-v2",
+      "Files": [
+        {
+          "RawFilePath": "",
+          "Order": 1
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module 1 - Recommendation triggers.md",
+          "Order": 2
+        },
+        {
+          "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-900T0x-MicrosoftAzureFundamentals/prod/Instructions/CloudLabs.AI/02-Create%20a%20Web%20App.md",
+          "Order": 3
+        },
+        {
+            "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-900T0x-MicrosoftAzureFundamentals/prod/Instructions/CloudLabs.AI/03-Deploy%20Azure%20Container%20Instances.md",
+            "Order": 4
+        },
+        {
+            "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-900T0x-MicrosoftAzureFundamentals/prod/Instructions/CloudLabs.AI/04-Create%20a%20virtual%20network.md",
+            "Order": 5
+        },
+        {
+            "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MOC/AZ-900T0x-MicrosoftAzureFundamentals/prod/Instructions/CloudLabs.AI/05-Create%20Blob%20storage.md",
+            "Order": 6
+        }
+    
+      ]
+    }
+  ]
