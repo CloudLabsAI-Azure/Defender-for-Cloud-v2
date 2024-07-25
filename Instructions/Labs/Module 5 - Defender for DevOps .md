@@ -495,91 +495,6 @@ To get detailed and up-to-date pricing information, you can refer to the [Micros
 By following these steps, you can effectively utilize Microsoft Defender for DevOps to secure your DevOps environment and ensure the security of your CI/CD pipelines and code repositories.
 
 ## Task 5: Securing your pipeline with GHAS and Defender for DevOps  
-### Task 1: Connect Azure DevOps Environment to Microsoft Defender for Cloud
-
-1. Sign in to the Azure portal, using the below credentials
-
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
-
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
-
-1. Search and select **Microsoft Defender for Cloud** from the portal
-
-    ![alert_detected](images/mls2.png)
-
-1. Select **skip** on **Getting started** tab.
-
-    ![alert_detected](images/mls1.png)
-
-1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
-
-    ![alert_detected](images/advlab51.png)
-
-1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
-
-   | Setting  | Value |
-   -----------|---------
-   | Connector name | AzureDevopsconnector |
-   | Subscription | Choose the default subscription |
-   | Resource group | Lab-VM |
-   | Location | Select any supporting region |
-
-    ![alert_detected](images/advlab52.png)
-
-1. Select **Next: Configure access**
-
-1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
-
-1. In the popup dialog, read the list of permission requests, and then select **Accept**.
-
-    ![alert_detected](images/advlab53.png)
-
-1. Leave all other settings as default.
-
-1. Select **Next: Review and generate**.
-
-1. Review the information, and then select **Create**.
-
-1. Wait for some time to view the connector on the **Environment settings** page.
-
-    ![alert_detected](images/advlab54.png)
-
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
-> - Click the Lab Validation tab located at the upper right corner of the lab guide section and navigate to the Lab Validation Page.
-> - Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task. 
-> - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-> - If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
-
-<validation step="c52850e5-7c62-4d01-a624-175043de84b6" />
-
-### Task 2: Understanding your DevOps security
-
-1. Navigate to **DevOps Security** under **Cloud Security**.
-
-    ![alert_detected](images/advlab55.png)
-
-1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
-
-    ![alert_detected](images/m51.png)
-
-   >**Note:** It might take upto 8hrs to reflect the real-time status.
-
-1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
-
-    ![alert_detected](images/m55.png)
-
-    ![alert_detected](images/m52.png)
-
-1. Navigate to the **Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
-
-    ![alert_detected](images/m53.png)
-
-1. Similarly, navigate to the **OSS Vulnerabilities** tab and identify the issues, then take note of the recommendations provided to resolve the issues.
-
-    ![alert_detected](images/m54.png)
-
- Please feel free to go through these links for further understanding: [Application Security](https://info.microsoft.com/US-DevOps-VDEO-FY24-02Feb-12-GitHub-and-AI-A-Powerful-Duo-for-Application-Security-Testing-SRGCM11732_LP01-Registration---Form-in-Body.html) and [Email Reactor](https://developer.microsoft.com/en-us/reactor/series/S-1311/?wt.mc_id=promotional_S-1311_email_reactor)
-
 
 ## Task 6: Connecting your Azure DevOps environment to MDC 
 
@@ -630,7 +545,7 @@ For information on service connections and various authentication methods in Azu
      - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
      - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments. 
 
-      ![](images/def1.png)
+      ![](mages/def1.png)
 
 2. Data sensitivity context is also used in Security Alerts and you can quickly filter based on the type of Sensitivity Information. Navigate to **Security alerts** click on **Add filters**, and set it to **Sensitivity info types**.
 
@@ -655,24 +570,24 @@ In this exercise, you will learn how to enable Defender for CSPM and leverage De
 
 1. In **Azure Portal**, search for **Microsoft Defender for Cloud (1)** and then click on it from the search results **(2)**. 
 
-      ![](images/m1-img1.png)
+      ![](../images/m1-img1.png)
 
 2. From **Defender for Cloud** menu, click on **Environment Settings (1)** page and select your subscription **(2)**.
 
-      ![](images/m1-img2.png)
+      ![](../images/m1-img2.png)
 
 3. In the **Defender plans** page, select **Defender CSPM** turn the status to **On (1)** and select **Settings & monitoring (2)**.
 
-      ![](images/m1-img3.png)
+      ![](../images/m1-img3.png)
 
 4. Turn **On (1)** the **Agentless scanning for machines (preview)** and click **Continue (2)**.
 
-      ![](images/m1-img4.png)
+      ![](../images/m1-img4.png)
 
 5. Click on **Save** to save the changes. 
 
    >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
 
-      ![](images/m1-img5.png)
+      ![](../images/m1-img5.png)
 
  
