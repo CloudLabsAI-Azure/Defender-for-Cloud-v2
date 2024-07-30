@@ -1,8 +1,8 @@
 ## Module 5 – Defender for DevOps 
 
-## Task 1: Understanding CI/CD pipelines in Azure DevOps 
+## Exercise 1: Understanding CI/CD pipelines in Azure DevOps 
 
-### Set up an Azure DevOps organization (Skip if already done).
+### Task 1:  Set up an Azure DevOps organization.
 
 1. On your lab VM open **Edge Browser** on desktop and navigate to [Azure DevOps](https://go.microsoft.com/fwlink/?LinkId=307137), and if prompted sign with the credentials.
 
@@ -19,453 +19,372 @@
 4. On the **Almost Done...** page fill the captcha and click on continue. 
 
    ![](images/AZ-400-almost.png)
+    
+5. On the Azure DevOps page click on **Azure DevOps** located at top left corner and then click on **Organization Setting** at the left down corner
 
-### Exercise 0: Configure the lab prerequisites
+    ![Azure DevOps](images/az-400-lab3-(1).png)
+    
+6. In the **Organization Setting** window on the left menu click on **Billing (1)** and select **Setup Billing (2)** then click on **save (3)**.
 
-In this exercise, you will set up the prerequisites for the lab, which consist of a new Azure DevOps project with a repository based on the **eShopOnWeb**.
+    ![Azure DevOps](images/az-400-lab3-1.png)
+    
+    ![Azure DevOps](images/az-400-lab3-2.png)    
 
-#### Task 1: Create and configure the team project
+7. On the **MS Hosted CI/CD (1)** section under **Paid parallel jobs** enter value **1** and at the end of the page click on **Save (2)**.
 
-In this task, you will create an **eShopOnWeb** Azure DevOps project to be used by several labs.
+    ![Azure DevOps](images/az-400-lab3-3.png)
 
-   1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **eShopOnWeb (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
+8. In the **Organization Setting** window on the left menu click on **Policies** and enable **Third-party application access via OAuth**.
+
+    ![Azure DevOps](images/policies-enable-3rd.png)
+
+1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **eShopOnWeb (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
       ![](images/az400-m3-L4-03.png)
-
-#### Task 2: Import eShopOnWeb Git Repository
-
-  In this task you will import the eShopOnWeb Git repository that will be used by several labs.
-  
-   1. On your lab computer, in a browser window open your Azure DevOps organization and the previously created eShopOnWeb project. Click on             **Repos (1)>Files (2) , Import a Repository**. Select **Import (3)**. On the **Import a Git Repository (4)** window, paste the following URL                     https://github.com/MicrosoftLearning/eShopOnWeb.git (5) and click **Import (6)**.
+      
+1. Click on **Repos (1)>Files (2) , Import a Repository**. Select **Import (3)**. On the **Import a Git Repository (4)** window, paste the following URL https://github.com/MicrosoftLearning/eShopOnWeb.git (5) and click **Import (6)**.
 
       ![](images/AZ-400-import.png)
       
       ![](images/AZ-400-git.png)
 
-   2. The repository is organized the following way:
+2. The repository is organized the following way:
 
-         o. **.ado** folder contains Azure DevOps YAML pipelines
+      o. **.ado** folder contains Azure DevOps YAML pipelines
          
-         o **.devcontainer** folder container setup to develop using containers (either locally in VS Code or GitHub Codespaces)
+      o **.devcontainer** folder container setup to develop using containers (either locally in VS Code or GitHub Codespaces)
          
-         o **.azure** folder contains Bicep & ARM infrastructure as code templates used in some lab scenarios.
+      o **.azure** folder contains Bicep & ARM infrastructure as code templates used in some lab scenarios.
          
-         o **.github** folder contains YAML GitHub workflow definitions.
+      o **.github** folder contains YAML GitHub workflow definitions.
          
-         o. **src** folder contains the .NET 6 website used in the lab scenarios.
+      o. **src** folder contains the .NET 6 website used in the lab scenarios.
          
-       ![](images/az400-m3-L4-06.png)
+      ![](images/az400-m3-L4-06.png)
          
- ### Exercise 1: Include build validation as part of a Pull Request
- 
- In this exercise, you will include build validation to validate a Pull Request.
- 
- #### Task 1: Import the YAML build definition
- 
- In this task, you will import the YAML build definition that will be used as a Branch Policy to validate the pull requests.
- 
- Let's start by importing the build pipeline named **eshoponweb-ci-pr.yml**.
- 
-   1. Go to **Pipelines (1)>Pipelines (2)**. Click on **Create Pipeline (3)** or **New Pipeline** button.
+### Task 2: Create Azure resources
 
-      ![](images/AZ-400-create.png)  
+In this task, you will create an Azure web app by using the Azure portal.
 
-   2. Select **Azure Repos Git (YAML)**
+1. From the lab computer, start a web browser, navigate to the [**Azure Portal**](https://portal.azure.com), and sign in with the user account that has the Owner role in the Azure subscription you will be using in this lab and has the role of the Global Administrator in the Azure AD tenant associated with this subscription.
 
-      ![](images/AZ-400-code.png)
+1. In the Azure portal, in the toolbar, click the **Cloud Shell** icon located directly to the right of the search text box.
+1. If prompted to select either **Bash** or **PowerShell**, select **Bash**.
 
-   3. Select the **eShopOnWeb** repository.
+    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and select **Create storage**.
 
-      ![](images/az400-m3-L4-09.png)
+    > **Note:** for a list of regions and their alias, run the following command from the Azure Cloud Shell - Bash:
 
-   4. Select **Existing Azure Pipelines YAML File**
+    ```bash
+    az account list-locations -o table
+    ```
 
-      ![](images/az400-m3-L4-10.png)
+1. From the **Bash** prompt, in the **Cloud Shell** pane, run the following command to create a resource group (replace the `<region>` placeholder with the name of the Azure region closest to you such as 'centralus', 'westeurope' or other region of choice).
 
-   5. Select the path **/.ado/eshoponweb-ci-pr.yml(1)** file then click on **Continue(2)**
+    ```bash
+    LOCATION='<region>'
+    ```
 
-      ![](images/AZ-400-yaml.1.png)
+    ```bash
+    RESOURCEGROUPNAME='az400m05l11-RG'
+    az group create --name $RESOURCEGROUPNAME --location $LOCATION
+    ```
 
-       The build definition consists of the following tasks:
-      
-         o **DotNet Restore:** With NuGet Package Restore you can install all your project's dependency without having to store them in source                   control. 
-        
-         o **DotNet Build:** Builds a project and all of its dependencies.
-        
-         o **DotNet Test:** .Net test driver used to execute unit tests.
-        
-         o **DotNet Publish:** Publishes the application and its dependencies to a folder for deployment to a hosting system. In this case, it's                 **Build.ArtifactStagingDirectory**.
-        
-        ![](images/AZ-400-pipeline.png)
+1. To create a Windows App service plan by running the following command:
 
-   6. Click the **Save** button to save the pipeline definition
+    ```bash
+    SERVICEPLANNAME='az400m05l11-sp1'
+    az appservice plan create --resource-group $RESOURCEGROUPNAME --name $SERVICEPLANNAME --sku B3
+    ```
 
-      ![](images/az400-m3-L4-13.png)
-     
-   7. Your pipeline will take a name based on the project name. Let's **rename** it for identifying the pipeline better. Go to **Pipelines>Pipelines** and click on the recently created pipeline. Click on the **ellipsis (1)** and **Rename/move (2)** option.
-   
-      ![](images/AZ-400-eshop.png)
+1. Create a web app with a unique name.
 
-   8. Name it **eshoponweb-ci-pr (1)** and click on **Save (2)**.
+    ```bash
+    WEBAPPNAME=eshoponWebYAML$RANDOM$RANDOM
+    az webapp create --resource-group $RESOURCEGROUPNAME --plan $SERVICEPLANNAME --name $WEBAPPNAME
+    ```
 
-      ![](images/AZ-400-rename.png)    
+    > **Note**: Record the name of the web app. You will need it later in this lab.
 
-#### Task 2: Branch Policies
+1. Close the Azure Cloud Shell, but leave the Azure Portal open in the browser.
 
-In this task, you will add policies to the main branch and only allow changes using Pull Requests that comply with the defined policies. You want to ensure that changes in a branch are reviewed before they are merged.
+### Task 3: Configure CI/CD Pipelines as Code with YAML in Azure DevOps
 
-   1. Go to **Repos (1)>Branches (2)** section. On the **Mine** tab of the **Branches** pane, hover the mouse pointer over the **main (3)** branch entry to reveal the **ellipsis symbol (4)** on the right side.
+1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
+1. In the **Create your first Pipeline** window, click **Create pipeline**.
 
-      ![](images/az400-m3-L4-16.png)
+    > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
 
-   2. Click the **ellipsis (4)** and, in the pop-up menu, select **Branch Policies (5)**.
+1. On the **Where is your code?** pane, click **Azure Repos Git (YAML)** option.
 
-      ![](images/az400-m3-L4-17.png)
+1. On the **Select a repository** pane, click **eShopOnWeb_MultiStageYAML**.
 
-   3. On the main tab of the repository settings, enable the option for **Require minimum number of reviewers (1)**. Add **1 (2)** reviewer and check the box **Allow requestors to approve their own changes (3)**(as you are the only user in your project for the lab)
+1. On the **Configure your pipeline** pane, scroll down and select **Existing Azure Pipelines YAML File**.
 
-      ![](images/az400-m3-L4-18.png)
+1. In the **Selecting an existing YAML File** blade, specify the following parameters:
+- Branch: **main**
+- Path: **.ado/eshoponweb-ci.yml**
 
-   4. On the **main (1)** tab of the repository settings, in the **Build Validation (2)** section, **click + (Add a new build policy) (3)** and in the Build pipeline list, select **eshoponweb-ci-pr (4)** then click **Save (5)**
+7. Click **Continue** to save these settings.
 
-      ![](images/az400-m3-L4-19.png)
+8. From the **Review your Pipeline YAML** screen, click **Run** to start the Build Pipeline process.
+9. Wait for the Build Pipeline to complete successfully. Ignore any warnings regarding the source code itself, as they are not relevant for this lab exercise.
 
-      ![](images/AZ-400-build.png)
-      
-      >**Note**: If you get any error while saving the branch validation refresh the page and try again.
+    > **Note**: Each task from the YAML file is available for review, including any warnings and errors.
 
- #### Task 3: Working with Pull Requests
- 
- In this task, you will use the Azure DevOps portal to create a Pull Request, using a new branch to merge a change into the protected main branch.
- 
- 1. Navigate to the **Repos (1)->Branches (2)** section in the eShopOnWeb navigation and click **New Branch (3)**.
+### Task 4: Add continuous delivery to the YAML definition
 
-    ![](images/az400-m3-L4-21.png)
+In this task, you will add continuous delivery to the YAML-based definition of the pipeline you created in the previous task.
 
- 2. Create a new branch named **Feature01 (1)** based on the **main** branch and click **Create (2)**.
+  > **Note**: Now that the build and test processes are successful, we can now add delivery to the YAML definition.
 
-    ![](images/az-400-lab3-8.png)
+1. On the pipeline run pane, click the ellipsis symbol in the upper right corner and, in the dropdown menu, click **Edit pipeline**.
 
-3. Click **Feature01 (1)** and navigate to the **/eShopOnWeb/src(2)/Web(3)/Program.cs (4)** file as part of the **Feature01** branch and click on **edit (5)** to make the following change on the first line:
+1. On the pane displaying the content of the **eShopOnWeb_MultiStageYAML/.ado/eshoponweb-ci.yml** file, navigate to the end of the file (line 56), and hit **Enter/Return** to add a new empty line.
 
-   ```
-   // Testing my PR
-   ```
+1. Being on line **57**, add the following content to define the **Release** stage in the YAML pipeline.
 
-   ![](images/az400-m3-L4-23.png)
+    > **Note**: You can define whatever stages you need to better organize and track pipeline progress.
 
-   ![](images/az400-m3-L4-24.png)
-   
- 4. Click on **Commit > Commit** (leave default commit message).
+    ```yaml
+    - stage: Deploy
+      displayName: Deploy to an Azure Web App
+      jobs:
+      - job: Deploy
+        pool:
+          vmImage: 'windows-2019'
+        steps:
+    ```
 
-    ![](images/az400-m3-L4-25.png)
-    
-    ![](images/AZ-400-commit.png)
+1. Set the cursor on a new line at the end of the YAML definition.
 
-5. A message will pop-up, proposing to create a Pull Request (as your **Feature01** branch is now ahead in changes, compared to **main**). Click on **Create a Pull Request (1)**.
+    > **Note**: This will be the location where new tasks are added.
 
-    ![](images/az400-m3-L4-27.png)
+1. In the list of tasks on the right side of the code pane, search for and select the **Azure App Service Deploy** task.
 
-6. In the **New pull request (1)** tab, leave defaults and click on **Create (2)**.
-   
-   ![](images/AZ-400-newpr.png)
-   
-7. The Pull Request will show some pending requirements, based on the policies applied to the target **main** branch.
+1. In the **Azure App Service deploy** pane, specify the following settings and click **Add**:
 
-    - It shows **At least 1 user should review and approve the changes (1)**, click **Add (2)** select Required Reviewer and **select the Reviewer to complete the PR(3)**.
-    - Build validation, you will see that the build **eshoponweb-ci-pr** was triggered automatically
-     
-     ![](images/az400-m3-L4-29.png)
-     
-     ![](images/az400-m3-L4-30.png)    
-      
-8. After all validations are successful, on the top-right click on **Approve (1)**,  click on **Complete (3)**.  
+    - in the **Azure subscription** drop-down list, select the Azure subscription into which you deployed the Azure resources earlier in the lab, click **Authorize**, and, when prompted, authenticate by using the same user account you used during the Azure resource deployment.
+    - in the **App Service name** dropdown list, select the name of the web app you deployed earlier in the lab.
+    - in the **Package or folder** text box, **update** the Default Value to `$(Build.ArtifactStagingDirectory)/**/Web.zip`.
+1. Confirm the settings from the Assistant pane by clicking the **Add** button.
 
-9. On the **Complete Pull Request** tab, select only **Complete associated work items after merging** checkbox  and Click on **Complete Merge**
+    > **Note**: This will automatically add the deployment task to the YAML pipeline definition.
 
-   ![](images/az400-m3-L4-32.png)
+1. The snippet of code added to the editor should look similar to below, reflecting your name for the azureSubscription and WebappName parameters:
 
-### Exercise 2: Configure CI Pipeline as Code with YAML
+    ```yaml
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: 'AZURE SUBSCRIPTION HERE (b999999abc-1234-987a-a1e0-27fb2ea7f9f4)'
+            appType: 'webApp'
+            WebAppName: 'eshoponWebYAML369825031'
+            packageForLinux: '$(Build.ArtifactStagingDirectory)/**/Web.zip'
+    ```
 
-  In this exercise, you will configure CI Pipeline as code with YAML.
+1. Validate the task is listed as a child of the **steps** task. If not, select all lines from the added task, press the **Tab** key twice to indent it four spaces, so that it listed as a child of the **steps** task.
 
-#### Task 1: Import the YAML build definition
+    > **Note**: The **packageForLinux** parameter is misleading in the context of this lab, but it is valid for Windows or Linux.
 
-  In this task, you will add the YAML build definition that will be used to implement the Continuous Integration.
+    > **Note**: By default, these two stages run independently. As a result, the build output from the first stage might not be available to the second stage without additional changes. To implement these changes, we will add a new task to download the deployment artifact in the beginning of the deploy stage.
 
-  Let's start by importing the CI pipeline named **eshoponweb-ci.yml**.
+1. Place the cursor on the first line under the **steps** node of the **deploy** stage, and hit Enter/Return to add a new empty line (Line 64).
 
-  1. Go to **Pipelines>Pipelines (1)** and click on **New Pipeline (2)** button
+1. On the **Tasks** pane, search for and select the **Download build artifacts** task.
 
-     ![](images/az400-m3-L4-33.png)
+1. Specify the following parameters for this task:
+    - Download Artifacts produced by: **Current Build**
+    - Download Type: **Specific Artifact**
+    - Artifact Name: **Enter "Website" in the text box**
+    - Destination Directory: **$(Build.ArtifactStagingDirectory)**
 
-  2. Select **Azure Repos Git (YAML)**
+1. Click **Add**.
 
-      ![](images/AZ-400-repo.png)
+1. The snippet of added code should look similar to below:
 
-  3. Select the **eShopOnWeb** repository
+    ```yaml
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'Website'
+            downloadPath: '$(Build.ArtifactStagingDirectory)'
+    ```
+1. If the YAML indentation is off, With the added task still selected in the editor, press the **Tab** key twice to indent it four spaces.
 
-     ![](images/az400-m3-L4-35.png)
+    > **Note**: Here as well you may also want to add an empty line before and after to make it easier to read.
 
-  4. Select **Existing Azure Pipelines YAML File**
+1. Click **Save**, on the **Save** pane, click **Save** again to commit the change directly into the master branch.
 
-     ![](images/az400-m3-L4-36.png)
+    > **Note**: Since our original CI-YAML was not configured to automatically trigger a new build, we have to initiate this one manually.
 
-  5. Select the **/.ado/eshoponweb-ci.yml (1)** file then click on **Continue (2)**
+1. From the Azure DevOps left menu, navigate to **Pipelines** and select **Pipelines** again. 
 
-     ![](images/az400-m3-L4-37.png)
+1. Open the **EShopOnWeb_MultiStageYAML** Pipeline and click **Run Pipeline**.
 
-     The CI definition consists of the following tasks:
-     
-   o **DotNet Restore:** With NuGet Package Restore you can install all your project's dependency without having to store them in source control.
-       
-   o **DotNet Build:** Builds a project and all of its dependencies.
-       
-   o **DotNet Test:** .Net test driver used to execute unit tests.
-       
-   o **DotNet Publish:** Publishes the application and its dependencies to a folder for deployment to a hosting system. In this case, it's             **Build.ArtifactStagingDirectory**.
-       
-   o **Publish Artifact - Website:** Publish the app artifact (created in the previous step) and make it available as a pipeline artifact.
-       
-   o **Publish Artifact - Bicep:** Publish the infrastructure artifact (Bicep file) and make it available as a pipeline artifact.
-       
-              
-#### Task 2: Enable Continuous Integration
-   
-The default build pipeline definition doesn't enable Continuous Integration
-   
-1. Now, you need to replace the **trigger: none** code with the following code:
+1. Confirm the **Run** from the appearing pane.
 
-   ```
-      trigger:
-      branches:
-         include:
-         - main
-      paths:
-         include:
-         - src/web/*
-   ``` 
+1. Notice the 2 different Stages, **Build .Net Core Solution** and **Deploy to Azure Web App** appearing.
 
-   ![](images/az-400-lab3-7.png)
+1. Wait for the pipeline to kick off and wait until it completes the Build Stage successfully.
 
-   > **Note**: This will automatically trigger the build pipeline if any change is made to the main branch and the web application code (the src/web folder).Since you enabled Branch Policies, you need to pass by a Pull Request in order to update your code. 
-    
-2. Click the **Dropdown** and **Save** button (not **Save and run**) to save the pipeline definition.
+1. Once the Deploy Stage wants to start, you are prompted with **Permissions Needed**, as well as an orange bar saying 
+    ```
+    This pipeline needs permission to access a resource before this run can continue to Deploy to an Azure Web App
+    ```
+1. Click on **View**
 
-   ![](images/az400-m3-L4-(40)(1).png)
+1. From the **Waiting for Review** pane, click **Permit**.
+
+1. Validate the message in the **Permit popup** window, and confirm by clicking **Permit**.
+
+1. This sets off the Deploy Stage. Wait for this to complete successfully.
+
+     > **Note**: If the deployment should fail, because of an issue with the YAML Pipeline syntax, use this as a reference:
+
+     ```yaml
+    #NAME THE PIPELINE SAME AS FILE (WITHOUT ".yml")
+    # trigger:
+    # - main
+
+    resources:
+      repositories:
+        - repository: self
+          trigger: none
+
+    stages:
+    - stage: Build
+      displayName: Build .Net Core Solution
+      jobs:
+      - job: Build
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+        - task: DotNetCoreCLI@2
+          displayName: Restore
+          inputs:
+            command: 'restore'
+            projects: '**/*.sln'
+            feedsToUse: 'select'
+
+        - task: DotNetCoreCLI@2
+          displayName: Build
+          inputs:
+            command: 'build'
+            projects: '**/*.sln'
+
+        - task: DotNetCoreCLI@2
+          displayName: Test
+          inputs:
+            command: 'test'
+            projects: 'tests/UnitTests/*.csproj'
+
+        - task: DotNetCoreCLI@2
+          displayName: Publish
+          inputs:
+            command: 'publish'
+            publishWebProjects: true
+            arguments: '-o $(Build.ArtifactStagingDirectory)'
+
+        - task: PublishBuildArtifacts@1
+          displayName: Publish Artifacts ADO - Website
+          inputs:
+            pathToPublish: '$(Build.ArtifactStagingDirectory)'
+            artifactName: Website
+
+        - task: PublishBuildArtifacts@1
+          displayName: Publish Artifacts ADO - Bicep
+          inputs:
+            PathtoPublish: '$(Build.SourcesDirectory)/.azure/bicep/webapp.bicep'
+            ArtifactName: 'Bicep'
+            publishLocation: 'Container'
+
+    - stage: Deploy
+      displayName: Deploy to an Azure Web App
+      jobs:
+      - job: Deploy
+        pool:
+          vmImage: 'windows-2019'
+        steps:
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'Website'
+            downloadPath: '$(Build.ArtifactStagingDirectory)'
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: 'AZURE SUBSCRIPTION HERE (b999999abc-1234-987a-a1e0-27fb2ea7f9f4)'
+            appType: 'webApp'
+            WebAppName: 'eshoponWebYAML369825031'
+            packageForLinux: '$(Build.ArtifactStagingDirectory)/**/Web.zip'
+
+    ```
+
+### Task 5: Review the deployed site
+
+1. Switch back to web browser window displaying the Azure portal and navigate to the blade displaying the properties of the Azure web app.
+
+1. On the Azure web app blade, click **Overview** and, on the overview blade, click **Browse** to open your site in a new web browser tab.
+
+1. Verify that the deployed site loads as expected in the new browser tab, showing the EShopOnWeb E-commerce website.
   
-3. Select **Create a new branch for this commit (1)** Keep the default branch name and **Start a pull request(2)** checked. and Click on **Save(3)**
+## Exercise 2: Identifying security issues in the pipeline 
 
-   ![](images/AZ-400-save.png)
+#### Task 1: Activate Mend Bolt extension
 
-4. Your pipeline will take a name based on the project name. Let's **rename** it for identifying the pipeline better. Go to                          **Pipelines>Pipelines** and click on the recently created pipeline. Click on the **ellipsis (1)** and **Rename/move** option. Name it **eshoponweb-ci (2)**  and click on **Save (3)**.
+In this task, you will activate WhiteSource Bolt in the newly generated Azure Devops project.
 
-   ![](images/az400-m3-L4-42.png)
+1.  On your lab computer, in the web browser window displaying the Azure DevOps portal with the **eShopOnWeb** project open, click on the marketplace icon > **Browse Marketplace**.
 
-5. Go to **Repos (1)>Pullrequests (2)** and click on the existing pull request. After all validations are successful, on the top-right click on **Approve (3)**. Now you can click on **Complete (4)**.
+    ![Browse Marketplace](images/browse-marketplace.png)
 
-   ![](images/az400-m3-L4-43.png)
+1.  On the MarketPlace, search for **Mend Bolt (formerly WhiteSource)** and open it. Mend Bolt is the free version of the previously known WhiteSource tool, which scans all your projects and detects open source components, their license and known vulnerabilities.
 
-6. On the **Complete Pull Request** tab, select only **Complete associated work items after merging** checkbox  and Click on **Complete Merge**
+    > Warning: make sure you select the Mend **Bolt** option (the **free** one)!
 
-   ![](images/az400-m3-L4-44.png)
+1.  On the **Mend Bolt (formerly WhiteSource)** page, click on **Get it for free**.
 
-#### Task 3: Test the CI pipeline
- 
-In this task, you will create a Pull Request, using a new branch to merge a change into the protected main branch and automatically trigger the CI pipeline Navigate to the Repos section
- 
-1. Navigate to the **Repos (1)->Branches (2)** section. Create a **new branch (3)** named **Feature02 (4)** based on the **main** branch and Click on **Create (5)**
+    ![Get Mend Bolt](images/mend-bolt.png)
 
-   ![](images/az400-m3-L4-45.png)
-    
-   ![](images/az-400-lab3-9.png)
+1.  On the next page, select the desired Azure DevOps organization and **Install**. **Proceed to organization** once installed.
 
-2. Click the new **Feature02 (1)** branch and navigate to the **/eShopOnWeb/src (2)/Web (3)/Program.cs (4)** file and click on **Edit (5)** to remove the first line // **Testing my PR (6)** and click on commit.
-   
-   ![](images/az400-m3-L4-47.png)
-   
-   ![](images/az400-m3-L4-48.png)
+1.  In your Azure DevOps navigate to **Organization Settings** and select **Mend** under **Extensions**. Provide your Work Email (**your lab personal account**, e.g. using AZ400learner@outlook.com instead of student@microsoft.com ), Company Name and other details and click **Create Account** button to start using the Free version.
 
-3. Click on **Commit > Commit** (leave default commit message).
-   
-   ![](images/az400-m3-L4-49.png)
-
-4. A message will pop-up, proposing to create a Pull Request (as your **Feature02** branch is now ahead in changes, compared to main).
-
-5. Click on **Create a Pull Request**
-
-   ![](images/az400-m3-L4-50.png)
-
-6. In the **New pull request (1)** tab, leave defaults and click on **Create (3)** The Pull Request will show some pending requirements, based on the policies applied to the target **main (2)** branch and wait until build completes.
-
-   ![](images/AZ-400-pull.png)
-
-7. After all validations are successful, on the top-right click on **Approve (1)**, click on **Complete (2)**
-
-   ![](images/az400-m3-L4-52.png)
-
-8. On the **Complete Pull Request** tab, select only **Complete associated work items after merging** checkbox  and Click on **Complete Merge**
-
-   ![](images/az400-m3-L4-53.png)
-
-9. Go back to **Pipelines>Pipelines,** you will notice that the build **eshoponweb-ci** was triggered automatically after the code was merged.
-
-   ![](images/az400-m3-L4-54.png)
- 
-10. Click on the **eshoponweb-ci** build then select the last run.
-
-      ![](images/az400-m3-L4-55.png)
-
-11. After its successful execution, click on **Related (1) > Published (2)** to check the published artifacts:
-           
-     ![](images/az400-m3-L4-56.png)  
-     
-      o Bicep: the infrastructure artifact  
-      o Website: the app artifact
-     
-     ![](images/az400-m3-L4-57.png)
+    ![Get Mend Account](images/mend-account.png)
 
 
-## Task 2: Identifying security issues in the pipeline 
+#### Task 2: Create and Trigger a build
 
-To provide a detailed step-by-step guide for identifying security issues in a CI/CD pipeline, I'll outline a generic process. This will involve setting up a typical CI/CD pipeline, integrating security tools, and analyzing the results. Here's a comprehensive guide:
+In this task, you will create and trigger a CI build pipeline within  Azure DevOps project. You will use **Mend Bolt** extension to identify vulnerable OSS components present in this code.
 
-### Step 1: Set Up Your CI/CD Pipeline
-1. **Choose Your CI/CD Platform**: Jenkins, Azure DevOps, GitLab CI/CD, CircleCI, or any other platform of your choice.
-2. **Create a Repository**: Host your code in a version control system like GitHub, GitLab, or Bitbucket.
-3. **Define Your Pipeline**: Write a pipeline configuration file (`Jenkinsfile`, `.gitlab-ci.yml`, `azure-pipelines.yml`, etc.).
+1.  On your lab computer, from the **eShopOnWeb** Azure DevOps project, in the vertical menu bar on the left side, navigate to the **Pipelines>Pipelines** section, click **Create Pipeline** (or **New Pipeline**).
 
-   Example for Azure DevOps (`azure-pipelines.yml`):
-   ```yaml
-   trigger:
-     - main
+1.  On the **Where is your code?** window, select **Azure Repos Git (YAML)** and select the **eShopOnWeb** repository.
 
-   pool:
-     vmImage: 'ubuntu-latest'
+1.  On the **Configure** section, choose **Existing Azure Pipelines YAML file (1)**. Provide the following **path (2)** **/.ado/eshoponweb-ci-mend.yml** and click **Continue (3)**.
 
-   steps:
-   - task: UsePythonVersion@0
-     inputs:
-       versionSpec: '3.x'
-       addToPath: true
+    ![Select Pipeline](images/select-pipeline.png)
 
-   - script: |
-       python -m pip install --upgrade pip
-       pip install -r requirements.txt
-     displayName: 'Install dependencies'
+1.  Review the pipeline and click on **Run**. It will take a few minutes to run successfully.
+    > **Note**: The build may take a few minutes to complete. The build definition consists of the following tasks:
+    - **DotnetCLI** task for restoring, building, testing and publishing the dotnet project.
+    - **Whitesource** task (still keeps the old name), to run the Mend tool analysis of OSS libraries.
+    - **Publish Artifacts** the agents running this pipeline will upload the published web project.
 
-   - script: |
-       pytest
-     displayName: 'Run tests'
-   ```
+1.  While the pipeline is executing, lets **rename** it to identify it easier (as the project may be used for multiple labs). Go to **Pipelines/Pipelines** section in Azure DevOps project, click on the executing Pipeline name (it will get a default name), and look for **Rename/move** option on the ellipsis icon. Rename it to **eshoponweb-ci-mend** and click **Save**.
 
-### Step 2: Integrate Static Application Security Testing (SAST)
-1. **Choose a SAST Tool**: Examples include SonarQube, Checkmarx, Veracode, or open-source options like Bandit (for Python).
-2. **Add SAST to Your Pipeline**: Configure the pipeline to run the SAST tool.
+    ![Rename Pipeline](images/rename-pipeline.png)
 
-   Example with Bandit (Python):
-   ```yaml
-   steps:
-   - script: |
-       pip install bandit
-       bandit -r your_project_directory
-     displayName: 'Run Bandit for SAST'
-   ```
+1.  Once the pipeline execution has finished, you can review the results. Open the latest execution for  **eshoponweb-ci-mend** pipeline. The summary tab will show the logs of the execution, together with related details such as the repository version(commit) used, trigger type, published artifacts, test coverage, etc.
 
-### Step 3: Integrate Software Composition Analysis (SCA)
-1. **Choose an SCA Tool**: Examples include Snyk, WhiteSource, or OWASP Dependency-Check.
-2. **Add SCA to Your Pipeline**: Configure the pipeline to run the SCA tool.
+1. On the **Mend Bolt** tab, you can review the OSS security analysis. It will show you details around the inventory used, vulnerabilities found (and how to solve them), and an interesting report around library related Licenses. Take some time to review the report.
 
-   Example with OWASP Dependency-Check:
-   ```yaml
-   steps:
-   - task: DependencyCheck@1
-     inputs:
-       outputDirectory: '$(Build.ArtifactStagingDirectory)/dependency-check'
-       scanPath: '$(Build.SourcesDirectory)'
-   ```
+    ![Mend Results](images/mend-results.png)
 
-### Step 4: Integrate Dynamic Application Security Testing (DAST)
-1. **Choose a DAST Tool**: Examples include OWASP ZAP, Burp Suite, or Acunetix.
-2. **Add DAST to Your Pipeline**: This usually runs against a deployed instance of your application.
-
-   Example with OWASP ZAP (Docker-based):
-   ```yaml
-   steps:
-   - script: |
-       docker run -v $(System.DefaultWorkingDirectory):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://your_application_url
-     displayName: 'Run OWASP ZAP for DAST'
-   ```
-
-### Step 5: Integrate Infrastructure as Code (IaC) Scanning
-1. **Choose an IaC Scanning Tool**: Examples include Terraform, AWS CloudFormation, Azure Resource Manager (ARM), and tools like Checkov or Terrascan.
-2. **Add IaC Scanning to Your Pipeline**: Configure the pipeline to run the IaC scanning tool.
-
-   Example with Checkov:
-   ```yaml
-   steps:
-   - script: |
-       pip install checkov
-       checkov -d your_iac_directory
-     displayName: 'Run Checkov for IaC scanning'
-   ```
-
-### Step 6: Review and Address Security Findings
-1. **Review Reports**: Collect reports from the SAST, SCA, DAST, and IaC scans.
-2. **Prioritize Issues**: Use CVSS scores or similar metrics to prioritize fixing vulnerabilities.
-3. **Fix and Validate**: Address the identified issues in the code, configurations, or dependencies and rerun the scans to ensure issues are resolved.
-
-### Step 7: Automate Security Checks
-1. **Continuous Monitoring**: Ensure that security scans are part of your regular CI/CD process.
-2. **Automated Alerts**: Set up automated alerts for new security issues.
-3. **Policy Enforcement**: Enforce policies to block deployments if critical vulnerabilities are found.
-
-### Example CI/CD Pipeline with Integrated Security Steps (Azure DevOps)
-```yaml
-trigger:
-  - main
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.x'
-    addToPath: true
-
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
-
-- script: |
-    pytest
-  displayName: 'Run tests'
-
-- script: |
-    pip install bandit
-    bandit -r your_project_directory
-  displayName: 'Run Bandit for SAST'
-
-- task: DependencyCheck@1
-  inputs:
-    outputDirectory: '$(Build.ArtifactStagingDirectory)/dependency-check'
-    scanPath: '$(Build.SourcesDirectory)'
-
-- script: |
-    docker run -v $(System.DefaultWorkingDirectory):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py -t http://your_application_url
-  displayName: 'Run OWASP ZAP for DAST'
-
-- script: |
-    pip install checkov
-    checkov -d your_iac_directory
-  displayName: 'Run Checkov for IaC scanning'
-```
-
-This pipeline example demonstrates how to integrate various security scanning tools into an Azure DevOps pipeline. The same principles can be applied to other CI/CD platforms with appropriate adjustments.
-
-## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
+## Exercise 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
 
 ### Overview of GitHub Advanced Security (GHAS)
 
@@ -533,14 +452,6 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
 - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
 
-### Best Practices
-
-- Regularly update your workflows and dependency manifests to leverage the latest security updates and fixes.
-- Educate your team about security best practices and ensure they follow secure coding guidelines.
-- Use branch protection rules and required status checks to enforce code quality and security standards before merging pull requests.
-- Keep your secrets and tokens out of the codebase by using environment variables and GitHub Secrets.
-
-By following these steps and best practices, you can effectively utilize GitHub Advanced Security to enhance the security of your code and workflows.
 
 ## Task 4: Overview of Defender for DevOps (including pricing) [Read-Only] 
 
@@ -681,7 +592,7 @@ For information on service connections and various authentication methods in Azu
      - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
      - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments. 
 
-      ![](mages/def1.png)
+      ![](images/def1.png)
 
 2. Data sensitivity context is also used in Security Alerts and you can quickly filter based on the type of Sensitivity Information. Navigate to **Security alerts** click on **Add filters**, and set it to **Sensitivity info types**.
 
@@ -692,7 +603,6 @@ For information on service connections and various authentication methods in Azu
 In this exercise, you will learn how to enable Defender for CSPM and leverage Defender for CSPM Capabilities
 
    >**Note:** To gain access to the capabilities provided by Defender CSPM, you'll need to <a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/enable-enhanced-security">enable the Defender Cloud Security Posture Management (CSPM) plan </a> on your subscription
-
 
 1. **Defender Cloud Security Posture Management**, will reduce the critical risks by:
 
@@ -706,24 +616,24 @@ In this exercise, you will learn how to enable Defender for CSPM and leverage De
 
 1. In **Azure Portal**, search for **Microsoft Defender for Cloud (1)** and then click on it from the search results **(2)**. 
 
-      ![](../images/m1-img1.png)
+      ![](images/m1-img1.png)
 
 2. From **Defender for Cloud** menu, click on **Environment Settings (1)** page and select your subscription **(2)**.
 
-      ![](../images/m1-img2.png)
+      ![](images/m1-img2.png)
 
 3. In the **Defender plans** page, select **Defender CSPM** turn the status to **On (1)** and select **Settings & monitoring (2)**.
 
-      ![](../images/m1-img3.png)
+      ![](images/m1-img3.png)
 
 4. Turn **On (1)** the **Agentless scanning for machines (preview)** and click **Continue (2)**.
 
-      ![](../images/m1-img4.png)
+      ![](images/m1-img4.png)
 
 5. Click on **Save** to save the changes. 
 
    >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
 
-      ![](../images/m1-img5.png)
+      ![](images/m1-img5.png)
 
  
