@@ -27,7 +27,7 @@
 6. In the **Organization Setting** window on the left menu click on **Billing (1)** and select **Setup Billing (2)** then click on **save (3)**.
 
     ![Azure DevOps](images/az-400-lab3-1.png)
-    
+
     ![Azure DevOps](images/az-400-lab3-2.png)    
 
 7. On the **MS Hosted CI/CD (1)** section under **Paid parallel jobs** enter value **1** and at the end of the page click on **Save (2)**.
@@ -453,21 +453,13 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
 
 
-## Task 4: Overview of Defender for DevOps (including pricing) [Read-Only] 
+## Exercise 4: Overview of Defender for DevOps (including pricing) [Read-Only] 
 
 ### Overview of Microsoft Defender for DevOps
 
 Microsoft Defender for DevOps is a comprehensive security solution designed to protect your DevOps environments, including CI/CD pipelines, code repositories, and infrastructure as code (IaC) configurations. It helps identify and remediate vulnerabilities, enforce security policies, and secure the entire DevOps lifecycle.
 
-#### 1. **Set Up Microsoft Defender for DevOps**
 
-To start using Microsoft Defender for DevOps, you need to have the appropriate Azure subscription and ensure that the Azure Security Center is enabled.
-
-- Navigate to the Azure portal.
-- Search for and select `Microsoft Defender for Cloud`.
-- Click on `Environment settings`.
-- Select the subscription or workspace where you want to enable Defender for DevOps.
-- Enable Microsoft Defender for DevOps.
 
 #### 2. **Integrate with DevOps Tools**
 
@@ -541,36 +533,162 @@ To get detailed and up-to-date pricing information, you can refer to the [Micros
 
 By following these steps, you can effectively utilize Microsoft Defender for DevOps to secure your DevOps environment and ensure the security of your CI/CD pipelines and code repositories.
 
-## Task 5: Securing your pipeline with GHAS and Defender for DevOps  
+## Exercise 5: Securing your pipeline with GHAS and Defender for DevOps  
 
-## Task 6: Connecting your Azure DevOps environment to MDC 
+### Task 1: Setup Code Scanning
 
-To connect your Azure DevOps environment to Microsoft Defender for Cloud, you can follow these steps:
+Code scanning in GitHub Advanced Security for Azure DevOps lets you analyze the code in an Azure DevOps repository to find security vulnerabilities and coding errors. Any problems identified by the analysis are raised as an alert. Code scanning uses CodeQL to identify vulnerabilities.
 
-1. **Sign in to the Azure Portal**:
-   - Go to the Azure portal and navigate to Microsoft Defender for Cloud > Environment settings.
-   - Select "Add environment" and then choose "Azure DevOps."
+1. Select the pipeline **eShopOnweb**.
 
-2. **Configure Connection Details**:
-   - Enter a name for the connection, select your subscription, resource group, and region.
-   - Click "Next: Configure access" and then select "Authorize." Ensure you're authorizing the correct Azure Tenant.
+   ![alert_detected](images/advlab33.png)
 
-3. **Set Permissions**:
-   - Make sure you have the required permissions, which include being an Account Administrator, Contributor, and Project Collection Administrator on the Azure DevOps organization. Basic or Basic + Test Plans access level is needed, and OAuth must be enabled.
+1. Locate the tasks related to **Advanced Security Code Scanning** that are already included in the YAML pipeline file.
 
-4. **Authorize and Complete Setup**:
-   - In the popup dialog, read the permission requests, and then select "Accept."
-   - Choose the organizations you want to connect. You can opt to connect all existing or all existing and future organizations.
-   - Click "Next: Review and generate" and then "Create."
+   ![alert_detected](images/nls6.png)
+ 
+1. Do not run the pipeline. The code scanning setup has already been initiated, along with dependency scanning performed in the previous lab.
 
-5. **Post-Connection Configuration**:
-   - Once connected, it might take up to 8 hours for resources to appear in Defender for Cloud. You may need to perform additional configuration for pipeline security scanning.
+### Task 2: Review Code Scanning Alert (Gain Insights)
 
-For a detailed guide, you can refer to the official [Microsoft documentation on connecting Azure DevOps to Defender for Cloud](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-devops-onboard-devops-environment)【15†source】【16†source】.
+1. Go to the **Repos** tab and click on the **Advanced Security** menu at the bottom.
 
-For information on service connections and various authentication methods in Azure Pipelines, you can check out the [service connections documentation](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops)【14†source】.
+1. Click on **Code scanning** to see a list of all the code scanning alerts that have been found. This includes the alert, vulnerable code details, and first detected date.
 
-## Task 7: Integrating non-MS security scan solutions with MDC 
+#### Code scanning Alert Details
+
+1. Click on the item ***Uncontrolled command line...*** to see the details about this alert.
+
+1. This includes the Recommendation, Locations found, Description, Severity, and the Date it was first detected. We can easily fix this threat. 
+
+   ![code_alert_detected](images/nls7.png)
+
+1. You can also view the code that triggered the alert and what build detected it.
+   
+1. Click on **Detections** to see the different builds that detected this alert.
+
+   ![where_detected](images/nls81.png)
+
+    **ProTip!** When a vulnerable component is no longer detected in the latest build for pipelines with the dependency scanning task, the state of the associated alert is automatically changed to Closed. To see these resolved alerts, you can use the **State filter** in the main toolbar and select **Closed**.
+
+### Task 3: Fixing the Code to resolve the alert
+
+1. This is simple to fix using parameters in the dynamic SQL described in the remediation steps.
+
+1. Click on **Locations found** to see the code that triggered the alert.
+
+   ![Image](images/advlab4n6.png)
+
+1. Click on the **Edit** button to edit the file. Line number 23 is highlighted here. 
+
+1. The value of __{drive}__ is getting highlighted from line number 23.
+
+    ![Image](images/nls9.png)
+
+1. Instead of getting the value of 
+__{drive}__ using a query, we can directly define it as __C__ for the string drive variable in the line 20.
+    ```C#
+    string drive = "C";
+    ```
+
+    ![Image](images/nls11.png)
+
+1. Click on **Commit** to save changes. Enter **Fixalert** for the branch name and link the work item. Check **Create a pull request**, and then click on **Commit** again.
+
+    ![Image](images/nls10.png)
+
+    > **Note:** This step is necessary since the main branch is protected by a pull request pipeline.
+
+1. Navigate to Azure DevOps, click on **Repos**, select **Pull requests** and select **Create a pull request** to push the commits from **Fixalert** to the **main**.
+
+1. On the **New pull request** page, click on **Create**.
+
+    ![Image](images/mls3.png)
+
+1. Once the **eShoponWeb** pipeline has been completed, click on **Approve** and then click on **Complete**.
+
+    ![Image](images/mls4.png)
+
+1. Change **Merge Type** to **Squash commit** and check the box **Delete Fixalert after merging** to merge changes into the main branch.
+
+    ![Image](images/mls5.png)
+
+    > **Note**: The build will run automatically, initiating the code scanning task and publishing the results to Advanced Security.
+
+## Exercise 6: Connecting your Azure DevOps environment to MDC 
+
+#### 1. **Set Up Microsoft Defender for DevOps**
+
+1. Sign in to the Azure portal, using the below credentials
+
+   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
+
+   - **Password:** <inject key="AzureAdUserPassword"></inject>
+
+1. Search and select **Microsoft Defender for Cloud** from the portal
+
+    ![alert_detected](images/mls2.png)
+
+1. Select **skip** on **Getting started** tab.
+
+    ![alert_detected](images/mls1.png)
+
+1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
+
+    ![alert_detected](images/advlab51.png)
+
+1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
+
+   | Setting  | Value |
+   -----------|---------
+   | Connector name | AzureDevopsconnector |
+   | Subscription | Choose the default subscription |
+   | Resource group | Lab-VM |
+   | Location | Select any supporting region |
+
+    ![alert_detected](images/advlab52.png)
+
+1. Select **Next: Configure access**
+
+1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
+
+1. In the popup dialog, read the list of permission requests, and then select **Accept**.
+
+    ![alert_detected](images/advlab53.png)
+
+1. Leave all other settings as default.
+
+1. Select **Next: Review and generate**.
+
+1. Review the information, and then select **Create**.
+
+1. Wait for some time to view the connector on the **Environment settings** page.
+
+1. Navigate to **DevOps Security** under **Cloud Security**.
+
+    ![alert_detected](images/advlab55.png)
+
+1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
+
+    ![alert_detected](images/m51.png)
+
+   >**Note:** It might take upto 8hrs to reflect the real-time status.
+
+1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
+
+    ![alert_detected](images/m55.png)
+
+    ![alert_detected](images/m52.png)
+
+1. Navigate to the **Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
+
+    ![alert_detected](images/m53.png)
+
+1. Similarly, navigate to the **OSS Vulnerabilities** tab and identify the issues, then take note of the recommendations provided to resolve the issues.
+
+    ![alert_detected](images/m54.png)
+
+## Exercise 7: Integrating non-MS security scan solutions with MDC 
 
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
