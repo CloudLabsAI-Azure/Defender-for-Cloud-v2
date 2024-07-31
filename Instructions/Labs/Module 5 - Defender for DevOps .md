@@ -536,87 +536,11 @@ By following these steps, you can effectively utilize Microsoft Defender for Dev
 
 ## Exercise 5: Securing your pipeline with GHAS and Defender for DevOps  
 
-To secure your pipeline using GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, follow this step-by-step guide. I'll also include references to Microsoft documentation for more detailed instructions.
 
-### Step-by-Step Guide
 
-#### 1. **Set Up GitHub Advanced Security (GHAS)**
-   - **Enable GHAS on Your Repository:**
-     1. Go to your repository on GitHub.
-     2. Navigate to the repository settings.
-     3. Under "Security & analysis," enable the desired features (Code scanning, Secret scanning, Dependabot alerts).
 
-   - **Configure Code Scanning:**
-     1. Go to the "Security" tab in your repository.
-     2. Click on "Set up code scanning" and follow the wizard to configure your code scanning.
-     3. Choose a code scanning tool (e.g., GitHub CodeQL) and set it up as per the instructions.
-
-   - **Configure Secret Scanning:**
-     1. Go to the "Security" tab in your repository.
-     2. Click on "Enable secret scanning" to start scanning for exposed secrets.
-
-   - **Configure Dependabot Alerts:**
-     1. Go to the "Security" tab in your repository.
-     2. Click on "Enable Dependabot alerts" to start receiving alerts about vulnerabilities in your dependencies.
-
-#### 2. **Integrate Microsoft Defender for DevOps**
-   - **Enable Defender for DevOps:**
-     1. Sign in to the Azure portal.
-     2. Go to "Microsoft Defender for Cloud" in the left-hand menu.
-     3. Under "Settings & monitoring," select "Defender plans."
-     4. Enable "Defender for DevOps."
-
-   - **Connect GitHub Repository:**
-     1. In the Azure portal, navigate to "Defender for DevOps."
-     2. Select "Add integration" and choose "GitHub."
-     3. Follow the prompts to authenticate and connect your GitHub account.
-
-   - **Configure Policies and Alerts:**
-     1. Go to "Defender for DevOps" in the Azure portal.
-     2. Set up policies to define what constitutes a security alert.
-     3. Configure alerts to notify you of any security issues detected in your pipeline.
-
-### Microsoft Documentation References
-
-- [GitHub Advanced Security Documentation](https://docs.github.com/en/github-ae@latest/code-security/github-advanced-security)
-- [Code Scanning with GitHub CodeQL](https://docs.github.com/en/github-ae@latest/code-security/code-scanning)
-- [Secret Scanning](https://docs.github.com/en/github-ae@latest/code-security/secret-scanning)
-- [Dependabot Alerts](https://docs.github.com/en/github-ae@latest/code-security/dependabot/alerts)
-- [Microsoft Defender for DevOps Documentation](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-devops-introduction)
-
-### Lab Guide Outline
-
-1. **Pre-requisites:**
-   - GitHub account with repository access.
-   - Azure subscription with appropriate permissions.
-
-2. **Setting Up GHAS:**
-   - Steps to enable and configure GHAS features.
-   - Running initial scans and interpreting results.
-
-3. **Integrating with Defender for DevOps:**
-   - Steps to enable and configure Defender for DevOps.
-   - Connecting GitHub repositories and setting up monitoring.
-
-4. **Creating and Managing Security Policies:**
-   - How to create custom security policies in Defender for DevOps.
-   - Configuring alerting and response actions.
-
-5. **Testing and Verifying Setup:**
-   - Simulating security issues to verify alerting and response.
-   - Reviewing logs and reports for insights and improvements.
-
-By following these steps and referencing the provided documentation, you can effectively secure your pipeline with GitHub Advanced Security and Microsoft Defender for DevOps.
 
 ## Exercise 6: Connecting your Azure DevOps environment to MDC 
-
-#### 1. **Set Up Microsoft Defender for DevOps**
-
-1. Sign in to the Azure portal, using the below credentials
-
-   - **Email/Username:** <inject key="AzureAdUserEmail"></inject>
-
-   - **Password:** <inject key="AzureAdUserPassword"></inject>
 
 1. Search and select **Microsoft Defender for Cloud** from the portal
 
@@ -686,7 +610,7 @@ By following these steps and referencing the provided documentation, you can eff
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
-##### Task 1: Understanding Microsoft Data Security Posture Management
+### Task 1: Understanding Microsoft Data Security Posture Management
 
 **Data Security Posture Management (DSPM)** allows security teams to get ahead of their data risks and prioritize security issues that could result in a data breach. With DSPM you can:
      
