@@ -38,6 +38,10 @@
 
     ![Azure DevOps](images/policies-enable-3rd.png)
 
+1. Toggle the switch to **On** for **Allow public projects**.
+
+     > **Note:** Extensions used in some labs might require a public project to allow using the free version.
+
 1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **eShopOnWeb (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
       ![](images/az400-m3-L4-03.png)
@@ -86,14 +90,14 @@ In this task, you will create an Azure web app by using the Azure portal.
     ```
 
     ```bash
-    RESOURCEGROUPNAME='cicd-RG'
+    RESOURCEGROUPNAME='az400m05l11-RG'
     az group create --name $RESOURCEGROUPNAME --location $LOCATION
     ```
 
 1. To create a Windows App service plan by running the following command:
 
     ```bash
-    SERVICEPLANNAME='cicd-sp1'
+    SERVICEPLANNAME='az400m05l11-sp1'
     az appservice plan create --resource-group $RESOURCEGROUPNAME --name $SERVICEPLANNAME --sku B3
     ```
 
@@ -167,6 +171,7 @@ In this task, you will add continuous delivery to the YAML-based definition of t
     - in the **Azure subscription** drop-down list, select the Azure subscription into which you deployed the Azure resources earlier in the lab, click **Authorize**, and, when prompted, authenticate by using the same user account you used during the Azure resource deployment.
     - in the **App Service name** dropdown list, select the name of the web app you deployed earlier in the lab.
     - in the **Package or folder** text box, **update** the Default Value to `$(Build.ArtifactStagingDirectory)/**/Web.zip`.
+
 1. Confirm the settings from the Assistant pane by clicking the **Add** button.
 
     > **Note**: This will automatically add the deployment task to the YAML pipeline definition.
@@ -229,11 +234,12 @@ In this task, you will add continuous delivery to the YAML-based definition of t
 
 1. Wait for the pipeline to kick off and wait until it completes the Build Stage successfully.
 
-1. Once the Deploy Stage wants to start, you are prompted with **Permissions Needed**, as well as an orange bar saying 
+1. Once the Deploy Stage wants to start, you are prompted with **Permissions Needed**, as well as an orange bar saying .
+
     ```
     This pipeline needs permission to access a resource before this run can continue to Deploy to an Azure Web App
     ```
-1. Click on **View**
+1. Click on **View**.
 
 1. From the **Waiting for Review** pane, click **Permit**.
 
@@ -354,7 +360,6 @@ In this task, you will activate WhiteSource Bolt in the newly generated Azure De
 1.  In your Azure DevOps navigate to **Organization Settings** and select **Mend** under **Extensions**. Provide your Work Email (**your lab personal account**, e.g. using AZ400learner@outlook.com instead of student@microsoft.com ), Company Name and other details and click **Create Account** button to start using the Free version.
 
     ![Get Mend Account](images/mend-account.png)
-
 
 #### Task 2: Create and Trigger a build
 
@@ -536,7 +541,6 @@ By following these steps, you can effectively utilize Microsoft Defender for Dev
 
 ## Exercise 5: Securing your pipeline with GHAS and Defender for DevOps  
 
-
 ### Task 1: Sign up and configure the eShopOnWeb team project in Azure DevOps
 
 1. Open the **Edge browser**, and navigate to **Azure DevOps** using the link below. Select **Start Free**, and sign in with the credentials provided in the Environment variables.
@@ -546,38 +550,6 @@ By following these steps, you can effectively utilize Microsoft Defender for Dev
    ```
 
       ![setup](images/lab1-image1.png)
-
-1. On the **Get Started with Azure DevOps** page, click on **Continue**.
-
-      ![setup](images/end2.png)
-
-1. On the **Almost done** page, enter the **captcha** and click on **Continue**.
-
-      ![setup](images/end1.png)
-
-1. On the **Azure DevOps** page, at the button left, click on **Organization settings**. then select **Billing** (opening this screen takes a few seconds).
-
-    ![](images/nls2.png)
-
-1. From the left navigation pane, select **Billing** and click **Set up billing**. On the right-hand side of the screen, select the **Existing subscription** listed and click **Save** to link the subscription with the organization.
-
-   ![](images/lab1-image8.png)
-
-   ![](images/lab1-image9.png)
-
-1. Once the screen shows the linked Azure Subscription ID at the top, change the number of **Paid parallel jobs** for **MS Hosted CI/CD** from 0 to **1**. Then click the **SAVE** button at the bottom.
-
-   ![](images/lab1-image10.png)
-
-1. Navigate back to the **Organization Settings** page, go to the **Security** section, and click **Policies**. Turn on the **Toggle** for **Third-party application access via OAuth**.
-
-     ![]images/nls1.png)
-   
-      > **Note:** The OAuth setting helps enable tools such as the DemoDevOpsGenerator to register extensions. Without this, several labs may fail due to a lack of the required extensions.
-
-1. Toggle the switch to **On** for **Allow public projects**.
-
-     > **Note:** Extensions used in some labs might require a public project to allow using the free version.
 
 1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
 
@@ -696,8 +668,6 @@ You can follow these steps to install an extension which is needed in upcoming t
 
     ![allow-permissions](images/ext5.png)
 
-Please feel free to go through the documentation for further understanding: [GitHub Advanced Security for Azure DevOps](https://azure.microsoft.com/en-us/products/devops/github-advanced-security) and [Configure GitHub Advanced Security for Azure DevOps](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml)
-
 
 ## Exercise 6: Connecting your Azure DevOps environment to MDC 
 
@@ -767,7 +737,8 @@ Please feel free to go through the documentation for further understanding: [Git
 ## Exercise 7: Integrating non-MS security scan solutions with MDC 
 
 
-## Exercise 8: Role of Defender Cloud Security Posture Management (DCSPM) 
+
+## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
 ### Task 1: Understanding Microsoft Data Security Posture Management
 
@@ -829,5 +800,6 @@ In this exercise, you will learn how to enable Defender for CSPM and leverage De
    >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
 
       ![](images/m1-img5.png)
+
 
  
