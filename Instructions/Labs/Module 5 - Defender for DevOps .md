@@ -767,7 +767,7 @@ Please feel free to go through the documentation for further understanding: [Git
 ## Exercise 7: Integrating non-MS security scan solutions with MDC 
 
 
-## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
+## Exercise 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
 ### Task 1: Understanding Microsoft Data Security Posture Management
 
