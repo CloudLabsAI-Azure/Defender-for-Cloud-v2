@@ -86,14 +86,14 @@ In this task, you will create an Azure web app by using the Azure portal.
     ```
 
     ```bash
-    RESOURCEGROUPNAME='az400m05l11-RG'
+    RESOURCEGROUPNAME='cicd-RG'
     az group create --name $RESOURCEGROUPNAME --location $LOCATION
     ```
 
 1. To create a Windows App service plan by running the following command:
 
     ```bash
-    SERVICEPLANNAME='az400m05l11-sp1'
+    SERVICEPLANNAME='cicd-sp1'
     az appservice plan create --resource-group $RESOURCEGROUPNAME --name $SERVICEPLANNAME --sku B3
     ```
 
