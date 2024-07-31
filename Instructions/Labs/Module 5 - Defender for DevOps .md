@@ -399,6 +399,8 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - Click on `Settings`.
 - In the `Security` section, find `GitHub Advanced Security` and enable it.
 
+https://github.com/ghas-bootcamp/ghas-bootcamp fork this repo 
+
 #### 2. **Configure Code Scanning**
 
 **Code scanning** helps detect vulnerabilities and errors in your code by running static analysis tools.
@@ -460,8 +462,7 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 Microsoft Defender for DevOps is a comprehensive security solution designed to protect your DevOps environments, including CI/CD pipelines, code repositories, and infrastructure as code (IaC) configurations. It helps identify and remediate vulnerabilities, enforce security policies, and secure the entire DevOps lifecycle.
 
 
-
-#### 2. **Integrate with DevOps Tools**
+#### 1. **Integrate with DevOps Tools**
 
 Integrate Defender for DevOps with your CI/CD pipelines and code repositories to start scanning for vulnerabilities.
 
@@ -535,85 +536,77 @@ By following these steps, you can effectively utilize Microsoft Defender for Dev
 
 ## Exercise 5: Securing your pipeline with GHAS and Defender for DevOps  
 
-### Task 1: Setup Code Scanning
+To secure your pipeline using GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, follow this step-by-step guide. I'll also include references to Microsoft documentation for more detailed instructions.
 
-Code scanning in GitHub Advanced Security for Azure DevOps lets you analyze the code in an Azure DevOps repository to find security vulnerabilities and coding errors. Any problems identified by the analysis are raised as an alert. Code scanning uses CodeQL to identify vulnerabilities.
+### Step-by-Step Guide
 
-1. Select the pipeline **eShopOnweb**.
+#### 1. **Set Up GitHub Advanced Security (GHAS)**
+   - **Enable GHAS on Your Repository:**
+     1. Go to your repository on GitHub.
+     2. Navigate to the repository settings.
+     3. Under "Security & analysis," enable the desired features (Code scanning, Secret scanning, Dependabot alerts).
 
-   ![alert_detected](images/advlab33.png)
+   - **Configure Code Scanning:**
+     1. Go to the "Security" tab in your repository.
+     2. Click on "Set up code scanning" and follow the wizard to configure your code scanning.
+     3. Choose a code scanning tool (e.g., GitHub CodeQL) and set it up as per the instructions.
 
-1. Locate the tasks related to **Advanced Security Code Scanning** that are already included in the YAML pipeline file.
+   - **Configure Secret Scanning:**
+     1. Go to the "Security" tab in your repository.
+     2. Click on "Enable secret scanning" to start scanning for exposed secrets.
 
-   ![alert_detected](images/nls6.png)
- 
-1. Do not run the pipeline. The code scanning setup has already been initiated, along with dependency scanning performed in the previous lab.
+   - **Configure Dependabot Alerts:**
+     1. Go to the "Security" tab in your repository.
+     2. Click on "Enable Dependabot alerts" to start receiving alerts about vulnerabilities in your dependencies.
 
-### Task 2: Review Code Scanning Alert (Gain Insights)
+#### 2. **Integrate Microsoft Defender for DevOps**
+   - **Enable Defender for DevOps:**
+     1. Sign in to the Azure portal.
+     2. Go to "Microsoft Defender for Cloud" in the left-hand menu.
+     3. Under "Settings & monitoring," select "Defender plans."
+     4. Enable "Defender for DevOps."
 
-1. Go to the **Repos** tab and click on the **Advanced Security** menu at the bottom.
+   - **Connect GitHub Repository:**
+     1. In the Azure portal, navigate to "Defender for DevOps."
+     2. Select "Add integration" and choose "GitHub."
+     3. Follow the prompts to authenticate and connect your GitHub account.
 
-1. Click on **Code scanning** to see a list of all the code scanning alerts that have been found. This includes the alert, vulnerable code details, and first detected date.
+   - **Configure Policies and Alerts:**
+     1. Go to "Defender for DevOps" in the Azure portal.
+     2. Set up policies to define what constitutes a security alert.
+     3. Configure alerts to notify you of any security issues detected in your pipeline.
 
-#### Code scanning Alert Details
+### Microsoft Documentation References
 
-1. Click on the item ***Uncontrolled command line...*** to see the details about this alert.
+- [GitHub Advanced Security Documentation](https://docs.github.com/en/github-ae@latest/code-security/github-advanced-security)
+- [Code Scanning with GitHub CodeQL](https://docs.github.com/en/github-ae@latest/code-security/code-scanning)
+- [Secret Scanning](https://docs.github.com/en/github-ae@latest/code-security/secret-scanning)
+- [Dependabot Alerts](https://docs.github.com/en/github-ae@latest/code-security/dependabot/alerts)
+- [Microsoft Defender for DevOps Documentation](https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-devops-introduction)
 
-1. This includes the Recommendation, Locations found, Description, Severity, and the Date it was first detected. We can easily fix this threat. 
+### Lab Guide Outline
 
-   ![code_alert_detected](images/nls7.png)
+1. **Pre-requisites:**
+   - GitHub account with repository access.
+   - Azure subscription with appropriate permissions.
 
-1. You can also view the code that triggered the alert and what build detected it.
-   
-1. Click on **Detections** to see the different builds that detected this alert.
+2. **Setting Up GHAS:**
+   - Steps to enable and configure GHAS features.
+   - Running initial scans and interpreting results.
 
-   ![where_detected](images/nls81.png)
+3. **Integrating with Defender for DevOps:**
+   - Steps to enable and configure Defender for DevOps.
+   - Connecting GitHub repositories and setting up monitoring.
 
-    **ProTip!** When a vulnerable component is no longer detected in the latest build for pipelines with the dependency scanning task, the state of the associated alert is automatically changed to Closed. To see these resolved alerts, you can use the **State filter** in the main toolbar and select **Closed**.
+4. **Creating and Managing Security Policies:**
+   - How to create custom security policies in Defender for DevOps.
+   - Configuring alerting and response actions.
 
-### Task 3: Fixing the Code to resolve the alert
+5. **Testing and Verifying Setup:**
+   - Simulating security issues to verify alerting and response.
+   - Reviewing logs and reports for insights and improvements.
 
-1. This is simple to fix using parameters in the dynamic SQL described in the remediation steps.
-
-1. Click on **Locations found** to see the code that triggered the alert.
-
-   ![Image](images/advlab4n6.png)
-
-1. Click on the **Edit** button to edit the file. Line number 23 is highlighted here. 
-
-1. The value of __{drive}__ is getting highlighted from line number 23.
-
-    ![Image](images/nls9.png)
-
-1. Instead of getting the value of 
-__{drive}__ using a query, we can directly define it as __C__ for the string drive variable in the line 20.
-    ```C#
-    string drive = "C";
-    ```
-
-    ![Image](images/nls11.png)
-
-1. Click on **Commit** to save changes. Enter **Fixalert** for the branch name and link the work item. Check **Create a pull request**, and then click on **Commit** again.
-
-    ![Image](images/nls10.png)
-
-    > **Note:** This step is necessary since the main branch is protected by a pull request pipeline.
-
-1. Navigate to Azure DevOps, click on **Repos**, select **Pull requests** and select **Create a pull request** to push the commits from **Fixalert** to the **main**.
-
-1. On the **New pull request** page, click on **Create**.
-
-    ![Image](images/mls3.png)
-
-1. Once the **eShoponWeb** pipeline has been completed, click on **Approve** and then click on **Complete**.
-
-    ![Image](images/mls4.png)
-
-1. Change **Merge Type** to **Squash commit** and check the box **Delete Fixalert after merging** to merge changes into the main branch.
-
-    ![Image](images/mls5.png)
-
-    > **Note**: The build will run automatically, initiating the code scanning task and publishing the results to Advanced Security.
+By following these steps and referencing the provided documentation, you can effectively secure your pipeline with GitHub Advanced Security and Microsoft Defender for DevOps.
 
 ## Exercise 6: Connecting your Azure DevOps environment to MDC 
 
