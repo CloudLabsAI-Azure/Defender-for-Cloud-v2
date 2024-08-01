@@ -48,12 +48,10 @@
 
       ![](images/az400-m3-L4-03.png)
       
-1. Click on **Repos (1)>Files (2) , Import a Repository**. Select **Import (3)**. On the **Import a Git Repository (4)** window, paste the following URL https://github.com/MicrosoftLearning/eShopOnWeb.git (5) and click **Import (6)**.
+1. Click on **Repos (1)>Files (2) , Import a Repository**. Select **Import (3)**. On the **Import a Git Repository** window, paste the following URL https://github.com/MicrosoftLearning/eShopOnWeb.git (4) and click **Import (5)**.
 
       ![](images/AZ-400-import.png)
       
-      ![](images/AZ-400-git.png)
-
 2. The repository is organized the following way:
 
       o. **.ado** folder contains Azure DevOps YAML pipelines
@@ -72,12 +70,17 @@
 
 In this task, you will create an Azure web app by using the Azure portal.
 
-1. From the lab computer, start a web browser, navigate to the [**Azure Portal**](https://portal.azure.com), and sign in with the user account that has the Owner role in the Azure subscription you will be using in this lab and has the role of the Global Administrator in the Azure AD tenant associated with this subscription.
-
 1. In the Azure portal, in the toolbar, click the **Cloud Shell** icon located directly to the right of the search text box.
+
+   ![](images/16.png)
+   
 1. If prompted to select either **Bash** or **PowerShell**, select **Bash**.
 
-    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and select **Create storage**.
+     ![](images/15.png)
+
+    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and click **Apply**.
+
+      ![](images/17.png)
 
     > **Note:** for a list of regions and their alias, run the following command from the Azure Cloud Shell - Bash:
 
@@ -123,9 +126,15 @@ In this task, you will create an Azure web app by using the Azure portal.
 
 1. On the **Where is your code?** pane, click **Azure Repos Git (YAML)** option.
 
-1. On the **Select a repository** pane, click **eShopOnWeb_MultiStageYAML**.
+   ![](images/10.png)
+
+1. On the **Select a repository** pane, click **CICD**.
+
+   ![](images/11.png)
 
 1. On the **Configure your pipeline** pane, scroll down and select **Existing Azure Pipelines YAML File**.
+
+   ![](images/12.png)
 
 1. In the **Selecting an existing YAML File** blade, specify the following parameters:
 - Branch: **main**
@@ -133,7 +142,12 @@ In this task, you will create an Azure web app by using the Azure portal.
 
 7. Click **Continue** to save these settings.
 
+   ![](images/13.png)
+
 8. From the **Review your Pipeline YAML** screen, click **Run** to start the Build Pipeline process.
+
+   ![](images/14.png)
+
 9. Wait for the Build Pipeline to complete successfully. Ignore any warnings regarding the source code itself, as they are not relevant for this lab exercise.
 
     > **Note**: Each task from the YAML file is available for review, including any warnings and errors.
@@ -144,9 +158,9 @@ In this task, you will add continuous delivery to the YAML-based definition of t
 
   > **Note**: Now that the build and test processes are successful, we can now add delivery to the YAML definition.
 
-1. On the pipeline run pane, click the ellipsis symbol in the upper right corner and, in the dropdown menu, click **Edit pipeline**.
+1. On the pipeline run pane, click the ellipsis symbol in the upper right corner and, in the dropdown menu, click **Edit**.
 
-1. On the pane displaying the content of the **eShopOnWeb_MultiStageYAML/.ado/eshoponweb-ci.yml** file, navigate to the end of the file (line 56), and hit **Enter/Return** to add a new empty line.
+1. On the pane displaying the content of the **CICD/.ado/eshoponweb-ci.yml** file, navigate to the end of the file (line 56), and hit **Enter/Return** to add a new empty line.
 
 1. Being on line **57**, add the following content to define the **Release** stage in the YAML pipeline.
 
@@ -176,6 +190,8 @@ In this task, you will add continuous delivery to the YAML-based definition of t
 
 1. Confirm the settings from the Assistant pane by clicking the **Add** button.
 
+      ![](images/9.png)
+
     > **Note**: This will automatically add the deployment task to the YAML pipeline definition.
 
 1. The snippet of code added to the editor should look similar to below, reflecting your name for the azureSubscription and WebappName parameters:
@@ -201,12 +217,14 @@ In this task, you will add continuous delivery to the YAML-based definition of t
 1. On the **Tasks** pane, search for and select the **Download build artifacts** task.
 
 1. Specify the following parameters for this task:
-    - Download Artifacts produced by: **Current Build**
-    - Download Type: **Specific Artifact**
-    - Artifact Name: **Enter "Website" in the text box**
-    - Destination Directory: **$(Build.ArtifactStagingDirectory)**
 
-1. Click **Add**.
+    - Download Artifacts produced by: **Current Build**
+    - Download Type: **Specific Artifact**
+     - Artifact Name: **Enter "Website" in the text box**
+    - Destination Directory: **$(Build.ArtifactStagingDirectory)**
+    - Click **Add**.
+
+      ![](images/1.png)
 
 1. The snippet of added code should look similar to below:
 
@@ -222,17 +240,26 @@ In this task, you will add continuous delivery to the YAML-based definition of t
 
     > **Note**: Here as well you may also want to add an empty line before and after to make it easier to read.
 
-1. Click **Save**, on the **Save** pane, click **Save** again to commit the change directly into the master branch.
+1. Click **Validate + Save**, then again click on **Save**.
+
+    ![](images/2.png)
+
+1. Click **Save** again..
+
+    ![](images/3.png)    
+   
 
     > **Note**: Since our original CI-YAML was not configured to automatically trigger a new build, we have to initiate this one manually.
 
 1. From the Azure DevOps left menu, navigate to **Pipelines** and select **Pipelines** again. 
 
-1. Open the **EShopOnWeb_MultiStageYAML** Pipeline and click **Run Pipeline**.
+1. Open the **CICD** Pipeline and click **Run Pipeline**.
 
 1. Confirm the **Run** from the appearing pane.
 
 1. Notice the 2 different Stages, **Build .Net Core Solution** and **Deploy to Azure Web App** appearing.
+
+   ![](images/5.png)    
 
 1. Wait for the pipeline to kick off and wait until it completes the Build Stage successfully.
 
@@ -243,10 +270,16 @@ In this task, you will add continuous delivery to the YAML-based definition of t
     ```
 1. Click on **View**.
 
+   ![](images/6.png)  
+
 1. From the **Waiting for Review** pane, click **Permit**.
+
+   ![](images/7.png)  
 
 1. Validate the message in the **Permit popup** window, and confirm by clicking **Permit**.
 
+   ![](images/8.png)  
+     
 1. This sets off the Deploy Stage. Wait for this to complete successfully.
 
      > **Note**: If the deployment should fail, because of an issue with the YAML Pipeline syntax, use this as a reference:
@@ -345,7 +378,7 @@ In this task, you will add continuous delivery to the YAML-based definition of t
 
 In this task, you will activate WhiteSource Bolt in the newly generated Azure Devops project.
 
-1.  On your lab computer, in the web browser window displaying the Azure DevOps portal with the **eShopOnWeb** project open, click on the marketplace icon > **Browse Marketplace**.
+1.  On your lab computer, in the web browser window displaying the Azure DevOps portal with the **CICD** project open, click on the marketplace icon > **Browse Marketplace**.
 
     ![Browse Marketplace](images/browse-marketplace.png)
 
@@ -361,19 +394,21 @@ In this task, you will activate WhiteSource Bolt in the newly generated Azure De
 
 1.  In your Azure DevOps navigate to **Organization Settings** and select **Mend** under **Extensions**. Provide your Work Email (**your lab personal account**, e.g. using AZ400learner@outlook.com instead of student@microsoft.com ), Company Name and other details and click **Create Account** button to start using the Free version.
 
-    ![Get Mend Account](images/mend-account.png)
+    ![Get Mend Account](images/20.png)
 
 #### Task 2: Create and Trigger a build
 
 In this task, you will create and trigger a CI build pipeline within  Azure DevOps project. You will use **Mend Bolt** extension to identify vulnerable OSS components present in this code.
 
-1.  On your lab computer, from the **eShopOnWeb** Azure DevOps project, in the vertical menu bar on the left side, navigate to the **Pipelines>Pipelines** section, click **Create Pipeline** (or **New Pipeline**).
+1.  On your lab computer, from the **CICD** Azure DevOps project, in the vertical menu bar on the left side, navigate to the **Pipelines>Pipelines** section, click  **New Pipeline**.
 
-1.  On the **Where is your code?** window, select **Azure Repos Git (YAML)** and select the **eShopOnWeb** repository.
+1.  On the **Where is your code?** window, select **Azure Repos Git (YAML)** and select the **CICD** repository.
+
+    ![Select Pipeline](images/10.png)
 
 1.  On the **Configure** section, choose **Existing Azure Pipelines YAML file (1)**. Provide the following **path (2)** **/.ado/eshoponweb-ci-mend.yml** and click **Continue (3)**.
 
-    ![Select Pipeline](images/select-pipeline.png)
+    ![Select Pipeline](images/19.png)
 
 1.  Review the pipeline and click on **Run**. It will take a few minutes to run successfully.
     > **Note**: The build may take a few minutes to complete. The build definition consists of the following tasks:
@@ -381,9 +416,9 @@ In this task, you will create and trigger a CI build pipeline within  Azure DevO
     - **Whitesource** task (still keeps the old name), to run the Mend tool analysis of OSS libraries.
     - **Publish Artifacts** the agents running this pipeline will upload the published web project.
 
-1.  While the pipeline is executing, lets **rename** it to identify it easier (as the project may be used for multiple labs). Go to **Pipelines/Pipelines** section in Azure DevOps project, click on the executing Pipeline name (it will get a default name), and look for **Rename/move** option on the ellipsis icon. Rename it to **eshoponweb-ci-mend** and click **Save**.
+1.  While the pipeline is executing, lets **rename** it to identify it easier (as the project may be used for multiple labs). Go to **Pipelines/Pipelines** section in Azure DevOps project, click on the executing Pipeline name (it will get a default name), and look for **Rename/move** option on the ellipsis icon. Rename it to **cicd-mend** and click **Save**.
 
-    ![Rename Pipeline](images/rename-pipeline.png)
+    ![Rename Pipeline](images/18.png)
 
 1.  Once the pipeline execution has finished, you can review the results. Open the latest execution for  **eshoponweb-ci-mend** pipeline. The summary tab will show the logs of the execution, together with related details such as the repository version(commit) used, trigger type, published artifacts, test coverage, etc.
 
@@ -670,6 +705,305 @@ You can follow these steps to install an extension which is needed in upcoming t
 
     ![allow-permissions](images/ext5.png)
 
+### Task 4: Viewing alerts of repository 
+
+The Advanced Security Alert Hub is where all alerts are raised and where we gain insights, specifically under the category of Secrets. When a secret is found, you can click on it to access more information. The secret may be located in different places, including various commits. 
+
+1. Under **eShopOnWeb** project, go to the **Repos** tab and click on the **Advanced Security** menu item at the bottom.
+
+   ![setup](images/lab1-image16.png)
+
+1. Click on **Secrets** to see a list of all the exposed secret alerts that have been found. This includes the alert and introduced dates. Click on the **Microsoft Azure Storage account access key identifiable...** to see more details about the alert and what you can do to clean up the secret.
+
+   ![Secrets page](images/advsecurity2.png)
+
+1. Notice that this includes the Recommendation, Locations found, Remediation steps, Severity, and the Date it was first introduced. We can easily clean this up and dismiss the alert.
+
+   ![Secret Details](images/advsc3.png)
+
+### Task 5: Fixing secret scanning alerts
+
+Once a credential touches the repo, it's too late. Hackers might have already exploited it. The only way forward is to permanently eliminate these leaks and find all the places they're being used in production.
+
+ **Note:** Good news! GHAzDO focuses on preventing this in the first place. Bad news! These need to be manually fixed. There isn't an easy button.
+
+#### Push Protection
+
+Push Protection helps protect your repository by preventing unauthorized or malicious code from being pushed to your repository's branches.
+
+#### Updating Secrets:
+
+You can follow these steps to update a file. 
+
+1. While viewing the alert details, click on the line of code, _Constants._ _cs_.
+
+    ![Click on File](images/advsc9.png)
+
+1. Click on **Edit** to edit the file. This will open the code editor and highlight the exact location of the secret. In this case, it's in the .cs file.
+
+   ![setup](images/lab1-image17.png)
+
+1. On line 9, update the variable name to "STORAGE_ID" and click on **Commit** to save changes.
+    
+     ![setup](images/lab1-image14.png)
+
+1. Enter **StorageDetails** for the branch name and check **Create a pull request**, then click on **Commit** again.
+
+     ![setup](images/lab1-image15.png)
+
+1. The commit was rejected because the repository has secret protection enabled. This is a good thing! It's preventing us from checking in on the exposed secret. Let's fix this.
+   
+    ![Commit Rejected](images/commit_rejected.png)
+
+    > **Note:** The code went up to the server, was analyzed, rejected, and not stored anywhere. Using Secret push scanning, it catches secrets right before they become a problem.
+
+    > **ProTip!** This can't happen during a Pull Request. Once the code has been pushed into a topic branch, it's too late. PR analysis is best for dependency scanning but not secret push scanning. They are different.
+
+#### Bypass push protection
+
+1. Update your comment with **skip-secret-scanning:true** and click **Commit**.
+
+    ![Commit Bypass](images/commit_bypass2.png)
+
+    >**Note:** Bypassing flagged secrets isn't recommended because bypassing can put a company’s security at risk. 
+
+1. It will give an option to **Create a Pull request**.
+
+    ![Commit Bypass](images/commit_bypass1.png)
+
+#### Fixing Exposed Secrets
+
+You can follow these steps to fix the exposed secret. 
+
+1. Click on **Edit**.
+
+    > **Note**: This scenario is all too common. A developer is testing an application locally and needs to connect to a database, so what do they do? Of course, just put the connection string in the appsettings.json file. They forget to remove it before checking in the code. Now, the secret is exposed in the repo, not just the tip. The exposed credentials will still be in history. This is a huge security hole!
+
+1. On line 9, copy the **STORAGE_ID value** and note it down in a notepad. Now replace this value with **#{STORAGE_ID}#**.
+
+    ![setup](images/lab1-image18.png)
+
+1. Click on **Commit** to save changes. Enter **SecretFix** for the branch name and link the **Work item** created earlier from the list.
+
+    ![Remove STORAGE_ID](images/advsc66.png)
+
+    > **Note:** This step is necessary since the main branch is protected by a pull request pipeline.
+
+1. Next, we need to update the build pipeline to add a variable. Click on **Pipelines** and select **eShoponWeb**.
+
+    ![setup](images/lab1-image19.png)
+
+1. Click on **Edit** to edit the pipeline. Change to the **SecretFix** branch.
+
+     ![setup](images/lab1-image20.png)
+   
+     ![Remove STORAGE_ID](images/advsc44.png)
+ 
+1. Click on **Variables** and click on **+** New Variable. 
+
+     ![setup](images/lab1-image21.png)
+
+1. Enter **STORAGE_ID** for the name and paste the secret value from Notepad into the value field. Click on **Keep this value secret to hide the value**, then click **OK** and **Save**. Next, we need to edit the pipeline and add a new build task to replace the **#{STORAGE_ID}#** with the actual value.
+
+   ![setup](images/lab1-image22.png)
+   
+1. While still in edit mode, add the following task between the Checkout and Restore tasks around line 17. This task will replace the **#{STORAGE_ID}#** with the actual value in the **'src/Web/Constants.cs'** file and also remove the tasks related to test and production deployments (Delete the code from line 79) from the existing pipeline, which is not required in our scenario.
+
+    ``` YAML
+
+    - task: qetza.replacetokens.replacetokens-task.replacetokens@6
+      inputs:
+        targetFiles: '**/*.cs'
+        encoding: 'auto'
+        tokenPattern: 'custom'
+        tokenPrefix: '#{' 
+        tokenSuffix: '}#' 
+        verbosity: 'detailed' 
+        keepToken: false 
+    ```
+    
+    ![Replace Token Task](images/advlab23.png)
+
+1. The final pipeline should look as below:
+
+   ```YAML
+    trigger:
+    - main
+
+    pool:
+      vmImage: ubuntu-latest
+    
+    extends: 
+      template: template.yaml
+      parameters:
+        stages:
+          - stage: Build
+            displayName: 'Build'
+            jobs:
+            - job: Build
+              steps:
+              - checkout: self
+    
+              - task: qetza.replacetokens.replacetokens-task.replacetokens@6
+                inputs:
+                  targetFiles: '**/*.cs'
+                  encoding: 'auto'
+                  tokenPattern: 'custom'
+                  tokenPrefix: '#{' 
+                  tokenSuffix: '}#' 
+                  verbosity: 'detailed' 
+                  keepToken: false
+              - task: DotNetCoreCLI@2
+                displayName: Restore 
+                inputs:
+                  command: restore
+                  projects: '**/*.csproj'
+    
+              - task: ms.advancedsecurity-tasks.codeql.init.AdvancedSecurity-Codeql-Init@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Initialize CodeQL'
+                inputs:
+                  languages: csharp
+                  querysuite: default
+    
+              - task: DotNetCoreCLI@2
+                displayName: Build
+                inputs:
+                  projects: '**/*.csproj'
+                  arguments: '--configuration $(BuildConfiguration)'
+    
+              - task: ms.advancedsecurity-tasks.dependency-scanning.AdvancedSecurity-Dependency-Scanning@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Dependency Scanning'
+    
+              - task: ms.advancedsecurity-tasks.codeql.analyze.AdvancedSecurity-Codeql-Analyze@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Perform CodeQL analysis'
+    
+              - task: ms.advancedsecurity-tasks.codeql.enhance.AdvancedSecurity-Publish@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Publish Results'
+    
+              - task: DotNetCoreCLI@2
+                displayName: Test
+                inputs:
+                  command: test
+                  projects: '[Tt]ests/**/*.csproj'
+                  arguments: '--configuration $(BuildConfiguration) --collect:"Code coverage"'
+    
+              - task: DotNetCoreCLI@2
+                displayName: Publish
+                inputs:
+                  command: publish
+                  publishWebProjects: True
+                  arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+                  zipAfterPublish: True
+    
+              - task: PublishBuildArtifacts@1
+                displayName: 'Publish Artifact'
+                inputs:
+                  PathtoPublish: '$(build.artifactstagingdirectory)'
+                condition: succeededOrFailed()
+              
+    ```
+   
+1. Select **Validate and save**, and ensure that the check box is marked at commit directly to the **SecretFix** branch setting, then click on **Save**.
+
+    ![Pipeline Save](images/advlab21.png)
+
+1. Once the commit is saved, click on **Repos**, click **Pull Requests**, and click on **New pull request** to merge the changes from branch **SecretFix** into branch **main**. 
+
+1. For the title, enter the **Fixed secret** and click on **Create**. This will run the **eShoponWeb** pipeline to validate changes. 
+
+    ![Pipeline Save](images/nls12.png)
+
+    >**Note:** Make sure you add a random workitem link from the dropdown if it is not added automatically for the pipeline to run successfully.
+
+1. Once the **eShoponWeb** pipeline has been created, click **Approve** and then click on **Complete**.
+
+1. Change **Merge Type** to **Squash commit** and check the box **Delete SecretFix after merging**, to merge changes into the main branch.
+
+    ![Completing merge](images/advlab25.png)
+
+### Task 1: Setup Code Scanning
+
+Code scanning in GitHub Advanced Security for Azure DevOps lets you analyze the code in an Azure DevOps repository to find security vulnerabilities and coding errors. Any problems identified by the analysis are raised as an alert. Code scanning uses CodeQL to identify vulnerabilities.
+
+1. Select the pipeline **eShopOnweb**.
+
+   ![alert_detected](images/advlab33.png)
+
+1. Locate the tasks related to **Advanced Security Code Scanning** that are already included in the YAML pipeline file.
+
+   ![alert_detected](images/nls6.png)
+ 
+1. Do not run the pipeline. The code scanning setup has already been initiated, along with dependency scanning performed in the previous lab.
+
+### Task 2: Review Code Scanning Alert (Gain Insights)
+
+1. Go to the **Repos** tab and click on the **Advanced Security** menu at the bottom.
+
+1. Click on **Code scanning** to see a list of all the code scanning alerts that have been found. This includes the alert, vulnerable code details, and first detected date.
+
+#### Code scanning Alert Details
+
+1. Click on the item ***Uncontrolled command line...*** to see the details about this alert.
+
+1. This includes the Recommendation, Locations found, Description, Severity, and the Date it was first detected. We can easily fix this threat. 
+
+   ![code_alert_detected](images/nls7.png)
+
+1. You can also view the code that triggered the alert and what build detected it.
+   
+1. Click on **Detections** to see the different builds that detected this alert.
+
+   ![where_detected](images/nls81.png)
+
+    **ProTip!** When a vulnerable component is no longer detected in the latest build for pipelines with the dependency scanning task, the state of the associated alert is automatically changed to Closed. To see these resolved alerts, you can use the **State filter** in the main toolbar and select **Closed**.
+
+### Task 3: Fixing the Code to resolve the alert
+
+1. This is simple to fix using parameters in the dynamic SQL described in the remediation steps.
+
+1. Click on **Locations found** to see the code that triggered the alert.
+
+   ![Image](images/advlab4n6.png)
+
+1. Click on the **Edit** button to edit the file. Line number 23 is highlighted here. 
+
+1. The value of __{drive}__ is getting highlighted from line number 23.
+
+    ![Image](images/nls9.png)
+
+1. Instead of getting the value of 
+__{drive}__ using a query, we can directly define it as __C__ for the string drive variable in the line 20.
+    ```C#
+    string drive = "C";
+    ```
+
+    ![Image](images/nls11.png)
+
+1. Click on **Commit** to save changes. Enter **Fixalert** for the branch name and link the work item. Check **Create a pull request**, and then click on **Commit** again.
+
+    ![Image](images/nls10.png)
+
+    > **Note:** This step is necessary since the main branch is protected by a pull request pipeline.
+
+1. Navigate to Azure DevOps, click on **Repos**, select **Pull requests** and select **Create a pull request** to push the commits from **Fixalert** to the **main**.
+
+1. On the **New pull request** page, click on **Create**.
+
+    ![Image](images/mls3.png)
+
+1. Once the **eShoponWeb** pipeline has been completed, click on **Approve** and then click on **Complete**.
+
+    ![Image](images/mls4.png)
+
+1. Change **Merge Type** to **Squash commit** and check the box **Delete Fixalert after merging** to merge changes into the main branch.
+
+    ![Image](images/mls5.png)
+
+    > **Note**: The build will run automatically, initiating the code scanning task and publishing the results to Advanced Security.
 
 ## Exercise 6: Connecting your Azure DevOps environment to MDC 
 
