@@ -24,9 +24,11 @@
 
     ![Azure DevOps](images/az-400-lab3-(1).png)
     
-6. In the **Organization Setting** window on the left menu click on **Billing (1)** and select **Setup Billing (2)** then click on **save (3)**.
+6. In the **Organization Setting** window on the left menu click on **Billing (1)** .
 
     ![Azure DevOps](images/az-400-lab3-1.png)
+
+1. Select **Setup Billing (2)** then click on **save (3)**.
 
     ![Azure DevOps](images/az-400-lab3-2.png)    
 
@@ -42,7 +44,7 @@
 
      > **Note:** Extensions used in some labs might require a public project to allow using the free version.
 
-1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **eShopOnWeb (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
+1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **CICD (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
       ![](images/az400-m3-L4-03.png)
       
@@ -90,14 +92,14 @@ In this task, you will create an Azure web app by using the Azure portal.
     ```
 
     ```bash
-    RESOURCEGROUPNAME='az400m05l11-RG'
+    RESOURCEGROUPNAME='m05-RG'
     az group create --name $RESOURCEGROUPNAME --location $LOCATION
     ```
 
 1. To create a Windows App service plan by running the following command:
 
     ```bash
-    SERVICEPLANNAME='az400m05l11-sp1'
+    SERVICEPLANNAME='m05-sp1'
     az appservice plan create --resource-group $RESOURCEGROUPNAME --name $SERVICEPLANNAME --sku B3
     ```
 
