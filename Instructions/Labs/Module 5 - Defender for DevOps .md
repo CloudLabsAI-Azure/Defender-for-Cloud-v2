@@ -1,8 +1,25 @@
 ## Module 5 – Defender for DevOps 
 
-## Exercise 1: Understanding CI/CD pipelines in Azure DevOps 
+## Task 1: Understanding CI/CD pipelines in Azure DevOps 
 
-### Task 1:  Set up an Azure DevOps organization.
+Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
+
+### CI/CD Pipelines in Azure DevOps
+
+**Continuous Integration (CI):**
+CI involves automatically building and testing your code every time a team member commits changes to version control. The key goals are to detect errors quickly and to improve software quality.
+
+**Continuous Deployment (CD):**
+CD extends CI by automatically deploying all code changes to a production environment after the build and test stages are successful. This ensures that the software is always in a releasable state.
+
+### Components of a CI/CD Pipeline
+
+1. **Source Control:** Where the code resides (e.g., Git repository).
+2. **Build:** The process of compiling the source code into executable artifacts.
+3. **Test:** Automated tests run to validate the code.
+4. **Release:** Deploying the artifacts to staging or production environments.
+
+### Set up an Azure DevOps organization.
 
 1. On your lab VM open **Edge Browser** on desktop and navigate to [Azure DevOps](https://go.microsoft.com/fwlink/?LinkId=307137), and if prompted sign with the credentials.
 
@@ -36,90 +53,42 @@
 
     ![Azure DevOps](images/az-400-lab3-3.png)
 
-8. In the **Organization Setting** window on the left menu click on **Policies** and enable **Third-party application access via OAuth**.
+1. In the **Organization Settings** window, click on **Settings** in the left menu. On the settings page, enable the **Creation of Classic Release Pipeline** option.
 
-    ![Azure DevOps](images/policies-enable-3rd.png)
+    ![](images/21.png)
 
-1. Toggle the switch to **On** for **Allow public projects**.
-
-     > **Note:** Extensions used in some labs might require a public project to allow using the free version.
 
 1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **CICD (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
       ![](images/az400-m3-L4-03.png)
       
-1. Click on **Repos (1)>Files (2) , Import a Repository**. Select **Import (3)**. On the **Import a Git Repository** window, paste the following URL https://github.com/MicrosoftLearning/eShopOnWeb.git (4) and click **Import (5)**.
+### **Create a Simple HTML File**
 
-      ![](images/AZ-400-import.png)
-      
-2. The repository is organized the following way:
+1. Click on **Repos (1)>Files (2)**, Select **Initialize (3)**. 
 
-      o. **.ado** folder contains Azure DevOps YAML pipelines
-         
-      o **.devcontainer** folder container setup to develop using containers (either locally in VS Code or GitHub Codespaces)
-         
-      o **.azure** folder contains Bicep & ARM infrastructure as code templates used in some lab scenarios.
-         
-      o **.github** folder contains YAML GitHub workflow definitions.
-         
-      o. **src** folder contains the .NET 6 website used in the lab scenarios.
-         
-      ![](images/az400-m3-L4-06.png)
-         
-### Task 2: Create Azure resources
+      ![](images/22.png)
 
-In this task, you will create an Azure web app by using the Azure portal.
+1. First, let’s create a basic HTML file named `index.html`:
 
-1. In the Azure portal, in the toolbar, click the **Cloud Shell** icon located directly to the right of the search text box.
+     ![](images/23.png)
 
-   ![](images/16.png)
-   
-1. If prompted to select either **Bash** or **PowerShell**, select **Bash**.
+1. Add the following contnet to `index.html` file:
 
-     ![](images/15.png)
-
-    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and click **Apply**.
-
-      ![](images/17.png)
-
-    > **Note:** for a list of regions and their alias, run the following command from the Azure Cloud Shell - Bash:
-
-    ```bash
-    az account list-locations -o table
+    ```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>My Simple HTML Page</title>
+    </head>
+    <body>
+        <h1>Hello, Azure DevOps!</h1>
+        <p>This is a simple HTML page used to demonstrate CI/CD pipelines.</p>
+    </body>
+    </html>
     ```
-
-1. From the **Bash** prompt, in the **Cloud Shell** pane, run the following command to create a resource group (replace the `<region>` placeholder with the name of the Azure region closest to you such as 'centralus', 'westeurope' or other region of choice).
-
-    ```bash
-    LOCATION='<region>'
-    ```
-
-    ```bash
-    RESOURCEGROUPNAME='m05-RG'
-    az group create --name $RESOURCEGROUPNAME --location $LOCATION
-    ```
-
-1. To create a Windows App service plan by running the following command:
-
-    ```bash
-    SERVICEPLANNAME='m05-sp1'
-    az appservice plan create --resource-group $RESOURCEGROUPNAME --name $SERVICEPLANNAME --sku B3
-    ```
-
-1. Create a web app with a unique name.
-
-    ```bash
-    WEBAPPNAME=eshoponWebYAML$RANDOM$RANDOM
-    az webapp create --resource-group $RESOURCEGROUPNAME --plan $SERVICEPLANNAME --name $WEBAPPNAME
-    ```
-
-    > **Note**: Record the name of the web app. You will need it later in this lab.
-
-1. Close the Azure Cloud Shell, but leave the Azure Portal open in the browser.
-
-### Task 3: Configure CI/CD Pipelines as Code with YAML in Azure DevOps
 
 1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
+
 1. In the **Create your first Pipeline** window, click **Create pipeline**.
 
     > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
@@ -132,19 +101,47 @@ In this task, you will create an Azure web app by using the Azure portal.
 
    ![](images/11.png)
 
-1. On the **Configure your pipeline** pane, scroll down and select **Existing Azure Pipelines YAML File**.
+1. On the **Configure your pipeline** pane, scroll down and select **Starter pipeline**.
 
    ![](images/12.png)
 
-1. In the **Selecting an existing YAML File** blade, specify the following parameters:
-- Branch: **main**
-- Path: **.ado/eshoponweb-ci.yml**
+1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
-7. Click **Continue** to save these settings.
+    ```yaml
+    trigger:
+    - main
 
-   ![](images/13.png)
+    pool:
+    vmImage: 'ubuntu-latest'
 
-8. From the **Review your Pipeline YAML** screen, click **Run** to start the Build Pipeline process.
+    steps:
+    - task: UsePythonVersion@0
+    inputs:
+        versionSpec: '3.x'
+    displayName: 'Set up Python'
+
+    - script: |
+        echo "Building the HTML project..."
+        mkdir output
+        cp index.html output/
+    displayName: 'Build Project'
+
+    - task: PublishBuildArtifacts@1
+    inputs:
+        pathToPublish: 'output'
+        artifactName: 'html-artifact'
+    displayName: 'Publish Artifacts'
+    ```
+
+1. This YAML file does the following:
+- **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
+- **Pool**: Uses an Ubuntu VM image for the build.
+- **Steps**:
+  - Set up Python (although not used in this case, you might need it for other tasks).
+  - Create a directory called `output` and copy `index.html` to it.
+  - Publish the contents of `output` as build artifacts.
+   
+8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
 
    ![](images/14.png)
 
@@ -152,226 +149,57 @@ In this task, you will create an Azure web app by using the Azure portal.
 
     > **Note**: Each task from the YAML file is available for review, including any warnings and errors.
 
-### Task 4: Add continuous delivery to the YAML definition
+### **Create a Release Pipeline**
 
-In this task, you will add continuous delivery to the YAML-based definition of the pipeline you created in the previous task.
+1. Go to **Pipelines** > **Releases** > **New pipeline**.
 
-  > **Note**: Now that the build and test processes are successful, we can now add delivery to the YAML definition.
+    ![](images/24.png)
 
-1. On the pipeline run pane, click the ellipsis symbol in the upper right corner and, in the dropdown menu, click **Edit**.
 
-1. On the pane displaying the content of the **CICD/.ado/eshoponweb-ci.yml** file, navigate to the end of the file (line 56), and hit **Enter/Return** to add a new empty line.
+1. From the **Select a template** window, **choose** **Azure App Service Deployment** (Deploy your application to Azure App Service. Choose from Web App on Windows, Linux, containers, Function Apps, or WebJobs) under the **Featured** list of templates.    
 
-1. Being on line **57**, add the following content to define the **Release** stage in the YAML pipeline.
+1. Click **Apply**.
 
-    > **Note**: You can define whatever stages you need to better organize and track pipeline progress.
+    ![](images/33.png)
 
-    ```yaml
-    - stage: Deploy
-      displayName: Deploy to an Azure Web App
-      jobs:
-      - job: Deploy
-        pool:
-          vmImage: 'windows-2019'
-        steps:
-    ```
+1. Select the **CICD (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
 
-1. Set the cursor on a new line at the end of the YAML definition.
+    ![](images/25.png)
 
-    > **Note**: This will be the location where new tasks are added.
+1. On the All pipelines > New Release Pipeline pane, ensure that the **stage 2** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
 
-1. In the list of tasks on the right side of the code pane, search for and select the **Azure App Service Deploy** task.
 
-1. In the **Azure App Service deploy** pane, specify the following settings and click **Add**:
+    ![](images/28.png)
 
-    - in the **Azure subscription** drop-down list, select the Azure subscription into which you deployed the Azure resources earlier in the lab, click **Authorize**, and, when prompted, authenticate by using the same user account you used during the Azure resource deployment.
-    - in the **App Service name** dropdown list, select the name of the web app you deployed earlier in the lab.
-    - in the **Package or folder** text box, **update** the Default Value to `$(Build.ArtifactStagingDirectory)/**/Web.zip`.
+   >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
-1. Confirm the settings from the Assistant pane by clicking the **Add** button.
+1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_testing/html-artifact"**,
 
-      ![](images/9.png)
+    ![](images/27.png)
 
-    > **Note**: This will automatically add the deployment task to the YAML pipeline definition.
+1.  On the **All pipelines > New Release Pipeline** pane, click **Save** and, in the **Save** dialog box, click **OK**.
 
-1. The snippet of code added to the editor should look similar to below, reflecting your name for the azureSubscription and WebappName parameters:
+    ![](images/34.png)
 
-    ```yaml
-        - task: AzureRmWebAppDeployment@4
-          inputs:
-            ConnectionType: 'AzureRM'
-            azureSubscription: 'AZURE SUBSCRIPTION HERE (b999999abc-1234-987a-a1e0-27fb2ea7f9f4)'
-            appType: 'webApp'
-            WebAppName: 'eshoponWebYAML369825031'
-            packageForLinux: '$(Build.ArtifactStagingDirectory)/**/Web.zip'
-    ```
+1.  On the **All pipelines > New Release Pipeline** pane, click **Create release** .
 
-1. Validate the task is listed as a child of the **steps** task. If not, select all lines from the added task, press the **Tab** key twice to indent it four spaces, so that it listed as a child of the **steps** task.
+    ![](images/29.png)
 
-    > **Note**: The **packageForLinux** parameter is misleading in the context of this lab, but it is valid for Windows or Linux.
+1. Wait until the release pipline successfully completed.
 
-    > **Note**: By default, these two stages run independently. As a result, the build output from the first stage might not be available to the second stage without additional changes. To implement these changes, we will add a new task to download the deployment artifact in the beginning of the deploy stage.
+    ![](images/30.png)
 
-1. Place the cursor on the first line under the **steps** node of the **deploy** stage, and hit Enter/Return to add a new empty line (Line 64).
+1. Navigate to the Azure portal interface, navigate to the resource group **asclab**, in the list of resources, click the **asclab-app** web app.
 
-1. On the **Tasks** pane, search for and select the **Download build artifacts** task.
+1. On the web app blade, click **Browse**.
 
-1. Specify the following parameters for this task:
+    ![](images/32.png)
 
-    - Download Artifacts produced by: **Current Build**
-    - Download Type: **Specific Artifact**
-     - Artifact Name: **Enter "Website" in the text box**
-    - Destination Directory: **$(Build.ArtifactStagingDirectory)**
-    - Click **Add**.
+1. Verify that the web page loads successfully in a new web browser tab.
 
-      ![](images/1.png)
+    ![](images/31.png)
 
-1. The snippet of added code should look similar to below:
 
-    ```yaml
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: 'current'
-            downloadType: 'single'
-            artifactName: 'Website'
-            downloadPath: '$(Build.ArtifactStagingDirectory)'
-    ```
-1. If the YAML indentation is off, With the added task still selected in the editor, press the **Tab** key twice to indent it four spaces.
-
-    > **Note**: Here as well you may also want to add an empty line before and after to make it easier to read.
-
-1. Click **Validate + Save**, then again click on **Save**.
-
-    ![](images/2.png)
-
-1. Click **Save** again..
-
-    ![](images/3.png)    
-   
-
-    > **Note**: Since our original CI-YAML was not configured to automatically trigger a new build, we have to initiate this one manually.
-
-1. From the Azure DevOps left menu, navigate to **Pipelines** and select **Pipelines** again. 
-
-1. Open the **CICD** Pipeline and click **Run Pipeline**.
-
-1. Confirm the **Run** from the appearing pane.
-
-1. Notice the 2 different Stages, **Build .Net Core Solution** and **Deploy to Azure Web App** appearing.
-
-   ![](images/5.png)    
-
-1. Wait for the pipeline to kick off and wait until it completes the Build Stage successfully.
-
-1. Once the Deploy Stage wants to start, you are prompted with **Permissions Needed**, as well as an orange bar saying .
-
-    ```
-    This pipeline needs permission to access a resource before this run can continue to Deploy to an Azure Web App
-    ```
-1. Click on **View**.
-
-   ![](images/6.png)  
-
-1. From the **Waiting for Review** pane, click **Permit**.
-
-   ![](images/7.png)  
-
-1. Validate the message in the **Permit popup** window, and confirm by clicking **Permit**.
-
-   ![](images/8.png)  
-     
-1. This sets off the Deploy Stage. Wait for this to complete successfully.
-
-     > **Note**: If the deployment should fail, because of an issue with the YAML Pipeline syntax, use this as a reference:
-
-     ```yaml
-    #NAME THE PIPELINE SAME AS FILE (WITHOUT ".yml")
-    # trigger:
-    # - main
-
-    resources:
-      repositories:
-        - repository: self
-          trigger: none
-
-    stages:
-    - stage: Build
-      displayName: Build .Net Core Solution
-      jobs:
-      - job: Build
-        pool:
-          vmImage: ubuntu-latest
-        steps:
-        - task: DotNetCoreCLI@2
-          displayName: Restore
-          inputs:
-            command: 'restore'
-            projects: '**/*.sln'
-            feedsToUse: 'select'
-
-        - task: DotNetCoreCLI@2
-          displayName: Build
-          inputs:
-            command: 'build'
-            projects: '**/*.sln'
-
-        - task: DotNetCoreCLI@2
-          displayName: Test
-          inputs:
-            command: 'test'
-            projects: 'tests/UnitTests/*.csproj'
-
-        - task: DotNetCoreCLI@2
-          displayName: Publish
-          inputs:
-            command: 'publish'
-            publishWebProjects: true
-            arguments: '-o $(Build.ArtifactStagingDirectory)'
-
-        - task: PublishBuildArtifacts@1
-          displayName: Publish Artifacts ADO - Website
-          inputs:
-            pathToPublish: '$(Build.ArtifactStagingDirectory)'
-            artifactName: Website
-
-        - task: PublishBuildArtifacts@1
-          displayName: Publish Artifacts ADO - Bicep
-          inputs:
-            PathtoPublish: '$(Build.SourcesDirectory)/.azure/bicep/webapp.bicep'
-            ArtifactName: 'Bicep'
-            publishLocation: 'Container'
-
-    - stage: Deploy
-      displayName: Deploy to an Azure Web App
-      jobs:
-      - job: Deploy
-        pool:
-          vmImage: 'windows-2019'
-        steps:
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: 'current'
-            downloadType: 'single'
-            artifactName: 'Website'
-            downloadPath: '$(Build.ArtifactStagingDirectory)'
-        - task: AzureRmWebAppDeployment@4
-          inputs:
-            ConnectionType: 'AzureRM'
-            azureSubscription: 'AZURE SUBSCRIPTION HERE (b999999abc-1234-987a-a1e0-27fb2ea7f9f4)'
-            appType: 'webApp'
-            WebAppName: 'eshoponWebYAML369825031'
-            packageForLinux: '$(Build.ArtifactStagingDirectory)/**/Web.zip'
-
-    ```
-
-### Task 5: Review the deployed site
-
-1. Switch back to web browser window displaying the Azure portal and navigate to the blade displaying the properties of the Azure web app.
-
-1. On the Azure web app blade, click **Overview** and, on the overview blade, click **Browse** to open your site in a new web browser tab.
-
-1. Verify that the deployed site loads as expected in the new browser tab, showing the EShopOnWeb E-commerce website.
-  
 ## Exercise 2: Identifying security issues in the pipeline 
 
 #### Task 1: Activate Mend Bolt extension
