@@ -503,11 +503,13 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
 
 ### **1. Setting Up Nmap on a Windows VM**
 
-1. Visit the official website using the URL https://nmap.org/download.html on any web browser the click on **nmap-7.92-setup.exe** Downloading of this executable file will start soon. It is a 21.8 MB file so it will take some minutes. 
+1. Visit the official website using the URL https://nmap.org/download.html then click on **Windows**.
 
-     ![alert_detected](images/35.png)
+   ![alert_detected](images/35.png)
 
-    ![alert_detected](images/36.png)
+1. Click on **nmap-7.92-setup.exe** Downloading of this executable file will start soon. It is a 21.8 MB file so it will take some minutes. 
+
+   ![alert_detected](images/36.png)
 
 1. Now check for the executable file in downloads in your system and run it.
 
