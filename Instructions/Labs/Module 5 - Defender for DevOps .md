@@ -514,54 +514,52 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
 1. It will prompt confirmation to make changes to your system. Click on Yes.
 
 1. The next screen will be of License Agreement, click on **I Agree**.
-
   
-    ![alert_detected](images/37.png)
+   ![alert_detected](images/37.png)
 
 1. Next screen is of choosing components, all components are already marked so don’t change anything just click on the **Next** button.
 
-
-    ![alert_detected](images/38.png)
+   ![alert_detected](images/38.png)
 
 1. In this step, we choose the installation location of Nmap. By default, it uses the C drive but you can change it into another drive that will have sufficient memory space for installation. It requires 80.5 MB of memory space.
 
-    ![alert_detected](images/39.png)
+   ![alert_detected](images/39.png)
 
 1. After this installation process it will take a few minutes to complete the installation.
 
-    ![alert_detected](images/40.png)
+   ![alert_detected](images/40.png)
 
 1. Npcap installation will also occur with it, the screen of License Agreement will appear, click on **I Agree**.
 
-    ![alert_detected](images/41.png)
+   ![alert_detected](images/41.png)
 
 1. Next screen is of installation options don’t change anything and click on the **Install** button.
 
-    ![alert_detected](images/42.png)
+   ![alert_detected](images/42.png)
 
 1. After this installation process it will take a few minutes to complete the installation.
 
-      ![alert_detected](images/43.png)
+    ![alert_detected](images/43.png)
 
 1. Click on the Finish button to finish the installation of Npcap.
 
-      ![alert_detected](images/48.png)
+    ![alert_detected](images/48.png)
 
 1. After completion of installation click on the Next button.
 
-      ![alert_detected](images/45.png)
+    ![alert_detected](images/45.png)
 
 1. Click on the Finish button to finish the installation of Npcap.
 
-      ![alert_detected](images/44.png)
+    ![alert_detected](images/44.png)
 
 1. Screen for creating shortcut will appear, click on **Next** button.
 
-      ![alert_detected](images/46.png)
+    ![alert_detected](images/46.png)
 
 1. Click on the **Finish** button to finish the installation of Nmap.
 
-      ![alert_detected](images/47.png)
+    ![alert_detected](images/47.png)
 
 1.  You have successfully installed Nmap on your windows system.
 
@@ -569,7 +567,7 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
 
 1. Click the **Start** menu, type `cmd` into the search bar, and then select **Command Prompt** from the search results.
     
-      ![alert_detected](images/49.png)
+    ![alert_detected](images/49.png)
 
 1. Execute a basic Nmap scan command:
 
@@ -612,7 +610,6 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
    ![alert_detected](images/52.png)
 
 1. Microsoft Defender for Cloud recommendations offer high-level security alerts and suggested actions from Azure. In contrast, Nmap scan results provide detailed technical data to identify and verify open ports on a virtual machine. Both are essential for robust network security, ensuring that potentially vulnerable open ports are properly managed and secured.
-
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
