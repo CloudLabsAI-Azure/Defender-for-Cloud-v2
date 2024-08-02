@@ -1,6 +1,6 @@
 ## Module 5 – Defender for DevOps 
 
-## Task 1: Understanding CI/CD pipelines in Azure DevOps 
+### Task 1: Understanding CI/CD pipelines in Azure DevOps 
 
 Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
 
@@ -201,121 +201,71 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 ## Task 2: Identifying security issues in the pipeline 
 
-To identify and address security issues in your CI/CD pipeline, you need to assess several aspects of your pipeline configuration and its deployment environment. Here are key areas to focus on and steps to help secure your Azure DevOps pipeline:
+To identify security issues in your pipeline with a straightforward approach, you can follow these basic steps to incorporate a simple security scan into your Azure DevOps pipeline. This example focuses on integrating a basic security scan with minimal configuration:
 
-### 1. Secrets and Credentials
+### Example: Basic Security Scan with Snyk
 
-**Ensure Secrets are Secure:**
-- **Use Azure DevOps Variable Groups** to manage sensitive information. Store secrets in the Azure DevOps Library and reference them using variable names rather than hardcoding them in your pipeline files.
-- **Use Service Connections** for connecting to Azure or other services, which manage credentials securely.
+**Snyk** is a popular tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into an Azure DevOps pipeline to identify security issues:
 
-**Example:**
-Instead of hardcoding credentials:
-```yaml
-azureSubscription: 'my-azure-subscription'
-```
+#### **1. Set Up Snyk**
 
-Use a variable group:
-```yaml
-azureSubscription: $(azureSubscription)
-```
+1. **Create a Snyk Account**:
+   - Sign up for a Snyk account if you don’t have one.
 
-### 2. Access Control
+2. **Get Your Snyk Token**:
+   - Go to your Snyk account settings to get your API token for authentication.
 
-**Restrict Access:**
-- **Limit access to your Azure DevOps project** to only those users who need it.
-- **Use least privilege principle**: Ensure that only necessary permissions are granted to the service accounts and users.
+#### **2. Integrate Snyk in Azure DevOps Pipeline**
 
-**Configure Pipeline Permissions:**
-- **Restrict who can edit or run pipelines** by setting appropriate permissions on the pipeline or repository level.
+1. **Create or Edit Your Pipeline**:
+   - In Azure DevOps, go to your project and create or edit a pipeline.
 
-### 3. Pipeline Code Review
+2. **Add a Snyk Security Scan Task**:
+   - Insert the following YAML configuration into your pipeline file to run Snyk as part of your CI process:
+Here’s an alternative way to achieve the same result using a slightly different approach. This version includes installing Node.js and Snyk as part of a single script, which can be more efficient:
 
-**Review Pipeline Configuration:**
-- **Regularly review your pipeline YAML files** for any hardcoded secrets or insecure practices.
-- **Implement pipeline as code practices** to ensure that changes are reviewed and approved through pull requests.
+    ```yaml
+    trigger:
+    - main
 
-**Example YAML Review:**
-Ensure that sensitive information is not exposed in the YAML file.
+    pool:
+    vmImage: 'ubuntu-latest'
 
-### 4. Dependency Management
+    steps:
+    - script: |
+        echo "Setting up Node.js..."
+        sudo apt-get update
+        sudo apt-get install -y nodejs npm
+        node --version
+        npm --version
+        
+        echo "Installing Snyk..."
+        npm install -g snyk
 
-**Review Dependencies:**
-- **Ensure dependencies are up-to-date** and do not contain known vulnerabilities.
-- **Use dependency scanning tools** to identify vulnerabilities in third-party packages.
+        echo "Installing dependencies..."
+        npm install
 
-**Example Tools:**
-- **Azure Pipelines has built-in support** for tools like WhiteSource or Snyk to scan for vulnerabilities in dependencies.
+        echo "Running Snyk Security Scan..."
+        snyk test
+    displayName: 'Setup, Install Dependencies, and Run Snyk Security Scan'
+    ```
 
-### 5. Secure Artifact Handling
+### Explanation:
+1. **Setup Node.js**: The script manually installs Node.js and npm, which might be helpful if the `UseNode` task is not available or if you want to ensure the specific versions of Node.js and npm are installed.
 
-**Control Artifact Access:**
-- **Ensure that build artifacts** are stored securely and access is controlled.
-- **Use artifact repositories** with appropriate access controls.
+2. **Install Snyk**: Installs Snyk globally.
 
-**Example:**
-When deploying artifacts, ensure that only authorized users can access or deploy them.
+3. **Install Dependencies**: Runs `npm install` to install project dependencies.
 
-### 6. Pipeline and Deployment Security
+4. **Run Snyk Security Scan**: Executes the Snyk scan.
 
-**Validate Deployment Configurations:**
-- **Ensure that deployment tasks are configured securely**, such as using service connections or managed identities instead of hardcoded credentials.
+### 3. **Review and Act on Results**
 
-**Monitor and Audit:**
-- **Enable auditing and monitoring** for your pipeline activities and deployments.
-- **Regularly review audit logs** to track access and changes.
+1. **Check Pipeline Results**:
+   - After running the pipeline, review the results of the Snyk scan in the pipeline logs. Snyk will report any vulnerabilities found.
 
-### 7. Pipeline Security Tools
-
-**Integrate Security Scanning:**
-- **Integrate security scanning tools** into your pipeline to detect vulnerabilities in your code, configuration, and dependencies.
-
-**Example Tasks:**
-- **Static Analysis**: Run static code analysis tools to identify security issues in code.
-- **Dynamic Analysis**: Implement dynamic application security testing (DAST) tools to test running applications for vulnerabilities.
-
-### 8. Example Pipeline Security Configuration
-
-Here’s a more secure version of the YAML pipeline, incorporating best practices:
-
-```yaml
-trigger:
-- main
-
-pool:
-  vmImage: 'ubuntu-latest'
-
-variables:
-  azureSubscription: $(azureSubscription) # Securely managed variable
-
-steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.x'
-  displayName: 'Set up Python'
-
-- script: |
-    echo "Building the HTML project..."
-    mkdir output
-    cp index.html output/
-    cd output
-    zip -r html-artifact.zip *
-  displayName: 'Build and Zip Project'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'output/html-artifact.zip'
-    artifactName: 'html-artifact'
-  displayName: 'Publish Artifacts'
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    azureSubscription: $(azureSubscription) # Securely managed variable
-    appName: '<your-web-app-name>'
-    package: '$(System.DefaultWorkingDirectory)/_your-build-pipeline/html-artifact/html-artifact.zip'
-  displayName: 'Deploy to Azure Web App'
-```
-
+2. **Resolve Identified Issues**:
+   - Address any vulnerabilities reported by Snyk by updating dependencies or applying fixes.
 
 
 ## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
