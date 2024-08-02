@@ -57,20 +57,19 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
     ![](images/21.png)
 
-
 1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **CICD (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
-      ![](images/az400-m3-L4-03.png)
+    ![](images/az400-m3-L4-03.png)
       
 ### 3. Create a Simple HTML File
 
 1. Click on **Repos (1)>Files (2)**, Select **Initialize (3)**. 
 
-      ![](images/22.png)
+    ![](images/22.png)
 
 1. First, let’s create a basic HTML file named `index.html`:
 
-     ![](images/23.png)
+    ![](images/23.png)
 
 1. Add the following contnet to `index.html` file:
 
@@ -155,7 +154,6 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
     ![](images/24.png)
 
-
 1. From the **Select a template** window, **choose** **Azure App Service Deployment** (Deploy your application to Azure App Service. Choose from Web App on Windows, Linux, containers, Function Apps, or WebJobs) under the **Featured** list of templates.    
 
 1. Click **Apply**.
@@ -201,9 +199,9 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 ## Task 2: Identifying security issues in the pipeline 
 
-To identify security issues in your pipeline with a straightforward approach, you can follow these basic steps to incorporate a simple security scan into your Azure DevOps pipeline. This example focuses on integrating a basic security scan with minimal configuration:
+To identify security issues in your pipeline with a straightforward approach, you can follow these basic steps to incorporate a security scan into your Azure DevOps pipeline. This focuses on integrating a basic security scan with minimal configuration:
 
-### Example: Basic Security Scan with Snyk
+### Security Scan with Snyk
 
 **Snyk** is a popular tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into an Azure DevOps pipeline to identify security issues:
 
