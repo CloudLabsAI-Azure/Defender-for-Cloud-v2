@@ -1,0 +1,14 @@
+[
+    {
+      "Name": "Defender for Cloud V2",
+      "Language": "English",
+      "BaseURL": "https://github.com/CloudLabsAI-Azure/Defender-for-Cloud-v2",
+      "Files": [
+        {
+            "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%205%20-%20Defender%20for%20DevOps%20.md",
+            "Order": 1
+        }
+    
+      ]
+    }
+  ]
