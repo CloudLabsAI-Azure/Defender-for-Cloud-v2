@@ -200,60 +200,130 @@ CD extends CI by automatically deploying all code changes to a production enviro
     ![](images/31.png)
 
 
-## Exercise 2: Identifying security issues in the pipeline 
+## Task 2: Identifying security issues in the pipeline 
 
-#### Task 1: Activate Mend Bolt extension
+To identify and address security issues in your CI/CD pipeline, you need to assess several aspects of your pipeline configuration and its deployment environment. Here are key areas to focus on and steps to help secure your Azure DevOps pipeline:
 
-In this task, you will activate WhiteSource Bolt in the newly generated Azure Devops project.
+### 1. **Secrets and Credentials**
 
-1.  On your lab computer, in the web browser window displaying the Azure DevOps portal with the **CICD** project open, click on the marketplace icon > **Browse Marketplace**.
+**Ensure Secrets are Secure:**
+- **Use Azure DevOps Variable Groups** to manage sensitive information. Store secrets in the Azure DevOps Library and reference them using variable names rather than hardcoding them in your pipeline files.
+- **Use Service Connections** for connecting to Azure or other services, which manage credentials securely.
 
-    ![Browse Marketplace](images/browse-marketplace.png)
+**Example:**
+Instead of hardcoding credentials:
+```yaml
+azureSubscription: 'my-azure-subscription'
+```
 
-1.  On the MarketPlace, search for **Mend Bolt (formerly WhiteSource)** and open it. Mend Bolt is the free version of the previously known WhiteSource tool, which scans all your projects and detects open source components, their license and known vulnerabilities.
+Use a variable group:
+```yaml
+azureSubscription: $(azureSubscription)
+```
 
-    > Warning: make sure you select the Mend **Bolt** option (the **free** one)!
+### 2. **Access Control**
 
-1.  On the **Mend Bolt (formerly WhiteSource)** page, click on **Get it for free**.
+**Restrict Access:**
+- **Limit access to your Azure DevOps project** to only those users who need it.
+- **Use least privilege principle**: Ensure that only necessary permissions are granted to the service accounts and users.
 
-    ![Get Mend Bolt](images/mend-bolt.png)
+**Configure Pipeline Permissions:**
+- **Restrict who can edit or run pipelines** by setting appropriate permissions on the pipeline or repository level.
 
-1.  On the next page, select the desired Azure DevOps organization and **Install**. **Proceed to organization** once installed.
+### 3. **Pipeline Code Review**
 
-1.  In your Azure DevOps navigate to **Organization Settings** and select **Mend** under **Extensions**. Provide your Work Email (**your lab personal account**, e.g. using AZ400learner@outlook.com instead of student@microsoft.com ), Company Name and other details and click **Create Account** button to start using the Free version.
+**Review Pipeline Configuration:**
+- **Regularly review your pipeline YAML files** for any hardcoded secrets or insecure practices.
+- **Implement pipeline as code practices** to ensure that changes are reviewed and approved through pull requests.
 
-    ![Get Mend Account](images/20.png)
+**Example YAML Review:**
+Ensure that sensitive information is not exposed in the YAML file.
 
-#### Task 2: Create and Trigger a build
+### 4. **Dependency Management**
 
-In this task, you will create and trigger a CI build pipeline within  Azure DevOps project. You will use **Mend Bolt** extension to identify vulnerable OSS components present in this code.
+**Review Dependencies:**
+- **Ensure dependencies are up-to-date** and do not contain known vulnerabilities.
+- **Use dependency scanning tools** to identify vulnerabilities in third-party packages.
 
-1.  On your lab computer, from the **CICD** Azure DevOps project, in the vertical menu bar on the left side, navigate to the **Pipelines>Pipelines** section, click  **New Pipeline**.
+**Example Tools:**
+- **Azure Pipelines has built-in support** for tools like WhiteSource or Snyk to scan for vulnerabilities in dependencies.
 
-1.  On the **Where is your code?** window, select **Azure Repos Git (YAML)** and select the **CICD** repository.
+### 5. **Secure Artifact Handling**
 
-    ![Select Pipeline](images/10.png)
+**Control Artifact Access:**
+- **Ensure that build artifacts** are stored securely and access is controlled.
+- **Use artifact repositories** with appropriate access controls.
 
-1.  On the **Configure** section, choose **Existing Azure Pipelines YAML file (1)**. Provide the following **path (2)** **/.ado/eshoponweb-ci-mend.yml** and click **Continue (3)**.
+**Example:**
+When deploying artifacts, ensure that only authorized users can access or deploy them.
 
-    ![Select Pipeline](images/19.png)
+### 6. **Pipeline and Deployment Security**
 
-1.  Review the pipeline and click on **Run**. It will take a few minutes to run successfully.
-    > **Note**: The build may take a few minutes to complete. The build definition consists of the following tasks:
-    - **DotnetCLI** task for restoring, building, testing and publishing the dotnet project.
-    - **Whitesource** task (still keeps the old name), to run the Mend tool analysis of OSS libraries.
-    - **Publish Artifacts** the agents running this pipeline will upload the published web project.
+**Validate Deployment Configurations:**
+- **Ensure that deployment tasks are configured securely**, such as using service connections or managed identities instead of hardcoded credentials.
 
-1.  While the pipeline is executing, lets **rename** it to identify it easier (as the project may be used for multiple labs). Go to **Pipelines/Pipelines** section in Azure DevOps project, click on the executing Pipeline name (it will get a default name), and look for **Rename/move** option on the ellipsis icon. Rename it to **cicd-mend** and click **Save**.
+**Monitor and Audit:**
+- **Enable auditing and monitoring** for your pipeline activities and deployments.
+- **Regularly review audit logs** to track access and changes.
 
-    ![Rename Pipeline](images/18.png)
+### 7. **Pipeline Security Tools**
 
-1.  Once the pipeline execution has finished, you can review the results. Open the latest execution for  **eshoponweb-ci-mend** pipeline. The summary tab will show the logs of the execution, together with related details such as the repository version(commit) used, trigger type, published artifacts, test coverage, etc.
+**Integrate Security Scanning:**
+- **Integrate security scanning tools** into your pipeline to detect vulnerabilities in your code, configuration, and dependencies.
 
-1. On the **Mend Bolt** tab, you can review the OSS security analysis. It will show you details around the inventory used, vulnerabilities found (and how to solve them), and an interesting report around library related Licenses. Take some time to review the report.
+**Example Tasks:**
+- **Static Analysis**: Run static code analysis tools to identify security issues in code.
+- **Dynamic Analysis**: Implement dynamic application security testing (DAST) tools to test running applications for vulnerabilities.
 
-    ![Mend Results](images/mend-results.png)
+### 8. **Example Pipeline Security Configuration**
 
+Here’s a more secure version of the YAML pipeline, incorporating best practices:
+
+```yaml
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: $(azureSubscription) # Securely managed variable
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+  displayName: 'Set up Python'
+
+- script: |
+    echo "Building the HTML project..."
+    mkdir output
+    cp index.html output/
+    cd output
+    zip -r html-artifact.zip *
+  displayName: 'Build and Zip Project'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'output/html-artifact.zip'
+    artifactName: 'html-artifact'
+  displayName: 'Publish Artifacts'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    azureSubscription: $(azureSubscription) # Securely managed variable
+    appName: '<your-web-app-name>'
+    package: '$(System.DefaultWorkingDirectory)/_your-build-pipeline/html-artifact/html-artifact.zip'
+  displayName: 'Deploy to Azure Web App'
+```
+
+### 9. **Documentation and Training**
+
+**Educate Your Team:**
+- **Provide training on security best practices** for CI/CD pipelines.
+- **Keep documentation updated** on secure pipeline practices and configuration guidelines.
+
+By focusing on these aspects, you can significantly improve the security of your Azure DevOps pipelines and protect your applications and data.
 ## Exercise 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
 
 ### Overview of GitHub Advanced Security (GHAS)
@@ -268,8 +338,6 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - Navigate to your repository on GitHub.
 - Click on `Settings`.
 - In the `Security` section, find `GitHub Advanced Security` and enable it.
-
-https://github.com/ghas-bootcamp/ghas-bootcamp fork this repo 
 
 #### 2. **Configure Code Scanning**
 
@@ -324,514 +392,200 @@ https://github.com/ghas-bootcamp/ghas-bootcamp fork this repo
 - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
 - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
 
-
 ## Exercise 4: Overview of Defender for DevOps (including pricing) [Read-Only] 
 
-### Overview of Microsoft Defender for DevOps
+#Defender for DevOps is a security solution by Microsoft designed to enhance the security of DevOps environments. It provides a range of tools and features to help secure the software development lifecycle (SDLC) and protect against threats that target DevOps processes. Here's an overview:
 
-Microsoft Defender for DevOps is a comprehensive security solution designed to protect your DevOps environments, including CI/CD pipelines, code repositories, and infrastructure as code (IaC) configurations. It helps identify and remediate vulnerabilities, enforce security policies, and secure the entire DevOps lifecycle.
+### **Key Features:**
 
+1. **Security for CI/CD Pipelines:**
+   - **Code Scanning:** Identifies vulnerabilities and security issues in your code before deployment.
+   - **Dependency Scanning:** Detects known vulnerabilities in dependencies and libraries used in your projects.
 
-#### 1. **Integrate with DevOps Tools**
+2. **Integration with Azure DevOps and GitHub:**
+   - **Azure DevOps:** Integrates with Azure Pipelines, Boards, Repos, and other Azure DevOps services to secure the DevOps lifecycle.
+   - **GitHub:** Provides security insights and recommendations directly in your GitHub repositories.
 
-Integrate Defender for DevOps with your CI/CD pipelines and code repositories to start scanning for vulnerabilities.
+3. **Container Security:**
+   - **Image Scanning:** Scans container images for vulnerabilities before they are deployed.
+   - **Runtime Protection:** Monitors running containers for security issues and potential threats.
 
-**Azure DevOps:**
+4. **Infrastructure as Code (IaC) Security:**
+   - **IaC Scanning:** Analyzes your IaC templates for security misconfigurations and vulnerabilities.
 
-- In the Azure DevOps portal, go to `Project Settings`.
-- Under `Pipelines`, select `Service connections`.
-- Click on `New service connection` and choose `Azure Resource Manager`.
-- Follow the prompts to authorize and configure the service connection.
+5. **Policy Management:**
+   - **Compliance Policies:** Enforces security policies and compliance requirements across your DevOps processes.
 
-**GitHub:**
+6. **Threat Detection and Response:**
+   - **Alerts and Notifications:** Provides real-time alerts on detected security threats and vulnerabilities.
+   - **Incident Management:** Helps manage and respond to security incidents effectively.
 
-- In the GitHub repository, navigate to `Settings`.
-- Under `Security`, select `Integrations`.
-- Click on `Configure` next to Microsoft Defender for DevOps and follow the instructions to complete the integration.
+### **Pricing:**
 
-#### 3. **Configure Security Policies**
+Defender for DevOps is included in Microsoft Defender for Cloud, and its pricing is generally based on the overall Defender for Cloud plan. Pricing may vary based on:
 
-Set up security policies to define the security requirements and best practices for your DevOps environment.
+1. **Number of Resources:**
+   - The cost may be influenced by the number of resources (e.g., pipelines, repositories, containers) being protected.
 
-- In the Azure portal, go to `Microsoft Defender for Cloud`.
-- Select `Security policy`.
-- Choose the subscription or resource group where you want to apply the policy.
-- Configure the policy settings according to your security requirements.
+2. **Features and Plans:**
+   - Microsoft Defender for Cloud offers different pricing tiers (e.g., Free, Standard, and Enhanced) that include various features and levels of protection. Defender for DevOps features are generally available in the Standard or Enhanced tiers.
 
-#### 4. **Enable Continuous Assessment**
+3. **Azure Consumption:**
+   - Costs are also related to the overall consumption of Azure resources and services.
 
-Enable continuous assessment to automatically scan your DevOps pipelines and code repositories for security vulnerabilities.
-
-- In the Azure portal, go to `Microsoft Defender for Cloud`.
-- Under `Defender plans`, enable continuous assessment for your DevOps environment.
-- Configure the settings to define the scope and frequency of the assessments.
-
-#### 5. **Monitor and Review Security Alerts**
-
-Monitor the security alerts generated by Defender for DevOps to identify and remediate vulnerabilities.
-
-- Navigate to `Microsoft Defender for Cloud` in the Azure portal.
-- Go to `Security alerts` to view the list of detected security issues.
-- Click on any alert to get detailed information about the vulnerability and recommended remediation steps.
-
-#### 6. **Remediate Vulnerabilities**
-
-Follow the remediation recommendations provided by Defender for DevOps to fix the detected vulnerabilities.
-
-- Review the alert details to understand the nature of the vulnerability.
-- Implement the suggested fixes in your code, configuration files, or pipeline settings.
-- Rescan the environment to ensure the vulnerabilities have been addressed.
-
-#### 7. **Implement Best Practices**
-
-Adopt security best practices to minimize the risk of vulnerabilities in your DevOps environment.
-
-- Use secure coding practices and code review processes to identify potential security issues early.
-- Regularly update dependencies and use vulnerability management tools to keep your environment secure.
-- Implement access controls and least privilege principles to protect sensitive data and resources.
-- Use Infrastructure as Code (IaC) security tools to scan and validate your IaC templates.
-
-### Pricing
-
-The pricing for Microsoft Defender for DevOps is typically based on the number of resources being monitored and the volume of data processed. Here is an overview of the pricing components:
-
-- **Base Pricing:** There might be a base fee associated with enabling Defender for DevOps, depending on the Azure subscription plan.
-- **Resource Monitoring:** Charges are based on the number of resources (e.g., virtual machines, containers) being monitored.
-- **Data Ingestion:** Costs for the volume of data processed and analyzed by Defender for DevOps.
-- **Alerting and Reporting:** Some plans may include charges for advanced alerting and reporting features.
-
-To get detailed and up-to-date pricing information, you can refer to the [Microsoft Defender for DevOps pricing page](https://azure.microsoft.com/en-us/pricing/details/defender-for-cloud/) on the Azure website.
-
-By following these steps, you can effectively utilize Microsoft Defender for DevOps to secure your DevOps environment and ensure the security of your CI/CD pipelines and code repositories.
+For the most accurate and up-to-date pricing, it's best to consult the [Microsoft Defender for Cloud pricing page](https://azure.microsoft.com/en-us/pricing/details/defender-for-cloud/) or contact Microsoft sales support directly.
 
 ## Exercise 5: Securing your pipeline with GHAS and Defender for DevOps  
 
-### Task 1: Sign up and configure the eShopOnWeb team project in Azure DevOps
+To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
 
-1. Open the **Edge browser**, and navigate to **Azure DevOps** using the link below. Select **Start Free**, and sign in with the credentials provided in the Environment variables.
+### 1. **GitHub Advanced Security (GHAS)**
 
+**GitHub Advanced Security** provides several features to secure your code, including code scanning, secret scanning, and dependency review.
+
+#### **Enable Code Scanning**
+
+1. **Go to Your GitHub Repository:**
+   - Navigate to the repository you want to secure.
+
+2. **Set Up Code Scanning:**
+   - Go to **Security** > **Code scanning alerts**.
+   - Click **Set up code scanning**.
+   - Choose a code scanning tool. GitHub offers built-in support for CodeQL, or you can use third-party tools.
+
+3. **Add a CodeQL Workflow:**
+   - Add a `.github/workflows/codeql-analysis.yml` file to your repository to configure the CodeQL analysis:
+
+   ```yaml
+   name: "CodeQL"
+
+   on:
+     push:
+       branches: [main]
+     pull_request:
+       branches: [main]
+
+   jobs:
+     analyze:
+       name: Analyze
+       runs-on: ubuntu-latest
+       steps:
+         - name: Checkout code
+           uses: actions/checkout@v3
+
+         - name: Set up CodeQL
+           uses: github/codeql-action/setup@v2
+           with:
+             languages: 'python'
+
+         - name: Autobuild
+           uses: github/codeql-action/autobuild@v2
+
+         - name: Perform CodeQL Analysis
+           uses: github/codeql-action/analyze@v2
    ```
-    https://dev.azure.com
-   ```
 
-      ![setup](images/lab1-image1.png)
+#### **Enable Secret Scanning**
 
-1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
+1. **Navigate to Your Repository Settings:**
+   - Go to **Security** > **Secret scanning**.
+   - Ensure that secret scanning is enabled to detect any accidentally committed secrets.
 
-   ```
-   https://azuredevopsdemogenerator.azurewebsites.net/
-   ```
-  
-1. Click on **Sign in** and log in using the Microsoft account associated with your Azure DevOps subscription.
-
-    ![](images/lab1-image2.png)
-
-1. Please click on **Accept** to grant permission to access your subscription.
-
-1. Click **Choose Template**.
-
-    ![](images/lab1-image3.png)
-
-1. Select the **eShopOnWeb** template and click on **Select Template**.
-
-    ![](images/lab1-image4.png)
-
-1. Provide a project name, **eShopOnWeb**, and choose your **Organization**, then click on **Create Project** and wait for the process to complete.
-
-   ![](images/lab1-image5.png)
-
-1. Once the process is complete, click on **Navigate to the project**.
-
-   ![](images/lab1-image6.png)
-
-
-### Task 2: Enable Advanced Security from Portal
-
-GitHub Advanced Security for Azure DevOps includes extra permissions for more levels of control around Advanced Security results and management. Be sure to adjust individual permissions for your repository.
-
-To ensure Azure DevOps Advanced Security is enabled in your organization, you can follow these steps:
-
-1. Navigate back to the **Azure DevOps** tab, and select **Azure DevOps (1)**.
-
-    ![setup](images/azuredevops.png)
-
-1. Select **eShopOnWeb (2)** project and click on **Project Settings** available in the lower left corner. In the left menu area under Repos, click **Repositories**.
-
-1. Click on the **eShopOnWeb** repository.
-
-1. Click on **Settings**, then click on **Advanced Security**, to turn it on.
-
-    ![setup](images/last2.png)
-
-1. Click **Begin Billing**.
-
-    ![](images/lab1-image12.png)
-
-1. Advanced Security and Push Protection are now enabled. You can also onboard Advanced Security at [Project-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#project-level-onboarding) and [Organization-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#organization-level-onboarding) as well.
- 
-### Task 3: Setup Advanced Security permissions
-
-In this task, you will configure advanced security permissions for the eShopOnWeb repository in Azure DevOps. This involves granting specific permissions to project administrators to manage security alerts and settings related to the repository.
-
-1. In the lower-left corner, click on **Project Settings**. In the left menu area under the **Repos** section, click **Repositories**.
-
-      ![](images/lab1-image13.png)
-  	
-1. Click on the **eShopOnWeb** repository.
-
-1. Select **Security** and click on **Project Administrators**.
-
-1. Next to Advanced Security: manage and dismiss alerts, click the **dropdown**, and select  **Allow**.
-
-1. Next to Advanced Security: manage settings, click the **dropdown**, and select **Allow**.
-
-1. Next to Advanced Security: view alerts, click the dropdown, and select **Allow**.
-
-      ![allow-permissions](images/last1.png)
-
-1. Make sure a green checkmark ✅ appears next to the selected permission.
-
-## Create Work item
-
-You can follow these steps to create a work item to link while committing the changes.
-
-1. Navigate to the **eShopOnWeb** project and select **Boards** from the left menu and select **Work items**
-
-      ![allow-permissions](images/nls3.png)
-
-1. On the **Work items** page, select **+New Work Item** and select **Issue** from the drop-down menu.
-
-    ![allow-permissions](images/nls5.png)
-
-1. Enter **Advanced security related events** in the Title box
-
-1. Enter **Work item to link for all the commits related to Advanced security events** in the description box and click on **Save**
-
-    ![allow-permissions](images/nls4.png)
-
-## Install extension
-
-You can follow these steps to install an extension which is needed in upcoming tasks.
-
-1. Select the **Marketplace** icon from the top right corner and select **Browse marketplace** from the list
-
-    ![allow-permissions](images/ext1.png)
-
-1. On the **Marketplace** window, under **Azure DevOps** search and select **replace tokens**
-
-    ![allow-permissions](images/ext2.png)
-
-1. Select **Get it free**
-
-    ![allow-permissions](images/ext3.png)
-
-1. Select **Install**
-
-     ![allow-permissions](images/ext4.png)
-
-1. Select **Proceed to Organization** to navigate back to **Azure DevOps**
-
-    ![allow-permissions](images/ext5.png)
-
-### Task 4: Viewing alerts of repository 
-
-The Advanced Security Alert Hub is where all alerts are raised and where we gain insights, specifically under the category of Secrets. When a secret is found, you can click on it to access more information. The secret may be located in different places, including various commits. 
-
-1. Under **eShopOnWeb** project, go to the **Repos** tab and click on the **Advanced Security** menu item at the bottom.
-
-   ![setup](images/lab1-image16.png)
-
-1. Click on **Secrets** to see a list of all the exposed secret alerts that have been found. This includes the alert and introduced dates. Click on the **Microsoft Azure Storage account access key identifiable...** to see more details about the alert and what you can do to clean up the secret.
-
-   ![Secrets page](images/advsecurity2.png)
-
-1. Notice that this includes the Recommendation, Locations found, Remediation steps, Severity, and the Date it was first introduced. We can easily clean this up and dismiss the alert.
-
-   ![Secret Details](images/advsc3.png)
-
-### Task 5: Fixing secret scanning alerts
-
-Once a credential touches the repo, it's too late. Hackers might have already exploited it. The only way forward is to permanently eliminate these leaks and find all the places they're being used in production.
-
- **Note:** Good news! GHAzDO focuses on preventing this in the first place. Bad news! These need to be manually fixed. There isn't an easy button.
-
-#### Push Protection
-
-Push Protection helps protect your repository by preventing unauthorized or malicious code from being pushed to your repository's branches.
-
-#### Updating Secrets:
-
-You can follow these steps to update a file. 
-
-1. While viewing the alert details, click on the line of code, _Constants._ _cs_.
-
-    ![Click on File](images/advsc9.png)
-
-1. Click on **Edit** to edit the file. This will open the code editor and highlight the exact location of the secret. In this case, it's in the .cs file.
-
-   ![setup](images/lab1-image17.png)
-
-1. On line 9, update the variable name to "STORAGE_ID" and click on **Commit** to save changes.
-    
-     ![setup](images/lab1-image14.png)
-
-1. Enter **StorageDetails** for the branch name and check **Create a pull request**, then click on **Commit** again.
-
-     ![setup](images/lab1-image15.png)
-
-1. The commit was rejected because the repository has secret protection enabled. This is a good thing! It's preventing us from checking in on the exposed secret. Let's fix this.
+2. **Configure Secret Scanning Alerts:**
    
-    ![Commit Rejected](images/commit_rejected.png)
 
-    > **Note:** The code went up to the server, was analyzed, rejected, and not stored anywhere. Using Secret push scanning, it catches secrets right before they become a problem.
+#### **Set Up Dependency Review**
 
-    > **ProTip!** This can't happen during a Pull Request. Once the code has been pushed into a topic branch, it's too late. PR analysis is best for dependency scanning but not secret push scanning. They are different.
+1. **Configure Dependency Review:**
+   - Go to **Security** > **Dependabot alerts**.
+   - Enable **Dependabot** for automated dependency updates and reviews.
 
-#### Bypass push protection
+### 2. **Microsoft Defender for DevOps**
 
-1. Update your comment with **skip-secret-scanning:true** and click **Commit**.
+**Microsoft Defender for DevOps** provides security features for Azure DevOps, including security posture management and vulnerability assessments.
 
-    ![Commit Bypass](images/commit_bypass2.png)
+#### **Integrate with Azure DevOps**
 
-    >**Note:** Bypassing flagged secrets isn't recommended because bypassing can put a company’s security at risk. 
+1. **Navigate to Azure DevOps Portal:**
+   - Go to your Azure DevOps organization.
 
-1. It will give an option to **Create a Pull request**.
+2. **Enable Microsoft Defender for Cloud:**
+   - Go to **Organization Settings** > **Security** > **Microsoft Defender for Cloud**.
+   - Enable Microsoft Defender for Cloud for your Azure DevOps organization.
 
-    ![Commit Bypass](images/commit_bypass1.png)
-
-#### Fixing Exposed Secrets
-
-You can follow these steps to fix the exposed secret. 
-
-1. Click on **Edit**.
-
-    > **Note**: This scenario is all too common. A developer is testing an application locally and needs to connect to a database, so what do they do? Of course, just put the connection string in the appsettings.json file. They forget to remove it before checking in the code. Now, the secret is exposed in the repo, not just the tip. The exposed credentials will still be in history. This is a huge security hole!
-
-1. On line 9, copy the **STORAGE_ID value** and note it down in a notepad. Now replace this value with **#{STORAGE_ID}#**.
-
-    ![setup](images/lab1-image18.png)
-
-1. Click on **Commit** to save changes. Enter **SecretFix** for the branch name and link the **Work item** created earlier from the list.
-
-    ![Remove STORAGE_ID](images/advsc66.png)
-
-    > **Note:** This step is necessary since the main branch is protected by a pull request pipeline.
-
-1. Next, we need to update the build pipeline to add a variable. Click on **Pipelines** and select **eShoponWeb**.
-
-    ![setup](images/lab1-image19.png)
-
-1. Click on **Edit** to edit the pipeline. Change to the **SecretFix** branch.
-
-     ![setup](images/lab1-image20.png)
-   
-     ![Remove STORAGE_ID](images/advsc44.png)
- 
-1. Click on **Variables** and click on **+** New Variable. 
-
-     ![setup](images/lab1-image21.png)
-
-1. Enter **STORAGE_ID** for the name and paste the secret value from Notepad into the value field. Click on **Keep this value secret to hide the value**, then click **OK** and **Save**. Next, we need to edit the pipeline and add a new build task to replace the **#{STORAGE_ID}#** with the actual value.
-
-   ![setup](images/lab1-image22.png)
-   
-1. While still in edit mode, add the following task between the Checkout and Restore tasks around line 17. This task will replace the **#{STORAGE_ID}#** with the actual value in the **'src/Web/Constants.cs'** file and also remove the tasks related to test and production deployments (Delete the code from line 79) from the existing pipeline, which is not required in our scenario.
-
-    ``` YAML
-
-    - task: qetza.replacetokens.replacetokens-task.replacetokens@6
-      inputs:
-        targetFiles: '**/*.cs'
-        encoding: 'auto'
-        tokenPattern: 'custom'
-        tokenPrefix: '#{' 
-        tokenSuffix: '}#' 
-        verbosity: 'detailed' 
-        keepToken: false 
-    ```
-    
-    ![Replace Token Task](images/advlab23.png)
-
-1. The final pipeline should look as below:
-
-   ```YAML
-    trigger:
-    - main
-
-    pool:
-      vmImage: ubuntu-latest
-    
-    extends: 
-      template: template.yaml
-      parameters:
-        stages:
-          - stage: Build
-            displayName: 'Build'
-            jobs:
-            - job: Build
-              steps:
-              - checkout: self
-    
-              - task: qetza.replacetokens.replacetokens-task.replacetokens@6
-                inputs:
-                  targetFiles: '**/*.cs'
-                  encoding: 'auto'
-                  tokenPattern: 'custom'
-                  tokenPrefix: '#{' 
-                  tokenSuffix: '}#' 
-                  verbosity: 'detailed' 
-                  keepToken: false
-              - task: DotNetCoreCLI@2
-                displayName: Restore 
-                inputs:
-                  command: restore
-                  projects: '**/*.csproj'
-    
-              - task: ms.advancedsecurity-tasks.codeql.init.AdvancedSecurity-Codeql-Init@1
-                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-                displayName: 'Initialize CodeQL'
-                inputs:
-                  languages: csharp
-                  querysuite: default
-    
-              - task: DotNetCoreCLI@2
-                displayName: Build
-                inputs:
-                  projects: '**/*.csproj'
-                  arguments: '--configuration $(BuildConfiguration)'
-    
-              - task: ms.advancedsecurity-tasks.dependency-scanning.AdvancedSecurity-Dependency-Scanning@1
-                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-                displayName: 'Dependency Scanning'
-    
-              - task: ms.advancedsecurity-tasks.codeql.analyze.AdvancedSecurity-Codeql-Analyze@1
-                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-                displayName: 'Perform CodeQL analysis'
-    
-              - task: ms.advancedsecurity-tasks.codeql.enhance.AdvancedSecurity-Publish@1
-                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-                displayName: 'Publish Results'
-    
-              - task: DotNetCoreCLI@2
-                displayName: Test
-                inputs:
-                  command: test
-                  projects: '[Tt]ests/**/*.csproj'
-                  arguments: '--configuration $(BuildConfiguration) --collect:"Code coverage"'
-    
-              - task: DotNetCoreCLI@2
-                displayName: Publish
-                inputs:
-                  command: publish
-                  publishWebProjects: True
-                  arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-                  zipAfterPublish: True
-    
-              - task: PublishBuildArtifacts@1
-                displayName: 'Publish Artifact'
-                inputs:
-                  PathtoPublish: '$(build.artifactstagingdirectory)'
-                condition: succeededOrFailed()
-              
-    ```
-   
-1. Select **Validate and save**, and ensure that the check box is marked at commit directly to the **SecretFix** branch setting, then click on **Save**.
+#### **Configure Policies and Alerts**
 
-    ![Pipeline Save](images/advlab21.png)
+1. **Set Up Policies:**
+   - Configure security policies and rules in Defender for Cloud to monitor and protect your Azure DevOps resources.
+   - Ensure that policies are set to alert on security misconfigurations and vulnerabilities.
 
-1. Once the commit is saved, click on **Repos**, click **Pull Requests**, and click on **New pull request** to merge the changes from branch **SecretFix** into branch **main**. 
+2. **Review Security Recommendations:**
+   - Periodically review security recommendations provided by Defender for Cloud.
+   - Implement suggested actions to address vulnerabilities and security risks.
 
-1. For the title, enter the **Fixed secret** and click on **Create**. This will run the **eShoponWeb** pipeline to validate changes. 
+#### **Monitor and Respond**
 
-    ![Pipeline Save](images/nls12.png)
+1. **Monitor Security Alerts:**
+   - Regularly check the **Microsoft Defender for Cloud** dashboard for security alerts and incidents.
 
-    >**Note:** Make sure you add a random workitem link from the dropdown if it is not added automatically for the pipeline to run successfully.
+2. **Respond to Issues:**
+   - Investigate and resolve any security issues or vulnerabilities detected by Microsoft Defender for Cloud.
 
-1. Once the **eShoponWeb** pipeline has been created, click **Approve** and then click on **Complete**.
+### **Simple Example Pipeline Integration**
 
-1. Change **Merge Type** to **Squash commit** and check the box **Delete SecretFix after merging**, to merge changes into the main branch.
+Here’s how you might configure a pipeline in GitHub Actions to integrate with GHAS and Microsoft Defender for DevOps:
 
-    ![Completing merge](images/advlab25.png)
+**GitHub Actions Pipeline with Code Scanning:**
 
-### Task 1: Setup Code Scanning
+```yaml
+name: CI/CD Pipeline
 
-Code scanning in GitHub Advanced Security for Azure DevOps lets you analyze the code in an Azure DevOps repository to find security vulnerabilities and coding errors. Any problems identified by the analysis are raised as an alert. Code scanning uses CodeQL to identify vulnerabilities.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
-1. Select the pipeline **eShopOnweb**.
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-   ![alert_detected](images/advlab33.png)
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-1. Locate the tasks related to **Advanced Security Code Scanning** that are already included in the YAML pipeline file.
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-   ![alert_detected](images/nls6.png)
- 
-1. Do not run the pipeline. The code scanning setup has already been initiated, along with dependency scanning performed in the previous lab.
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-### Task 2: Review Code Scanning Alert (Gain Insights)
+      - name: Run tests
+        run: |
+          pytest
 
-1. Go to the **Repos** tab and click on the **Advanced Security** menu at the bottom.
+      - name: CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          languages: 'python'
 
-1. Click on **Code scanning** to see a list of all the code scanning alerts that have been found. This includes the alert, vulnerable code details, and first detected date.
+      - name: Publish build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/
+```
 
-#### Code scanning Alert Details
+In this task:
+- **Code Scanning** is enabled with CodeQL to identify security vulnerabilities in your code.
+- **Secret Scanning** and **Dependency Review** are managed through GitHub’s settings.
+- **Microsoft Defender for Cloud** integrates with Azure DevOps to monitor and secure the environment.
 
-1. Click on the item ***Uncontrolled command line...*** to see the details about this alert.
-
-1. This includes the Recommendation, Locations found, Description, Severity, and the Date it was first detected. We can easily fix this threat. 
-
-   ![code_alert_detected](images/nls7.png)
-
-1. You can also view the code that triggered the alert and what build detected it.
-   
-1. Click on **Detections** to see the different builds that detected this alert.
-
-   ![where_detected](images/nls81.png)
-
-    **ProTip!** When a vulnerable component is no longer detected in the latest build for pipelines with the dependency scanning task, the state of the associated alert is automatically changed to Closed. To see these resolved alerts, you can use the **State filter** in the main toolbar and select **Closed**.
-
-### Task 3: Fixing the Code to resolve the alert
-
-1. This is simple to fix using parameters in the dynamic SQL described in the remediation steps.
-
-1. Click on **Locations found** to see the code that triggered the alert.
-
-   ![Image](images/advlab4n6.png)
-
-1. Click on the **Edit** button to edit the file. Line number 23 is highlighted here. 
-
-1. The value of __{drive}__ is getting highlighted from line number 23.
-
-    ![Image](images/nls9.png)
-
-1. Instead of getting the value of 
-__{drive}__ using a query, we can directly define it as __C__ for the string drive variable in the line 20.
-    ```C#
-    string drive = "C";
-    ```
-
-    ![Image](images/nls11.png)
-
-1. Click on **Commit** to save changes. Enter **Fixalert** for the branch name and link the work item. Check **Create a pull request**, and then click on **Commit** again.
-
-    ![Image](images/nls10.png)
-
-    > **Note:** This step is necessary since the main branch is protected by a pull request pipeline.
-
-1. Navigate to Azure DevOps, click on **Repos**, select **Pull requests** and select **Create a pull request** to push the commits from **Fixalert** to the **main**.
-
-1. On the **New pull request** page, click on **Create**.
-
-    ![Image](images/mls3.png)
-
-1. Once the **eShoponWeb** pipeline has been completed, click on **Approve** and then click on **Complete**.
-
-    ![Image](images/mls4.png)
-
-1. Change **Merge Type** to **Squash commit** and check the box **Delete Fixalert after merging** to merge changes into the main branch.
-
-    ![Image](images/mls5.png)
-
-    > **Note**: The build will run automatically, initiating the code scanning task and publishing the results to Advanced Security.
+By integrating GHAS and Defender for DevOps, you ensure that your pipeline is better protected against security threats and vulnerabilities.
 
 ## Exercise 6: Connecting your Azure DevOps environment to MDC 
 
@@ -900,7 +654,110 @@ __{drive}__ using a query, we can directly define it as __C__ for the string dri
 
 ## Exercise 7: Integrating non-MS security scan solutions with MDC 
 
+Integrating non-Microsoft security scanning solutions with Microsoft Defender for Cloud (MDC) involves setting up the external solution, configuring it to send its findings to MDC, and then validating the integration. Here's a simple example using an open-source security scanning tool, Trivy, for container image scanning:
 
+### Prerequisites
+
+1. **Azure Subscription**: Ensure you have an active Azure subscription with MDC enabled.
+2. **Trivy**: Installed and configured on your local machine or CI/CD pipeline.
+3. **Azure CLI**: Installed and configured on your local machine.
+
+### Steps
+
+#### 1. Setup Trivy
+
+Install Trivy if it's not already installed:
+
+```sh
+brew install aquasecurity/trivy/trivy
+```
+
+#### 2. Scan a Docker Image
+
+Use Trivy to scan a Docker image. For this example, let's scan the `nginx` image:
+
+```sh
+trivy image nginx
+```
+
+This command will output the vulnerabilities found in the `nginx` image.
+
+#### 3. Format the Scan Results
+
+Trivy can output results in various formats such as JSON. For integration with MDC, JSON format will be used:
+
+```sh
+trivy image -f json -o results.json nginx
+```
+
+#### 4. Create a Custom Logic App for Integration
+
+1. **Create a Logic App**: In the Azure Portal, create a new Logic App.
+2. **Add a Trigger**: Set up a trigger for the Logic App. This can be an HTTP request received from your CI/CD pipeline or a scheduled trigger.
+3. **Add an Action**: Configure the Logic App to send the formatted Trivy results to MDC.
+
+Here’s a sample Logic App workflow:
+
+- **Trigger**: When an HTTP request is received.
+- **Action**: HTTP - Send a request to MDC’s API with the Trivy results.
+
+```json
+{
+    "type": "HTTP",
+    "method": "POST",
+    "uri": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securitySolutions/{securitySolutionName}?api-version=2020-01-01",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {accessToken}"
+    },
+    "body": {
+        "findings": "@{triggerOutputs().body}"
+    }
+}
+```
+
+#### 5. Trigger the Logic App
+
+From your CI/CD pipeline or manually, trigger the Logic App, sending the `results.json` generated by Trivy.
+
+#### 6. Validate the Integration
+
+Check the MDC dashboard to ensure the findings from Trivy are reflected.
+
+### Example CI/CD Pipeline Integration
+
+Here's a simple example using GitHub Actions:
+
+```yaml
+name: Security Scan
+
+on: [push]
+
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install Trivy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y trivy
+    - name: Scan Docker Image
+      run: |
+        trivy image -f json -o results.json nginx
+    - name: Trigger Logic App
+      run: |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.AZURE_ACCESS_TOKEN }}" \
+          --data @results.json \
+          https://management.azure.com/subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/${{ secrets.AZURE_RESOURCE_GROUP }}/providers/Microsoft.Security/securitySolutions/${{ secrets.AZURE_SECURITY_SOLUTION_NAME }}?api-version=2020-01-01
+```
+
+### Conclusion
+
+This is a basic example demonstrating how to integrate Trivy, a non-Microsoft security scanning tool, with Microsoft Defender for Cloud. By customizing the Logic App and CI/CD pipeline configurations, you can adapt this example to integrate other security tools with MDC.
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
