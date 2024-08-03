@@ -1,6 +1,6 @@
-## Module 5 – Defender for DevOps 
+# Module 5 – Defender for DevOps 
 
-### Task 1: Understanding CI/CD pipelines in Azure DevOps 
+## Task 1: Understanding CI/CD pipelines in Azure DevOps 
 
 Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
 
@@ -23,9 +23,9 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. On your lab VM open **Edge Browser** on desktop and navigate to [Azure DevOps](https://go.microsoft.com/fwlink/?LinkId=307137), and if prompted sign with the credentials.
 
-    * Email/Username: <inject key="AzureAdUserEmail"></inject>
+   * Email/Username: <inject key="AzureAdUserEmail"></inject>
 
-    * Password: <inject key="AzureAdUserPassword"></inject>
+   * Password: <inject key="AzureAdUserPassword"></inject>
 
 2. If prompted click **Ask later** on **Action Required** page.
 
@@ -39,37 +39,37 @@ CD extends CI by automatically deploying all code changes to a production enviro
     
 5. On the Azure DevOps page click on **Azure DevOps** located at top left corner and then click on **Organization Setting** at the left down corner
 
-    ![Azure DevOps](images/az-400-lab3-(1).png)
+   ![Azure DevOps](images/az-400-lab3-(1).png)
     
 6. In the **Organization Setting** window on the left menu click on **Billing (1)** .
 
-    ![Azure DevOps](images/az-400-lab3-1.png)
+   ![Azure DevOps](images/az-400-lab3-1.png)
 
 1. Select **Setup Billing (2)** then click on **save (3)**.
 
-    ![Azure DevOps](images/az-400-lab3-2.png)    
+   ![Azure DevOps](images/az-400-lab3-2.png)    
 
 7. On the **MS Hosted CI/CD (1)** section under **Paid parallel jobs** enter value **1** and at the end of the page click on **Save (2)**.
 
-    ![Azure DevOps](images/az-400-lab3-3.png)
+   ![Azure DevOps](images/az-400-lab3-3.png)
 
 1. In the **Organization Settings** window, click on **Settings** in the left menu. On the settings page, enable the **Creation of Classic Release Pipeline** option.
 
-    ![](images/21.png)
+   ![](images/21.png)
 
 1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **CICD (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
-    ![](images/az400-m3-L4-03.png)
+   ![](images/az400-m3-L4-03.png)
       
 ### 3. Create a Simple HTML File
 
 1. Click on **Repos (1)>Files (2)**, Select **Initialize (3)**. 
 
-    ![](images/22.png)
+   ![](images/22.png)
 
 1. First, let’s create a basic HTML file named `index.html`:
 
-    ![](images/23.png)
+   ![](images/23.png)
 
 1. Add the following contnet to `index.html` file:
 
@@ -85,12 +85,11 @@ CD extends CI by automatically deploying all code changes to a production enviro
     </body>
     </html>
     ```
-
 1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
 
 1. In the **Create your first Pipeline** window, click **Create pipeline**.
 
-    > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
+   > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
 
 1. On the **Where is your code?** pane, click **Azure Repos Git (YAML)** option.
 
@@ -131,14 +130,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
         artifactName: 'html-artifact'
     displayName: 'Publish Artifacts'
     ```
-
 1. This YAML file does the following:
-- **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
-- **Pool**: Uses an Ubuntu VM image for the build.
-- **Steps**:
-  - Set up Python (although not used in this case, you might need it for other tasks).
-  - Create a directory called `output` and copy `index.html` to it.
-  - Publish the contents of `output` as build artifacts.
+    - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
+    - **Pool**: Uses an Ubuntu VM image for the build.
+    - **Steps**:
+    - Set up Python (although not used in this case, you might need it for other tasks).
+    - Create a directory called `output` and copy `index.html` to it.
+    - Publish the contents of `output` as build artifacts.
    
 8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
 
@@ -152,17 +150,17 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. Go to **Pipelines** > **Releases** > **New pipeline**.
 
-    ![](images/24.png)
+   ![](images/24.png)
 
 1. From the **Select a template** window, **choose** **Azure App Service Deployment** (Deploy your application to Azure App Service. Choose from Web App on Windows, Linux, containers, Function Apps, or WebJobs) under the **Featured** list of templates.    
 
 1. Click **Apply**.
 
-    ![](images/33.png)
+   ![](images/33.png)
 
 1. Select the **CICD (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
 
-    ![](images/25.png)
+   ![](images/25.png)
 
 1. On the All pipelines > New Release Pipeline pane, ensure that the **stage 2** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
 
@@ -172,30 +170,29 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_testing/html-artifact"**.
 
-    ![](images/27.png)
+   ![](images/27.png)
 
 1.  On the **All pipelines > New Release Pipeline** pane, click **Save** and, in the **Save** dialog box, click **OK**.
 
-    ![](images/34.png)
+   ![](images/34.png)
 
 1.  On the **All pipelines > New Release Pipeline** pane, click **Create release** .
 
-    ![](images/29.png)
+   ![](images/29.png)
 
 1. Wait until the release pipline successfully completed.
 
-    ![](images/30.png)
+   ![](images/30.png)
 
 1. Navigate to the Azure portal interface, navigate to the resource group **asclab**, in the list of resources, click the **asclab-app** web app.
 
 1. On the web app blade, click **Browse**.
 
-    ![](images/32.png)
+   ![](images/32.png)
 
 1. Verify that the web page loads successfully in a new web browser tab.
 
-    ![](images/31.png)
-
+   ![](images/31.png)
 
 ## Task 2: Identifying security issues in the pipeline 
 
@@ -205,7 +202,7 @@ To identify security issues in your pipeline with a straightforward approach, yo
 
 **Snyk** is a popular tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into an Azure DevOps pipeline to identify security issues:
 
-#### **1. Set Up Snyk**
+### 1. Set Up Snyk
 
 1. **Create a Snyk Account**:
    - Sign up for a Snyk account if you don’t have one.
@@ -213,7 +210,7 @@ To identify security issues in your pipeline with a straightforward approach, yo
 2. **Get Your Snyk Token**:
    - Go to your Snyk account settings to get your API token for authentication.
 
-#### **2. Integrate Snyk in Azure DevOps Pipeline**
+### 2. Integrate Snyk in Azure DevOps Pipeline
 
 1. **Create or Edit Your Pipeline**:
    - In Azure DevOps, go to your project and create or edit a pipeline.
@@ -222,31 +219,31 @@ To identify security issues in your pipeline with a straightforward approach, yo
    - Insert the following YAML configuration into your pipeline file to run Snyk as part of your CI process:
 Here’s an alternative way to achieve the same result using a slightly different approach. This version includes installing Node.js and Snyk as part of a single script, which can be more efficient:
 
-    ```yaml
-    trigger:
-    - main
+        ```yaml
+        trigger:
+        - main
 
-    pool:
-    vmImage: 'ubuntu-latest'
+        pool:
+        vmImage: 'ubuntu-latest'
 
-    steps:
-    - script: |
-        echo "Setting up Node.js..."
-        sudo apt-get update
-        sudo apt-get install -y nodejs npm
-        node --version
-        npm --version
-        
-        echo "Installing Snyk..."
-        npm install -g snyk
+        steps:
+        - script: |
+            echo "Setting up Node.js..."
+            sudo apt-get update
+            sudo apt-get install -y nodejs npm
+            node --version
+            npm --version
+            
+            echo "Installing Snyk..."
+            npm install -g snyk
 
-        echo "Installing dependencies..."
-        npm install
+            echo "Installing dependencies..."
+            npm install
 
-        echo "Running Snyk Security Scan..."
-        snyk test
-    displayName: 'Setup, Install Dependencies, and Run Snyk Security Scan'
-    ```
+            echo "Running Snyk Security Scan..."
+            snyk test
+        displayName: 'Setup, Install Dependencies, and Run Snyk Security Scan'
+        ```
 
 ### Explanation:
 1. **Setup Node.js**: The script manually installs Node.js and npm, which might be helpful if the `UseNode` task is not available or if you want to ensure the specific versions of Node.js and npm are installed.
@@ -257,7 +254,7 @@ Here’s an alternative way to achieve the same result using a slightly differen
 
 4. **Run Snyk Security Scan**: Executes the Snyk scan.
 
-### 3. **Review and Act on Results**
+### 3. Review and Act on Results
 
 1. **Check Pipeline Results**:
    - After running the pipeline, review the results of the Snyk scan in the pipeline logs. Snyk will report any vulnerabilities found.
@@ -272,14 +269,14 @@ Here’s an alternative way to achieve the same result using a slightly differen
 
 GitHub Advanced Security (GHAS) is a suite of security tools built into the GitHub platform designed to help developers secure their code and workflows. It includes features such as code scanning, secret scanning, and dependency review to identify and remediate security vulnerabilities and exposures.
 
-### 1. **Enable GitHub Advanced Security**
+### 1. Enable GitHub Advanced Security
 To use GHAS, you need to have GitHub Advanced Security enabled for your repository. This typically requires a GitHub Enterprise subscription.
 
 - Navigate to your repository on GitHub.
 - Click on `Settings`.
 - In the `Security` section, find `GitHub Advanced Security` and enable it.
 
-### 2. **Configure Code Scanning**
+### 2. Configure Code Scanning
 
 **Code scanning** helps detect vulnerabilities and errors in your code by running static analysis tools.
 
@@ -288,17 +285,17 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - You can choose from different options like `CodeQL Analysis`, which is a powerful tool provided by GitHub. Select the `Set up this workflow` button for `CodeQL Analysis`.
 - Review the configuration file (e.g., `.github/workflows/codeql-analysis.yml`). Modify it if needed and commit it to your repository.
 
-### 3. **Run Code Scanning**
+### 3. Run Code Scanning
 
 - Once configured, code scanning runs automatically on the specified events (like pushes and pull requests).
 - You can also manually trigger a scan by going to the `Actions` tab, finding the `CodeQL` workflow, and clicking `Run workflow`.
 
-### 4. **Review Code Scanning Results**
+### 4. Review Code Scanning Results
 
 - Navigate to the `Security` tab, and under `Code scanning alerts`, you'll see a list of detected issues.
 - Click on any alert to get detailed information about the vulnerability and recommended fixes.
 
-### 5. **Configure Secret Scanning**
+### 5. Configure Secret Scanning
 
 **Secret scanning** detects secrets (like API keys and tokens) that may have been accidentally committed to your repository.
 
@@ -306,28 +303,28 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - Click on `Set up secret scanning`.
 - GitHub automatically scans for patterns that match common secret types and alerts you if any are found.
 
-### 6. **Review Secret Scanning Results**
+### 6. Review Secret Scanning Results
 
 - Navigate to the `Security` tab, and under `Secret scanning alerts`, you'll see a list of detected secrets.
 - Click on any alert to view details and follow the steps to revoke or rotate the compromised secrets.
 
-### 7. **Set Up Dependency Review**
+### 7. Set Up Dependency Review
 
 **Dependency review** helps you understand and remediate vulnerable dependencies in your project.
 
 - Ensure your project has a dependency manifest file (e.g., `package.json`, `pom.xml`).
 - GitHub automatically generates dependency graphs and checks for known vulnerabilities in your dependencies.
 
-#### 8. **Review Dependency Alerts**
+### 8. Review Dependency Alerts
 
 - Navigate to the `Security` tab, and under `Dependency review`, you'll see alerts for vulnerable dependencies.
 - Click on any alert to see details about the vulnerability and recommended versions to update to.
 
-#### 9. **Manage Security Policies**
+### 9. Manage Security Policies
 
 - In the `Security` tab, you can also manage security policies by setting up a `security.md` file to inform users about your project's security practices and how they can report vulnerabilities.
 
-### 10. **Continuous Monitoring and Alerts**
+### 10. Continuous Monitoring and Alerts
 
 - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
 - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
@@ -336,41 +333,42 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 
 #Defender for DevOps is a security solution by Microsoft designed to enhance the security of DevOps environments. It provides a range of tools and features to help secure the software development lifecycle (SDLC) and protect against threats that target DevOps processes. Here's an overview:
 
-### **Key Features:**
+### Key Features:
 
-1. **Security for CI/CD Pipelines:**
+1. Security for CI/CD Pipelines:
+
    - **Code Scanning:** Identifies vulnerabilities and security issues in your code before deployment.
    - **Dependency Scanning:** Detects known vulnerabilities in dependencies and libraries used in your projects.
 
-2. **Integration with Azure DevOps and GitHub:**
+2. Integration with Azure DevOps and GitHub:
    - **Azure DevOps:** Integrates with Azure Pipelines, Boards, Repos, and other Azure DevOps services to secure the DevOps lifecycle.
    - **GitHub:** Provides security insights and recommendations directly in your GitHub repositories.
 
-3. **Container Security:**
+3. Container Security:
    - **Image Scanning:** Scans container images for vulnerabilities before they are deployed.
    - **Runtime Protection:** Monitors running containers for security issues and potential threats.
 
-4. **Infrastructure as Code (IaC) Security:**
+4. Infrastructure as Code (IaC) Security:
    - **IaC Scanning:** Analyzes your IaC templates for security misconfigurations and vulnerabilities.
 
-5. **Policy Management:**
+5. Policy Management:
    - **Compliance Policies:** Enforces security policies and compliance requirements across your DevOps processes.
 
-6. **Threat Detection and Response:**
+6. Threat Detection and Response:
    - **Alerts and Notifications:** Provides real-time alerts on detected security threats and vulnerabilities.
    - **Incident Management:** Helps manage and respond to security incidents effectively.
 
-### **Pricing:**
+### Pricing:
 
 Defender for DevOps is included in Microsoft Defender for Cloud, and its pricing is generally based on the overall Defender for Cloud plan. Pricing may vary based on:
 
-1. **Number of Resources:**
+1. Number of Resources:
    - The cost may be influenced by the number of resources (e.g., pipelines, repositories, containers) being protected.
 
-2. **Features and Plans:**
+2. Features and Plans:
    - Microsoft Defender for Cloud offers different pricing tiers (e.g., Free, Standard, and Enhanced) that include various features and levels of protection. Defender for DevOps features are generally available in the Standard or Enhanced tiers.
 
-3. **Azure Consumption:**
+3. Azure Consumption:
    - Costs are also related to the overall consumption of Azure resources and services.
 
 For the most accurate and up-to-date pricing, it's best to consult the [Microsoft Defender for Cloud pricing page](https://azure.microsoft.com/en-us/pricing/details/defender-for-cloud/) or contact Microsoft sales support directly.
@@ -379,11 +377,11 @@ For the most accurate and up-to-date pricing, it's best to consult the [Microsof
 
 To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
 
-### 1. **GitHub Advanced Security (GHAS)**
+### 1. GitHub Advanced Security (GHAS)
 
 **GitHub Advanced Security** provides several features to secure your code, including code scanning, secret scanning, and dependency review.
 
-1. Copy the link and open it in a browser window to log in to GitHub 
+1. Copy the link and open it in a browser window to log in to GitHub.
 
    ```
    https://github.com/login
@@ -398,9 +396,9 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. In the GitHub repository navigate to **Settings** from the top navigation pane and click on **Code Security and Analysis** under Security.
 
-1.  Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
+1. Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
 
-    ![alert_detected](images/54.png)
+   ![alert_detected](images/54.png)
 
 1. Now, Click on the **Setup** button and click on **Advanced**.
 
@@ -408,15 +406,15 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. Now you are redirect you to the codeql.yml file in github/ workflows, review the yml file and then click on **commit changes**. 
 
-    ![alert_detected](images/55.png)
+   ![alert_detected](images/55.png)
 
 1. Again, click on **Commit changes**.
 
-    ![alert_detected](images/56.png)
+   ![alert_detected](images/56.png)
 
 1. Navigate, to **actions** tab and wait until shows a successful run of a GitHub Actions workflow.
 
-    ![alert_detected](images/57.png)
+   ![alert_detected](images/57.png)
 
 1. In the repository navigate to **Settings** from the top navigation pane, Scroll down to **Secret Scanning** and ensure that **Secret Scanning** is enabled.
 
@@ -434,15 +432,15 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. Search and select **Microsoft Defender for Cloud** from the portal
 
-    ![alert_detected](images/mls2.png)
+   ![alert_detected](images/mls2.png)
 
 1. Select **skip** on **Getting started** tab.
 
-    ![alert_detected](images/mls1.png)
+   ![alert_detected](images/mls1.png)
 
 1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
 
-    ![alert_detected](images/advlab51.png)
+   ![alert_detected](images/advlab51.png)
 
 1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
 
@@ -453,7 +451,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
    | Resource group | Lab-VM |
    | Location | Select any supporting region |
 
-    ![alert_detected](images/advlab52.png)
+   ![alert_detected](images/advlab52.png)
 
 1. Select **Next: Configure access**
 
@@ -461,7 +459,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. In the popup dialog, read the list of permission requests, and then select **Accept**.
 
-    ![alert_detected](images/advlab53.png)
+   ![alert_detected](images/advlab53.png)
 
 1. Leave all other settings as default.
 
@@ -473,33 +471,33 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. Navigate to **DevOps Security** under **Cloud Security**.
 
-    ![alert_detected](images/advlab55.png)
+   ![alert_detected](images/advlab55.png)
 
 1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
 
-    ![alert_detected](images/m51.png)
+   ![alert_detected](images/m51.png)
 
    >**Note:** It might take upto 8hrs to reflect the real-time status.
 
 1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
 
-    ![alert_detected](images/m55.png)
+   ![alert_detected](images/m55.png)
 
-    ![alert_detected](images/m52.png)
+   ![alert_detected](images/m52.png)
 
 1. Navigate to the **Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
 
-    ![alert_detected](images/m53.png)
+   ![alert_detected](images/m53.png)
 
 1. Similarly, navigate to the **OSS Vulnerabilities** tab and identify the issues, then take note of the recommendations provided to resolve the issues.
 
-    ![alert_detected](images/m54.png)
+   ![alert_detected](images/m54.png)
 
 ## Task 7: Integrating non-MS security scan solutions with MDC 
 
 Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) can provide a more comprehensive security posture. Using Nmap as an example:
 
-### **1. Setting Up Nmap on a Windows VM**
+### 1. Setting Up Nmap on a Windows VM
 
 1. Visit the official website using the URL https://nmap.org/download.html then click on **Windows**.
 
@@ -539,35 +537,35 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
 
 1. After this installation process it will take a few minutes to complete the installation.
 
-    ![alert_detected](images/43.png)
+   ![alert_detected](images/43.png)
 
 1. Click on the Finish button to finish the installation of Npcap.
 
-    ![alert_detected](images/48.png)
+   ![alert_detected](images/48.png)
 
 1. After completion of installation click on the Next button.
 
-    ![alert_detected](images/45.png)
+   ![alert_detected](images/45.png)
 
 1. Click on the Finish button to finish the installation of Npcap.
 
-    ![alert_detected](images/44.png)
+   ![alert_detected](images/44.png)
 
 1. Screen for creating shortcut will appear, click on **Next** button.
 
-    ![alert_detected](images/46.png)
+   ![alert_detected](images/46.png)
 
 1. Click on the **Finish** button to finish the installation of Nmap.
 
-    ![alert_detected](images/47.png)
+   ![alert_detected](images/47.png)
 
-1.  You have successfully installed Nmap on your windows system.
+1. You have successfully installed Nmap on your windows system.
 
 **Run a Basic Nmap Scan:**
 
 1. Click the **Start** menu, type `cmd` into the search bar, and then select **Command Prompt** from the search results.
     
-    ![alert_detected](images/49.png)
+   ![alert_detected](images/49.png)
 
 1. Execute a basic Nmap scan command:
 
@@ -577,10 +575,9 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
     ```
     nmap -sS -p 1-65535 <target-ip>
     ```
-
    >**Note** Replace `<target-ip>` with the IP address of the **labVM** you want to scan. You can find the IP address of the LabVM in the **Overview** section of the LabVM in the Azure portal.
     
-    ![alert_detected](images/50.png)
+   ![alert_detected](images/50.png)
 
 3. Export the scan results to a file for manual review:
 
@@ -601,9 +598,9 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
 
 1. Search for and select the **Management ports should be closed on your virtual machine** recommendation. This Azure security recommendation indicates that management ports on a virtual machine (e.g., labvm-1417106) should be closed to reduce the risk of Internet-based attacks. Open management ports (such as RDP or SSH) pose a high risk by exposing the VM to potential brute force attacks. The recommendation offers actionable remediation steps, including:
 
-- Using a "Quick fix" to automatically close the ports.
-- Manually editing inbound rules.
-- Using Just-in-Time VM access.
+   - Using a "Quick fix" to automatically close the ports.
+   - Manually editing inbound rules.
+   - Using Just-in-Time VM access.
 
 1. Azure's built-in tools and recommendations can help secure virtual machines effectively.
 
@@ -627,16 +624,16 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
      
 1. Defender for Cloud leverages **DSPM** data to prioritize critical data risks by distinguishing them from other risks by:
 
-     - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
-     - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments. 
+    - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
+    - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments. 
 
-      ![](images/def1.png)
+    ![](images/def1.png)
 
 2. Data sensitivity context is also used in Security Alerts and you can quickly filter based on the type of Sensitivity Information. Navigate to **Security alerts** click on **Add filters**, and set it to **Sensitivity info types**.
 
-     ![](images/def3.png) 
+    ![](images/def3.png) 
 
-###  Enabling Defender CSPM plan
+### Enabling Defender CSPM plan
 
 In this exercise, you will learn how to enable Defender for CSPM and leverage Defender for CSPM Capabilities
 
@@ -644,35 +641,32 @@ In this exercise, you will learn how to enable Defender for CSPM and leverage De
 
 1. **Defender Cloud Security Posture Management**, will reduce the critical risks by:
 
-     - **Monitor your multi-cloud security posture**: It gets continuous security assessments of your resources running across Microsoft Azure, AWS, Google Cloud Platform, and on-premises.
+    - **Monitor your multi-cloud security posture**: It gets continuous security assessments of your resources running across Microsoft Azure, AWS, Google Cloud Platform, and on-premises.
      
-     - **Prioritize risks with contextual insights**: Identifies your most critical risks with insights from the security operations center (SOC), DevOps, APIs, Microsoft Defender External Attack Surface Management, Microsoft Entra Permissions Management, and Microsoft Purview, all in a single view.
+    - **Prioritize risks with contextual insights**: Identifies your most critical risks with insights from the security operations center (SOC), DevOps, APIs, Microsoft Defender External Attack Surface Management, Microsoft Entra Permissions Management, and Microsoft Purview, all in a single view.
      
-     - **Get agent and agentless vulnerability scanning**: It gets continuous, real-time monitoring with agentless vulnerability scanning and gains deeper protection from built-in agents.
+    - **Get agent and agentless vulnerability scanning**: It gets continuous, real-time monitoring with agentless vulnerability scanning and gains deeper protection from built-in agents.
      
-     - **Maintain compliance with multi-cloud benchmarks**: It follows best practices for multi-cloud security compliance with controls mapped to major regulatory industry benchmarks, such as the Center for Internet Security, the Payment Card Industry, and the National Institute for Standards and Technology, in a central dashboard. 
+    - **Maintain compliance with multi-cloud benchmarks**: It follows best practices for multi-cloud security compliance with controls mapped to major regulatory industry benchmarks, such as the Center for Internet Security, the Payment Card Industry, and the National Institute for Standards and Technology, in a central dashboard. 
 
 1. In **Azure Portal**, search for **Microsoft Defender for Cloud (1)** and then click on it from the search results **(2)**. 
 
-      ![](images/m1-img1.png)
+    ![](images/m1-img1.png)
 
 2. From **Defender for Cloud** menu, click on **Environment Settings (1)** page and select your subscription **(2)**.
 
-      ![](images/m1-img2.png)
+    ![](images/m1-img2.png)
 
 3. In the **Defender plans** page, select **Defender CSPM** turn the status to **On (1)** and select **Settings & monitoring (2)**.
 
-      ![](images/m1-img3.png)
+    ![](images/m1-img3.png)
 
 4. Turn **On (1)** the **Agentless scanning for machines (preview)** and click **Continue (2)**.
 
-      ![](images/m1-img4.png)
+    ![](images/m1-img4.png)
 
 5. Click on **Save** to save the changes. 
 
    >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
 
-      ![](images/m1-img5.png)
-
-
- 
+    ![](images/m1-img5.png)

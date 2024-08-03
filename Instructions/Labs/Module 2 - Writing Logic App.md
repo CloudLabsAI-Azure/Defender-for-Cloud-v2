@@ -1,6 +1,4 @@
-### Module 2 - Writing the Logic App
-
----
+# Module 2 - Writing the Logic App
 
 #### Task 1: Deploying / Creating the App
 

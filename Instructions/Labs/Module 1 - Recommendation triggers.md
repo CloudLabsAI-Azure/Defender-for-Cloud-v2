@@ -1,6 +1,4 @@
-### Module 1 - Response Triggers
-
----
+# Module 1 - Response Triggers
 
 #### Task 1: Triggering the Flow
 

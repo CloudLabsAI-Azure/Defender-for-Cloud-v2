@@ -1,10 +1,6 @@
-### Module 4 - Bulk Remediation
-
----
+# Module 4 - Bulk Remediation
 
 In this module, we will explore an alternative method for remediation. Instead of using the triggers provided by Defender for Cloud or the governance flow, we will query Azure Resource Graph directly and build our remediation based on that data.
-
----
 
 #### Task 1: Deploying the Logic App
 

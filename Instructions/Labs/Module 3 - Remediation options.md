@@ -1,12 +1,8 @@
-### Module 3 - Remediation Options
-
----
+# Module 3 - Remediation Options
 
 So far, the capabilities we have discussed apply to both Azure Sentinel and Defender for Cloud. This section, however, is more geared towards the out-of-the-box capabilities that Defender for Cloud offers.
 
 If you are interested in conducting the same in Sentinel, please let the workshop instructor know, and they can arrange a follow-up.
-
----
 
 #### Task 1: Setting Up Automated Remediation
 
