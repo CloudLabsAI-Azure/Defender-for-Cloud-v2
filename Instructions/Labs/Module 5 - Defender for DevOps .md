@@ -197,72 +197,123 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 ## Task 2: Identifying security issues in the pipeline 
 
-To identify security issues in your pipeline with a straightforward approach, you can follow these basic steps to incorporate a security scan into your Azure DevOps pipeline. This focuses on integrating a basic security scan with minimal configuration:
+To store your Infrastructure as Code (IaC) templates in an Azure DevOps repository, you’ll need to set up a repository and commit your IaC templates to it. Here’s a step-by-step guide with examples:
 
-### Security Scan with Snyk
+### **1. Create an Azure DevOps Repository**
 
-**Snyk** is a popular tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into an Azure DevOps pipeline to identify security issues:
+1. **Log In to Azure DevOps**:
+   - Go to [Azure DevOps](https://dev.azure.com/) and sign in to your account.
 
-### 1. Set Up Snyk
+2. **Navigate to Your Project**:
+   - Select your project or create a new one.
 
-1. **Create a Snyk Account**:
-   - Sign up for a Snyk account if you don’t have one.
+3. **Create a New Repository**:
+   - Go to `Repos` in the left-hand menu.
+   - Click on `Files` (if not already selected).
+   - Click on `New repository` (or `New` if you already have repositories listed).
+   - Provide a name for your repository (e.g., `iac-templates`).
+   - Choose the type of repository (e.g., Git).
+   - Click `Create`.
 
-2. **Get Your Snyk Token**:
-   - Go to your Snyk account settings to get your API token for authentication.
+### **2. Add IaC Templates to Your Repository**
 
-### 2. Integrate Snyk in Azure DevOps Pipeline
+#### **Example IaC Templates**
 
-1. **Create or Edit Your Pipeline**:
-   - In Azure DevOps, go to your project and create or edit a pipeline.
+**Terraform Example (`main.tf`)**:
+```hcl
+# main.tf
+provider "aws" {
+  region = "us-west-2"
+}
 
-2. **Add a Snyk Security Scan Task**:
-   - Insert the following YAML configuration into your pipeline file to run Snyk as part of your CI process:
-Here’s an alternative way to achieve the same result using a slightly different approach. This version includes installing Node.js and Snyk as part of a single script, which can be more efficient:
+resource "aws_s3_bucket" "bucket" {
+  bucket = "my-example-bucket"
+  acl    = "private"
+}
+```
 
-        ```yaml
-        trigger:
-        - main
+**ARM Template Example (`template.json`)**:
+```json
+{
+  "$schema": "https://schema.management.azure.com/2020-06-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-04-01",
+      "name": "mystorageaccount",
+      "location": "eastus",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "accessTier": "Hot"
+      }
+    }
+  ]
+}
+```
 
-        pool:
-        vmImage: 'ubuntu-latest'
+1. **Clone the Repository Locally**:
+   - Copy the clone URL from Azure DevOps.
+   - Open a terminal or command prompt and run:
 
-        steps:
-        - script: |
-            echo "Setting up Node.js..."
-            sudo apt-get update
-            sudo apt-get install -y nodejs npm
-            node --version
-            npm --version
-            
-            echo "Installing Snyk..."
-            npm install -g snyk
+     ```bash
+     git clone <your-repo-url>
+     cd <your-repo-name>
+     ```
 
-            echo "Installing dependencies..."
-            npm install
+2. **Add Your IaC Templates**:
+   - Place your `main.tf` or `template.json` files in the cloned repository directory.
 
-            echo "Running Snyk Security Scan..."
-            snyk test
-        displayName: 'Setup, Install Dependencies, and Run Snyk Security Scan'
-        ```
+3. **Commit and Push Changes**:
 
-### Explanation:
-1. **Setup Node.js**: The script manually installs Node.js and npm, which might be helpful if the `UseNode` task is not available or if you want to ensure the specific versions of Node.js and npm are installed.
+   ```bash
+   git add main.tf # or template.json
+   git commit -m "Add IaC templates"
+   git push origin main
+   ```
 
-2. **Install Snyk**: Installs Snyk globally.
+### **3. Verify Your IaC Templates**
 
-3. **Install Dependencies**: Runs `npm install` to install project dependencies.
+1. **Check Repository in Azure DevOps**:
+   - Go back to your Azure DevOps project.
+   - Navigate to `Repos` > `Files`.
+   - Verify that your IaC templates (e.g., `main.tf`, `template.json`) are listed.
 
-4. **Run Snyk Security Scan**: Executes the Snyk scan.
+### **4. Set Up a Pipeline to Scan IaC Templates**
 
-### 3. Review and Act on Results
+Here’s a basic pipeline YAML configuration to scan these IaC templates. This example uses Terraform:
 
-1. **Check Pipeline Results**:
-   - After running the pipeline, review the results of the Snyk scan in the pipeline logs. Snyk will report any vulnerabilities found.
+```yaml
+trigger:
+- main
 
-2. **Resolve Identified Issues**:
-   - Address any vulnerabilities reported by Snyk by updating dependencies or applying fixes.
+pool:
+  vmImage: 'ubuntu-latest'
 
+steps:
+- script: |
+    echo "Installing Terraform..."
+    sudo apt-get update
+    sudo apt-get install -y wget unzip
+    wget https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
+    unzip terraform_1.4.0_linux_amd64.zip
+    sudo mv terraform /usr/local/bin/
+
+    echo "Running Terraform scan..."
+    tflint --config .tflint.hcl
+  displayName: 'Install Terraform and Run tflint'
+```
+
+### **Summary**
+
+- **Create a Repository**: Set up a new Git repository in Azure DevOps.
+- **Add IaC Templates**: Commit your IaC templates (Terraform, ARM, etc.) to the repository.
+- **Set Up a Pipeline**: Configure a pipeline to scan your IaC templates.
+
+This setup allows you to store and manage your IaC templates in Azure DevOps and integrate them into your CI/CD pipelines for automated validation and security scanning.
 
 ## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
 
