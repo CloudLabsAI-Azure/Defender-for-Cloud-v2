@@ -143,7 +143,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/14.png)
 
-9. Wait for the Build Pipeline to complete successfully. Ignore any warnings regarding the source code itself, as they are not relevant for this lab exercise.
+9. Wait for the Build Pipeline to complete successfully.
 
     > **Note**: Each task from the YAML file is available for review, including any warnings and errors.
 
@@ -197,123 +197,175 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 ## Task 2: Identifying security issues in the pipeline 
 
-To store your Infrastructure as Code (IaC) templates in an Azure DevOps repository, you’ll need to set up a repository and commit your IaC templates to it. Here’s a step-by-step guide with examples:
 
-### **1. Create an Azure DevOps Repository**
+1. On your lab computer, in the web browser window displaying the Azure DevOps portal with the **CICD** project open, click on the **marketplace icon > Browse Marketplace**.
 
-1. **Log In to Azure DevOps**:
-   - Go to [Azure DevOps](https://dev.azure.com/) and sign in to your account.
+   ![](images/61.png)
 
-2. **Navigate to Your Project**:
-   - Select your project or create a new one.
+2. On the MarketPlace, search for **Microsoft Security DevOps** and open it.
 
-3. **Create a New Repository**:
-   - Go to `Repos` in the left-hand menu.
-   - Click on `Files` (if not already selected).
-   - Click on `New repository` (or `New` if you already have repositories listed).
-   - Provide a name for your repository (e.g., `iac-templates`).
-   - Choose the type of repository (e.g., Git).
-   - Click `Create`.
+   ![](images/62.png)
 
-### **2. Add IaC Templates to Your Repository**
+1.  On the **Microsoft Security DevOps** page, click on **Get it for free**.
 
-#### **Example IaC Templates**
+    ![](images/63.png)
 
-**Terraform Example (`main.tf`)**:
-```hcl
-# main.tf
-provider "aws" {
-  region = "us-west-2"
-}
+1.  On the next page, select the desired Azure DevOps organization and **Install**.
 
-resource "aws_s3_bucket" "bucket" {
-  bucket = "my-example-bucket"
-  acl    = "private"
-}
-```
+    ![](images/64.png)
 
-**ARM Template Example (`template.json`)**:
-```json
-{
-  "$schema": "https://schema.management.azure.com/2020-06-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2021-04-01",
-      "name": "mystorageaccount",
-      "location": "eastus",
-      "sku": {
-        "name": "Standard_LRS"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "accessTier": "Hot"
-      }
-    }
-  ]
-}
-```
+1. Click **Proceed to organization** once installed.
 
-1. **Clone the Repository Locally**:
-   - Copy the clone URL from Azure DevOps.
-   - Open a terminal or command prompt and run:
+   ![](images/65.png)
 
-     ```bash
-     git clone <your-repo-url>
-     cd <your-repo-name>
-     ```
+1. Click on **Repos (1)>Files (2)**, create a new file named **main.tf** and add the following content to that file:
 
-2. **Add Your IaC Templates**:
-   - Place your `main.tf` or `template.json` files in the cloned repository directory.
+   ```hcl
+   # Specify the provider
+   provider "azurerm" {
+   features {}
+   }
 
-3. **Commit and Push Changes**:
+   # Resource Group
+   resource "azurerm_resource_group" "example" {
+   name     = "example-resources"
+   location = "East US"
+   }
 
-   ```bash
-   git add main.tf # or template.json
-   git commit -m "Add IaC templates"
-   git push origin main
+   # Virtual Network
+   resource "azurerm_virtual_network" "example" {
+   name                = "example-vnet"
+   address_space       = ["10.0.0.0/16"]
+   location            = azurerm_resource_group.example.location
+   resource_group_name = azurerm_resource_group.example.name
+   }
+
+   # Subnet
+   resource "azurerm_subnet" "example" {
+   name                 = "example-subnet"
+   resource_group_name  = azurerm_resource_group.example.name
+   virtual_network_name = azurerm_virtual_network.example.name
+   address_prefixes     = ["10.0.1.0/24"]
+   }
+
+   # Network Interface
+   resource "azurerm_network_interface" "example" {
+   name                = "example-nic"
+   location            = azurerm_resource_group.example.location
+   resource_group_name = azurerm_resource_group.example.name
+
+   ip_configuration {
+      name                          = "internal"
+      subnet_id                     = azurerm_subnet.example.id
+      private_ip_address_allocation = "Dynamic"
+   }
+   }
+
+   # Virtual Machine
+   resource "azurerm_virtual_machine" "example" {
+   name                = "example-vm"
+   location            = azurerm_resource_group.example.location
+   resource_group_name = azurerm_resource_group.example.name
+   network_interface_ids = [
+      azurerm_network_interface.example.id,
+   ]
+   vm_size = "Standard_B1s"
+
+   storage_os_disk {
+      name              = "myosdisk1"
+      caching           = "ReadWrite"
+      create_option     = "FromImage"
+      managed           = true
+      disk_size_gb      = 30
+   }
+
+   storage_image_reference {
+      publisher = "MicrosoftWindowsServer"
+      offer     = "WindowsServer"
+      sku       = "2019-Datacenter"
+      version   = "latest"
+   }
+
+   os_profile {
+      computer_name  = "hostname"
+      admin_username = "adminuser"
+      admin_password = "Password1234!"
+   }
+
+   os_profile_windows_config {
+      provision_vm_agent = true
+   }
+   }
    ```
 
-### **3. Verify Your IaC Templates**
+   ### Explanation:
+   - **Provider Block**: Specifies the provider (in this case, Azure).
+   - **Resource Group**: Defines the resource group where all other resources will reside.
+   - **Virtual Network**: Defines a virtual network with a specified address space.
+   - **Subnet**: Creates a subnet within the virtual network.
+   - **Network Interface**: Creates a network interface card for the VM.
+   - **Virtual Machine**: Defines the virtual machine including the operating system, size, and network settings.
 
-1. **Check Repository in Azure DevOps**:
-   - Go back to your Azure DevOps project.
-   - Navigate to `Repos` > `Files`.
-   - Verify that your IaC templates (e.g., `main.tf`, `template.json`) are listed.
+1. on **Mian.tf** page, click on **Commit**.
 
-### **4. Set Up a Pipeline to Scan IaC Templates**
+   ![](images/66.png)
 
-Here’s a basic pipeline YAML configuration to scan these IaC templates. This example uses Terraform:
+1. Again click on **Commit**.
 
-```yaml
-trigger:
-- main
+   ![](images/67.png)
 
-pool:
-  vmImage: 'ubuntu-latest'
+1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
 
-steps:
-- script: |
-    echo "Installing Terraform..."
-    sudo apt-get update
-    sudo apt-get install -y wget unzip
-    wget https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
-    unzip terraform_1.4.0_linux_amd64.zip
-    sudo mv terraform /usr/local/bin/
+1. In the **Create your first Pipeline** window, click **Create pipeline**.
 
-    echo "Running Terraform scan..."
-    tflint --config .tflint.hcl
-  displayName: 'Install Terraform and Run tflint'
-```
+   > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
 
-### **Summary**
+1. On the **Where is your code?** pane, click **Azure Repos Git (YAML)** option.
 
-- **Create a Repository**: Set up a new Git repository in Azure DevOps.
-- **Add IaC Templates**: Commit your IaC templates (Terraform, ARM, etc.) to the repository.
-- **Set Up a Pipeline**: Configure a pipeline to scan your IaC templates.
+   ![](images/10.png)
 
-This setup allows you to store and manage your IaC templates in Azure DevOps and integrate them into your CI/CD pipelines for automated validation and security scanning.
+1. On the **Select a repository** pane, click **CICD**.
+
+   ![](images/11.png)
+
+1. On the **Configure your pipeline** pane, scroll down and select **Starter pipeline**.
+
+   ![](images/12.png)
+
+1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
+
+      ```yaml
+      trigger: none
+      pool:
+      # ubuntu-latest also supported.
+      vmImage: 'windows-latest'
+      steps:
+      - task: MicrosoftSecurityDevOps@1
+      displayName: 'Microsoft Security DevOps'
+      inputs:    
+         categories: 'IaC'
+      ```
+1. This YAML file is designed to configure an Azure DevOps pipeline with the following specifics:
+
+- **Trigger**: The pipeline is set to `none`, meaning it won't run automatically based on code changes or other triggers. It will need to be started manually or triggered by another pipeline or service.
+
+- **Pool**: It specifies that the pipeline will use the `windows-latest` virtual machine image. This VM image is provided by Azure DevOps and ensures the pipeline runs on a fresh Windows environment with the latest updates.
+
+- **Steps**: The pipeline includes a single step:
+  - **Task**: It uses the `MicrosoftSecurityDevOps@1` task, which is designed for Microsoft Security DevOps.
+  - **Display Name**: The task is labeled 'Microsoft Security DevOps' for easy identification in the pipeline UI.
+  - **Inputs**:
+    - `categories`: Set to 'IaC', indicating that the task will focus on Infrastructure as Code (IaC) security scanning.
+    
+8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
+
+   ![](images/68.png)
+
+9. Wait for the build pipeline to complete. Once finished, review the results, including any warnings or errors reported by the tasks. Address any issues identified, make the necessary changes, and then rerun the pipeline to ensure that all problems are resolved.
+   
+   ![](images/69.png)
+
+By setting up this pipeline, you've integrated a security task that scans IaC configurations within Azure DevOps. This ensures that security issues in your IaC templates are identified early in the development process, enhancing overall security posture and compliance.
 
 ## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
 
@@ -658,6 +710,125 @@ Integrating non-Microsoft security scan solutions with Microsoft Defender for Cl
    ![alert_detected](images/52.png)
 
 1. Microsoft Defender for Cloud recommendations offer high-level security alerts and suggested actions from Azure. In contrast, Nmap scan results provide detailed technical data to identify and verify open ports on a virtual machine. Both are essential for robust network security, ensuring that potentially vulnerable open ports are properly managed and secured.
+
+To store your Infrastructure as Code (IaC) templates in an Azure DevOps repository, you’ll need to set up a repository and commit your IaC templates to it. Here’s a step-by-step guide with examples:
+
+### **1. Create an Azure DevOps Repository**
+
+1. **Log In to Azure DevOps**:
+   - Go to [Azure DevOps](https://dev.azure.com/) and sign in to your account.
+
+2. **Navigate to Your Project**:
+   - Select your project or create a new one.
+
+3. **Create a New Repository**:
+   - Go to `Repos` in the left-hand menu.
+   - Click on `Files` (if not already selected).
+   - Click on `New repository` (or `New` if you already have repositories listed).
+   - Provide a name for your repository (e.g., `iac-templates`).
+   - Choose the type of repository (e.g., Git).
+   - Click `Create`.
+
+### **2. Add IaC Templates to Your Repository**
+
+#### **Example IaC Templates**
+
+**Terraform Example (`main.tf`)**:
+```hcl
+# main.tf
+provider "aws" {
+  region = "us-west-2"
+}
+
+resource "aws_s3_bucket" "bucket" {
+  bucket = "my-example-bucket"
+  acl    = "private"
+}
+```
+
+**ARM Template Example (`template.json`)**:
+```json
+{
+  "$schema": "https://schema.management.azure.com/2020-06-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "resources": [
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "apiVersion": "2021-04-01",
+      "name": "mystorageaccount",
+      "location": "eastus",
+      "sku": {
+        "name": "Standard_LRS"
+      },
+      "kind": "StorageV2",
+      "properties": {
+        "accessTier": "Hot"
+      }
+    }
+  ]
+}
+```
+
+1. **Clone the Repository Locally**:
+   - Copy the clone URL from Azure DevOps.
+   - Open a terminal or command prompt and run:
+
+     ```bash
+     git clone <your-repo-url>
+     cd <your-repo-name>
+     ```
+
+2. **Add Your IaC Templates**:
+   - Place your `main.tf` or `template.json` files in the cloned repository directory.
+
+3. **Commit and Push Changes**:
+
+   ```bash
+   git add main.tf # or template.json
+   git commit -m "Add IaC templates"
+   git push origin main
+   ```
+
+### **3. Verify Your IaC Templates**
+
+1. **Check Repository in Azure DevOps**:
+   - Go back to your Azure DevOps project.
+   - Navigate to `Repos` > `Files`.
+   - Verify that your IaC templates (e.g., `main.tf`, `template.json`) are listed.
+
+### **4. Set Up a Pipeline to Scan IaC Templates**
+
+Here’s a basic pipeline YAML configuration to scan these IaC templates. This example uses Terraform:
+
+```yaml
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo "Installing Terraform..."
+    sudo apt-get update
+    sudo apt-get install -y wget unzip
+    wget https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
+    unzip terraform_1.4.0_linux_amd64.zip
+    sudo mv terraform /usr/local/bin/
+
+    echo "Running Terraform scan..."
+    tflint --config .tflint.hcl
+  displayName: 'Install Terraform and Run tflint'
+```
+
+### **Summary**
+
+- **Create a Repository**: Set up a new Git repository in Azure DevOps.
+- **Add IaC Templates**: Commit your IaC templates (Terraform, ARM, etc.) to the repository.
+- **Set Up a Pipeline**: Configure a pipeline to scan your IaC templates.
+
+This setup allows you to store and manage your IaC templates in Azure DevOps and integrate them into your CI/CD pipelines for automated validation and security scanning.
+
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
