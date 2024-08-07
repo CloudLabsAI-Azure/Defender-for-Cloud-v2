@@ -106,30 +106,29 @@ CD extends CI by automatically deploying all code changes to a production enviro
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
    ```yaml
-      trigger:
-      - main
+   trigger:
+   - main
 
-      pool:
-      vmImage: 'ubuntu-latest'
+   pool:
+   vmImage: 'ubuntu-latest'
 
-      steps:
-      - task: UsePythonVersion@0
-         inputs:
-            versionSpec: '3.x'
-         displayName: 'Set up Python'
+   steps:
+   - task: UsePythonVersion@0
+      inputs:
+         versionSpec: '3.x'
+      displayName: 'Set up Python'
 
-      - script: |
-            echo "Building the HTML project..."
-            mkdir output
-            cp index.html output/
-         displayName: 'Build Project'
+   - script: |
+         echo "Building the HTML project..."
+         mkdir output
+         cp index.html output/
+      displayName: 'Build Project'
 
-      - task: PublishBuildArtifacts@1
-         inputs:
-            pathToPublish: 'output'
-            artifactName: 'html-artifact'
-         displayName: 'Publish Artifacts'
-
+   - task: PublishBuildArtifacts@1
+      inputs:
+         pathToPublish: 'output'
+         artifactName: 'html-artifact'
+      displayName: 'Publish Artifacts'
    ```
 1. This YAML file does the following:
     - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
