@@ -114,21 +114,21 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    steps:
    - task: UsePythonVersion@0
-      inputs:
-         versionSpec: '3.x'
-      displayName: 'Set up Python'
+   inputs:
+      versionSpec: '3.x'
+   displayName: 'Set up Python'
 
    - script: |
-         echo "Building the HTML project..."
-         mkdir output
+      echo "Building the HTML project..."
+      mkdir output
          cp index.html output/
       displayName: 'Build Project'
 
    - task: PublishBuildArtifacts@1
-      inputs:
-         pathToPublish: 'output'
-         artifactName: 'html-artifact'
-      displayName: 'Publish Artifacts'
+   inputs:
+      pathToPublish: 'output'
+      artifactName: 'html-artifact'
+   displayName: 'Publish Artifacts'  
    ```
 1. This YAML file does the following:
     - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
