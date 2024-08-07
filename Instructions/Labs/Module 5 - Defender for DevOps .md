@@ -609,12 +609,13 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 ## Task 7: Integrating non-MS security scan solutions with MDC 
 
-Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) can provide a more comprehensive security posture. 
+Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) enhances your security posture comprehensively. 
 
-To identify security issues in your pipeline with a straightforward approach, you can follow these basic steps to incorporate a security scan into your Azure DevOps pipeline. This focuses on integrating a basic security scan with minimal configuration:
+To incorporate a security scan into your Azure DevOps pipeline with minimal configuration, follow these steps for a basic integration using **Snyk**:
 
 ### Security Scan with Snyk
-**Snyk** is a popular tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into an Azure DevOps pipeline to identify security issues:
+**Snyk** is a well-known tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into your Azure DevOps pipeline to identify security issues:
+
 
 1. **Go to [Snyk's website](https://snyk.io/).**
 
@@ -732,16 +733,34 @@ To identify security issues in your pipeline with a straightforward approach, yo
 
 1. Under **Snyk Security Scan**, complete the following steps:
 
-   - For **Snyk API token (1)**, select the API from the dropdown menu.
-   - For **What do you want to test (2)**, choose **Code**.
-   - For **Code Testing Severity Threshold (3)**, select **High**.
-   - Click **Add (4)**.
+   - For **Snyk API token**, select the API from the dropdown menu.
+   - For **What do you want to test**, choose **Code**.
+   - For **Project name in Synk**, enter **Synk Security Scan**.
+   - Click **Add**.
 
     ![](images/83.png)
 
 1. Click **Save and Run** then click **Run** to start the Build Pipeline process.
 
    ![](images/84.png)
+
+1. You are prompted with **Permissions Needed**, as well as an orange bar saying :
+
+    ```
+    This pipeline needs permission to access a resource before this run can continue
+    ```
+
+1. Click on **View**.
+
+   ![](images/86.png)
+
+1. From the **Waiting for Review** pane, click **Permit**.
+
+   ![](images/87.png)
+
+1. Validate the message in the **Permit popup** window, and confirm by clicking **Permit**.
+
+   ![](images/88.png)
 
 9. Wait for the build pipeline to complete. After running the pipeline, review the results of the Snyk scan in the pipeline logs. Snyk will report any vulnerabilities found.
 
