@@ -201,7 +201,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 1. On your lab computer, open the Azure DevOps portal with the **CICD** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
-
    ![](images/61.png)
 
 2. Search for **Microsoft Security DevOps** in the Marketplace and open it.
@@ -317,7 +316,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/67.png)
 
-1.Navigate to the **Pipelines** pane in the **Pipelines** hub.
+1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
 
 1. Click **New pipeline** in the **Pipeline** window.
 
@@ -612,121 +611,141 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) can provide a more comprehensive security posture. 
 
-### **1. Create an Azure DevOps Repository**
+To identify security issues in your pipeline with a straightforward approach, you can follow these basic steps to incorporate a security scan into your Azure DevOps pipeline. This focuses on integrating a basic security scan with minimal configuration:
 
-1. **Log In to Azure DevOps**:
-   - Go to [Azure DevOps](https://dev.azure.com/) and sign in to your account.
+### Security Scan with Snyk
+**Snyk** is a popular tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into an Azure DevOps pipeline to identify security issues:
 
-2. **Navigate to Your Project**:
-   - Select your project or create a new one.
+1. **Go to [Snyk's website](https://snyk.io/).**
 
-3. **Create a New Repository**:
-   - Go to `Repos` in the left-hand menu.
-   - Click on `Files` (if not already selected).
-   - Click on `New repository` (or `New` if you already have repositories listed).
-   - Provide a name for your repository (e.g., `iac-templates`).
-   - Choose the type of repository (e.g., Git).
-   - Click `Create`.
+1. **Click on "Start free"** or **"Sign up"** located on the left of the page.
+    
+   ![](images/71.png)
 
-### **2. Add IaC Templates to Your Repository**
+1. On the sign-up page, **select the "Sign up with GitHub"** option.
 
-#### **Example IaC Templates**
+   ![](images/72.png)
 
-**Terraform Example (`main.tf`)**:
-```hcl
-# main.tf
-provider "aws" {
-  region = "us-west-2"
-}
+1. **Authorize Snyk** to access your GitHub account by clicking "Authorize Snyk" on the GitHub authorization page.
 
-resource "aws_s3_bucket" "bucket" {
-  bucket = "my-example-bucket"
-  acl    = "private"
-}
-```
+1. Follow the remaining prompts to complete your account setup.
 
-**ARM Template Example (`template.json`)**:
-```json
-{
-  "$schema": "https://schema.management.azure.com/2020-06-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "resources": [
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2021-04-01",
-      "name": "mystorageaccount",
-      "location": "eastus",
-      "sku": {
-        "name": "Standard_LRS"
-      },
-      "kind": "StorageV2",
-      "properties": {
-        "accessTier": "Hot"
-      }
-    }
-  ]
-}
-```
+1. Access your **Snyk account settings** to retrieve your **API token for authentication** and record it in your notepad.
+ 
+   ![](images/70.png)
 
-1. **Clone the Repository Locally**:
-   - Copy the clone URL from Azure DevOps.
-   - Open a terminal or command prompt and run:
+1. On your lab computer, open the Azure DevOps portal with the **CICD** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
-     ```bash
-     git clone <your-repo-url>
-     cd <your-repo-name>
-     ```
+   ![](images/61.png)
 
-2. **Add Your IaC Templates**:
-   - Place your `main.tf` or `template.json` files in the cloned repository directory.
+1. Search for **Snyk Security Scan** in the Marketplace and open it.
 
-3. **Commit and Push Changes**:
+   ![](images/73.png)
 
-   ```bash
-   git add main.tf # or template.json
-   git commit -m "Add IaC templates"
-   git push origin main
-   ```
+1. On the **Microsoft Security DevOps** page, click on **Get it for free**.
 
-### **3. Verify Your IaC Templates**
+   ![](images/74.png)
 
-1. **Check Repository in Azure DevOps**:
-   - Go back to your Azure DevOps project.
-   - Navigate to `Repos` > `Files`.
-   - Verify that your IaC templates (e.g., `main.tf`, `template.json`) are listed.
+1. Select the desired Azure DevOps organization and **Install**.
 
-### **4. Set Up a Pipeline to Scan IaC Templates**
+   ![](images/64.png)
 
-Here’s a basic pipeline YAML configuration to scan these IaC templates. This example uses Terraform:
+1. Click **Proceed to organization** once the installation is complete.
 
-```yaml
-trigger:
-- main
+   ![](images/65.png)
 
-pool:
-  vmImage: 'ubuntu-latest'
+1. Go to the Azure portal, search for **Entra ID (1)**, and select **Microsoft Entra ID (2)**.
 
-steps:
-- script: |
-    echo "Installing Terraform..."
-    sudo apt-get update
-    sudo apt-get install -y wget unzip
-    wget https://releases.hashicorp.com/terraform/1.4.0/terraform_1.4.0_linux_amd64.zip
-    unzip terraform_1.4.0_linux_amd64.zip
-    sudo mv terraform /usr/local/bin/
+   ![](images/78.png)
 
-    echo "Running Terraform scan..."
-    tflint --config .tflint.hcl
-  displayName: 'Install Terraform and Run tflint'
-```
+1. Scroll down and select **App registrations**, then select the app registration named **odluser1420823-CICD-suffix**.
 
-### **Summary**
+   ![](images/77.png)
 
-- **Create a Repository**: Set up a new Git repository in Azure DevOps.
-- **Add IaC Templates**: Commit your IaC templates (Terraform, ARM, etc.) to the repository.
-- **Set Up a Pipeline**: Configure a pipeline to scan your IaC templates.
+1. Copy the name of the app registration and paste it into your notepad.
 
-This setup allows you to store and manage your IaC templates in Azure DevOps and integrate them into your CI/CD pipelines for automated validation and security scanning.
+   ![](images/80.png)
+
+1. Navigate back to Azure DevOps and click on **Project Settings** at the bottom left of the **CICD** project.
+
+1. Scroll down on the **Project Settings** page and select **Service Principal.**
+
+   ![](images/75.png)
+
+1. Click on **Create Service Principal.**
+
+1. Search for and select **Snyk Authentication**, then click **Next**.
+
+   ![](images/76.png)
+
+1. Paste the **API** under **Snyk API Token (1)** and the **App registration** name under **Service connection name (2)** that you noted earlier. Then, click **Save (3)**.
+
+   ![](images/79.png)
+
+1. You should see that a new service principal has been created.
+
+   ![](images/80.png)
+
+### 2. Integrate Snyk in Azure DevOps Pipeline
+
+1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
+
+1. Click **New pipeline** in the **Pipeline** window.
+
+1. Select **Azure Repos Git (YAML)** on the **Where is your code?** pane.
+
+   ![](images/10.png)
+
+1. Click **CICD** on the **Select a repository** pane.
+
+   ![](images/11.png)
+
+1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
+
+   ![](images/12.png)
+
+1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
+
+   ```yaml
+   trigger:
+   - main
+
+   pool:
+   vmImage: 'ubuntu-latest'
+
+   steps:
+   - task: UseNode@1
+   inputs:
+      version: '14.x'
+   displayName: 'Install Node.js'
+
+   - script: |
+      npm install -g snyk
+   displayName: 'Install Snyk CLI'
+    ```
+
+1. Click on the 16th line then press enter.
+
+1. Expand **Task** pane from the right side then search and select **Synk Security Scan**
+
+   ![](images/82.png)
+
+1. Under **Snyk Security Scan**, complete the following steps:
+
+   - For **Snyk API token (1)**, select the API from the dropdown menu.
+   - For **What do you want to test (2)**, choose **Code**.
+   - For **Code Testing Severity Threshold (3)**, select **High**.
+   - Click **Add (4)**.
+
+    ![](images/83.png)
+
+1. Click **Save and Run** then click **Run** to start the Build Pipeline process.
+
+   ![](images/84.png)
+
+9. Wait for the build pipeline to complete. After running the pipeline, review the results of the Snyk scan in the pipeline logs. Snyk will report any vulnerabilities found.
+
+   ![](images/85.png)
 
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
