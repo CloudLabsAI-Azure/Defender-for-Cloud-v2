@@ -105,7 +105,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
-      ```yaml
+   ```yaml
       trigger:
       - main
 
@@ -130,7 +130,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
             artifactName: 'html-artifact'
          displayName: 'Publish Artifacts'
 
-      ```
+   ```
 1. This YAML file does the following:
     - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
     - **Pool**: Uses an Ubuntu VM image for the build.
@@ -598,120 +598,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 ## Task 7: Integrating non-MS security scan solutions with MDC 
 
-Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) can provide a more comprehensive security posture. Using Nmap as an example:
-
-### 1. Setting Up Nmap on a Windows VM
-
-1. Visit the official website using the URL https://nmap.org/download.html then click on **Windows**.
-
-   ![alert_detected](images/35.png)
-
-1. Click on **nmap-7.92-setup.exe** Downloading of this executable file will start soon. It is a 21.8 MB file so it will take some minutes. 
-
-   ![alert_detected](images/36.png)
-
-1. Now check for the executable file in downloads in your system and run it.
-
-1. It will prompt confirmation to make changes to your system. Click on Yes.
-
-1. The next screen will be of License Agreement, click on **I Agree**.
-  
-   ![alert_detected](images/37.png)
-
-1. Next screen is of choosing components, all components are already marked so don’t change anything just click on the **Next** button.
-
-   ![alert_detected](images/38.png)
-
-1. In this step, we choose the installation location of Nmap. By default, it uses the C drive but you can change it into another drive that will have sufficient memory space for installation. It requires 80.5 MB of memory space.
-
-   ![alert_detected](images/39.png)
-
-1. After this installation process it will take a few minutes to complete the installation.
-
-   ![alert_detected](images/40.png)
-
-1. Npcap installation will also occur with it, the screen of License Agreement will appear, click on **I Agree**.
-
-   ![alert_detected](images/41.png)
-
-1. Next screen is of installation options don’t change anything and click on the **Install** button.
-
-   ![alert_detected](images/42.png)
-
-1. After this installation process it will take a few minutes to complete the installation.
-
-   ![alert_detected](images/43.png)
-
-1. Click on the Finish button to finish the installation of Npcap.
-
-   ![alert_detected](images/48.png)
-
-1. After completion of installation click on the Next button.
-
-   ![alert_detected](images/45.png)
-
-1. Click on the Finish button to finish the installation of Npcap.
-
-   ![alert_detected](images/44.png)
-
-1. Screen for creating shortcut will appear, click on **Next** button.
-
-   ![alert_detected](images/46.png)
-
-1. Click on the **Finish** button to finish the installation of Nmap.
-
-   ![alert_detected](images/47.png)
-
-1. You have successfully installed Nmap on your windows system.
-
-**Run a Basic Nmap Scan:**
-
-1. Click the **Start** menu, type `cmd` into the search bar, and then select **Command Prompt** from the search results.
-    
-   ![alert_detected](images/49.png)
-
-1. Execute a basic Nmap scan command:
-
-    ```
-    cd "\Program Files (x86)\Nmap"
-    ```
-    ```
-    nmap -sS -p 1-65535 <target-ip>
-    ```
-   >**Note** Replace `<target-ip>` with the IP address of the **labVM** you want to scan. You can find the IP address of the LabVM in the **Overview** section of the LabVM in the Azure portal.
-    
-   ![alert_detected](images/50.png)
-
-3. Export the scan results to a file for manual review:
-
-     ```
-     nmap -sS -p 1-65535 <target-ip> -oX nmap_scan_results.txt
-     ```
-   >**Note:** This saves the results in txt format in the `C:\Program Files (x86)\Nmap` folder.
-
-   >**Note** Replace `<target-ip>` with the IP address of the **labVM** you want to scan. You can find the IP address of the LabVM in the **Overview** section of the LabVM in the Azure portal.
-
-### 2. Correlating Nmap Results with Defender for Cloud
-
-1. Open the `nmap_scan_results.txt` file in a text editor to see the results of an Nmap scan on the IP address 40.86.172.0. The scan covers ports 1-65535, identifying open ports on the target. Use this information to find and secure potentially risky open ports. Nmap helps gather data on open ports to guide security actions in Azure or other platforms.
-
-   ![alert_detected](images/51.png)
-
-1. Navigate to **Microsoft Defender for Cloud** in the Azure portal and review the alerts and recommendations provided by Defender for Cloud.
-
-1. Search for and select the **Management ports should be closed on your virtual machine** recommendation. This Azure security recommendation indicates that management ports on a virtual machine (e.g., labvm-1417106) should be closed to reduce the risk of Internet-based attacks. Open management ports (such as RDP or SSH) pose a high risk by exposing the VM to potential brute force attacks. The recommendation offers actionable remediation steps, including:
-
-   - Using a "Quick fix" to automatically close the ports.
-   - Manually editing inbound rules.
-   - Using Just-in-Time VM access.
-
-1. Azure's built-in tools and recommendations can help secure virtual machines effectively.
-
-   ![alert_detected](images/52.png)
-
-1. Microsoft Defender for Cloud recommendations offer high-level security alerts and suggested actions from Azure. In contrast, Nmap scan results provide detailed technical data to identify and verify open ports on a virtual machine. Both are essential for robust network security, ensuring that potentially vulnerable open ports are properly managed and secured.
-
-To store your Infrastructure as Code (IaC) templates in an Azure DevOps repository, you’ll need to set up a repository and commit your IaC templates to it. Here’s a step-by-step guide with examples:
+Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) can provide a more comprehensive security posture. 
 
 ### **1. Create an Azure DevOps Repository**
 
@@ -832,63 +719,3 @@ This setup allows you to store and manage your IaC templates in Azure DevOps and
 
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
-###  Understanding Microsoft Data Security Posture Management
-
-**Data Security Posture Management (DSPM)** allows security teams to get ahead of their data risks and prioritize security issues that could result in a data breach. With DSPM you can:
-     
-   - Automatically discover sensitive data resources across multiple clouds.
-
-   - Evaluate data sensitivity, data exposure, and how data flows across the organization.
-
-   - Proactively and continuously uncover risks that might lead to data breaches.
-
-   - Detect suspicious activities that might indicate ongoing threats to sensitive data resources.
-     
-1. Defender for Cloud leverages **DSPM** data to prioritize critical data risks by distinguishing them from other risks by:
-
-    - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
-    - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments. 
-
-    ![](images/def1.png)
-
-2. Data sensitivity context is also used in Security Alerts and you can quickly filter based on the type of Sensitivity Information. Navigate to **Security alerts** click on **Add filters**, and set it to **Sensitivity info types**.
-
-    ![](images/def3.png) 
-
-### Enabling Defender CSPM plan
-
-In this exercise, you will learn how to enable Defender for CSPM and leverage Defender for CSPM Capabilities
-
-   >**Note:** To gain access to the capabilities provided by Defender CSPM, you'll need to <a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/enable-enhanced-security">enable the Defender Cloud Security Posture Management (CSPM) plan </a> on your subscription
-
-1. **Defender Cloud Security Posture Management**, will reduce the critical risks by:
-
-    - **Monitor your multi-cloud security posture**: It gets continuous security assessments of your resources running across Microsoft Azure, AWS, Google Cloud Platform, and on-premises.
-     
-    - **Prioritize risks with contextual insights**: Identifies your most critical risks with insights from the security operations center (SOC), DevOps, APIs, Microsoft Defender External Attack Surface Management, Microsoft Entra Permissions Management, and Microsoft Purview, all in a single view.
-     
-    - **Get agent and agentless vulnerability scanning**: It gets continuous, real-time monitoring with agentless vulnerability scanning and gains deeper protection from built-in agents.
-     
-    - **Maintain compliance with multi-cloud benchmarks**: It follows best practices for multi-cloud security compliance with controls mapped to major regulatory industry benchmarks, such as the Center for Internet Security, the Payment Card Industry, and the National Institute for Standards and Technology, in a central dashboard. 
-
-1. In **Azure Portal**, search for **Microsoft Defender for Cloud (1)** and then click on it from the search results **(2)**. 
-
-    ![](images/m1-img1.png)
-
-2. From **Defender for Cloud** menu, click on **Environment Settings (1)** page and select your subscription **(2)**.
-
-    ![](images/m1-img2.png)
-
-3. In the **Defender plans** page, select **Defender CSPM** turn the status to **On (1)** and select **Settings & monitoring (2)**.
-
-    ![](images/m1-img3.png)
-
-4. Turn **On (1)** the **Agentless scanning for machines (preview)** and click **Continue (2)**.
-
-    ![](images/m1-img4.png)
-
-5. Click on **Save** to save the changes. 
-
-   >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
-
-    ![](images/m1-img5.png)
