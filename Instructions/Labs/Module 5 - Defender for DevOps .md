@@ -121,14 +121,15 @@ CD extends CI by automatically deploying all code changes to a production enviro
    - script: |
       echo "Building the HTML project..."
       mkdir output
-         cp index.html output/
-      displayName: 'Build Project'
+      cp index.html output/
+   displayName: 'Build Project'
 
    - task: PublishBuildArtifacts@1
    inputs:
       pathToPublish: 'output'
       artifactName: 'html-artifact'
-   displayName: 'Publish Artifacts'  
+   displayName: 'Publish Artifacts'
+
    ```
 1. This YAML file does the following:
     - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
