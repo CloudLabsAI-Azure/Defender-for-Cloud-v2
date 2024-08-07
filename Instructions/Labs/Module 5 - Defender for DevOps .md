@@ -197,12 +197,14 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 ## Task 2: Identifying security issues in the pipeline 
 
+Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infrastructure as Code (IaC) templates for security issues. This process ensures early detection of vulnerabilities, enhances compliance, and improves your overall security posture within existing DevOps workflows.
 
-1. On your lab computer, in the web browser window displaying the Azure DevOps portal with the **CICD** project open, click on the **marketplace icon > Browse Marketplace**.
+1. On your lab computer, open the Azure DevOps portal with the **CICD** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
+
 
    ![](images/61.png)
 
-2. On the MarketPlace, search for **Microsoft Security DevOps** and open it.
+2. Search for **Microsoft Security DevOps** in the Marketplace and open it.
 
    ![](images/62.png)
 
@@ -210,15 +212,15 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
     ![](images/63.png)
 
-1.  On the next page, select the desired Azure DevOps organization and **Install**.
+1.  Select the desired Azure DevOps organization and **Install**.
 
     ![](images/64.png)
 
-1. Click **Proceed to organization** once installed.
+1. Click **Proceed to organization** once the installation is complete.
 
    ![](images/65.png)
 
-1. Click on **Repos (1)>Files (2)**, create a new file named **main.tf** and add the following content to that file:
+1. Navigate to **Repos (1) > Files (2)**, create a new file named **main.tf**, and add the following content:
 
    ```hcl
    # Specify the provider
@@ -304,58 +306,58 @@ CD extends CI by automatically deploying all code changes to a production enviro
    - **Virtual Network**: Defines a virtual network with a specified address space.
    - **Subnet**: Creates a subnet within the virtual network.
    - **Network Interface**: Creates a network interface card for the VM.
-   - **Virtual Machine**: Defines the virtual machine including the operating system, size, and network settings.
+   - **Virtual Machine**: Defines the virtual machine, including the operating system, size, and network settings.
 
-1. on **Mian.tf** page, click on **Commit**.
+
+1. Click on **Commit** in the **main.tf** page.
 
    ![](images/66.png)
 
-1. Again click on **Commit**.
+1. Confirm by clicking **Commit** again.
 
    ![](images/67.png)
 
-1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
+1.Navigate to the **Pipelines** pane in the **Pipelines** hub.
 
-1. In the **Create your first Pipeline** window, click **Create pipeline**.
+1. Click **New pipeline** in the **Pipeline** window.
 
-   > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
-
-1. On the **Where is your code?** pane, click **Azure Repos Git (YAML)** option.
+1. Select **Azure Repos Git (YAML)** on the **Where is your code?** pane.
 
    ![](images/10.png)
 
-1. On the **Select a repository** pane, click **CICD**.
+1. Click **CICD** on the **Select a repository** pane.
 
    ![](images/11.png)
 
-1. On the **Configure your pipeline** pane, scroll down and select **Starter pipeline**.
+1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
 
    ![](images/12.png)
 
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
-      ```yaml
-      trigger: none
-      pool:
-      # ubuntu-latest also supported.
-      vmImage: 'windows-latest'
-      steps:
-      - task: MicrosoftSecurityDevOps@1
-      displayName: 'Microsoft Security DevOps'
-      inputs:    
-         categories: 'IaC'
-      ```
+   ```yaml
+   trigger:
+   - none
+
+   pool:
+   vmImage: 'windows-latest'
+
+   steps:
+   - task: MicrosoftSecurityDevOps@1
+   displayName: 'Microsoft Security DevOps'
+   inputs:    
+      categories: 'IaC'
+    ```
 1. This YAML file is designed to configure an Azure DevOps pipeline with the following specifics:
 
-- **Trigger**: The pipeline is set to `none`, meaning it won't run automatically based on code changes or other triggers. It will need to be started manually or triggered by another pipeline or service.
+   - **Trigger**: The pipeline is set to `none`, meaning it won't run automatically based on code changes or other triggers. It will need to be started manually or triggered by another pipeline or service.
+   - **Pool**: Specifies that the pipeline will use the `windows-latest` virtual machine image. This VM image is provided by Azure DevOps and ensures the pipeline runs on a fresh Windows environment with the latest updates.
+   - **Steps**: The pipeline includes a single step:
+     - **Task**: Uses the `MicrosoftSecurityDevOps@1` task, which is designed for Microsoft Security DevOps.
+     - **Display Name**: The task is labeled 'Microsoft Security DevOps' for easy identification in the pipeline UI.
+     - **Inputs**:
+       - `categories`: Set to 'IaC', indicating that the task will focus on Infrastructure as Code (IaC) security scanning.
 
-- **Pool**: It specifies that the pipeline will use the `windows-latest` virtual machine image. This VM image is provided by Azure DevOps and ensures the pipeline runs on a fresh Windows environment with the latest updates.
-
-- **Steps**: The pipeline includes a single step:
-  - **Task**: It uses the `MicrosoftSecurityDevOps@1` task, which is designed for Microsoft Security DevOps.
-  - **Display Name**: The task is labeled 'Microsoft Security DevOps' for easy identification in the pipeline UI.
-  - **Inputs**:
-    - `categories`: Set to 'IaC', indicating that the task will focus on Infrastructure as Code (IaC) security scanning.
     
 8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
 
@@ -365,7 +367,17 @@ CD extends CI by automatically deploying all code changes to a production enviro
    
    ![](images/69.png)
 
-By setting up this pipeline, you've integrated a security task that scans IaC configurations within Azure DevOps. This ensures that security issues in your IaC templates are identified early in the development process, enhancing overall security posture and compliance.
+### Benefits of Using Microsoft Security DevOps for Scanning the Pipeline
+
+1. **Early Detection of Security Issues**: Microsoft Security DevOps integrates security scanning directly into your CI/CD pipeline, ensuring that security issues in your IaC templates are identified early in the development process.
+
+2. **Enhanced Compliance**: By incorporating automated security checks, your pipeline remains compliant with industry standards and best practices, reducing the risk of deploying insecure infrastructure.
+
+3. **Improved Security Posture**: Continuous scanning and monitoring of your IaC configurations help maintain a robust security posture by promptly addressing vulnerabilities and misconfigurations.
+
+4. **Streamlined Security Workflows**: Integrating security tools into your existing DevOps workflows simplifies the process of managing and mitigating security risks, reducing manual intervention and enhancing efficiency.
+
+5. **Comprehensive Security Coverage**: Microsoft Security DevOps covers a wide range of security aspects, including code analysis, dependency scanning, and configuration checks, providing comprehensive security coverage for your pipeline.
 
 ## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
 
