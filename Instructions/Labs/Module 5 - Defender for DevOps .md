@@ -327,7 +327,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    - **Network Interface**: Creates a network interface card for the VM.
    - **Virtual Machine**: Defines the virtual machine, including the operating system, size, and network settings.
 
-
 1. Click on **Commit** in the **main.tf** page.
 
    ![](images/66.png)
@@ -356,17 +355,17 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ```yaml
    trigger:
-   - none
+   - main
 
    pool:
-   vmImage: 'windows-latest'
+   vmImage: ubuntu-latest
 
    steps:
    - task: MicrosoftSecurityDevOps@1
-   displayName: 'Microsoft Security DevOps'
-   inputs:    
+     displayName: 'Microsoft Security DevOps'
+     inputs:    
       categories: 'IaC'
-    ```
+   ```
 1. This YAML file is designed to configure an Azure DevOps pipeline with the following specifics:
 
    - **Trigger**: The pipeline is set to `none`, meaning it won't run automatically based on code changes or other triggers. It will need to be started manually or triggered by another pipeline or service.
@@ -377,7 +376,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
      - **Inputs**:
        - `categories`: Set to 'IaC', indicating that the task will focus on Infrastructure as Code (IaC) security scanning.
 
-    
 8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
 
    ![](images/68.png)
@@ -526,13 +524,15 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
       >**Note:** Use your personal GitHub account to perform this task. If you don't have a GitHub account, create a new one by following the instructions in this [Microsoft document](https://docs.microsoft.com/en-us/github/get-started/sign-up-for-github).
 
-1. Navigate to `https://github.com/ghas-bootcamp/ghas-bootcamp/fork` and click on **Create fork**
+1. Navigate to `https://github.com/ghas-bootcamp/ghas-bootcamp/fork` and click on **Create fork**.
 
-1. In the GitHub repository navigate to **Settings** from the top navigation pane and click on **Code Security and Analysis** under Security.
+   ![](images/90.png)
 
-1. Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
+1. Go to **Security** and Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
 
    ![alert_detected](images/54.png)
+
+1. In the GitHub repository navigate to **Settings** from the top navigation pane and click on **Code Security and Analysis** under Security.
 
 1. Now, Click on the **Setup** button and click on **Advanced**.
 
