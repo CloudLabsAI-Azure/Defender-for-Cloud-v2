@@ -532,8 +532,6 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
    ![alert_detected](images/54.png)
 
-1. In the GitHub repository navigate to **Settings** from the top navigation pane and click on **Code Security and Analysis** under Security.
-
 1. Now, Click on the **Setup** button and click on **Advanced**.
 
    ![alert_detected](images/53.png)
@@ -550,7 +548,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
    ![alert_detected](images/57.png)
 
-1. In the repository navigate to **Settings** from the top navigation pane, Scroll down to **Secret Scanning** and ensure that **Secret Scanning** is enabled.
+1. In the repository navigate to **Security** from the top navigation pane, Scroll down to **Secret Scanning** and ensure that **Secret Scanning** is enabled.
 
    ![github-advisory-database](images/58.png)
 
