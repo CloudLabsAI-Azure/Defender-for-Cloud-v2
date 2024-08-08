@@ -205,7 +205,7 @@ This image provides a visual guide for creating a new file directly in an Azure 
 
    ![](images/30.png)
 
-1. Navigate to the Azure portal interface, navigate to the resource group **asclab**, in the list of resources, click the **asclab-app** web app.
+1. Navigate to the Azure portal interface, navigate to the resource group **asclab**, in the list of resources, click the **asclab-app-xxxxxxxxxxxxx** web app.
 
 1. On the web app blade, click **Browse**.
 
