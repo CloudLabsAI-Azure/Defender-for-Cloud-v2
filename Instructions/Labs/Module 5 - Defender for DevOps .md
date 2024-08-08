@@ -552,13 +552,21 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
    ![github-advisory-database](images/58.png)
 
-1. Go to **Security** and scroll down to **Dependabot alerts** and enable **Dependabot** for automated dependency updates and reviews.
+1. Go to **Security** and scroll down to **Dependabot alerts** and Click on **Enable Dependabot alerts**.
 
    ![github-advisory-database](images/60.png)
 
-1. **Code Scanning** is enabled with CodeQL for identifying code vulnerabilities, while **Secret Scanning** and **Dependency Review** are managed through GitHub’s settings.
+1. Click the **Enable** button next to Dependabot alerts. 
 
-1. Integrating GHAS enhances your pipeline’s protection against security threats and vulnerabilities.
+1. A popup will appear, informing you that enabling Dependabot alerts also requires the dependency graph. 
+
+1. Click the **Enable** button in the popup to confirm and activate both the dependency graph and Dependabot alerts.
+
+    ![alert_detected](images/91.png)
+
+1. **Code Scanning** uses CodeQL to find problems in your code, and **Secret Scanning** and **Dependency Review** are set up through GitHub's settings.
+
+2. Adding GitHub Advanced Security (GHAS) to your pipeline helps protect it better from security issues and threats.
 
 ## Task 6: Connecting and Securing your Azure DevOps environment to MDC 
 
