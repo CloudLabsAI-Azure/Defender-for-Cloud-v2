@@ -67,7 +67,23 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/22.png)
 
-1. First, let’s create a basic HTML file named `index.html`:
+1.  Click on the "New" button (often represented by a `+` symbol or labeled as "Add").
+
+1. In the dropdown menu, select **Add file**.
+
+This image provides a visual guide for creating a new file directly in an Azure DevOps repository. Here's a step-by-step explanation of the actions shown:
+
+1. Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section. This menu provides additional actions you can take within the repository.
+
+1. After clicking the three-dot menu, a dropdown list appears. From this list, hover over the **New** option. This will allow you to create new items in the repository.
+
+1. Under the **New** submenu, you have the option to create a "File" or a "Folder." In this case, you would click on **File** to start creating a new file within the repository.
+
+   ![](images/89.png)
+
+1. A prompt will appear asking you to name your new file.
+
+2. Enter a name for your HTML file, such as `index.html`.
 
    ![](images/23.png)
 
@@ -85,6 +101,11 @@ CD extends CI by automatically deploying all code changes to a production enviro
     </body>
     </html>
     ```
+
+1. After writing your code, you can commit the changes by filling in the commit message and selecting whether to commit directly to the main branch or a different one.
+
+1. Click **Commit** to save the file to your repository.
+
 1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
 
 1. In the **Create your first Pipeline** window, click **Create pipeline**.
@@ -129,7 +150,6 @@ CD extends CI by automatically deploying all code changes to a production enviro
       pathToPublish: 'output'
       artifactName: 'html-artifact'
    displayName: 'Publish Artifacts'
-
    ```
 1. This YAML file does the following:
     - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
@@ -766,6 +786,58 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/85.png)
 
-
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
+
+###  Understanding Microsoft Data Security Posture Management
+**Data Security Posture Management (DSPM)** allows security teams to get ahead of their data risks and prioritize security issues that could result in a data breach. With DSPM you can:
+     
+   - Automatically discover sensitive data resources across multiple clouds.
+   - Evaluate data sensitivity, data exposure, and how data flows across the organization.
+   - Proactively and continuously uncover risks that might lead to data breaches.
+   - Detect suspicious activities that might indicate ongoing threats to sensitive data resources.
+     
+1. Defender for Cloud leverages **DSPM** data to prioritize critical data risks by distinguishing them from other risks by:
+     - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
+     - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments.
+
+      ![](images/def1.png)
+
+2. Data sensitivity context is also used in Security Alerts and you can quickly filter based on the type of Sensitivity Information. Navigate to **Security alerts** click on **Add filters**, and set it to **Sensitivity info types**.
+
+     ![](images/def3.png) 
+
+###  Enabling Defender CSPM plan
+In this exercise, you will learn how to enable Defender for CSPM and leverage Defender for CSPM Capabilities
+   >**Note:** To gain access to the capabilities provided by Defender CSPM, you'll need to <a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/enable-enhanced-security">enable the Defender Cloud Security Posture Management (CSPM) plan </a> on your subscription
+
+1. **Defender Cloud Security Posture Management**, will reduce the critical risks by:
+
+     - **Monitor your multi-cloud security posture**: It gets continuous security assessments of your resources running across Microsoft Azure, AWS, Google Cloud Platform, and on-premises.
+     
+     - **Prioritize risks with contextual insights**: Identifies your most critical risks with insights from the security operations center (SOC), DevOps, APIs, Microsoft Defender External Attack Surface Management, Microsoft Entra Permissions Management, and Microsoft Purview, all in a single view.
+     
+     - **Get agent and agentless vulnerability scanning**: It gets continuous, real-time monitoring with agentless vulnerability scanning and gains deeper protection from built-in agents.
+     
+     - **Maintain compliance with multi-cloud benchmarks**: It follows best practices for multi-cloud security compliance with controls mapped to major regulatory industry benchmarks, such as the Center for Internet Security, the Payment Card Industry, and the National Institute for Standards and Technology, in a central dashboard. 
+
+1. In **Azure Portal**, search for **Microsoft Defender for Cloud (1)** and then click on it from the search results **(2)**. 
+
+      ![](images/m1-img1.png)
+
+2. From **Defender for Cloud** menu, click on **Environment Settings (1)** page and select your subscription **(2)**.
+
+      ![](images/m1-img2.png)
+
+3. In the **Defender plans** page, select **Defender CSPM** turn the status to **On (1)** and select **Settings & monitoring (2)**.
+
+      ![](images/m1-img3.png)
+
+4. Turn **On (1)** the **Agentless scanning for machines (preview)** and click **Continue (2)**.
+
+      ![](images/m1-img4.png)
+
+5. Click on **Save** to save the changes. 
+   >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
+
+      ![](images/m1-img5.png)
 
