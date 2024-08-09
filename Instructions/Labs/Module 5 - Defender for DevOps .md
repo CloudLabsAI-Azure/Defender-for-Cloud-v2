@@ -71,7 +71,6 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. In the dropdown menu, select **Add file**.
 
-This image provides a visual guide for creating a new file directly in an Azure DevOps repository. Here's a step-by-step explanation of the actions shown:
 
 1. Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section. This menu provides additional actions you can take within the repository.
 
@@ -794,15 +793,19 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/85.png)
 
+1. Go to the Summary tab, and you will find the **Snyk report** under the *Snyk tab*.
+
+   ![](images/93.png)
+
 ## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
 
 DevOps Security Posture, as part of Cloud Security Posture Management (CSPM), involves assessing and enhancing the security of your development and deployment processes within the cloud. Here's a detailed discussion on what CX (Customer Experience) gets in terms of DevOps security posture within CSPM:
 
-### **1. Overview of CSPM and DevOps Security**
+### 1. Overview of CSPM and DevOps Security
 
 CSPM focuses on ensuring that your cloud environment adheres to security best practices and compliance requirements. It helps in identifying misconfigurations, vulnerabilities, and compliance issues within your cloud resources. When integrated with DevOps processes, CSPM aims to secure the entire development lifecycle from code to deployment.
 
-### **2. Key Aspects of DevOps Security Posture in CSPM**
+### 2. Key Aspects of DevOps Security Posture in CSPM
 
 - **Infrastructure as Code (IaC) Scanning**: CSPM solutions often include the ability to scan IaC templates for security vulnerabilities and misconfigurations before they are deployed. This ensures that any security issues are identified early in the development process, reducing the risk of deploying insecure configurations.
 
@@ -814,7 +817,7 @@ CSPM focuses on ensuring that your cloud environment adheres to security best pr
 
 - **Configuration Management**: Ensuring that configurations used in development, staging, and production environments are securely managed and adhere to best practices is a critical aspect of DevOps security posture. CSPM tools help in monitoring and enforcing secure configurations across all environments.
 
-### **3. Demonstrating DevOps Security Posture**
+### 3. Demonstrating DevOps Security Posture
 
 To showcase the DevOps security posture provided by CSPM, you can create a lab or demonstration that highlights the following:
 
@@ -826,80 +829,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
 - **Incident Response**: Simulate a security incident within the DevOps process and demonstrate how the CSPM tool detects and responds to the threat, including the remediation steps.
 
-### **4. Conclusion**
-
-Integrating CSPM with DevOps processes provides a comprehensive approach to securing your development lifecycle, from coding to deployment. By leveraging CSPM tools, you ensure that security is baked into the DevOps process, reducing vulnerabilities and ensuring compliance.
-
-If you need to demonstrate specific recommendations or features from Microsoft Defender for Cloud, you can reference the recommendations at [Microsoft Defender for Cloud Recommendations](https://learn.microsoft.com/en-us/azure/defender-for-cloud/recommendations-reference-devops). This can provide a detailed view of how these recommendations apply to your DevOps security posture and help in effectively showcasing them in your lab or demo.
-
-###  Understanding Microsoft Data Security Posture Management
-**Data Security Posture Management (DSPM)** allows security teams to get ahead of their data risks and prioritize security issues that could result in a data breach. With DSPM you can:
-     
-   - Automatically discover sensitive data resources across multiple clouds.
-   - Evaluate data sensitivity, data exposure, and how data flows across the organization.
-   - Proactively and continuously uncover risks that might lead to data breaches.
-   - Detect suspicious activities that might indicate ongoing threats to sensitive data resources.
-     
-1. Defender for Cloud leverages **DSPM** data to prioritize critical data risks by distinguishing them from other risks by:
-     - Highlighting attack paths of internet-exposed VMs that have access to sensitive data stores.
-     - Allowing you to leverage Cloud Security Explorer to identify misconfigured data resources that are publicly accessible and contain sensitive data, across multi-cloud environments.
-
-      ![](images/def1.png)
-
-2. Data sensitivity context is also used in Security Alerts and you can quickly filter based on the type of Sensitivity Information. Navigate to **Security alerts** click on **Add filters**, and set it to **Sensitivity info types**.
-
-     ![](images/def3.png) 
-
-###  Enabling Defender CSPM plan
-In this exercise, you will learn how to enable Defender for CSPM and leverage Defender for CSPM Capabilities
-   >**Note:** To gain access to the capabilities provided by Defender CSPM, you'll need to <a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/enable-enhanced-security">enable the Defender Cloud Security Posture Management (CSPM) plan </a> on your subscription
-
-1. **Defender Cloud Security Posture Management**, will reduce the critical risks by:
-
-     - **Monitor your multi-cloud security posture**: It gets continuous security assessments of your resources running across Microsoft Azure, AWS, Google Cloud Platform, and on-premises.
-     
-     - **Prioritize risks with contextual insights**: Identifies your most critical risks with insights from the security operations center (SOC), DevOps, APIs, Microsoft Defender External Attack Surface Management, Microsoft Entra Permissions Management, and Microsoft Purview, all in a single view.
-     
-     - **Get agent and agentless vulnerability scanning**: It gets continuous, real-time monitoring with agentless vulnerability scanning and gains deeper protection from built-in agents.
-     
-     - **Maintain compliance with multi-cloud benchmarks**: It follows best practices for multi-cloud security compliance with controls mapped to major regulatory industry benchmarks, such as the Center for Internet Security, the Payment Card Industry, and the National Institute for Standards and Technology, in a central dashboard. 
-
-1. In **Azure Portal**, search for **Microsoft Defender for Cloud (1)** and then click on it from the search results **(2)**. 
-
-      ![](images/m1-img1.png)
-
-2. From **Defender for Cloud** menu, click on **Environment Settings (1)** page and select your subscription **(2)**.
-
-      ![](images/m1-img2.png)
-
-3. In the **Defender plans** page, select **Defender CSPM** turn the status to **On (1)** and select **Settings & monitoring (2)**.
-
-      ![](images/m1-img3.png)
-
-4. Turn **On (1)** the **Agentless scanning for machines (preview)** and click **Continue (2)**.
-
-      ![](images/m1-img4.png)
-
-5. Click on **Save** to save the changes. 
-   >**Note:** Agentless scanning for VMs provides vulnerability assessment and software inventory in 24 hours. Leave the setup and comeback after 24 hours.
-
-      ![](images/m1-img5.png)
-
-To discuss the DevOps Security Posture that customers (CX) get as part of Cloud Security Posture Management (CSPM), we need to focus on how CSPM integrates with DevOps practices, particularly through Microsoft Defender for Cloud. CSPM helps organizations identify and mitigate security risks across their cloud environments by providing continuous monitoring, assessment, and recommendations for improving their security posture.
-
-### DevOps Security Posture as part of CSPM
-
-1. **Continuous Monitoring and Assessment**: CSPM continuously monitors the security configurations of resources deployed via DevOps pipelines. It helps identify vulnerabilities or misconfigurations early in the development lifecycle, ensuring that code, configurations, and infrastructure adhere to security best practices.
-
-2. **Security Recommendations**: Microsoft Defender for Cloud, as part of CSPM, provides actionable security recommendations specifically tailored for DevOps environments. These recommendations help secure Infrastructure as Code (IaC) templates, pipelines, and deployed resources. The recommendations cover a wide range of areas such as identity and access management, data protection, threat protection, and security governance.
-
-3. **Integration with DevOps Tools**: CSPM integrates with popular DevOps tools like Azure DevOps, GitHub, Jenkins, etc., to provide security insights directly within the CI/CD pipelines. This allows developers and DevOps teams to address security concerns as part of their workflow, reducing the risk of security vulnerabilities being introduced into production.
-
-
-
-### Detailed Step-by-Step Lab Demonstration: DevOps Security Posture with CSPM
-
-This lab will guide you through setting up a DevOps pipeline, integrating it with Microsoft Defender for Cloud (as part of CSPM), and demonstrating how CSPM provides security recommendations based on identified issues. 
+1. Integrating CSPM with DevOps processes provides a comprehensive approach to securing your development lifecycle, from coding to deployment. By leveraging CSPM tools, you ensure that security is baked into the DevOps process, reducing vulnerabilities and ensuring compliance.
 
 ### Prerequisites
 
@@ -909,65 +839,88 @@ This lab will guide you through setting up a DevOps pipeline, integrating it wit
 4. **Microsoft Defender for Cloud Enabled**: Ensure Microsoft Defender for Cloud is enabled in your Azure subscription.
 5. **Azure Key Vault**: An existing Key Vault to store secrets securely.
 
-### Step 1: Set Up the Azure DevOps Pipeline
+### 1. Set Up the Azure DevOps Pipeline
 
-1. **Create a New Repository**:
-   - In your Azure DevOps project, create a new Git repository.
-   - Clone the repository to your local machine.
-
-2. **Prepare the Terraform Templates**:
-   - Create a Terraform template for deploying a simple Azure infrastructure, such as a Virtual Network and an Azure Storage Account.
-   - Add a security misconfiguration in the template (e.g., setting the Storage Account to allow public access).
+1. Navigate to **Repos > Files**, open **main.tf**, remove the existing content, and replace it with the new content provided:
 
    ```hcl
    resource "azurerm_storage_account" "example" {
-     name                     = "examplestorageacct"
-     resource_group_name      = azurerm_resource_group.example.name
-     location                 = azurerm_resource_group.example.location
-     account_tier             = "Standard"
-     account_replication_type = "LRS"
-     
-     # Insecure configuration: Public access
-     allow_blob_public_access = true
+   name                     = "examplestorageacct"
+   resource_group_name      = "example-resources"
+   location                 = "East US"
+   account_tier             = "Standard"
+   account_replication_type = "GRS"
+   enable_https_traffic_only = true   # Enforce HTTPS
+   min_tls_version          = "TLS1_2" # Minimum TLS version
+   allow_blob_public_access = false   # Disallow public access to blobs
+   identity {
+      type = "SystemAssigned"          # Enable managed identity for enhanced security
    }
+   }
+
    ```
+1. Click on **Commit** in the **main.tf** page.
 
-3. **Add the Terraform Template to the Repository**:
-   - Add the Terraform template files to the repository.
-   - Commit and push the changes to the remote repository.
+1. Confirm by clicking **Commit** again.
 
-4. **Create a Build Pipeline**:
-   - In Azure DevOps, navigate to Pipelines > New Pipeline.
-   - Select the repository where your Terraform templates are stored.
-   - Choose "Starter pipeline" to create a basic YAML pipeline.
-   - Define the pipeline to validate and deploy the Terraform templates.
+   ![](images/67.png)
 
-   Example pipeline (YAML):
+1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
+
+1. Click **New pipeline** in the **Pipeline** window.
+
+1. Select **Azure Repos Git (YAML)** on the **Where is your code?** pane.
+
+   ![](images/10.png)
+
+1. Click **CICD** on the **Select a repository** pane.
+
+   ![](images/11.png)
+
+1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
+
+   ![](images/12.png)
+
+1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
+
    ```yaml
    trigger:
    - main
 
    pool:
-     vmImage: 'ubuntu-latest'
+   vmImage: 'ubuntu-latest'
 
    steps:
-   - task: TerraformInstaller@0
-     inputs:
-       terraformVersion: '1.3.5' # Use the appropriate version
+   - checkout: self
+
+   - task: UsePythonVersion@0
+   inputs:
+      versionSpec: '3.x'
+      addToPath: true
 
    - script: |
-       terraform init
-       terraform validate
-     displayName: 'Terraform Init and Validate'
+      echo "Upgrading pip..."
+      python -m pip install --upgrade pip
+      if [ $? -ne 0 ]; then
+         echo "Failed to upgrade pip"
+         exit 1
+      fi
+
+      echo "Installing Checkov..."
+      pip install checkov
+      if [ $? -ne 0 ]; then
+         echo "Failed to install Checkov"
+         exit 1
+      fi
+   displayName: 'Install Checkov'
 
    - script: |
-       terraform plan
-       terraform apply -auto-approve
-     displayName: 'Terraform Plan and Apply'
+      echo "Running Checkov..."
+      checkov --directory . || true  # Add '|| true' to prevent pipeline failure
+   displayName: 'Run Checkov on Terraform'
    ```
 
-5. **Run the Pipeline**:
-   - Trigger the pipeline to run, which will deploy the infrastructure based on your Terraform templates.
+1. Click **Validate and Run** then click **Run** to start the Build Pipeline process.
 
 ### Step 2: Integrate CSPM with Azure DevOps
 
