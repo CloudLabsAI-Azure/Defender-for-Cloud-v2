@@ -463,47 +463,34 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 
 ## Task 4: Overview of Defender for DevOps (including pricing) [Read-Only] 
 
-#Defender for DevOps is a security solution by Microsoft designed to enhance the security of DevOps environments. It provides a range of tools and features to help secure the software development lifecycle (SDLC) and protect against threats that target DevOps processes. Here's an overview:
+Defender for DevOps is a security solution by Microsoft designed to enhance the security of DevOps environments. It provides a range of tools and features to help secure the software development lifecycle (SDLC) and protect against threats that target DevOps processes. Here's an overview:
 
-### Key Features:
+### Overview of Microsoft Defender for DevOps
 
-1. Security for CI/CD Pipelines:
+**Microsoft Defender for DevOps** helps secure your DevOps environments and pipelines by integrating with popular DevOps tools and providing security recommendations for your code and infrastructure. It focuses on the following areas:
 
-   - **Code Scanning:** Identifies vulnerabilities and security issues in your code before deployment.
-   - **Dependency Scanning:** Detects known vulnerabilities in dependencies and libraries used in your projects.
+1. **Source Code Security**: Scans your code repositories to identify vulnerabilities and security issues in your source code.
+2. **Pipeline Security**: Monitors and protects your CI/CD pipelines from potential threats and unauthorized access.
+3. **Infrastructure as Code (IaC) Security**: Analyzes your IaC templates (e.g., Terraform) for potential security risks and misconfigurations.
 
-2. Integration with Azure DevOps and GitHub:
-   - **Azure DevOps:** Integrates with Azure Pipelines, Boards, Repos, and other Azure DevOps services to secure the DevOps lifecycle.
-   - **GitHub:** Provides security insights and recommendations directly in your GitHub repositories.
+**Key Features:**
+- **Integration**: Works with tools like GitHub, Azure DevOps, and Bitbucket.
+- **Vulnerability Scanning**: Identifies vulnerabilities in your code, dependencies, and configuration files.
+- **Security Recommendations**: Provides actionable insights and recommendations for securing your pipelines and code.
+- **Compliance**: Helps ensure compliance with industry standards and best practices.
 
-3. Container Security:
-   - **Image Scanning:** Scans container images for vulnerabilities before they are deployed.
-   - **Runtime Protection:** Monitors running containers for security issues and potential threats.
+### Pricing
 
-4. Infrastructure as Code (IaC) Security:
-   - **IaC Scanning:** Analyzes your IaC templates for security misconfigurations and vulnerabilities.
+The pricing for Microsoft Defender for DevOps is generally included as part of the broader Microsoft Defender for Cloud offering, specifically under **Defender for Cloud's Cloud Security Posture Management (CSPM)** plan. Here’s a general breakdown:
 
-5. Policy Management:
-   - **Compliance Policies:** Enforces security policies and compliance requirements across your DevOps processes.
+- **Microsoft Defender for Cloud (Free Tier)**: Basic security features, including Azure Security Center and Azure Defender for servers.
+- **Microsoft Defender for Cloud (Standard Tier)**: Includes advanced features such as Defender for DevOps, Defender for Cloud's comprehensive protection, and threat detection capabilities. 
 
-6. Threat Detection and Response:
-   - **Alerts and Notifications:** Provides real-time alerts on detected security threats and vulnerabilities.
-   - **Incident Management:** Helps manage and respond to security incidents effectively.
+For exact pricing details, especially as they can vary based on the size of the environment and specific needs, it's best to consult the [Microsoft Defender for Cloud pricing page](https://azure.microsoft.com/en-us/pricing/details/defender-for-cloud/) or contact Microsoft sales for a customized quote.
 
-### Pricing:
+### Inclusion in Defender for CSPM
 
-Defender for DevOps is included in Microsoft Defender for Cloud, and its pricing is generally based on the overall Defender for Cloud plan. Pricing may vary based on:
-
-1. Number of Resources:
-   - The cost may be influenced by the number of resources (e.g., pipelines, repositories, containers) being protected.
-
-2. Features and Plans:
-   - Microsoft Defender for Cloud offers different pricing tiers (e.g., Free, Standard, and Enhanced) that include various features and levels of protection. Defender for DevOps features are generally available in the Standard or Enhanced tiers.
-
-3. Azure Consumption:
-   - Costs are also related to the overall consumption of Azure resources and services.
-
-For the most accurate and up-to-date pricing, it's best to consult the [Microsoft Defender for Cloud pricing page](https://azure.microsoft.com/en-us/pricing/details/defender-for-cloud/) or contact Microsoft sales support directly.
+**DevOps Security Posture** is included as part of the **Defender for CSPM** plan, which provides a unified view of your security posture across various cloud environments, including DevOps. This integration means that DevOps security capabilities are seamlessly integrated into the overall cloud security management, offering a more comprehensive approach to securing both your cloud infrastructure and development workflows.
 
 ## Task 5: Securing your pipeline with GHAS 
 
@@ -921,69 +908,3 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
    ```
 
 1. Click **Validate and Run** then click **Run** to start the Build Pipeline process.
-
-### Step 2: Integrate CSPM with Azure DevOps
-
-1. **Enable Defender for DevOps**:
-   - In the Azure portal, navigate to "Microsoft Defender for Cloud."
-   - Under "Environment settings," select your Azure subscription.
-   - Enable "Defender for DevOps" under the security settings.
-
-2. **Connect Azure DevOps to Microsoft Defender for Cloud**:
-   - In Microsoft Defender for Cloud, go to the "DevOps security" section.
-   - Click on "Connect DevOps organization."
-   - Follow the prompts to connect your Azure DevOps organization to Defender for Cloud.
-
-3. **Configure Policies and Recommendations**:
-   - Once connected, configure policies that CSPM will enforce, such as checking for the use of secure secrets management, container signing, etc.
-
-### Step 3: Demonstrate Security Issues and Recommendations
-
-1. **Terraform Template Misconfiguration**:
-   - Run the pipeline with the previously mentioned misconfiguration (public access allowed for a Storage Account).
-   - After the deployment, go back to Microsoft Defender for Cloud > Recommendations.
-   - You should see a recommendation related to the misconfigured Terraform template, such as "Storage accounts should restrict public access."
-
-2. **Secure Secrets Management**:
-   - Modify the pipeline to include a secret in plain text (e.g., a connection string or API key).
-   - Commit and push the change.
-   - Run the pipeline.
-   - Defender for Cloud will flag the use of plain text secrets and recommend using Azure Key Vault for secure secrets management.
-
-   Example of an insecure secret:
-   ```yaml
-   - script: |
-       echo "export CONNECTION_STRING=myInsecureConnectionString" >> ~/.bashrc
-     displayName: 'Set Connection String'
-   ```
-
-3. **Remediate the Issues**:
-   - **Public Access Restriction**: Modify the Terraform template to disable public access.
-     ```hcl
-     allow_blob_public_access = false
-     ```
-   - **Secure Secret Storage**: Replace the plain text secret with a reference to a Key Vault secret.
-     ```yaml
-     - script: |
-         echo "export CONNECTION_STRING=$(az keyvault secret show --name <secret-name> --vault-name <vault-name> --query value -o tsv)" >> ~/.bashrc
-       displayName: 'Set Connection String from Key Vault'
-     ```
-
-   - Commit and push the changes, then rerun the pipeline.
-
-### Step 4: Review and Analyze CSPM Recommendations
-
-1. **Review Security Posture in Microsoft Defender for Cloud**:
-   - After implementing the recommendations and rerunning the pipeline, revisit Microsoft Defender for Cloud.
-   - Confirm that the previous security recommendations have been resolved and that your infrastructure and pipeline now adhere to best practices.
-
-2. **Explore Additional Recommendations**:
-   - Explore other recommendations provided by CSPM, such as ensuring that your repositories are scanned for sensitive data and vulnerabilities.
-
-3. **Document and Share Findings**:
-   - Document the changes made to improve the security posture.
-   - Share the findings with your team or stakeholders to demonstrate the value of CSPM in enhancing DevOps security.
-
-### Conclusion
-
-By following this lab, you've experienced firsthand how CSPM, via Microsoft Defender for Cloud, integrates with DevOps practices to enhance security. The lab demonstrated how to identify and remediate security issues in a CI/CD pipeline, ensuring that security is embedded throughout the development lifecycle.
