@@ -5,14 +5,14 @@
       "BaseURL": "https://github.com/CloudLabsAI-Azure/Defender-for-Cloud-v2",
       "Files": [
         {
-            "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%205%20-%20Defender%20for%20DevOps%20.md",
-            "Order": 1
+          "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%201%20-%20Recommendation%20triggers.md",
+          "Order": 1
         },
         {
-          "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%201%20-%20Recommendation%20triggers.md",
-          "Order": 2
+            "RawFilePath": "https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%205%20-%20Defender%20for%20DevOps%20.md",
+            "Order": 2
         }
-    
+        
       ]
     }
   ]
