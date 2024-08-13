@@ -1,34 +1,44 @@
 # Module 2 - Writing the Logic App
 
-#### Task 1: Deploying / Creating the App
+### Task 1: Deploying / Creating the App
 
-1. **Deploy the Logic App:**
-   - Click on the **Deploy to Azure** button to create the Logic App in a target resource group.
+In this task, you will deploy a Logic App with pre-configured triggers based on Defender for Cloud recommendations and assign the necessary roles to the managed identity for remediation actions.
+
+
+1. Click on the **Deploy to Azure** button to create the Logic App in a target resource group.
 
      <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json" target="_blank">
      <img src="https://aka.ms/deploytoazurebutton"/></a>
 
-2. **Create a Managed Identity:**
-   - The remediation will require the permissions associated with this managed identity. Since this is a testing environment, we will give "Contributor" permissions to this identity.
+2. On the **Custom deployment** blade, select the **defender for cloud(1)** resource group from the drop-down and click on **Review + create(2)**
 
-   **To assign Managed Identity to a specific scope:**
+     ![](./images/mod2-cd.png)
 
-   - Ensure you have Owner/Contributor permissions for this scope.
-   - Go to the Settings.
-   - Press 'Identity' on the navigation bar.
-   - Choose 'System assigned' and set Status to 'On'.
+3. Click on **Create** to initiate the deployment.
 
-     ![](./images/set-identity.png)
+4. Wait until the deployment is succeeded and click on **Go to resource group**
 
-   - Set the 'Permissions' by clicking 'Azure role assignments', selecting the subscription as your scope, then selecting the subscription of the unhealthy resource, and finally selecting 'Contributor' under role.
+     ![](./images/mod2-gr.png)
 
-     ![](./images/set-identity-role.png)
+5. Select the **mdcremovesharedprivateaccess** logic app from the list.
 
-   - Click "Save" at the bottom of the page.
+     ![](./images/mod2-la.png)
 
----
+6. Navigate to settings and select **Identity(1)** from the list
 
-#### Task 2: Walkthrough of the Logic App
+7. Choose **System assigned(2)** and set Status to **On(3)**
+
+8. Set the Permissions by clicking **Azure role assignments(4)** 
+
+     ![](./images/mod2-id.png)
+
+9. On the **Azure role assignments** page, select **+ Add role assignment (preview)** and select the **subscription** as a scope and select **Contributor** for role.
+
+     ![](./images/mod2-ar.png)
+
+10 Click on **Save**
+
+### Task 2: Walkthrough of the Logic App
 
 The logic app we deployed should look like this:
 
