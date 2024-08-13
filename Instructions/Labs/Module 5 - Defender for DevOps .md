@@ -710,6 +710,8 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
 1. Follow the remaining prompts to complete your account setup.
 
+   >**Note**: On **where is the code you want to scan** page, select **skip for now**.
+
 1. Access your **Snyk account settings** to retrieve your **API token for authentication** and record it in your notepad.
  
    ![](images/70.png)
