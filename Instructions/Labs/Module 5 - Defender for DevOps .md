@@ -187,13 +187,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/27.png)
 
-1.  On the **All pipelines > New Release Pipeline** pane, click **Save** and, in the **Save** dialog box, click **OK**.
+1. On the **All pipelines > New Release Pipeline** pane, click **Save** and, in the **Save** dialog box, click **OK**.
 
-    ![](images/34.png)
+   ![](images/34.png)
 
-1.  On the **All pipelines > New Release Pipeline** pane, click **Create release** .
+1. On the **All pipelines > New Release Pipeline** pane, click **Create release** .
 
-    ![](images/29.png)
+   ![](images/29.png)
 
 1. Wait until the release pipline successfully completed.
 
@@ -352,7 +352,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    - main
 
    pool:
-    vmImage: ubuntu-latest
+     vmImage: ubuntu-latest
 
    steps:
    - task: MicrosoftSecurityDevOps@1
@@ -451,7 +451,7 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 
 - In the `Security` tab, you can also manage security policies by setting up a `security.md` file to inform users about your project's security practices and how they can report vulnerabilities.
 
- 10. Continuous Monitoring and Alerts
+10. Continuous Monitoring and Alerts
 
 - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
 - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
@@ -511,7 +511,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
    -----------|---------
    | Connector name | Githubconnector |
    | Subscription | Choose the default subscription |
-   | Resource group | (Create new) Mod5 |
+   | Resource group | defenderforcloud |
    | Location | Select any supporting region |
 
 1. Select **Next: Configure access**.
@@ -520,7 +520,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. Select **Authorize**. enter github username and password.
 
-    ![alert_detected](images/96.png)
+   ![alert_detected](images/96.png)
 
 1. In the popup dialog, read the list of permission requests, and then select **Accept**.
 
@@ -602,9 +602,13 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. Click the **Enable** button in the popup to confirm and activate both the dependency graph and Dependabot alerts.
 
-    ![alert_detected](images/91.png)
+   ![alert_detected](images/91.png)
 
-1. **Code Scanning** uses CodeQL to find problems in your code, and **Secret Scanning** and **Dependency Review** are set up through GitHub's settings.
+1. Return to the Defender for Cloud tab, go to **DevOps Security**, and search for **ghas-bootcamp**. You'll notice that advanced security for ghas-bootcamp is currently **On**.
+
+   ![alert_detected](images/114.png)
+
+   >**Note**: You may need to wait 15-20 minutes for advanced security to be activated.
 
 1. Integrating GitHub Advanced Security (GHAS) with your pipeline, as outlined, results in the following benefits:
 
@@ -642,8 +646,8 @@ Overall, this setup strengthens your security posture by integrating automated s
    -----------|---------
    | Connector name | AzureDevopsconnector |
    | Subscription | Choose the default subscription |
-   | Resource group | Lab-VM |
-   | Location | Select any supporting region |
+   | Resource group | defenderforcloud |
+   | Location | east us|
 
    ![alert_detected](images/advlab52.png)
 
