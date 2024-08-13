@@ -1,6 +1,6 @@
-# Module 5 – Defender for DevOps 
+# **Module 5 – Defender for DevOps**
 
-## Task 1: Understanding CI/CD pipelines in Azure DevOps 
+## **Task 1: Understanding CI/CD pipelines in Azure DevOps**
 
 Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
 
@@ -57,7 +57,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/21.png)
 
-1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **CICD (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
+1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **Defender_for_cloud (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
    ![](images/az400-m3-L4-03.png)
       
@@ -66,11 +66,6 @@ CD extends CI by automatically deploying all code changes to a production enviro
 1. Click on **Repos (1)>Files (2)**, Select **Initialize (3)**. 
 
    ![](images/22.png)
-
-1.  Click on the "New" button (often represented by a `+` symbol or labeled as "Add").
-
-1. In the dropdown menu, select **Add file**.
-
 
 1. Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section. This menu provides additional actions you can take within the repository.
 
@@ -115,7 +110,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/10.png)
 
-1. On the **Select a repository** pane, click **CICD**.
+1. On the **Select a repository** pane, click **Defender_for_cloud**.
 
    ![](images/11.png)
 
@@ -130,25 +125,25 @@ CD extends CI by automatically deploying all code changes to a production enviro
    - main
 
    pool:
-   vmImage: 'ubuntu-latest'
+     vmImage: 'ubuntu-latest'
 
    steps:
    - task: UsePythonVersion@0
-   inputs:
-      versionSpec: '3.x'
-   displayName: 'Set up Python'
+     inputs:
+       versionSpec: '3.x'
+     displayName: 'Set up Python'
 
    - script: |
       echo "Building the HTML project..."
       mkdir output
       cp index.html output/
-   displayName: 'Build Project'
+     displayName: 'Build Project'
 
    - task: PublishBuildArtifacts@1
-   inputs:
-      pathToPublish: 'output'
-      artifactName: 'html-artifact'
-   displayName: 'Publish Artifacts'
+     inputs:
+       pathToPublish: 'output'
+       artifactName: 'html-artifact'
+     displayName: 'Publish Artifacts'
    ```
 1. This YAML file does the following:
     - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
@@ -178,7 +173,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/33.png)
 
-1. Select the **CICD (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
+1. Select the **Defender_for_cloud (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
 
    ![](images/25.png)
 
@@ -188,7 +183,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
-1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_CICD/html-artifact"**.
+1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_Defender_for_cloud/html-artifact"**.
 
    ![](images/27.png)
 
@@ -214,11 +209,11 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/31.png)
 
-## Task 2: Identifying security issues in the pipeline 
+## **Task 2: Identifying security issues in the pipeline** 
 
 Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infrastructure as Code (IaC) templates for security issues. This process ensures early detection of vulnerabilities, enhances compliance, and improves your overall security posture within existing DevOps workflows.
 
-1. On your lab computer, open the Azure DevOps portal with the **CICD** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
+1. On your lab computer, open the Azure DevOps portal with the **Defender_for_cloud** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
 
@@ -226,13 +221,13 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/62.png)
 
-1.  On the **Microsoft Security DevOps** page, click on **Get it for free**.
+1. On the **Microsoft Security DevOps** page, click on **Get it for free**.
 
-    ![](images/63.png)
+   ![](images/63.png)
 
-1.  Select the desired Azure DevOps organization and **Install**.
+1. Select the desired Azure DevOps organization and **Install**.
 
-    ![](images/64.png)
+   ![](images/64.png)
 
 1. Click **Proceed to organization** once the installation is complete.
 
@@ -342,7 +337,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/10.png)
 
-1. Click **CICD** on the **Select a repository** pane.
+1. Click **Defender_for_cloud** on the **Select a repository** pane.
 
    ![](images/11.png)
 
@@ -357,7 +352,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    - main
 
    pool:
-   vmImage: ubuntu-latest
+    vmImage: ubuntu-latest
 
    steps:
    - task: MicrosoftSecurityDevOps@1
@@ -395,39 +390,39 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 5. **Comprehensive Security Coverage**: Microsoft Security DevOps covers a wide range of security aspects, including code analysis, dependency scanning, and configuration checks, providing comprehensive security coverage for your pipeline.
 
-## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only] 
+## **Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]**
 
 ### Overview of GitHub Advanced Security (GHAS)
 
 GitHub Advanced Security (GHAS) is a suite of security tools built into the GitHub platform designed to help developers secure their code and workflows. It includes features such as code scanning, secret scanning, and dependency review to identify and remediate security vulnerabilities and exposures.
 
- 1. Enable GitHub Advanced Security
+1. Enable GitHub Advanced Security
 To use GHAS, you need to have GitHub Advanced Security enabled for your repository. This typically requires a GitHub Enterprise subscription.
 
 - Navigate to your repository on GitHub.
 - Click on `Settings`.
 - In the `Security` section, find `GitHub Advanced Security` and enable it.
 
- 2. Configure Code Scanning
+2. Configure Code Scanning
 
-**Code scanning** helps detect vulnerabilities and errors in your code by running static analysis tools.
+   **Code scanning** helps detect vulnerabilities and errors in your code by running static analysis tools.
 
 - Go to the `Security` tab of your repository.
 - Click on `Set up code scanning`.
 - You can choose from different options like `CodeQL Analysis`, which is a powerful tool provided by GitHub. Select the `Set up this workflow` button for `CodeQL Analysis`.
 - Review the configuration file (e.g., `.github/workflows/codeql-analysis.yml`). Modify it if needed and commit it to your repository.
 
- 3. Run Code Scanning
+3. Run Code Scanning
 
 - Once configured, code scanning runs automatically on the specified events (like pushes and pull requests).
 - You can also manually trigger a scan by going to the `Actions` tab, finding the `CodeQL` workflow, and clicking `Run workflow`.
 
- 4. Review Code Scanning Results
+4. Review Code Scanning Results
 
 - Navigate to the `Security` tab, and under `Code scanning alerts`, you'll see a list of detected issues.
 - Click on any alert to get detailed information about the vulnerability and recommended fixes.
 
- 5. Configure Secret Scanning
+5. Configure Secret Scanning
 
 **Secret scanning** detects secrets (like API keys and tokens) that may have been accidentally committed to your repository.
 
@@ -435,24 +430,24 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - Click on `Set up secret scanning`.
 - GitHub automatically scans for patterns that match common secret types and alerts you if any are found.
 
- 6. Review Secret Scanning Results
+6. Review Secret Scanning Results
 
 - Navigate to the `Security` tab, and under `Secret scanning alerts`, you'll see a list of detected secrets.
 - Click on any alert to view details and follow the steps to revoke or rotate the compromised secrets.
 
- 7. Set Up Dependency Review
+7. Set Up Dependency Review
 
 **Dependency review** helps you understand and remediate vulnerable dependencies in your project.
 
 - Ensure your project has a dependency manifest file (e.g., `package.json`, `pom.xml`).
 - GitHub automatically generates dependency graphs and checks for known vulnerabilities in your dependencies.
 
- 8. Review Dependency Alerts
+8. Review Dependency Alerts
 
 - Navigate to the `Security` tab, and under `Dependency review`, you'll see alerts for vulnerable dependencies.
 - Click on any alert to see details about the vulnerability and recommended versions to update to.
 
- 9. Manage Security Policies
+9. Manage Security Policies
 
 - In the `Security` tab, you can also manage security policies by setting up a `security.md` file to inform users about your project's security practices and how they can report vulnerabilities.
 
@@ -461,7 +456,7 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
 - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
 - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
 
-## Task 4: Overview of Defender for DevOps (including pricing) [Read-Only] 
+## **Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]**
 
 Defender for DevOps is a security solution by Microsoft designed to enhance the security of DevOps environments. It provides a range of tools and features to help secure the software development lifecycle (SDLC) and protect against threats that target DevOps processes. Here's an overview:
 
@@ -492,13 +487,64 @@ For exact pricing details, especially as they can vary based on the size of the 
 
 **DevOps Security Posture** is included as part of the **Defender for CSPM** plan, which provides a unified view of your security posture across various cloud environments, including DevOps. This integration means that DevOps security capabilities are seamlessly integrated into the overall cloud security management, offering a more comprehensive approach to securing both your cloud infrastructure and development workflows.
 
-## Task 5: Securing your pipeline with GHAS 
+## **Task 5: Securing your pipeline with GHAS**
 
 To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
 
 ### 1. GitHub Advanced Security (GHAS)
 
 **GitHub Advanced Security** provides several features to secure your code, including code scanning, secret scanning, and dependency review.
+
+1. Navigate to Azure portal.
+
+1. Search and select **Microsoft Defender for Cloud** from the portal
+
+   ![alert_detected](images/mls2.png)
+
+1. Select **Environment settings** under Management > **+Add environment** > **Github**.
+
+   ![alert_detected](images/94.png)
+
+1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
+
+   | Setting  | Value |
+   -----------|---------
+   | Connector name | Githubconnector |
+   | Subscription | Choose the default subscription |
+   | Resource group | (Create new) Mod5 |
+   | Location | Select any supporting region |
+
+1. Select **Next: Configure access**.
+
+   ![alert_detected](images/95.png)
+
+1. Select **Authorize**. enter github username and password.
+
+    ![alert_detected](images/96.png)
+
+1. In the popup dialog, read the list of permission requests, and then select **Accept**.
+
+1. Select **Install** under Install DevOps security app ,In the popup dialog, click on **configure**.
+
+   ![alert_detected](images/97.png)
+
+1. Under **Repository access**, select **Save**.
+
+   ![alert_detected](images/99.png)
+
+1. Leave all other settings as default.
+
+1. Select **Next: Review and generate**.
+
+   ![alert_detected](images/98.png)
+
+1. Review the information, and then select **Create**.
+
+   ![alert_detected](images/100.png)
+
+1. Wait for some time to view the connector on the **Environment settings** page.
+
+   ![alert_detected](images/101.png)
 
 1. Copy the link and open it in a browser window to log in to GitHub.
 
@@ -514,7 +560,15 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
    ![](images/90.png)
 
-1. Go to **Security** and Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
+1. Return to the Defender for Cloud tab, go to **DevOps Security**, and search for **ghas-bootcamp**. You'll notice that advanced security for ghas-bootcamp is currently **off**.
+
+   ![](images/102.png)
+
+1. In Microsoft Defender for Cloud, navigate to the **Recommendations** tab, use the search bar to filter recommendations related to **ghas-bootcamp,**" and apply the **All** status filter to view both Unassigned and Completed categories. Select the second recommendation to review its details.
+
+   ![](images/103.png)
+
+1. Navigate back to **Ghas-bootcamp** repository, Go to **Security** and Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
 
    ![alert_detected](images/54.png)
 
@@ -552,9 +606,23 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
 1. **Code Scanning** uses CodeQL to find problems in your code, and **Secret Scanning** and **Dependency Review** are set up through GitHub's settings.
 
-2. Adding GitHub Advanced Security (GHAS) to your pipeline helps protect it better from security issues and threats.
+1. Integrating GitHub Advanced Security (GHAS) with your pipeline, as outlined, results in the following benefits:
 
-## Task 6: Connecting and Securing your Azure DevOps environment to MDC 
+   - **Code Scanning**: You’ll be able to identify vulnerabilities and potential issues in your code using CodeQL. The setup of code scanning through GitHub Actions ensures that code is automatically analyzed for security issues.
+
+   - **Secret Scanning**: By enabling Secret Scanning, GitHub will scan your codebase for exposed secrets or credentials, helping prevent accidental leaks of sensitive information.
+   
+   - **Dependency Review**: Enabling Dependabot alerts ensures that you are notified of vulnerabilities in your dependencies and can take timely action to address them. This feature also involves maintaining an updated dependency graph.
+  
+   - **Integration with Microsoft Defender for Cloud**: The integration allows you to manage and monitor your GHAS settings from within Microsoft Defender for Cloud, providing a centralized view of security recommendations and statuses for your GitHub repositories.
+
+   - **Enhanced Pipeline Security**: The combination of these tools helps secure your pipeline by proactively identifying and mitigating security risks, ensuring that both your code and dependencies are continuously reviewed for vulnerabilities.
+
+Overall, this setup strengthens your security posture by integrating automated security checks and monitoring into your development and deployment processes.
+
+## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
+
+1. Navigate to Azure portal.
 
 1. Search and select **Microsoft Defender for Cloud** from the portal
 
@@ -619,7 +687,7 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
    ![alert_detected](images/m54.png)
 
-## Task 7: Integrating non-MS security scan solutions with MDC 
+## **Task 7: Integrating non-MS security scan solutions with MDC**
 
 Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) enhances your security posture comprehensively. 
 
@@ -627,7 +695,6 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
 ### Security Scan with Snyk
 **Snyk** is a well-known tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into your Azure DevOps pipeline to identify security issues:
-
 
 1. **Go to [Snyk's website](https://snyk.io/).**
 
@@ -647,7 +714,7 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
  
    ![](images/70.png)
 
-1. On your lab computer, open the Azure DevOps portal with the **CICD** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
+1. On your lab computer, open the Azure DevOps portal with the **Defender_for_cloud** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
 
@@ -671,7 +738,7 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/78.png)
 
-1. Scroll down and select **App registrations** under **manage**, then select the app registration named **odluser1420823-CICD-suffix** under all application.
+1. Scroll down and select **App registrations** under **manage**, then select the app registration named **odluser1420823-Defender_for_cloud-suffix** under all application.
 
    ![](images/77.png)
 
@@ -679,7 +746,7 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/80.png)
 
-1. Navigate back to Azure DevOps and click on **Project Settings** at the bottom left of the **CICD** project.
+1. Navigate back to Azure DevOps and click on **Project Settings** at the bottom left of the **Defender_for_cloud** project.
 
 1. Scroll down on the **Project Settings** page and select **Service Principal.**
 
@@ -711,7 +778,7 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/10.png)
 
-1. Click **CICD** on the **Select a repository** pane.
+1. Click **Defender_for_cloud** on the **Select a repository** pane.
 
    ![](images/11.png)
 
@@ -726,17 +793,17 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
    - main
 
    pool:
-   vmImage: 'ubuntu-latest'
+     vmImage: 'ubuntu-latest'
 
    steps:
    - task: UseNode@1
-   inputs:
-      version: '14.x'
-   displayName: 'Install Node.js'
+     inputs:
+       version: '14.x'
+     displayName: 'Install Node.js'
 
    - script: |
       npm install -g snyk
-   displayName: 'Install Snyk CLI'
+     displayName: 'Install Snyk CLI'
    ```
 
 1. Click on the 16th line then press enter.
@@ -784,7 +851,7 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/93.png)
 
-## Task 8: Role of Defender Cloud Security Posture Management (DCSPM) 
+## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
 DevOps Security Posture, as part of Cloud Security Posture Management (CSPM), involves assessing and enhancing the security of your development and deployment processes within the cloud. Here's a detailed discussion on what CX (Customer Experience) gets in terms of DevOps security posture within CSPM:
 
@@ -860,7 +927,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![](images/10.png)
 
-1. Click **CICD** on the **Select a repository** pane.
+1. Click **Defender_for_cloud** on the **Select a repository** pane.
 
    ![](images/11.png)
 
@@ -875,15 +942,15 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
    - main
 
    pool:
-   vmImage: 'ubuntu-latest'
+    vmImage: 'ubuntu-latest'
 
    steps:
    - checkout: self
 
    - task: UsePythonVersion@0
-   inputs:
-      versionSpec: '3.x'
-      addToPath: true
+     inputs:
+       versionSpec: '3.x'
+       addToPath: true
 
    - script: |
       echo "Upgrading pip..."
@@ -904,7 +971,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
    - script: |
       echo "Running Checkov..."
       checkov --directory . || true  # Add '|| true' to prevent pipeline failure
-   displayName: 'Run Checkov on Terraform'
+    displayName: 'Run Checkov on Terraform'
    ```
 
 1. Click **Validate and Run** then click **Run** to start the Build Pipeline process.
