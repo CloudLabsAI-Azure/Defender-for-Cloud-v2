@@ -53,14 +53,30 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![Azure DevOps](images/az-400-lab3-3.png)
 
-1. In the **Organization Settings** window, click on **Settings** in the left menu. On the settings page, enable the **Creation of Classic Release Pipeline** option.
+1. On the **Organization Settings** page, go to the Security section and click **Policies** (1). Enable the toggles for both **Third-party application access via OAuth** (2) and **Allow public projects** (3), then click **Save** (4) when prompted to Change policy setting.
+
+    ![](images/nls1.png)
+
+1. In the **Organization Settings** window, click on **Settings** in the left menu. On the settings page, toggles for **Creation of Classic Release Pipeline** option.
 
    ![](images/21.png)
 
 1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **Defender_for_cloud (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
    ![](images/az400-m3-L4-03.png)
-      
+
+1. Click **Project settings (1)** in the lower-left corner. In the left menu under Repos, click **Repositories (2)**, then select the **eShopOnWeb (3)** repository.
+
+   ![setup](images/06-26-2024(4).png)
+
+1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it On.
+
+   ![setup](images/06-26-2024(5).png)
+
+1. Click **Begin Billing**.
+
+   ![](images/lab1-image12.png)
+
 ### 3. Create a Simple HTML File
 
 1. Click on **Repos (1)>Files (2)**, Select **Initialize (3)**. 
@@ -491,138 +507,193 @@ For exact pricing details, especially as they can vary based on the size of the 
 
 To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
 
-### 1. GitHub Advanced Security (GHAS)
 
-**GitHub Advanced Security** provides several features to secure your code, including code scanning, secret scanning, and dependency review.
+#### Configure the eShopOnWeb team project in Azure DevOps
 
-1. Navigate to Azure portal.
-
-1. Search and select **Microsoft Defender for Cloud** from the portal
-
-   ![alert_detected](images/mls2.png)
-
-1. Select **Environment settings** under Management > **+Add environment** > **Github**.
-
-   ![alert_detected](images/94.png)
-
-1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
-
-   | Setting  | Value |
-   -----------|---------
-   | Connector name | Githubconnector |
-   | Subscription | Choose the default subscription |
-   | Resource group | defenderforcloud |
-   | Location | Select any supporting region |
-
-1. Select **Next: Configure access**.
-
-   ![alert_detected](images/95.png)
-
-1. Select **Authorize**. enter github username and password.
-
-   ![alert_detected](images/96.png)
-
-1. In the popup dialog, read the list of permission requests, and then select **Accept**.
-
-1. Select **Install** under Install DevOps security app ,In the popup dialog, click on **configure**.
-
-   ![alert_detected](images/97.png)
-
-1. Under **Repository access**, select **Save**.
-
-   ![alert_detected](images/99.png)
-
-1. Leave all other settings as default.
-
-1. Select **Next: Review and generate**.
-
-   ![alert_detected](images/98.png)
-
-1. Review the information, and then select **Create**.
-
-   ![alert_detected](images/100.png)
-
-1. Wait for some time to view the connector on the **Environment settings** page.
-
-   ![alert_detected](images/101.png)
-
-1. Copy the link and open it in a browser window to log in to GitHub.
+1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
 
    ```
-   https://github.com/login
+   https://azuredevopsdemogenerator.azurewebsites.net/
    ```
-
-2. In the sign-in to GitHub page in the Edge browser, enter the **GitHub UserEmail** and **GitHub Password** and click on **Sign in**.
-
-      >**Note:** Use your personal GitHub account to perform this task. If you don't have a GitHub account, create a new one by following the instructions in this [Microsoft document](https://docs.microsoft.com/en-us/github/get-started/sign-up-for-github).
-
-1. Navigate to `https://github.com/ghas-bootcamp/ghas-bootcamp/fork` and click on **Create fork**.
-
-   ![](images/90.png)
-
-1. Return to the Defender for Cloud tab, go to **DevOps Security**, and search for **ghas-bootcamp**. You'll notice that advanced security for ghas-bootcamp is currently **off**.
-
-   ![](images/102.png)
-
-1. In Microsoft Defender for Cloud, navigate to the **Recommendations** tab, use the search bar to filter recommendations related to **ghas-bootcamp,**" and apply the **All** status filter to view both Unassigned and Completed categories. Select the second recommendation to review its details.
-
-   ![](images/103.png)
-
-1. Navigate back to **Ghas-bootcamp** repository, Go to **Security** and Scroll down and you will find the **Code Scanning** option.Click on **Set up code scanning**.
-
-   ![alert_detected](images/54.png)
-
-1. Now, Click on the **Setup** button and click on **Advanced**.
-
-   ![alert_detected](images/53.png)
-
-1. Now you are redirect you to the codeql.yml file in github/ workflows, review the yml file and then click on **commit changes**. 
-
-   ![alert_detected](images/55.png)
-
-1. Again, click on **Commit changes**.
-
-   ![alert_detected](images/56.png)
-
-1. Navigate, to **actions** tab and wait until shows a successful run of a GitHub Actions workflow.
-
-   ![alert_detected](images/57.png)
-
-1. In the repository navigate to **Security** from the top navigation pane, Scroll down to **Secret Scanning** and ensure that **Secret Scanning** is enabled.
-
-   ![github-advisory-database](images/58.png)
-
-1. Go to **Security** and scroll down to **Dependabot alerts** and Click on **Enable Dependabot alerts**.
-
-   ![github-advisory-database](images/60.png)
-
-1. Click the **Enable** button next to Dependabot alerts. 
-
-1. A popup will appear, informing you that enabling Dependabot alerts also requires the dependency graph. 
-
-1. Click the **Enable** button in the popup to confirm and activate both the dependency graph and Dependabot alerts.
-
-   ![alert_detected](images/91.png)
-
-1. Return to the Defender for Cloud tab, go to **DevOps Security**, and search for **ghas-bootcamp**. You'll notice that advanced security for ghas-bootcamp is currently **On**.
-
-   ![alert_detected](images/114.png)
-
-   >**Note**: You may need to wait 15-20 minutes for advanced security to be activated.
-
-1. Integrating GitHub Advanced Security (GHAS) with your pipeline, as outlined, results in the following benefits:
-
-   - **Code Scanning**: You’ll be able to identify vulnerabilities and potential issues in your code using CodeQL. The setup of code scanning through GitHub Actions ensures that code is automatically analyzed for security issues.
-
-   - **Secret Scanning**: By enabling Secret Scanning, GitHub will scan your codebase for exposed secrets or credentials, helping prevent accidental leaks of sensitive information.
-   
-   - **Dependency Review**: Enabling Dependabot alerts ensures that you are notified of vulnerabilities in your dependencies and can take timely action to address them. This feature also involves maintaining an updated dependency graph.
   
-   - **Integration with Microsoft Defender for Cloud**: The integration allows you to manage and monitor your GHAS settings from within Microsoft Defender for Cloud, providing a centralized view of security recommendations and statuses for your GitHub repositories.
+1. Click on **Sign in** and log in using the Microsoft account associated with your Azure DevOps subscription.
 
-   - **Enhanced Pipeline Security**: The combination of these tools helps secure your pipeline by proactively identifying and mitigating security risks, ensuring that both your code and dependencies are continuously reviewed for vulnerabilities.
+    ![](images/lab1-image2.png)
 
-Overall, this setup strengthens your security posture by integrating automated security checks and monitoring into your development and deployment processes.
+1. Please click on **Accept** to grant permission to access your subscription.
+
+1. Click **Choose Template**.
+
+    ![](images/lab1-image3.png)
+
+1. Select the **eShopOnWeb (1)** template and click on **Select Template (2)**.
+
+    ![](images/lab1-image4.png)
+
+1. Provide a project name, **eShopOnWeb (1)**, and choose your **Organization (2)**, then click on **Create Project (3)** and wait for the process to complete.
+
+   ![](images/lab1-image5.png)
+
+1. Once the process is complete, click on **Navigate to project**.
+
+   ![](images/lab1-image6.png)
+
+
+#### Enable Advanced Security from Portal
+
+GitHub Advanced Security for Azure DevOps includes extra permissions for more levels of control around Advanced Security results and management. Be sure to adjust individual permissions for your repository.
+
+To ensure Azure DevOps Advanced Security is enabled in your organization, you can follow these steps:
+
+1. Click **Project settings (1)** in the lower-left corner. In the left menu under Repos, click **Repositories (2)**, then select the **eShopOnWeb (3)** repository.
+
+   ![setup](images/06-26-2024(4).png)
+
+1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it On.
+
+    ![setup](images/06-26-2024(5).png)
+
+1. Click **Begin Billing**.
+
+    ![](images/lab1-image12.png)
+
+1. Advanced Security and Push Protection are now enabled. You can also onboard Advanced Security at [Project-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#project-level-onboarding) and [Organization-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#organization-level-onboarding) as well but we recommend for this hands on lab to enable it only for repositry level.
+
+#### Update the pipeline and create a pull request
+
+In this task, you will remove the Azure deployment task codes from the pipeline.
+
+1. Navigate to the **Pipelines (1)** in the left menu and select the **eShopOnWeb (2)** pipeline.
+
+   ![allow-permissions](images/pipev.png)
+
+1. Click on **Edit** on top right corner.
+
+   ![allow-permissions](images/editv2.png)
+
+1. Make sure you **Remove** the code in the pipeline which includes the **test** and **production** deployments tasks (from line 70 till the end). If you won't remove the deployment task the pipeline might fail.
+
+1. The final code should look like the one below
+
+   ```
+    trigger:
+    - main
+    
+    pool:
+      vmImage: ubuntu latest
+    
+    extends: 
+      template: template.yaml
+      parameters:
+        stages:
+          - stage: Build
+            displayName: 'Build'
+            jobs:
+            - job: Build
+              steps:
+              - checkout: self
+    
+              - task: DotNetCoreCLI@2
+                displayName: Restore 
+                inputs:
+                  command: restore
+                  projects: '**/*.csproj'
+    
+              - task: ms.advancedsecurity-tasks.codeql.init.AdvancedSecurity-Codeql-Init@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Initialize CodeQL'
+                inputs:
+                  languages: csharp
+                  querysuite: default
+    
+              - task: DotNetCoreCLI@2
+                displayName: Build
+                inputs:
+                  projects: '**/*.csproj'
+                  arguments: '--configuration $(BuildConfiguration)'
+    
+              - task: ms.advancedsecurity-tasks.dependency-scanning.AdvancedSecurity-Dependency-Scanning@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Dependency Scanning'
+    
+              - task: ms.advancedsecurity-tasks.codeql.analyze.AdvancedSecurity-Codeql-Analyze@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Perform CodeQL analysis'
+    
+              - task: ms.advancedsecurity-tasks.codeql.enhance.AdvancedSecurity-Publish@1
+                condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+                displayName: 'Publish Results'
+    
+              - task: DotNetCoreCLI@2
+                displayName: Test
+                inputs:
+                  command: test
+                  projects: '[Tt]ests/**/*.csproj'
+                  arguments: '--configuration $(BuildConfiguration) --collect:"Code coverage"'
+    
+              - task: DotNetCoreCLI@2
+                displayName: Publish
+                inputs:
+                  command: publish
+                  publishWebProjects: True
+                  arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+                  zipAfterPublish: True
+    
+              - task: PublishBuildArtifacts@1
+                displayName: 'Publish Artifact'
+                inputs:
+                  PathtoPublish: '$(build.artifactstagingdirectory)'
+                condition: succeededOrFailed()
+    ```
+     
+1. Click on **Validate and save**.
+
+   ![allow-permissions](images/valv.png)
+
+1. Click on **Save**, then select **Create a new branch for this commit**, accept the default value, and finally, click on **Save and run**.
+
+   ![allow-permissions](images/savev.png)
+
+1. Navigate to **Repos (1)** > **Pull requests (2)** and click on **Create a Pull request (3)**, you will see already a tab mentioning the latest changes.
+
+   ![allow-permissions](images/pullv.png)
+
+1. For the title, enter the **added secret** and click on **Create**. This will run the eShoponWeb pipeline to validate changes.
+ 
+   ![allow-permissions](images/crtPR.png)buildscs
+   
+1. Once the eShoponWeb pipeline has been completed, click **Approve**, and then click on **Complete** and click on **Complete merge**.
+  
+   > **Note:** The pipeline execution can take approx. 5 minutes to get complete, please wait untill the build gets completed and then click on Complete merge.
+   
+   ![allow-permissions](images/buildscs.png)
+
+   ![allow-permissions](images/cmpltdpr.png)
+   
+1. Navigate to **DevOps Security** under **Cloud Security**.
+
+   ![alert_detected](images/advlab55.png)
+
+1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
+
+   ![alert_detected](images/m51.png)
+
+   >**Note:** It might take upto 8hrs to reflect the real-time status.
+
+1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
+
+   ![alert_detected](images/m55.png)
+
+   ![alert_detected](images/m52.png)
+
+1. Navigate to the **Secret** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **link** which redirect ypu to the actual issue page.
+
+   ![alert_detected](images/122.png)
+
+1. You will get all the details and recommendations steps.
+
+   ![alert_detected](images/123.png)
+
 
 ## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
 
@@ -683,13 +754,17 @@ Overall, this setup strengthens your security posture by integrating automated s
 
    ![alert_detected](images/m52.png)
 
-1. Navigate to the **Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
+1. Navigate to the **Infrastructure as Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
 
-   ![alert_detected](images/m53.png)
+   ![alert_detected](images/121.png)
 
-1. Similarly, navigate to the **OSS Vulnerabilities** tab and identify the issues, then take note of the recommendations provided to resolve the issues.
+1. Similarly, navigate to the **Secrete** tab and click on **link** and identify the issues.
 
-   ![alert_detected](images/m54.png)
+   ![alert_detected](images/122.png)
+
+1. Then take note of the recommendations provided to resolve the issues.
+
+   ![alert_detected](images/123.png)
 
 ## **Task 7: Integrating non-MS security scan solutions with MDC**
 
@@ -891,93 +966,30 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
 1. Integrating CSPM with DevOps processes provides a comprehensive approach to securing your development lifecycle, from coding to deployment. By leveraging CSPM tools, you ensure that security is baked into the DevOps process, reducing vulnerabilities and ensuring compliance.
 
-### Prerequisites
+1. Navigate back to the **Recommendations** page of defender for cloud, filter the recommendations by selecting only **Azure DevOps connections**, and then choose the **Azure DevOps repositories should have secrets scanning findings resolved** recommendation.
 
-1. **Azure Subscription**: Ensure you have an active Azure subscription with permissions to create resources.
-2. **Azure DevOps Project**: Set up a project in Azure DevOps.
-3. **Terraform Templates**: Basic knowledge of Terraform and access to Terraform templates.
-4. **Microsoft Defender for Cloud Enabled**: Ensure Microsoft Defender for Cloud is enabled in your Azure subscription.
-5. **Azure Key Vault**: An existing Key Vault to store secrets securely.
+   ![alert_detected](images/124.png)
 
-### 1. Set Up the Azure DevOps Pipeline
+1. Review the **Take actions** tab, where you'll find steps to remediate the issue.
 
-1. Navigate to **Repos > Files**, open **main.tf**, remove the existing content, and replace it with the new content provided:
+   ![alert_detected](images/126.png)
 
-   ```hcl
-   resource "azurerm_storage_account" "example" {
-   name                     = "examplestorageacct"
-   resource_group_name      = "example-resources"
-   location                 = "East US"
-   account_tier             = "Standard"
-   account_replication_type = "GRS"
-   enable_https_traffic_only = true   # Enforce HTTPS
-   min_tls_version          = "TLS1_2" # Minimum TLS version
-   allow_blob_public_access = false   # Disallow public access to blobs
-   identity {
-      type = "SystemAssigned"          # Enable managed identity for enhanced security
-   }
-   }
+1. Navigate to the **Findings** tab, where you'll find detailed information related to the identified issues.
 
-   ```
-1. Click on **Commit** in the **main.tf** page.
+   ![alert_detected](images/125.png)
 
-1. Confirm by clicking **Commit** again.
+1. Navigate back to the **Recommendations** page, filter the recommendations by selecting only **Azure DevOps connections**, and then choose the **Azure DevOps repositories should have infrastructure as code scanning findings resolved** recommendation.
 
-   ![](images/67.png)
+   ![alert_detected](images/127.png)
 
-1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
+1. Review the **Take actions** tab, where you'll find steps to remediate the issue.
 
-1. Click **New pipeline** in the **Pipeline** window.
+   ![alert_detected](images/128.png)
 
-1. Select **Azure Repos Git (YAML)** on the **Where is your code?** pane.
+1. Navigate to the **Findings** tab, where you'll find detailed information related to the identified issues.
 
-   ![](images/10.png)
+   ![alert_detected](images/129.png)
 
-1. Click **Defender_for_cloud** on the **Select a repository** pane.
+1. Navigate back to the **Recommendations** page, select **Status**, then choose **All (1)**, and click on **Apply (2)**. You'll now see additional recommendations that are in a completed state.
 
-   ![](images/11.png)
-
-1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
-
-   ![](images/12.png)
-
-1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
-
-   ```yaml
-   trigger:
-   - main
-
-   pool:
-    vmImage: 'ubuntu-latest'
-
-   steps:
-   - checkout: self
-
-   - task: UsePythonVersion@0
-     inputs:
-       versionSpec: '3.x'
-       addToPath: true
-
-   - script: |
-      echo "Upgrading pip..."
-      python -m pip install --upgrade pip
-      if [ $? -ne 0 ]; then
-         echo "Failed to upgrade pip"
-         exit 1
-      fi
-
-      echo "Installing Checkov..."
-      pip install checkov
-      if [ $? -ne 0 ]; then
-         echo "Failed to install Checkov"
-         exit 1
-      fi
-   displayName: 'Install Checkov'
-
-   - script: |
-      echo "Running Checkov..."
-      checkov --directory . || true  # Add '|| true' to prevent pipeline failure
-    displayName: 'Run Checkov on Terraform'
-   ```
-
-1. Click **Validate and Run** then click **Run** to start the Build Pipeline process.
+   ![alert_detected](images/131.png)
