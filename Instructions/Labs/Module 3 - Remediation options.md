@@ -76,6 +76,18 @@ If you are interested in conducting the same in Sentinel, please let the worksho
 
    ![](./images/108.png)
 
+1. In the search bar, locate the **asclabsxxxxxxxx** storage account and select it. Then, navigate to the **Configuration** option from the left panel, where you'll see that the Allow storage account access key option is **dnabled**.
+
+   ![](./images/116.png)
+
+1. Return to the **Storage accounts should prevent shared key access** recommendation, select the affected storage account, and click on **Trigger Logic App**. Choose the appropriate logic app, and then click on **Trigger**.
+
+   ![](./images/115.png)
+
+1. In the search bar, locate the **asclabsxxxxxxxx** storage account and select it. Then, navigate to the **Configuration** option in the left panel, where you'll see that the Allow storage account access key option is now **disabled**.
+
+   ![](./images/117.png)
+
 ### Referance
 - To review the Logic App, click [here](./Module%202%20-%20Writing%20Logic%20App.md).
 - Check out the Workflow Automation [documentation](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation).
