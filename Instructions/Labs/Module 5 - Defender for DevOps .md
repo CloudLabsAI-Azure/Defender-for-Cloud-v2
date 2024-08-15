@@ -656,9 +656,7 @@ In this task, you will remove the Azure deployment task codes from the pipeline.
 
 ## **Task 6: Integrating non-MS security scan solutions with MDC**
 
-Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) enhances your security posture comprehensively. 
-
-To incorporate a security scan into your Azure DevOps pipeline with minimal configuration, follow these steps for a basic integration using **Snyk**:
+To enhance your security posture comprehensively, integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) is a strategic approach. For a straightforward integration of a security scan into your Azure DevOps pipeline using **Snyk** with minimal configuration, follow these steps:
 
 ### Security Scan with Snyk
 
@@ -674,11 +672,42 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
    ![](images/72.png)
 
+1. In the sign-in to GitHub page in edge browser, enter the **GitHub UserEmail** and **GitHub Password** and click on **Sign in**.
+
+   ![](images/136.png)
+
+1. Open a new tab and navigate to `https://www.microsoft.com/en-us/microsoft-365/outlook/log-in` then click on **Sign-in**.
+
+   ![](images/137.png)
+
+
+1. You'll see the **Sign into Microsoft Outlokk** tab. Here, enter your credentials:
+ 
+   - **Email/Username:** 
+ 
+       ![Enter Your Username](images/138.png)
+ 
+1. Next, provide your password:
+ 
+   - **Password:** 
+ 
+       ![Enter Your Password](images/139.png)
+
+   >**Note**: Navigate to the **Environment** tab to view the key-value pairs of the **GitHub UserEmail**, and **GitHub Password**. You can use the copy buttons under the actions column to have the values copied instantly. Alternatively, it is suggested to have the values copied over onto a notepad for easy accessibility. 
+
+1. The email containing the verification code can sometimes creep into the archive/spam folders within your Outlook. Copy the verification code.
+
+      ![Enter Your Password](images/140.png)
+
+1. Navigate back to the **Device Verifition** page, enter the code you copied and click on **Verify**.
+
+   ![Enter Your Password](images/141.png)
+
 1. **Authorize Snyk** to access your GitHub account by clicking "Authorize Snyk" on the GitHub authorization page.
 
-1. Follow the remaining prompts to complete your account setup.
+   ![](images/135.png)
 
-   >**Note**: On **where is the code you want to scan** page, select **skip for now**.
+1. On **where is the code you want to scan** page, select **skip for now**.
 
 1. Access your **Snyk account settings** to retrieve your **API token for authentication** and record it in your notepad.
  

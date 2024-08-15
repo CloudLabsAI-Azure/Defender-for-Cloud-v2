@@ -115,7 +115,7 @@ The architecture for this lab focuses on integrating Microsoft Defender for Clou
 
 ## Architecture Diagram
 
-  ![](../images/arch15.PNG)
+  ![](images/arch15.png)
 
 ## Explanation of Components
 
