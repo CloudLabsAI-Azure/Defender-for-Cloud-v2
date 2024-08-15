@@ -63,7 +63,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **Defender_for_cloud (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
 
-   ![](images/az400-m3-L4-03.png)
+   ![](images/134.png)
 
 1. Click **Project settings (1)** in the lower-left corner. In the left menu under Repos, click **Repositories (2)**, then select the **Defender_for_cloud (3)** repository.
 
@@ -650,26 +650,12 @@ In this task, you will remove the Azure deployment task codes from the pipeline.
 
    ![allow-permissions](images/valv.png)
 
-1. Click on **Save**, then select **Create a new branch for this commit**, accept the default value, and finally, click on **Save and run**.
+1. Select **Create a new branch for this commit**, keep the default value, and click **Save**. Finally, click **Run**.
 
    ![allow-permissions](images/savev.png)
 
-1. Navigate to **Repos (1)** > **Pull requests (2)** and click on **Create a Pull request (3)**, you will see already a tab mentioning the latest changes.
+1. Navigate to the pipeline and select it. The execution may take approximately 5 minutes to complete, so please wait until the build finishes.
 
-   ![allow-permissions](images/pullv.png)
-
-1. For the title, enter the **added secret** and click on **Create**. This will run the eShoponWeb pipeline to validate changes.
- 
-   ![allow-permissions](images/crtPR.png)buildscs
-   
-1. Once the eShoponWeb pipeline has been completed, click **Approve**, and then click on **Complete** and click on **Complete merge**.
-  
-   > **Note:** The pipeline execution can take approx. 5 minutes to get complete, please wait untill the build gets completed and then click on Complete merge.
-   
-   ![allow-permissions](images/buildscs.png)
-
-   ![allow-permissions](images/cmpltdpr.png)
-   
 1. Navigate to **DevOps Security** under **Cloud Security**.
 
    ![alert_detected](images/advlab55.png)
