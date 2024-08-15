@@ -65,13 +65,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/az400-m3-L4-03.png)
 
-1. Click **Project settings (1)** in the lower-left corner. In the left menu under Repos, click **Repositories (2)**, then select the **eShopOnWeb (3)** repository.
+1. Click **Project settings (1)** in the lower-left corner. In the left menu under Repos, click **Repositories (2)**, then select the **Defender_for_cloud (3)** repository.
 
-   ![setup](images/06-26-2024(4).png)
+   ![setup](images/133.png)
 
 1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it On.
 
-   ![setup](images/06-26-2024(5).png)
+   ![setup](images/132.png)
 
 1. Click **Begin Billing**.
 
