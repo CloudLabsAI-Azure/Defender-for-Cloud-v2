@@ -69,7 +69,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![setup](images/133.png)
 
-1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it On.
+1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it **On** and click **Enable all**.
 
    ![setup](images/132.png)
 
@@ -507,7 +507,6 @@ For exact pricing details, especially as they can vary based on the size of the 
 
 To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
 
-
 #### Configure the eShopOnWeb team project in Azure DevOps
 
 1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
@@ -538,7 +537,6 @@ To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defen
 
    ![](images/lab1-image6.png)
 
-
 #### Enable Advanced Security from Portal
 
 GitHub Advanced Security for Azure DevOps includes extra permissions for more levels of control around Advanced Security results and management. Be sure to adjust individual permissions for your repository.
@@ -549,7 +547,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
    ![setup](images/06-26-2024(4).png)
 
-1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it On.
+1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it **On** and click **Enable all**.
 
     ![setup](images/06-26-2024(5).png)
 
@@ -656,109 +654,14 @@ In this task, you will remove the Azure deployment task codes from the pipeline.
 
 1. Navigate to the pipeline and select it. The execution may take approximately 5 minutes to complete, so please wait until the build finishes.
 
-1. Navigate to **DevOps Security** under **Cloud Security**.
-
-   ![alert_detected](images/advlab55.png)
-
-1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
-
-   ![alert_detected](images/m51.png)
-
-   >**Note:** It might take upto 8hrs to reflect the real-time status.
-
-1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
-
-   ![alert_detected](images/m55.png)
-
-   ![alert_detected](images/m52.png)
-
-1. Navigate to the **Secret** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **link** which redirect ypu to the actual issue page.
-
-   ![alert_detected](images/122.png)
-
-1. You will get all the details and recommendations steps.
-
-   ![alert_detected](images/123.png)
-
-
-## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
-
-1. Navigate to Azure portal.
-
-1. Search and select **Microsoft Defender for Cloud** from the portal
-
-   ![alert_detected](images/mls2.png)
-
-1. Select **skip** on **Getting started** tab.
-
-   ![alert_detected](images/mls1.png)
-
-1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
-
-   ![alert_detected](images/advlab51.png)
-
-1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
-
-   | Setting  | Value |
-   -----------|---------
-   | Connector name | AzureDevopsconnector |
-   | Subscription | Choose the default subscription |
-   | Resource group | defenderforcloud |
-   | Location | east us|
-
-   ![alert_detected](images/advlab52.png)
-
-1. Select **Next: Configure access**
-
-1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
-
-1. In the popup dialog, read the list of permission requests, and then select **Accept**.
-
-   ![alert_detected](images/advlab53.png)
-
-1. Leave all other settings as default.
-
-1. Select **Next: Review and generate**.
-
-1. Review the information, and then select **Create**.
-
-1. Wait for some time to view the connector on the **Environment settings** page.
-
-1. Navigate to **DevOps Security** under **Cloud Security**.
-
-   ![alert_detected](images/advlab55.png)
-
-1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
-
-   ![alert_detected](images/m51.png)
-
-   >**Note:** It might take upto 8hrs to reflect the real-time status.
-
-1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
-
-   ![alert_detected](images/m55.png)
-
-   ![alert_detected](images/m52.png)
-
-1. Navigate to the **Infrastructure as Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
-
-   ![alert_detected](images/121.png)
-
-1. Similarly, navigate to the **Secrete** tab and click on **link** and identify the issues.
-
-   ![alert_detected](images/122.png)
-
-1. Then take note of the recommendations provided to resolve the issues.
-
-   ![alert_detected](images/123.png)
-
-## **Task 7: Integrating non-MS security scan solutions with MDC**
+## **Task 6: Integrating non-MS security scan solutions with MDC**
 
 Integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) enhances your security posture comprehensively. 
 
 To incorporate a security scan into your Azure DevOps pipeline with minimal configuration, follow these steps for a basic integration using **Snyk**:
 
 ### Security Scan with Snyk
+
 **Snyk** is a well-known tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into your Azure DevOps pipeline to identify security issues:
 
 1. **Go to [Snyk's website](https://snyk.io/).**
@@ -888,7 +791,7 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 
     ![](images/83.png)
 
-1. Click **Validate and Run** then click **Run** to start the Build Pipeline process.
+1. Click **Save and Run** then again click **Save and Run** to start the Build Pipeline process.
 
    ![](images/84.png)
 
@@ -917,6 +820,79 @@ To incorporate a security scan into your Azure DevOps pipeline with minimal conf
 1. Go to the Summary tab, and you will find the **Snyk report** under the *Snyk tab*.
 
    ![](images/93.png)
+
+## **Task 7: Connecting and Securing your Azure DevOps environment to MDC**
+
+1. Navigate to Azure portal.
+
+1. Search and select **Microsoft Defender for Cloud** from the portal
+
+   ![alert_detected](images/mls2.png)
+
+1. Select **skip** on **Getting started** tab.
+
+   ![alert_detected](images/mls1.png)
+
+1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
+
+   ![alert_detected](images/advlab51.png)
+
+1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
+
+   | Setting  | Value |
+   -----------|---------
+   | Connector name | AzureDevopsconnector |
+   | Subscription | Choose the default subscription |
+   | Resource group | defenderforcloud |
+   | Location | east us|
+
+   ![alert_detected](images/advlab52.png)
+
+1. Select **Next: Configure access**
+
+1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
+
+1. In the popup dialog, read the list of permission requests, and then select **Accept**.
+
+   ![alert_detected](images/advlab53.png)
+
+1. Leave all other settings as default.
+
+1. Select **Next: Review and generate**.
+
+1. Review the information, and then select **Create**.
+
+1. Wait for some time to view the connector on the **Environment settings** page.
+
+1. Navigate to **DevOps Security** under **Cloud Security**.
+
+   ![alert_detected](images/advlab55.png)
+
+1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
+
+   ![alert_detected](images/m51.png)
+
+   >**Note:** It might take upto 8hrs to reflect the real-time status.
+
+1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
+
+   ![alert_detected](images/m55.png)
+
+   ![alert_detected](images/m52.png)
+
+1. Navigate to the **Infrastructure as Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
+
+   ![alert_detected](images/121.png)
+
+1. Similarly, navigate to the **Secrete** tab and click on **link** and identify the issues.
+
+   ![alert_detected](images/122.png)
+
+1. Then take note of the recommendations provided to resolve the issues.
+
+   ![alert_detected](images/123.png)
+
+
 
 ## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
