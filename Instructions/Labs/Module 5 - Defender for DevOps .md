@@ -901,7 +901,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![alert_detected](images/m51.png)
 
-   >**Note:** It might take upto 8hrs to reflect the real-time status.
+   >**Note:** It might take upto 24hrs to reflect the real-time status.
 
 1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
 
