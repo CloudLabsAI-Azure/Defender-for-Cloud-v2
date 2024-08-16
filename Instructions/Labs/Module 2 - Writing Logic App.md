@@ -5,7 +5,7 @@
 In this task, you will deploy a Logic App with pre-configured triggers based on Defender for Cloud recommendations and assign the necessary roles to the managed identity for remediation actions.
 
 
-1. Copy the on the **[Deploy to Azure](./https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json)** link and paste it in the new tab to create the Logic App in a target resource group.
+1. Copy `https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json` link and paste it in the new tab to create the Logic App in a target resource group.
 
 2. On the **Custom deployment** blade, select the **defender for cloud(1)** resource group from the drop-down and click on **Review + create(2)**
 

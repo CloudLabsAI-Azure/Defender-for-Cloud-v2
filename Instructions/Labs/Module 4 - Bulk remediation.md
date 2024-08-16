@@ -4,9 +4,7 @@ In this module, we will explore an alternative method for remediation. Instead o
 
 #### Task 1: Deploying the Logic App
 
-1. Copy the on the **[Deploy to Azure](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json)** link and paste it in the new tab to create the Logic App in a target resource group.
-
-     
+1. Copy `https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json` link and paste it in the new tab to create the Logic App in a target resource group.
 
 2. **Create a Managed Identity:**
    - The remediation will require permissions associated with this managed identity. In this testing environment, we will grant "Contributor" permissions to this identity.
