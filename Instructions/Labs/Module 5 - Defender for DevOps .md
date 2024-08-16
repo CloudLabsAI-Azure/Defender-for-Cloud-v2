@@ -922,7 +922,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
    ![alert_detected](images/123.png)
 
 
-
 ## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
 DevOps Security Posture, as part of Cloud Security Posture Management (CSPM), involves assessing and enhancing the security of your development and deployment processes within the cloud. Here's a detailed discussion on what CX (Customer Experience) gets in terms of DevOps security posture within CSPM:
