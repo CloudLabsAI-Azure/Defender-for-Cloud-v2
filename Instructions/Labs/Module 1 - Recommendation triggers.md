@@ -1,35 +1,30 @@
-# Module 1 - Response Triggers
+# Module 1 - Response Triggers (Read-Only)
 
-## Task 1: Triggering the Flow
+## Task 1: Initiating the Flow
 
-You can respond to recommendations, alerts, and compliance findings using **Logic Apps** (we will build one in Module 2). The response logic app can be triggered either automatically or manually.
+You can respond to recommendations, alerts, and compliance findings using **Logic Apps** (we'll create one in Module 2). The response logic app can be triggered either automatically or manually.
 
-**Automated Response Setup:**
+### Setting Up Automated Responses:
 
-1. Set up *Workflow Automation* to trigger the logic app when Defender for Cloud detects the finding. Follow the procedure for setting up *Workflow Automation* [here](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation).
-2. Azure Policies can be used to set up automation at [scale](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation#configure-workflow-automation-at-scale), though this workshop will not cover them.
+1. **Workflow Automation:** Configure it to automatically trigger the logic app when Defender for Cloud detects a finding. You can find the setup process [here](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation).
+2. **Azure Policies:** These can be used to configure automation at [scale](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation#configure-workflow-automation-at-scale). However, this workshop does not cover this setup.
 
+## Task 2: Scenarios for Automated Triggers
 
-## Task 2: Use Cases for Automated Trigger
+Automated triggers are particularly useful in the following situations:
 
-Automated triggers are useful in the following scenarios:
+- You have strict policy guidelines and aim to keep risk within acceptable levels **without any exceptions**.
+- You've already evaluated the trigger, confirmed that no risk exceptions exist, and want to initiate remediation as soon as the risk is detected.
+- The risk exceeds your tolerance levels.
 
-- You have strict policy guidelines and want to maintain the risk at an acceptable level with **no exceptions**.
-- You have already triaged the trigger, determined that there are no risk exceptions, and want to remediate as soon as the risk arises.
-- The risk posed is far beyond your tolerance levels.
+## Task 3: Scenarios for Manual Triggers
 
+Manual triggers are best suited for the following scenarios:
 
-## Task 3: Use Cases for Manually Triggering the Response
+- You're in the early stages of deployment.
+- You plan to remediate only a select few unhealthy resources and set exceptions for the rest.
+- Your change management system isn't directly integrated with Logic Apps for automatic deployments.
 
-Manual triggers are useful in the following scenarios:
+![Workshop Focus](./images/recommendation-manual-trigger.png "Focus areas for the workshop and manual trigger")
 
-- You are early in the deployment stages.
-- You want to remediate only a handful of the unhealthy resources and will set exceptions for the remaining.
-- The change management system is not directly linked with Logic Apps to trigger an automatic deployment.
-
-
-![workshop focus](./images/recommendation-manual-trigger.png "Focus areas for the workshop and manual trigger")
-
-
-
-Next, let's see how to [write the response logic app](./Module%202%20-%20Writing%20Logic%20App.md).
+Next, let's move on to [creating the response logic app](./Module%202%20-%20Writing%20Logic%20App.md).
