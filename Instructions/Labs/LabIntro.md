@@ -97,13 +97,14 @@ In this read-only task, you'll learn about Defender for DevOps, including its pr
 
 In this task, you'll integrate GHAS and Defender for DevOps into your pipeline to enhance security. You'll configure these tools to automatically detect and respond to security issues.
 
-### Task 6: Connecting Your Azure DevOps Environment to MDC
+### Task 6: Integrating Non-MS Security Scan Solutions with MDC
+
+In this task, you'll learn how to integrate third-party security scanning tools with MDC. This will enable you to use a broader range of security tools while maintaining centralized visibility in Defender for Cloud.
+
+### Task 7: Connecting Your Azure DevOps Environment to MDC
 
 Here, you'll connect your Azure DevOps environment to Microsoft Defender for Cloud (MDC). This integration will allow you to monitor your DevOps activities directly from Defender for Cloud.
 
-### Task 7: Integrating Non-MS Security Scan Solutions with MDC
-
-In this task, you'll learn how to integrate third-party security scanning tools with MDC. This will enable you to use a broader range of security tools while maintaining centralized visibility in Defender for Cloud.
 
 ### Task 8: Role of Defender Cloud Security Posture Management (DCSPM)
 

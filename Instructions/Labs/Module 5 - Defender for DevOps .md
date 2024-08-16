@@ -981,6 +981,36 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![alert_detected](images/129.png)
 
+1. Navigate back to the **Recommendations** page, filter the recommendations by selecting only **Azure DevOps connections**, and then choose the **Azure Devops repositories should have dependency vulnerability scanning findings resolved** recommendation.
+
+   ![alert_detected](images/144.png)
+
+1. Review the **Take actions** tab, where you'll find steps to remediate the issue.
+
+   ![alert_detected](images/142.png)
+
+1. Navigate to the **Findings** tab, where you'll find detailed information related to the identified issues.
+
+   ![alert_detected](images/143.png)
+
+1. Navigate back to the **Recommendations** page, filter the recommendations by selecting only **Azure DevOps connections**, and then choose the **Azure DevOps repositories should require minimum two-reviewer approval for code pushes** recommendation.
+
+   ![alert_detected](images/148.png)
+
+1. Review the **Take actions** tab, where you'll find steps to remediate the issue.
+
+   ![alert_detected](images/145.png)
+
+1. Click on the **View recommendations for all resources** form the top.
+
+   ![alert_detected](images/146.png)
+
+1. Expand the affected resources and review the unhealthy resources.
+
+    ![alert_detected](images/147.png)
+
 1. Navigate back to the **Recommendations** page, select **Status**, then choose **All (1)**, and click on **Apply (2)**. You'll now see additional recommendations that are in a completed state.
 
    ![alert_detected](images/131.png)
+
+ >**Note**: It may take up to 24 hours to receive all the recommendations.
