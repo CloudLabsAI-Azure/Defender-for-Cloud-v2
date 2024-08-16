@@ -1,71 +1,77 @@
 # Module 4 - Bulk Remediation
 
-In this module, we will explore an alternative method for remediation. Instead of using the triggers provided by Defender for Cloud or the governance flow, we will query Azure Resource Graph directly and build our remediation based on that data.
+In this module, we'll explore an alternative remediation method using Azure Resource Graph (ARG). Instead of relying on Defender for Cloud triggers or governance flows, we'll directly query ARG and build our remediation process based on that data.
 
-#### Task 1: Deploying the Logic App
+## Task 1: Deploying the Logic App
 
-1. Copy the link below and paste it into a new tab to create the Logic App in the target resource group.
- 
-    ```
-    https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudLabsAI-Azure%2FDefender-for-Cloud-v2%2Fmain%2FInstructions%2FLabs%2Ftemplate%2Fazuredeploybulkremediation.json
-    ```
+1. Open a new tab and paste the following link to create the Logic App in your target resource group:
 
-2. **Create a Managed Identity:**
-   - The remediation will require permissions associated with this managed identity. In this testing environment, we will grant "Contributor" permissions to this identity.
+     ```
+     https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudLabsAI-Azure%2FDefender-for-Cloud-v2%2Fmain%2FInstructions%2FLabs%2Ftemplate%2Fazuredeploybulkremediation.json
+     ```
 
-   **To assign Managed Identity to a specific scope:**
+2. On the **Custom deployment** blade, select the **defenderforcloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
 
-   - Ensure you have Owner/Contributor permissions for this scope.
-   - Go to the Settings.
-   - Press 'Identity' on the navigation bar.
-   - Choose 'System assigned' and set Status to 'On'.
+    ![](./images/151.png)
 
-     ![](./images/set-identity.png)
+3. Click **Create** to start the deployment process.
 
-   - Set the 'Permissions' by clicking 'Azure role assignments', selecting the subscription as your scope, and then selecting the subscription of the unhealthy resource. Choose 'Contributor' under the role.
+4. Wait for the deployment to complete and click **Go to resource group**.
 
-     ![](./images/set-identity-role.png)
+    ![](./images/mod2-gr.png)
 
-   - Click "Save" at the bottom of the page.
+5. In the resource group, select the **mdcremovesharedprivateaccess-bulkupdate** Logic App from the list.
 
-   > Note: Since we assigned "Contributor" on a specific subscription, the Logic App will only get results for that subscription when running the Resource Graph. Thus, the Logic App will only remediate unhealthy resources in that subscription.
+    ![](./images/152.png)
 
----
+6. Navigate to **Settings** and select **Identity (1)** from the list.
 
-#### Task 2: Logic App Walkthrough
+7. Choose **System assigned (2)** and set the Status to **On (3)**.
 
-Once deployed, the Logic App should look like this:
+8. Set the Permissions by clicking **Azure role assignments (4)**.
+
+    ![](./images/153.png)
+
+9. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**.   
+
+     ![](./images/154.png)
+
+   > **Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
+
+
+## Task 2: Logic App Walkthrough
+
+Once deployed, the Logic App should appear as follows:
 
 ![](./images/bulk-update-1.png)
 
 **Step-by-Step Walkthrough:**
 
 1. **Querying Azure Resource Graph (ARG):**
-   - Write the query to retrieve data. You don’t need to create the query from scratch. Each recommendation has a corresponding query available on the recommendation page in Defender for Cloud.
+   - Use the pre-defined query to retrieve data. Each recommendation has a corresponding query available on its page in Defender for Cloud.
 
      ![](./images/bulk-update-step-1-a.png)
 
-   - Click on **Open query** to access the ARG. Copy the KQL that we will use in the next step.
+   - Click **Open query** to access ARG. Copy the KQL query for use in the next step.
 
      ![](./images/bulk-update-step-1-b.png)
 
 2. **Setting Up the ARG Query:**
-   - Use HTTP POST to run the ARG query. Ensure you use Managed Identity for authentication.
+   - Use HTTP POST to execute the ARG query. Ensure authentication is done via Managed Identity.
 
      ![](./images/bulk-update-step-2.png)
 
 3. **Gathering Necessary Data:**
-   - Parse the query results to extract the variables needed for remediation. This step is similar to what we did in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
+   - Parse the query results to extract the required variables for remediation. This process is similar to the steps covered in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
 
      ![](./images/bulk-update-step-3.png)
 
 4. **Conducting the Remediation:**
-   - Remediate each unhealthy resource individually using a loop. Make sure to use the Managed Identity here as well. The remediation query is essentially the same as in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
+   - Loop through each unhealthy resource to perform remediation. Ensure you use Managed Identity for authentication here as well. The remediation process is similar to what was covered in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
 
      ![](./images/bulk-update-step-4.png)
 
----
 
 ### Conclusion
 
-You have learned how to run remediations based on the results stored in Azure Resource Graph (ARG). This pattern can also be used to act on other queryable data in ARG.
+In this module, you have learned how to conduct bulk remediation based on Azure Resource Graph (ARG) data. This approach can also be applied to other data queries within ARG, enhancing your ability to manage and remediate resources efficiently.

@@ -921,7 +921,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 1. Go to the Summary tab, and you will find the **Snyk report** under the *Snyk tab*.
 
    ![](images/93.png)
-   
+
 ## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
 DevOps Security Posture, as part of Cloud Security Posture Management (CSPM), involves assessing and enhancing the security of your development and deployment processes within the cloud. Here's a detailed discussion on what CX (Customer Experience) gets in terms of DevOps security posture within CSPM:
@@ -1013,3 +1013,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
    ![alert_detected](images/131.png)
 
  >**Note**: It may take up to 24 hours to receive all the recommendations.
+
+### Conclusion
+
+In this module, you’ve explored essential aspects of securing your CI/CD pipelines and development environments. You started by understanding the role of CI/CD pipelines and identifying potential vulnerabilities. Using Defender for DevOps, you pinpointed and assessed security issues, while also reviewing GitHub Advanced Security (GHAS) and Defender for DevOps features and pricing. You successfully integrated GHAS and Defender for DevOps into your pipeline, connected Azure DevOps to Microsoft Defender for Cloud (MDC), and learned to incorporate third-party security scanning tools with MDC. Lastly, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module has provided you with comprehensive tools and strategies to effectively secure your development workflows.

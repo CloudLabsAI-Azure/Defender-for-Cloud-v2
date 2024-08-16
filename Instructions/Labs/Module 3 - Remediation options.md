@@ -1,12 +1,10 @@
 # Module 3 - Remediation Options
 
-So far, the capabilities we have discussed apply to both Azure Sentinel and Defender for Cloud. This section, however, is more geared towards the out-of-the-box capabilities that Defender for Cloud offers.
-
-If you are interested in conducting the same in Sentinel, please let the workshop instructor know, and they can arrange a follow-up.
+In this module, we will explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
 
 ## Task 1: Setting Up Automated Remediation
 
-1. Defender for Cloud has a **Workflow Automation** option that we will use to run our Logic App automatically. We discussed this in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
+1. **Configure Workflow Automation:** Defender for Cloud provides a **Workflow Automation** feature to run your Logic App automatically. We covered this in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 
    ![Workflow Automation](./images/workflow-automation.png)
 
@@ -14,17 +12,17 @@ If you are interested in conducting the same in Sentinel, please let the worksho
 
    ![](./images/add-workflow-automation.png)
 
-3. On the **Add Workflow Automation** screen fill in the following Details then click on **Create (8)**:
-   
+3. On the **Add Workflow Automation** screen, fill in the following details, then click **Create (8)**:
+
    | Setting  | Value |
    -----------|---------
-   | Name | Enter name **RemediateStorageSharedAccess (1)** |
-   | Description | Enter **Automated remediation to remove the shared access from the unhealthy storage accounts as soon as they are discovered by Defender for cloud. (2)** |
-   | Subscription | Select defalut value **(3)** |
-   | Resource group | Select **defenderforcloud (4)** |
-   | Defender for Cloud data type | Select **Recommendation (5)** |
-   | Recommendation state | Select **Unhealthy (6)**|
-   | Logic App name | Select **mdcremovesharedprivateaccess (7)**|
+   | Name | **RemediateStorageSharedAccess (1)** |
+   | Description | **Automated remediation to remove the shared access from unhealthy storage accounts as soon as they are discovered by Defender for Cloud. (2)** |
+   | Subscription | Default value **(3)** |
+   | Resource group | **defenderforcloud (4)** |
+   | Defender for Cloud data type | **Recommendation (5)** |
+   | Recommendation state | **Unhealthy (6)** |
+   | Logic App name | **mdcremovesharedprivateaccess (7)** |
 
    ![Set up new automation](./images/105.png)
 
@@ -32,66 +30,66 @@ If you are interested in conducting the same in Sentinel, please let the worksho
 
 ## Task 2: Manual Remediation with Governance
 
-1. The reasons you might not want to remediate automatically include the potential for unintended consequences, the need for human review, or the risk of disrupting critical systems.
+1. **Reasons for Manual Remediation:** You may opt for manual remediation to avoid unintended consequences, ensure human review, or prevent disruptions to critical systems.
 
-2. In such cases, leverage the *Governance Rules* to forward the alerts to a specific distribution list for review. The control owner can then execute the Logic App after reviewing.
+2. **Using Governance Rules:** Set up Governance Rules to forward alerts to a specific distribution list for review. The control owner can then manually execute the Logic App after review.
 
-1. From the **Environment settings** page, select **Governance rule**.
+   1. From the **Environment settings** page, select **Governance rule**.
 
-   ![](./images/112.png)
+      ![](./images/112.png)
 
-1. From the **Governance rules** page, click on **Create governance rule**.
+   2. From the **Governance rules** page, click **Create governance rule**.
 
-   ![](./images/113.png)
+      ![](./images/113.png)
 
-3. On the **Create governance rule** screen fill in the following Details then click on **Next (4)**:
-   
-   | Setting  | Value |
-   -----------|---------
-   | Rule name | Enter name **Review Shared key Access (1)** |
-   | Scope | Eelect **Subscription (2)** |
-   | Priority | Enter **1 (3)** |
+   3. On the **Create governance rule** screen, fill in the following details, then click **Next (4)**:
 
-   ![](./images/106.png)
+      | Setting  | Value |
+      -----------|---------
+      | Rule name | **Review Shared Key Access (1)** |
+      | Scope | **Subscription (2)** |
+      | Priority | **1 (3)** |
 
-5. On the Conditions page, choose **By specific recommendation**, then search for **Shared**. Locate and select the recommendation titled **Storage accounts should restrict shared key access**.
+      ![](./images/106.png)
 
-   ![](./images/111.png)
+   4. On the Conditions page, choose **By specific recommendation**, search for **Shared**, and select the recommendation titled **Storage accounts should restrict shared key access**.
 
-6. Under **Set owner**, select **By email address** and enter the email address **<inject key="AzureAdUserEmail"></inject>**. Choose a 90-day remediation timeframe and set the email configuration day of the week to **Monday** then click on **Create**.
+      ![](./images/111.png)
 
-   ![](./images/109.png)
+   5. Under **Set owner**, select **By email address** and enter the email address **<inject key="AzureAdUserEmail"></inject>**. Set a 90-day remediation timeframe and configure the email notification to be sent on **Monday**. Then click **Create**.
 
-7. If a pop-up indicates that the rule was created successfully, select the option to apply the rule to the one existing unassigned recommendation.
+      ![](./images/109.png)
 
-   ![](./images/110.png)
-   
-8. The Control Owner can now review the recommendation in the Defender Portal and then execute the remediation on appropriate "unhealthy" resources as shown in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
+   6. If a pop-up indicates that the rule was created successfully, choose the option to apply the rule to the existing unassigned recommendation.
 
-1. Navigate to the **Recommendation** tab, search for **Shared**, and select the relevant recommendation.
+      ![](./images/110.png)
 
-   ![](./images/107.png)
+   7. The Control Owner can now review the recommendation in the Defender Portal and execute the remediation on the appropriate "unhealthy" resources, as outlined in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 
-1. Click on **View recommendation for all resources** at the top, and then expand the **Remediation** and **affected resources** section.
+   8. Navigate to the **Recommendation** tab, search for **Shared**, and select the relevant recommendation.
 
-   ![](./images/108.png)
+      ![](./images/107.png)
 
-1. In the search bar, locate the **asclabsxxxxxxxx** storage account and select it. Then, navigate to the **Configuration** option from the left panel, where you'll see that the Allow storage account access key option is **dnabled**.
+   9. Click on **View recommendation for all resources** at the top, and expand the **Remediation** and **Affected Resources** sections.
 
-   ![](./images/116.png)
+      ![](./images/108.png)
 
-1. Return to the **Storage accounts should prevent shared key access** recommendation, select the affected storage account, and click on **Trigger Logic App**. Choose the appropriate logic app, and then click on **Trigger**.
+   10. In the search bar, locate the **asclabsxxxxxxxx** storage account, select it, and navigate to **Configuration** in the left panel. You’ll see that the Allow storage account access key option is **enabled**.
 
-   ![](./images/115.png)
+       ![](./images/116.png)
 
-1. In the search bar, locate the **asclabsxxxxxxxx** storage account and select it. Then, navigate to the **Configuration** option in the left panel, where you'll see that the Allow storage account access key option is now **disabled**.
+   11. Return to the **Storage accounts should prevent shared key access** recommendation, select the affected storage account, and click on **Trigger Logic App**. Choose the appropriate logic app and then click **Trigger**.
 
-   ![](./images/117.png)
+       ![](./images/115.png)
 
-### Referance
+   12. In the search bar, locate the **asclabsxxxxxxxx** storage account, select it, and navigate to **Configuration** in the left panel. You’ll see that the Allow storage account access key option is now **disabled**.
+
+       ![](./images/117.png)
+
+### References
+
 - To review the Logic App, click [here](./Module%202%20-%20Writing%20Logic%20App.md).
-- Check out the Workflow Automation [documentation](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation).
-- Review the [Governance Rules](https://learn.microsoft.com/en-us/azure/defender-for-cloud/episode-fifteen).
+- Explore the Workflow Automation [documentation](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation).
+- Check out the [Governance Rules](https://learn.microsoft.com/en-us/azure/defender-for-cloud/episode-fifteen).
 
-If you're considering running remediation flows on all existing "unhealthy" resources as soon as possible, you can explore the option for [bulk remediation](./Module%204%20-%20Bulk%20remediation.md).
-
+If you’re considering performing bulk remediation for all existing "unhealthy" resources, explore the [bulk remediation](./Module%204%20-%20Bulk%20remediation.md) options.
