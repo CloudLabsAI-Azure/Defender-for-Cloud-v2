@@ -654,7 +654,79 @@ In this task, you will remove the Azure deployment task codes from the pipeline.
 
 1. Navigate to the pipeline and select it. The execution may take approximately 5 minutes to complete, so please wait until the build finishes.
 
-## **Task 6: Integrating non-MS security scan solutions with MDC**
+
+## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
+
+1. Navigate to Azure portal.
+
+1. Search and select **Microsoft Defender for Cloud** from the portal
+
+   ![alert_detected](images/mls2.png)
+
+1. Select **skip** on **Getting started** tab.
+
+   ![alert_detected](images/mls1.png)
+
+1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
+
+   ![alert_detected](images/advlab51.png)
+
+1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
+
+   | Setting  | Value |
+   -----------|---------
+   | Connector name | AzureDevopsconnector |
+   | Subscription | Choose the default subscription |
+   | Resource group | defenderforcloud |
+   | Location | east us|
+
+   ![alert_detected](images/advlab52.png)
+
+1. Select **Next: Configure access**
+
+1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
+
+1. In the popup dialog, read the list of permission requests, and then select **Accept**.
+
+   ![alert_detected](images/advlab53.png)
+
+1. Leave all other settings as default.
+
+1. Select **Next: Review and generate**.
+
+1. Review the information, and then select **Create**.
+
+1. Wait for some time to view the connector on the **Environment settings** page.
+
+1. Navigate to **DevOps Security** under **Cloud Security**.
+
+   ![alert_detected](images/advlab55.png)
+
+1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
+
+   ![alert_detected](images/m51.png)
+
+   >**Note:** It might take upto 24hrs to reflect the real-time status.
+
+1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
+
+   ![alert_detected](images/m55.png)
+
+   ![alert_detected](images/m52.png)
+
+1. Navigate to the **Infrastructure as Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
+
+   ![alert_detected](images/121.png)
+
+1. Similarly, navigate to the **Secrete** tab and click on **link** and identify the issues.
+
+   ![alert_detected](images/122.png)
+
+1. Then take note of the recommendations provided to resolve the issues.
+
+   ![alert_detected](images/123.png)
+
+## **Task 7: Integrating non-MS security scan solutions with MDC**
 
 To enhance your security posture comprehensively, integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) is a strategic approach. For a straightforward integration of a security scan into your Azure DevOps pipeline using **Snyk** with minimal configuration, follow these steps:
 
@@ -849,79 +921,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 1. Go to the Summary tab, and you will find the **Snyk report** under the *Snyk tab*.
 
    ![](images/93.png)
-
-## **Task 7: Connecting and Securing your Azure DevOps environment to MDC**
-
-1. Navigate to Azure portal.
-
-1. Search and select **Microsoft Defender for Cloud** from the portal
-
-   ![alert_detected](images/mls2.png)
-
-1. Select **skip** on **Getting started** tab.
-
-   ![alert_detected](images/mls1.png)
-
-1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
-
-   ![alert_detected](images/advlab51.png)
-
-1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
-
-   | Setting  | Value |
-   -----------|---------
-   | Connector name | AzureDevopsconnector |
-   | Subscription | Choose the default subscription |
-   | Resource group | defenderforcloud |
-   | Location | east us|
-
-   ![alert_detected](images/advlab52.png)
-
-1. Select **Next: Configure access**
-
-1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
-
-1. In the popup dialog, read the list of permission requests, and then select **Accept**.
-
-   ![alert_detected](images/advlab53.png)
-
-1. Leave all other settings as default.
-
-1. Select **Next: Review and generate**.
-
-1. Review the information, and then select **Create**.
-
-1. Wait for some time to view the connector on the **Environment settings** page.
-
-1. Navigate to **DevOps Security** under **Cloud Security**.
-
-   ![alert_detected](images/advlab55.png)
-
-1. The **DevOps security findings** and **DevOps security results** are listed on the page, which helps to review the DevOps security posture.
-
-   ![alert_detected](images/m51.png)
-
-   >**Note:** It might take upto 24hrs to reflect the real-time status.
-
-1. Navigate to **DevOps workbook** and change the toggle to **Yes**, which provides an overview of the tabs provided below
-
-   ![alert_detected](images/m55.png)
-
-   ![alert_detected](images/m52.png)
-
-1. Navigate to the **Infrastructure as Code** tab and scroll down, click on the **Severity** section to open the individual findings, and click on **Information** which in turn provides detailed findings and the issue location.
-
-   ![alert_detected](images/121.png)
-
-1. Similarly, navigate to the **Secrete** tab and click on **link** and identify the issues.
-
-   ![alert_detected](images/122.png)
-
-1. Then take note of the recommendations provided to resolve the issues.
-
-   ![alert_detected](images/123.png)
-
-
+   
 ## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
 DevOps Security Posture, as part of Cloud Security Posture Management (CSPM), involves assessing and enhancing the security of your development and deployment processes within the cloud. Here's a detailed discussion on what CX (Customer Experience) gets in terms of DevOps security posture within CSPM:
