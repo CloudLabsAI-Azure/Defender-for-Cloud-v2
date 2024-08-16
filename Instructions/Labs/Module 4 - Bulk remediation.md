@@ -7,7 +7,7 @@ In this module, we will explore an alternative method for remediation. Instead o
 1. Copy the link below and paste it into a new tab to create the Logic App in the target resource group.
 
     ```
-      https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json
+    https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json
     ```
 
 2. **Create a Managed Identity:**
