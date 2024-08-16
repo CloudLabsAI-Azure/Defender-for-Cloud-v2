@@ -1,0 +1,209 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workflows_mdcremovesharedprivateaccess_bulkupdate_name": {
+            "defaultValue": "mdcremovesharedprivateaccess-bulkupdate",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Logic/workflows",
+            "apiVersion": "2017-07-01",
+            "name": "[parameters('workflows_mdcremovesharedprivateaccess_bulkupdate_name')]",
+            "location": "eastus",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "state": "Enabled",
+                "definition": {
+                    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "triggers": {
+                        "HTTP_-_ARG_Storage_Accounts": {
+                            "recurrence": {
+                                "frequency": "Minute",
+                                "interval": 3
+                            },
+                            "evaluatedRecurrence": {
+                                "frequency": "Minute",
+                                "interval": 3
+                            },
+                            "type": "Http",
+                            "inputs": {
+                                "authentication": {
+                                    "type": "ManagedServiceIdentity"
+                                },
+                                "body": {
+                                    "query": "securityresources| where type == 'microsoft.security/assessments'| extend source = trim(' ', tolower(tostring(properties.resourceDetails.Source)))                          | extend resourceId = trim(' ', tolower(tostring(case(source =~ 'azure', properties.resourceDetails.Id,                                                                                   source =~ 'aws' and isnotempty(tostring(properties.resourceDetails.ConnectorId)), properties.resourceDetails.Id,                                                                                   source =~ 'gcp' and isnotempty(tostring(properties.resourceDetails.ConnectorId)), properties.resourceDetails.Id,                                                                                    source =~ 'aws', properties.resourceDetails.AzureResourceId,                                                                                    source =~ 'gcp', properties.resourceDetails.AzureResourceId,                                                                                  extract('^(.+)/providers/Microsoft.Security/assessments/.+$',1,id)))))| extend status = trim(' ', tostring(properties.status.code))| extend cause = trim(' ', tostring(properties.status.cause))| extend assessmentKey = tostring(name)| where assessmentKey == '3b363842-30f5-4056-980d-3a40fa5de8b3'       | where status == 'Unhealthy'"
+                                },
+                                "method": "POST",
+                                "uri": "https://management.azure.com/providers/Microsoft.ResourceGraph/resources?api-version=2020-04-01-preview"
+                            }
+                        }
+                    },
+                    "actions": {
+                        "Foreach-data": {
+                            "foreach": "@variables('data')",
+                            "actions": {
+                                "HTTP_-_Storage_Account": {
+                                    "runAfter": {
+                                        "Set_variable_-_resourceGroup": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "Http",
+                                    "inputs": {
+                                        "authentication": {
+                                            "type": "ManagedServiceIdentity"
+                                        },
+                                        "body": {
+                                            "properties": {
+                                                "allowSharedKeyAccess": false
+                                            }
+                                        },
+                                        "method": "PATCH",
+                                        "uri": "https://management.azure.com/subscriptions/@{variables('subscriptionId')}/resourceGroups/@{variables('resourceGroup')}/providers/Microsoft.Storage/storageAccounts/@{variables('storageName')}?api-version=2023-01-01"
+                                    }
+                                },
+                                "Set_variable_-_resourceGroup": {
+                                    "runAfter": {
+                                        "Set_variable_-_storageName": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "SetVariable",
+                                    "inputs": {
+                                        "name": "resourceGroup",
+                                        "value": "@{first(skip(split(first(items('Foreach-data')),'/'),4))}"
+                                    }
+                                },
+                                "Set_variable_-_storageName": {
+                                    "runAfter": {
+                                        "Set_variable_-_subscriptionId": [
+                                            "Succeeded"
+                                        ]
+                                    },
+                                    "type": "SetVariable",
+                                    "inputs": {
+                                        "name": "storageName",
+                                        "value": "@{first(skip(split(first(items('Foreach-data')),'/'),8))}"
+                                    }
+                                },
+                                "Set_variable_-_subscriptionId": {
+                                    "runAfter": {},
+                                    "type": "SetVariable",
+                                    "inputs": {
+                                        "name": "subscriptionId",
+                                        "value": "@{first(skip(split(first(items('Foreach-data')),'/'),2))}"
+                                    }
+                                }
+                            },
+                            "runAfter": {
+                                "Set_variable_-_data": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "Foreach"
+                        },
+                        "Initialize_-_Recommendation_Data": {
+                            "runAfter": {
+                                "Initialize_variable_-_resourceGroup": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "recommendationData",
+                                        "type": "object",
+                                        "value": "@triggerBody()"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable_-_data": {
+                            "runAfter": {
+                                "Initialize_-_Recommendation_Data": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "data",
+                                        "type": "array"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable_-_resourceGroup": {
+                            "runAfter": {
+                                "Initialize_variable_-_storageName": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "resourceGroup",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable_-_storageName": {
+                            "runAfter": {
+                                "Initialize_variable_-_subscriptionId": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "storageName",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "Initialize_variable_-_subscriptionId": {
+                            "runAfter": {},
+                            "type": "InitializeVariable",
+                            "inputs": {
+                                "variables": [
+                                    {
+                                        "name": "subscriptionId",
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "Set_variable_-_data": {
+                            "runAfter": {
+                                "Initialize_variable_-_data": [
+                                    "Succeeded"
+                                ]
+                            },
+                            "type": "SetVariable",
+                            "inputs": {
+                                "name": "data",
+                                "value": "@variables('recommendationData')?['data']?['rows']"
+                            }
+                        }
+                    },
+                    "outputs": {}
+                },
+                "parameters": {}
+            }
+        }
+    ]
+}
