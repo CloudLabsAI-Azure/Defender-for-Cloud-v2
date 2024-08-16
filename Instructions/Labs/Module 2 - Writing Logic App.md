@@ -7,8 +7,7 @@ In this task, you will deploy a Logic App with pre-configured triggers based on 
 
 1. Click on the **Deploy to Azure** button to create the Logic App in a target resource group.
 
-     <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json" target="_blank">
-     <img src="https://aka.ms/deploytoazurebutton"/></a>
+     <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json" target="_blank"><img src="https://aka.ms/deploytoazurebutton"/></a>
 
 2. On the **Custom deployment** blade, select the **defender for cloud(1)** resource group from the drop-down and click on **Review + create(2)**
 
