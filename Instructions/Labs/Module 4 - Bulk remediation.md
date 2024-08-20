@@ -38,6 +38,9 @@ In this module, we'll explore an alternative remediation method using Azure Reso
 
    > **Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
 
+10. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
+
+    ![](./images/157.png)
 
 ## Task 2: Logic App Walkthrough
 
@@ -45,9 +48,20 @@ Once deployed, the Logic App should appear as follows:
 
 ![](./images/bulk-update-1.png)
 
+ >**Note:** Click on **Edit** in the Azure Logic App interface allows you to modify the existing workflow or configuration of the Logic App.
+
+   ![alert_detected](images/mls2.png)
+
 **Step-by-Step Walkthrough:**
 
 1. **Querying Azure Resource Graph (ARG):**
+   
+   - Navigate to Azure portal.
+
+   - Search and select **Microsoft Defender for Cloud** from the portal
+
+     ![alert_detected](images/mls2.png)
+
    - Use the pre-defined query to retrieve data. Each recommendation has a corresponding query available on its page in Defender for Cloud.
 
      ![](./images/bulk-update-step-1-a.png)

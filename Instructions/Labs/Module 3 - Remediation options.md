@@ -4,6 +4,12 @@ In this module, we will explore how to leverage Defender for Cloud’s built-in 
 
 ## Task 1: Setting Up Automated Remediation
 
+1. Navigate to Azure portal.
+
+1. Search and select **Microsoft Defender for Cloud** from the portal
+
+   ![alert_detected](images/mls2.png)
+
 1. **Configure Workflow Automation:** Defender for Cloud provides a **Workflow Automation** feature to run your Logic App automatically. We covered this in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 
    ![Workflow Automation](./images/workflow-automation.png)
@@ -21,8 +27,9 @@ In this module, we will explore how to leverage Defender for Cloud’s built-in 
    | Subscription | Default value **(3)** |
    | Resource group | **defenderforcloud (4)** |
    | Defender for Cloud data type | **Recommendation (5)** |
-   | Recommendation state | **Unhealthy (6)** |
-   | Logic App name | **mdcremovesharedprivateaccess (7)** |
+   | Recommendation name| **Storage accounts should prevent shared key access (6)** |
+   | Recommendation state | **Unhealthy (7)** |
+   | Logic App name | **mdcremovesharedprivateaccess (8)** |
 
    ![Set up new automation](./images/105.png)
 
