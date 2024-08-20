@@ -1,10 +1,14 @@
-# Module 2 - Writing the Logic App
+# **Module 2 - Writing the Logic App**
 
 ### Task 1: Deploying/Creating the App
 
 In this task, you'll deploy a Logic App with pre-configured triggers based on Defender for Cloud recommendations and assign the required roles to the managed identity for remediation actions.
 
 1. Open a new tab and paste the following link to create the Logic App in your target resource group:
+
+    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json" target="_blank">
+    <img src="https://aka.ms/deploytoazurebutton"/></a>
+
 
     ```
     https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json

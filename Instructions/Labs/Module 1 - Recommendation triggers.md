@@ -1,4 +1,4 @@
-# Module 1 - Response Triggers (Read-Only)
+# **Module 1 - Response Triggers (Read-Only)**
 
 ## Task 1: Initiating the Flow
 
