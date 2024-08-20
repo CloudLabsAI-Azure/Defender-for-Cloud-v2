@@ -415,62 +415,62 @@ GitHub Advanced Security (GHAS) is a suite of security tools built into the GitH
 1. Enable GitHub Advanced Security
 To use GHAS, you need to have GitHub Advanced Security enabled for your repository. This typically requires a GitHub Enterprise subscription.
 
-- Navigate to your repository on GitHub.
-- Click on `Settings`.
-- In the `Security` section, find `GitHub Advanced Security` and enable it.
+  - Navigate to your repository on GitHub.
+  - Click on `Settings`.
+  - In the `Security` section, find `GitHub Advanced Security` and enable it.
 
 2. Configure Code Scanning
 
    **Code scanning** helps detect vulnerabilities and errors in your code by running static analysis tools.
 
-- Go to the `Security` tab of your repository.
-- Click on `Set up code scanning`.
-- You can choose from different options like `CodeQL Analysis`, which is a powerful tool provided by GitHub. Select the `Set up this workflow` button for `CodeQL Analysis`.
-- Review the configuration file (e.g., `.github/workflows/codeql-analysis.yml`). Modify it if needed and commit it to your repository.
+  - Go to the `Security` tab of your repository.
+  - Click on `Set up code scanning`.
+  - You can choose from different options like `CodeQL Analysis`, which is a powerful tool provided by GitHub. Select the `Set up this workflow` button for `CodeQL Analysis`.
+  - Review the configuration file (e.g., `.github/workflows/codeql-analysis.yml`). Modify it if needed and commit it to your repository.
 
 3. Run Code Scanning
 
-- Once configured, code scanning runs automatically on the specified events (like pushes and pull requests).
-- You can also manually trigger a scan by going to the `Actions` tab, finding the `CodeQL` workflow, and clicking `Run workflow`.
+  - Once configured, code scanning runs automatically on the specified events (like pushes and pull requests).
+  - You can also manually trigger a scan by going to the `Actions` tab, finding the `CodeQL` workflow, and clicking `Run workflow`.
 
 4. Review Code Scanning Results
 
-- Navigate to the `Security` tab, and under `Code scanning alerts`, you'll see a list of detected issues.
-- Click on any alert to get detailed information about the vulnerability and recommended fixes.
+  - Navigate to the `Security` tab, and under `Code scanning alerts`, you'll see a list of detected issues.
+  - Click on any alert to get detailed information about the vulnerability and recommended fixes.
 
 5. Configure Secret Scanning
 
 **Secret scanning** detects secrets (like API keys and tokens) that may have been accidentally committed to your repository.
 
-- Go to the `Security` tab of your repository.
-- Click on `Set up secret scanning`.
-- GitHub automatically scans for patterns that match common secret types and alerts you if any are found.
+  - Go to the `Security` tab of your repository.
+  - Click on `Set up secret scanning`.
+  - GitHub automatically scans for patterns that match common secret types and alerts you if any are found.
 
 6. Review Secret Scanning Results
 
-- Navigate to the `Security` tab, and under `Secret scanning alerts`, you'll see a list of detected secrets.
-- Click on any alert to view details and follow the steps to revoke or rotate the compromised secrets.
+  - Navigate to the `Security` tab, and under `Secret scanning alerts`, you'll see a list of detected secrets.
+  - Click on any alert to view details and follow the steps to revoke or rotate the compromised secrets.
 
 7. Set Up Dependency Review
 
 **Dependency review** helps you understand and remediate vulnerable dependencies in your project.
 
-- Ensure your project has a dependency manifest file (e.g., `package.json`, `pom.xml`).
-- GitHub automatically generates dependency graphs and checks for known vulnerabilities in your dependencies.
+  - Ensure your project has a dependency manifest file (e.g., `package.json`, `pom.xml`).
+  - GitHub automatically generates dependency graphs and checks for known vulnerabilities in your dependencies.
 
 8. Review Dependency Alerts
 
-- Navigate to the `Security` tab, and under `Dependency review`, you'll see alerts for vulnerable dependencies.
-- Click on any alert to see details about the vulnerability and recommended versions to update to.
+  - Navigate to the `Security` tab, and under `Dependency review`, you'll see alerts for vulnerable dependencies.
+  - Click on any alert to see details about the vulnerability and recommended versions to update to.
 
 9. Manage Security Policies
 
-- In the `Security` tab, you can also manage security policies by setting up a `security.md` file to inform users about your project's security practices and how they can report vulnerabilities.
+  - In the `Security` tab, you can also manage security policies by setting up a `security.md` file to inform users about your project's security practices and how they can report vulnerabilities.
 
 10. Continuous Monitoring and Alerts
 
-- GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
-- Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
+  - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
+  - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
 
 ## **Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]**
 
@@ -480,22 +480,22 @@ Defender for DevOps is a security solution by Microsoft designed to enhance the 
 
 **Microsoft Defender for DevOps** helps secure your DevOps environments and pipelines by integrating with popular DevOps tools and providing security recommendations for your code and infrastructure. It focuses on the following areas:
 
-1. **Source Code Security**: Scans your code repositories to identify vulnerabilities and security issues in your source code.
-2. **Pipeline Security**: Monitors and protects your CI/CD pipelines from potential threats and unauthorized access.
-3. **Infrastructure as Code (IaC) Security**: Analyzes your IaC templates (e.g., Terraform) for potential security risks and misconfigurations.
+  1. **Source Code Security**: Scans your code repositories to identify vulnerabilities and security issues in your source code.
+  2. **Pipeline Security**: Monitors and protects your CI/CD pipelines from potential threats and unauthorized access.
+  3. **Infrastructure as Code (IaC) Security**: Analyzes your IaC templates (e.g., Terraform) for potential security risks and misconfigurations.
 
 **Key Features:**
-- **Integration**: Works with tools like GitHub, Azure DevOps, and Bitbucket.
-- **Vulnerability Scanning**: Identifies vulnerabilities in your code, dependencies, and configuration files.
-- **Security Recommendations**: Provides actionable insights and recommendations for securing your pipelines and code.
-- **Compliance**: Helps ensure compliance with industry standards and best practices.
+  - **Integration**: Works with tools like GitHub, Azure DevOps, and Bitbucket.
+  - **Vulnerability Scanning**: Identifies vulnerabilities in your code, dependencies, and configuration files.
+  - **Security Recommendations**: Provides actionable insights and recommendations for securing your pipelines and code.
+  - **Compliance**: Helps ensure compliance with industry standards and best practices.
 
 ### Pricing
 
 The pricing for Microsoft Defender for DevOps is generally included as part of the broader Microsoft Defender for Cloud offering, specifically under **Defender for Cloud's Cloud Security Posture Management (CSPM)** plan. Here’s a general breakdown:
 
-- **Microsoft Defender for Cloud (Free Tier)**: Basic security features, including Azure Security Center and Azure Defender for servers.
-- **Microsoft Defender for Cloud (Standard Tier)**: Includes advanced features such as Defender for DevOps, Defender for Cloud's comprehensive protection, and threat detection capabilities. 
+  - **Microsoft Defender for Cloud (Free Tier)**: Basic security features, including Azure Security Center and Azure Defender for servers.
+  - **Microsoft Defender for Cloud (Standard Tier)**: Includes advanced features such as Defender for DevOps, Defender for Cloud's comprehensive protection, and threat detection capabilities. 
 
 For exact pricing details, especially as they can vary based on the size of the environment and specific needs, it's best to consult the [Microsoft Defender for Cloud pricing page](https://azure.microsoft.com/en-us/pricing/details/defender-for-cloud/) or contact Microsoft sales for a customized quote.
 
