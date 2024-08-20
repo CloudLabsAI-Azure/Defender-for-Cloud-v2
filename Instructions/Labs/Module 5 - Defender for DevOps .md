@@ -748,6 +748,10 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/136.png)
 
+   >**Note**: Navigate to the **Environment** tab to view the key-value pairs of the **GitHub UserEmail**, and **GitHub Password**. You can use the copy buttons under the actions column to have the values copied instantly. Alternatively, it is suggested to have the values copied over onto a notepad for easy accessibility. 
+
+     ![](images/158.png)
+
 1. Open a new tab and navigate to `https://www.microsoft.com/en-us/microsoft-365/outlook/log-in` then click on **Sign-in**.
 
    ![](images/137.png)
@@ -765,8 +769,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
  
        ![Enter Your Password](images/139.png)
 
-   >**Note**: Navigate to the **Environment** tab to view the key-value pairs of the **GitHub UserEmail**, and **GitHub Password**. You can use the copy buttons under the actions column to have the values copied instantly. Alternatively, it is suggested to have the values copied over onto a notepad for easy accessibility. 
-
 1. The email containing the verification code can sometimes creep into the archive/spam folders within your Outlook. Copy the verification code.
 
       ![Enter Your Password](images/140.png)
@@ -779,7 +781,25 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/135.png)
 
-1. On **where is the code you want to scan** page, select **skip for now**.
+1. On **where is the code you want to scan** page, select **Github** and then click **Next Step**.
+
+   ![](images/159.png)
+
+1. Set sccess permissions to **Private and Public repositories** and then click **Next Step**.
+
+   ![](images/160.png)
+
+1. Configure automation settings and authenticate by clicking **Authenticate Github**.
+
+   ![](images/161.png)
+
+1. **Authorize Snyk** to access your GitHub account by clicking "Authorize Snyk" on the GitHub authorization page.
+
+   ![](images/162.png)
+
+1. Select all the present repository and then click **Import and scan**.
+
+   ![](images/163.png)
 
 1. Access your **Snyk account settings** to retrieve your **API token for authentication** and record it in your notepad.
  
