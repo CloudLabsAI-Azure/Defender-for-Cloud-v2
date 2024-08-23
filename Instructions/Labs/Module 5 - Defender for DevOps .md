@@ -136,11 +136,11 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. On the **Select a repository** pane, click **eShopOnWeb**.
 
-   ![](images/164.png)
+   ![](images/12.png)
 
 1. On the **Configure your pipeline** pane, scroll down and select **Starter pipeline**.
 
-   ![](images/11.png)
+   ![](images/164.png)
 
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
@@ -197,7 +197,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/33.png)
 
-1. Select the **Defender_for_cloud (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
+1. Select the **eShopOnWeb (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
 
    ![](images/25.png)
 
@@ -207,7 +207,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
-1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_Defender_for_cloud/html-artifact"**.
+1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"**.
 
    ![](images/27.png)
 
