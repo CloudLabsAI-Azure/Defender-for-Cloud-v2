@@ -61,29 +61,37 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/21.png)
 
-1. On your lab computer, in a browser window open your Azure DevOps organization. Click on **New Project**. Give your project the name  **Defender_for_cloud (1)**, select visibility as **Private(2)**  and leave the other fields with defaults. Click on **Create project (3)**.
+1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
 
-   ![](images/134.png)
+   ```
+   https://azuredevopsdemogenerator.azurewebsites.net/
+   ```
+  
+1. Click on **Sign in** and log in using the Microsoft account associated with your Azure DevOps subscription.
 
-1. Click **Project settings (1)** in the lower-left corner. In the left menu under Repos, click **Repositories (2)**, then select the **Defender_for_cloud (3)** repository.
+    ![](images/lab1-image2.png)
 
-   ![setup](images/133.png)
+1. Please click on **Accept** to grant permission to access your subscription.
 
-1. Click on **Settings (1)**, then click on **Advanced Security (2)**, to turn it **On** and click **Enable all**.
+1. Click **Choose Template**.
 
-   ![setup](images/132.png)
+    ![](images/lab1-image3.png)
 
-1. Click **Begin Billing**.
+1. Select the **eShopOnWeb (1)** template and click on **Select Template (2)**.
 
-   ![](images/lab1-image12.png)
+    ![](images/lab1-image4.png)
+
+1. Provide a project name, **eShopOnWeb (1)**, and choose your **Organization (2)**, then click on **Create Project (3)** and wait for the process to complete.
+
+   ![](images/lab1-image5.png)
+
+1. Once the process is complete, click on **Navigate to project**.
+
+   ![](images/lab1-image6.png)
 
 ### 3. Create a Simple HTML File
 
-1. Click on **Repos (1)>Files (2)**, Select **Initialize (3)**. 
-
-   ![](images/22.png)
-
-1. Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section. This menu provides additional actions you can take within the repository.
+1. Click on **Repos (1)>Files (2)**, Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section. This menu provides additional actions you can take within the repository.
 
 1. After clicking the three-dot menu, a dropdown list appears. From this list, hover over the **New** option. This will allow you to create new items in the repository.
 
@@ -126,13 +134,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/10.png)
 
-1. On the **Select a repository** pane, click **Defender_for_cloud**.
+1. On the **Select a repository** pane, click **eShopOnWeb**.
 
-   ![](images/11.png)
+   ![](images/164.png)
 
 1. On the **Configure your pipeline** pane, scroll down and select **Starter pipeline**.
 
-   ![](images/12.png)
+   ![](images/11.png)
 
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
@@ -229,7 +237,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infrastructure as Code (IaC) templates for security issues. This process ensures early detection of vulnerabilities, enhances compliance, and improves your overall security posture within existing DevOps workflows.
 
-1. On your lab computer, open the Azure DevOps portal with the **Defender_for_cloud** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
+1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
 
@@ -249,102 +257,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/65.png)
 
-1. Navigate to **Repos (1) > Files (2)**, create a new file named **main.tf**, and add the following content:
-
-   ```hcl
-   # Specify the provider
-   provider "azurerm" {
-   features {}
-   }
-
-   # Resource Group
-   resource "azurerm_resource_group" "example" {
-   name     = "example-resources"
-   location = "East US"
-   }
-
-   # Virtual Network
-   resource "azurerm_virtual_network" "example" {
-   name                = "example-vnet"
-   address_space       = ["10.0.0.0/16"]
-   location            = azurerm_resource_group.example.location
-   resource_group_name = azurerm_resource_group.example.name
-   }
-
-   # Subnet
-   resource "azurerm_subnet" "example" {
-   name                 = "example-subnet"
-   resource_group_name  = azurerm_resource_group.example.name
-   virtual_network_name = azurerm_virtual_network.example.name
-   address_prefixes     = ["10.0.1.0/24"]
-   }
-
-   # Network Interface
-   resource "azurerm_network_interface" "example" {
-   name                = "example-nic"
-   location            = azurerm_resource_group.example.location
-   resource_group_name = azurerm_resource_group.example.name
-
-   ip_configuration {
-      name                          = "internal"
-      subnet_id                     = azurerm_subnet.example.id
-      private_ip_address_allocation = "Dynamic"
-   }
-   }
-
-   # Virtual Machine
-   resource "azurerm_virtual_machine" "example" {
-   name                = "example-vm"
-   location            = azurerm_resource_group.example.location
-   resource_group_name = azurerm_resource_group.example.name
-   network_interface_ids = [
-      azurerm_network_interface.example.id,
-   ]
-   vm_size = "Standard_B1s"
-
-   storage_os_disk {
-      name              = "myosdisk1"
-      caching           = "ReadWrite"
-      create_option     = "FromImage"
-      managed           = true
-      disk_size_gb      = 30
-   }
-
-   storage_image_reference {
-      publisher = "MicrosoftWindowsServer"
-      offer     = "WindowsServer"
-      sku       = "2019-Datacenter"
-      version   = "latest"
-   }
-
-   os_profile {
-      computer_name  = "hostname"
-      admin_username = "adminuser"
-      admin_password = "Password1234!"
-   }
-
-   os_profile_windows_config {
-      provision_vm_agent = true
-   }
-   }
-   ```
-
-   ### Explanation:
-   - **Provider Block**: Specifies the provider (in this case, Azure).
-   - **Resource Group**: Defines the resource group where all other resources will reside.
-   - **Virtual Network**: Defines a virtual network with a specified address space.
-   - **Subnet**: Creates a subnet within the virtual network.
-   - **Network Interface**: Creates a network interface card for the VM.
-   - **Virtual Machine**: Defines the virtual machine, including the operating system, size, and network settings.
-
-1. Click on **Commit** in the **main.tf** page.
-
-   ![](images/66.png)
-
-1. Confirm by clicking **Commit** again.
-
-   ![](images/67.png)
-
 1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
 
 1. Click **New pipeline** in the **Pipeline** window.
@@ -353,13 +265,13 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/10.png)
 
-1. Click **Defender_for_cloud** on the **Select a repository** pane.
+1. Click **eShopOnWeb** on the **Select a repository** pane.
 
-   ![](images/11.png)
+   ![](images/12.png)
 
 1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
 
-   ![](images/12.png)
+   ![](images/164.png)
 
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
@@ -507,36 +419,6 @@ For exact pricing details, especially as they can vary based on the size of the 
 
 To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
 
-#### Configure the eShopOnWeb team project in Azure DevOps
-
-1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
-
-   ```
-   https://azuredevopsdemogenerator.azurewebsites.net/
-   ```
-  
-1. Click on **Sign in** and log in using the Microsoft account associated with your Azure DevOps subscription.
-
-    ![](images/lab1-image2.png)
-
-1. Please click on **Accept** to grant permission to access your subscription.
-
-1. Click **Choose Template**.
-
-    ![](images/lab1-image3.png)
-
-1. Select the **eShopOnWeb (1)** template and click on **Select Template (2)**.
-
-    ![](images/lab1-image4.png)
-
-1. Provide a project name, **eShopOnWeb (1)**, and choose your **Organization (2)**, then click on **Create Project (3)** and wait for the process to complete.
-
-   ![](images/lab1-image5.png)
-
-1. Once the process is complete, click on **Navigate to project**.
-
-   ![](images/lab1-image6.png)
-
 #### Enable Advanced Security from Portal
 
 GitHub Advanced Security for Azure DevOps includes extra permissions for more levels of control around Advanced Security results and management. Be sure to adjust individual permissions for your repository.
@@ -557,21 +439,25 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 1. Advanced Security and Push Protection are now enabled. You can also onboard Advanced Security at [Project-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#project-level-onboarding) and [Organization-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#organization-level-onboarding) as well but we recommend for this hands on lab to enable it only for repositry level.
 
-#### Update the pipeline and create a pull request
+#### Create a pull request
 
-In this task, you will remove the Azure deployment task codes from the pipeline.
+1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
 
-1. Navigate to the **Pipelines (1)** in the left menu and select the **eShopOnWeb (2)** pipeline.
+1. Click **New pipeline** in the **Pipeline** window.
 
-   ![allow-permissions](images/pipev.png)
+1. Select **Azure Repos Git (YAML)** on the **Where is your code?** pane.
 
-1. Click on **Edit** on top right corner.
+   ![](images/10.png)
 
-   ![allow-permissions](images/editv2.png)
+1. Click **eShopOnWeb** on the **Select a repository** pane.
 
-1. Make sure you **Remove** the code in the pipeline which includes the **test** and **production** deployments tasks (from line 70 till the end). If you won't remove the deployment task the pipeline might fail.
+   ![](images/12.png)
 
-1. The final code should look like the one below
+1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
+
+   ![](images/164.png)
+
+1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
    ```
     trigger:
@@ -648,12 +534,9 @@ In this task, you will remove the Azure deployment task codes from the pipeline.
 
    ![allow-permissions](images/valv.png)
 
-1. Select **Create a new branch for this commit**, keep the default value, and click **Save**. Finally, click **Run**.
-
-   ![allow-permissions](images/savev.png)
+1. Click **Save**. Finally, click **Run**.
 
 1. Navigate to the pipeline and select it. The execution may take approximately 5 minutes to complete, so please wait until the build finishes.
-
 
 ## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
 
@@ -869,13 +752,13 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/10.png)
 
-1. Click **Defender_for_cloud** on the **Select a repository** pane.
+1. Click **eShopOnWeb** on the **Select a repository** pane.
 
-   ![](images/11.png)
+   ![](images/12.png)
 
 1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
 
-   ![](images/12.png)
+   ![](images/164.png)
 
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
@@ -941,6 +824,14 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 1. Go to the Summary tab, and you will find the **Snyk report** under the *Snyk tab*.
 
    ![](images/93.png)
+
+1. Go to the Azure portal and search for **Microsoft Defender for Cloud**.
+
+1. In the Microsoft Defender for Cloud dashboard, navigate to the **Recommendations** section.
+
+1. Look for recommendations under **Secure development practices** or **Dependency management**. These recommendations should now reflect the integration with Snyk.
+
+1. Specifically, the recommendation to use secure development practices will highlight the importance of dependency management and regular vulnerability scans.
 
 ## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
