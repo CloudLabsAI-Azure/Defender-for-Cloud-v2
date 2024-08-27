@@ -45,11 +45,7 @@ In this module, we'll explore an alternative remediation method using Azure Reso
 
 Once deployed, the Logic App should appear as follows:
 
-![](./images/bulk-update-1.png)
-
- >**Note:** Click on **Edit** in the Azure Logic App interface allows you to modify the existing workflow or configuration of the Logic App.
-
-   ![alert_detected](images/mls2.png)
+  ![](./images/bulk-update-1.png)
 
 **Step-by-Step Walkthrough:**
 
