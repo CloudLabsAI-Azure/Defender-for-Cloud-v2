@@ -215,7 +215,8 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
-1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, update the default value of "$(System.DefaultWorkingDirectory)/**/*.zip" to **"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"**.
+1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like:
+ **"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"**.
 
    ![](images/27.png)
 
@@ -571,7 +572,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
    | Connector name | AzureDevopsconnector |
    | Subscription | Choose the default subscription |
    | Resource group | defenderforcloud |
-   | Location | east us|
+   | Location | East US|
 
    ![alert_detected](images/advlab52.png)
 
@@ -695,8 +696,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
 1. Select **eShopOnWeb** and then click on **Add selected repositories**, wait until the import is completed.
 
-    ![](images/172.png)
-
+   ![](images/172.png)
 
 1. Navigate to the **Setting > Snyc Code** and make sure **Enable Snyk code** is enable.
 
