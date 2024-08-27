@@ -89,6 +89,14 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/lab1-image6.png)
 
+1. Click on **Repos** > **Branches**, then click the ellipsis next to your branch and select **Branch security**.
+
+   ![](images/167.png)
+
+1. Select **Project Administrators** and set **Bypass policies when pushing** to **Allow**.
+
+   ![](images/166.png)
+
 ### 3. Create a Simple HTML File
 
 1. Click on **Repos (1)>Files (2)**, Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section. This menu provides additional actions you can take within the repository.
@@ -536,7 +544,9 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 1. Click **Save**. Finally, click **Run**.
 
-1. Navigate to the pipeline and select it. The execution may take approximately 5 minutes to complete, so please wait until the build finishes.
+1. Please navigate to the pipeline and select it. The execution may take around 5 minutes to complete. Kindly wait until the build finishes, then review the pipeline result.
+
+    ![](images/165.png)
 
 ## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
 
@@ -617,8 +627,11 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
 **Snyk** is a well-known tool for vulnerability scanning in open source dependencies. Here’s how to integrate Snyk into your Azure DevOps pipeline to identify security issues:
 
-1. **Go to [Snyk's website](https://snyk.io/).**
+1. Navigate to **Snyk's website** using the link below. 
 
+   ```
+   https://snyk.io/
+   ```
 1. **Click on "Start free"** or **"Sign up"** located on the left of the page.
     
    ![](images/71.png)
@@ -664,31 +677,32 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/135.png)
 
-1. On **where is the code you want to scan** page, select **Github** and then click **Next Step**.
+1. On **where is the code you want to scan** page, select **Skip for now**.
 
-   ![](images/159.png)
+1. Select to **Integrations** from the left pannel and then select on **Azure Repos**.
 
-1. Set sccess permissions to **Private and Public repositories** and then click **Next Step**.
+   ![](images/169.png)
 
-   ![](images/160.png)
+1. On the account credentials page enter your azure devops organization name and enter a personal access token.
 
-1. Configure automation settings and authenticate by clicking **Authenticate Github**.
+   ![](images/170.png)
 
-   ![](images/161.png)
+   >**Note**: Click on **Create a personal access token**, name it **mypattoken**, grant it full access, and then generate the token. Once created, copy the token and paste it into the **Personal Access Token** field on the Snyk page.
 
-1. **Authorize Snyk** to access your GitHub account by clicking "Authorize Snyk" on the GitHub authorization page.
+1. Navigate to the **Projects** and click on **Add project** then select **Azure Repos**.
 
-   ![](images/162.png)
+   ![](images/171.png)
 
-1. Select all the present repository and then click **Import and scan**.
+1. Select **eShopOnWeb** and then click on **Add selected repositories**, wait until the import is completed.
 
-   ![](images/163.png)
+    ![](images/172.png)
 
-1. Access your **Snyk account settings** to retrieve your **API token for authentication** and record it in your notepad.
- 
-   ![](images/70.png)
 
-1. On your lab computer, open the Azure DevOps portal with the **Defender_for_cloud** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
+1. Navigate to the **Setting > Snyc Code** and make sure **Enable Snyk code** is enable.
+
+   ![](images/168.png)
+
+1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
 
@@ -790,10 +804,96 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    - For **Snyk API token**, select the API from the dropdown menu.
    - For **What do you want to test**, choose **Code**.
-   - For **Project name in Synk**, enter **Synk Security Scan**.
+   - For **Code Testing severity threshold**, enter **High**.
+   - Fail build if snyk finds issues should be **enable**.
    - Click **Add**.
 
-    ![](images/83.png)
+     ![](images/83.png)
+
+1. Final code should be similar to the below code:
+
+   ```
+   trigger:
+   - main
+
+   pool:
+     vmImage: 'ubuntu-latest'
+
+   steps:
+   - task: UseNode@1
+     inputs:
+       version: '14.x'
+     displayName: 'Install Node.js'
+
+   - script: |
+      npm install -g snyk
+     displayName: 'Install Snyk CLI'
+
+   - task: SnykSecurityScan@1
+     inputs:
+       serviceConnectionEndpoint: 'odluser1434697-eShopOnWeb-b5acb79e-5b3d-4c6f-b2dd-efc4dda52077'
+       testType: 'code'
+       codeSeverityThreshold: 'high'
+       failOnIssues: true
+   ```
+  
+  This YAML file is an Azure Pipelines configuration script used to automate tasks within a DevOps pipeline. Below is an explanation of each section and step:
+
+   - **Trigger**
+   
+      ```yaml
+      trigger:
+         - main
+      ```
+       - This section specifies that the pipeline should be triggered whenever a commit is made to the `main` branch.
+
+   - **Pool**
+ 
+      ```yaml
+      pool:
+         vmImage: 'ubuntu-latest'
+      ```
+       - The `pool` specifies the virtual machine image to be used for running the pipeline. Here, it's set to use the latest version of an Ubuntu-based image.
+
+   - **Steps**: This section defines a series of tasks that the pipeline will execute.
+
+   - **Installing Node.js**
+
+      ```yaml
+      steps:
+         - task: UseNode@1
+           inputs:
+            version: '14.x'
+         displayName: 'Install Node.js'
+      ```
+      - **`task: UseNode@1`**: This task is used to install a specific version of Node.js.
+      - **`version: '14.x'`**: Specifies that Node.js version 14.x should be installed.
+      - **`displayName: 'Install Node.js'`**: Provides a human-readable name for the task, making it easier to identify in the pipeline logs.
+
+   - **Installing Snyk CLI**
+      ```yaml
+      - script: |
+         npm install -g snyk
+      displayName: 'Install Snyk CLI'
+      ```
+      - **`script`**: This step runs a shell script to install the Snyk CLI globally.
+      - **`npm install -g snyk`**: Uses npm (Node Package Manager) to install the Snyk CLI globally on the virtual machine.
+      - **`displayName: 'Install Snyk CLI'`**: Provides a human-readable name for the task.
+
+   - **Running Snyk Security Scan**
+      ```yaml
+      - task: SnykSecurityScan@1
+        inputs:
+          serviceConnectionEndpoint: 'odluser1434697-eShopOnWeb-b5acb79e-5b3d-4c6f-b2dd-efc4dda52077'
+         testType: 'code'
+         codeSeverityThreshold: 'high'
+         failOnIssues: true
+      ```
+      - **`task: SnykSecurityScan@1`**: This task runs a Snyk security scan as part of the pipeline.
+      - **`serviceConnectionEndpoint`**: Refers to a service connection in Azure DevOps that is used to authenticate with Snyk. The identifier is `'odluser1434697-eShopOnWeb-b5acb79e-5b3d-4c6f-b2dd-efc4dda52077'`.
+      - **`testType: 'code'`**: Specifies that the scan should be run on the source code (Static Application Security Testing, or SAST).
+      - **`codeSeverityThreshold: 'high'`**: Configures the scan to only flag issues with a severity level of "high" or above.
+      - **`failOnIssues: true`**: The pipeline will fail if any issues are found that meet or exceed the specified severity threshold.
 
 1. Click **Save and Run** then again click **Save and Run** to start the Build Pipeline process.
 
