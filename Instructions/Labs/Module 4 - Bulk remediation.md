@@ -1,4 +1,4 @@
-# **Module 4 - Bulk Remediation**
+# **Lab 4 : Bulk Remediation**
 
 In this module, we'll explore an alternative remediation method using Azure Resource Graph (ARG). Instead of relying on Defender for Cloud triggers or governance flows, we'll directly query ARG and build our remediation process based on that data.
 

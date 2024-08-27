@@ -21,93 +21,6 @@ By the end of this lab, you will be able to:
 - Basic understanding of Logic Apps and Azure DevOps.
 - Knowledge of cloud security principles.
 
-## Module 1 - Response Triggers
-
-### Task 1: Triggering the Flow
-
-In this task, you will set up a trigger in Microsoft Defender for Cloud to initiate an automated response flow. You'll explore various trigger options and configure them based on specific security events.
-
-### Task 2: Use Cases for Automated Trigger
-
-This task will guide you through common use cases where automated triggers are beneficial, such as responding to security alerts in real-time. You will configure automated responses and observe their impact.
-
-### Task 3: Use Cases for Manually Triggering the Response
-
-Here, you will explore scenarios where manual intervention is necessary. You'll learn how to manually trigger responses and understand when this approach is more appropriate than automation.
-
-## Module 2 - Writing the Logic App
-
-### Task 1: Deploying / Creating the App
-
-In this task, you'll create and deploy a Logic App within Azure. This app will be the backbone of your automated response system, enabling you to manage security incidents effectively.
-
-### Task 2: Walkthrough of the Logic App
-
-#### Task 2.1: Setting the Trigger
-
-This sub-task focuses on configuring the initial trigger for your Logic App. You’ll set up the app to listen for specific events from Defender for Cloud and begin the response process.
-
-#### Task 2.2: Getting the Necessary Data
-
-Here, you'll learn how to fetch the necessary data from your Azure environment that your Logic App will use to determine the appropriate response actions.
-
-#### Task 2.3: Perform the Remediation
-
-In this sub-task, you'll configure the Logic App to perform remediation actions based on the data collected. You'll test these actions to ensure they work as expected.
-
-## Module 3 - Remediation Options
-
-### Task 1: Setting up Automated Remediation
-
-This task will guide you through setting up automated remediation processes. You'll configure your Logic App to automatically address specific security issues, reducing the need for manual intervention.
-
-### Task 2: Manual Remediation with Governance
-
-In this task, you'll learn how to perform manual remediation with a focus on governance and compliance. You'll explore how to maintain control over remediation actions while ensuring they align with organizational policies.
-
-## Module 4 - Bulk Remediation
-
-### Task 1: Deploying the Logic App
-
-Here, you'll deploy a Logic App specifically designed for bulk remediation. This task will focus on addressing multiple security issues simultaneously, streamlining your response efforts.
-
-### Task 2: Logic App Walkthrough
-
-This task provides a detailed walkthrough of the bulk remediation Logic App. You’ll learn how to configure the app to handle large-scale remediation tasks effectively.
-
-## Module 5 – Defender for DevOps
-
-### Task 1: Understanding CI/CD Pipelines in Azure DevOps
-
-In this task, you'll explore CI/CD pipelines within Azure DevOps and understand their role in the software development lifecycle. You'll identify potential security vulnerabilities within these pipelines.
-
-### Task 2: Identifying Security Issues in the Pipeline
-
-Here, you'll dive into identifying security issues in your DevOps pipeline. You'll use Defender for DevOps to pinpoint vulnerabilities and understand their potential impact.
-
-### Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]
-
-This read-only task provides an overview of GitHub Advanced Security (GHAS), highlighting its key features and how it integrates with your DevOps workflows to enhance security.
-
-### Task 4: Overview of Defender for DevOps (Including Pricing) [Read-Only]
-
-In this read-only task, you'll learn about Defender for DevOps, including its pricing model. You'll explore how it helps secure your development environments and pipelines.
-
-### Task 5: Securing Your Pipeline with GHAS and Defender for DevOps
-
-In this task, you'll integrate GHAS and Defender for DevOps into your pipeline to enhance security. You'll configure these tools to automatically detect and respond to security issues.
-
-### Task 6: Connecting Your Azure DevOps Environment to MDC
-
-Here, you'll connect your Azure DevOps environment to Microsoft Defender for Cloud (MDC). This integration will allow you to monitor your DevOps activities directly from Defender for Cloud.
-
-### Task 7: Integrating Non-MS Security Scan Solutions with MDC
-
-In this task, you'll learn how to integrate third-party security scanning tools with MDC. This will enable you to use a broader range of security tools while maintaining centralized visibility in Defender for Cloud.
-
-### Task 8: Role of Defender Cloud Security Posture Management (DCSPM)
-
-This task explores the role of Defender Cloud Security Posture Management (DCSPM) in your security strategy. You'll learn how DCSPM enhances your cloud security posture by providing insights and recommendations.
 
 ## Architecture
 
@@ -124,8 +37,6 @@ The architecture for this lab focuses on integrating Microsoft Defender for Clou
 2. **Logic Apps**: Azure Logic Apps are used to automate workflows and integrate systems and services across enterprises. In the context of Defender for Cloud, Logic Apps are employed to automate response actions, such as triggering remediation tasks when a security threat is detected.
 
 3. **Triggers**: Triggers are the starting points for Logic Apps and other automated workflows. In Defender for Cloud, triggers are used to initiate workflows based on specific security alerts or events, enabling automated or manual responses.
-
-4. **Remediation**: Remediation refers to the actions taken to fix security issues identified by Defender for Cloud. It can be automated through Logic Apps or handled manually to ensure that compliance and governance standards are met.
 
 5. **CI/CD Pipelines**: Continuous Integration and Continuous Deployment (CI/CD) pipelines are essential for modern software development, automating the process of building, testing, and deploying applications. Securing these pipelines with Defender for DevOps and GitHub Advanced Security helps to prevent vulnerabilities from being introduced into your software during the development process.
 

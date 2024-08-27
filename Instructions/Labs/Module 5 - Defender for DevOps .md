@@ -1,4 +1,4 @@
-# **Module 5 – Defender for DevOps**
+# **Lab 5 : Defender for DevOps**
 
 ## **Task 1: Understanding CI/CD pipelines in Azure DevOps**
 

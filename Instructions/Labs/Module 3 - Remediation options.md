@@ -1,4 +1,4 @@
-# **Module 3 - Remediation Options**
+# **Lab 3 : Remediation Options**
 
 In this module, we will explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
 
