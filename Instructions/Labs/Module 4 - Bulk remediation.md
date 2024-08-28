@@ -2,6 +2,8 @@
 
 In this module, we'll explore an alternative remediation method using Azure Resource Graph (ARG). Instead of relying on Defender for Cloud triggers or governance flows, we'll directly query ARG and build our remediation process based on that data.
 
+## Estimated Duration: 30 Minutes
+
 ## Task 1: Deploying the Logic App
 
 1. Open a new tab and paste the following link to create the Logic App in your target resource group:

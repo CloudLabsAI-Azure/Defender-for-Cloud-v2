@@ -1,5 +1,7 @@
 # **Lab 2 : Writing the Logic App**
 
+## Estimated Duration: 30 Minutes
+
 ### Task 1: Deploying/Creating the App
 
 In this task, you'll deploy a Logic App with pre-configured triggers based on Defender for Cloud recommendations and assign the required roles to the managed identity for remediation actions.

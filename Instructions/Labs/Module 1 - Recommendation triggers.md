@@ -1,5 +1,7 @@
 # **Lab 1 : Response Triggers (Read-Only)**
 
+## Estimated Duration: 20 Minutes
+
 ## Task 1: Initiating the Flow
 
 You can respond to recommendations, alerts, and compliance findings using **Logic Apps** (we'll create one in Module 2). The response logic app can be triggered either automatically or manually.

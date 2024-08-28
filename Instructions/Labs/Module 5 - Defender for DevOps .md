@@ -1,5 +1,7 @@
 # **Lab 5 : Defender for DevOps**
 
+## Estimated Duration: 180 Minutes
+
 ## **Task 1: Understanding CI/CD pipelines in Azure DevOps**
 
 Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
@@ -55,7 +57,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. On the **Organization Settings** page, go to the Security section and click **Policies** (1). Enable the toggles for both **Third-party application access via OAuth** (2) and **Allow public projects** (3), then click **Save** (4) when prompted to Change policy setting.
 
-    ![](images/nls1.png)
+   ![](images/nls1.png)
 
 1. In the **Organization Settings** window, click on **Settings** in the left menu. On the settings page, toggles for **Creation of Classic Release Pipeline** option.
 
@@ -69,17 +71,17 @@ CD extends CI by automatically deploying all code changes to a production enviro
   
 1. Click on **Sign in** and log in using the Microsoft account associated with your Azure DevOps subscription.
 
-    ![](images/lab1-image2.png)
+   ![](images/lab1-image2.png)
 
 1. Please click on **Accept** to grant permission to access your subscription.
 
 1. Click **Choose Template**.
 
-    ![](images/lab1-image3.png)
+   ![](images/lab1-image3.png)
 
 1. Select the **eShopOnWeb (1)** template and click on **Select Template (2)**.
 
-    ![](images/lab1-image4.png)
+   ![](images/lab1-image4.png)
 
 1. Provide a project name, **eShopOnWeb (1)**, and choose your **Organization (2)**, then click on **Create Project (3)** and wait for the process to complete.
 
@@ -547,7 +549,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 1. Please navigate to the pipeline and select it. The execution may take around 5 minutes to complete. Kindly wait until the build finishes, then review the pipeline result.
 
-    ![](images/165.png)
+   ![](images/165.png)
 
 ## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
 
@@ -664,11 +666,11 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
  
    - **Password:** 
  
-       ![Enter Your Password](images/139.png)
+      ![Enter Your Password](images/139.png)
 
 1. The email containing the verification code can sometimes creep into the archive/spam folders within your Outlook. Copy the verification code.
 
-      ![Enter Your Password](images/140.png)
+   ![Enter Your Password](images/140.png)
 
 1. Navigate back to the **Device Verifition** page, enter the code you copied and click on **Verify**.
 
