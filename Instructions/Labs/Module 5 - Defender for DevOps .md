@@ -946,9 +946,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
 1. In the Microsoft Defender for Cloud dashboard, navigate to the **Recommendations** section.
 
-1. Look for recommendations under **Secure development practices** or **Dependency management**. These recommendations should now reflect the integration with Snyk.
-
-1. Specifically, the recommendation to use secure development practices will highlight the importance of dependency management and regular vulnerability scans.
 
 ## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
 
