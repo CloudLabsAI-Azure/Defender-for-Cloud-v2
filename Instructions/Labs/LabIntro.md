@@ -11,11 +11,8 @@ In this hands-on lab, you will explore Microsoft Defender for Cloud, focusing on
 Understand how to utilize Azure DevOps and Defender for Cloud to enhance your cloud security posture. By the end of this lab, you will be able to:
 
 - **Getting Started with Defender for Cloud:** Learn how to trigger automated and manual responses using Defender for Cloud. Gain insight into initiating and managing cloud security alerts and responses.
-
 - **Writing and Deploying Logic Apps:** Develop hands-on skills in writing and deploying Logic Apps for cloud security automation. Understand how to integrate these apps into your cloud security strategy.
-
 - **Implementing Remediation Strategies:** Explore automated and manual remediation options within Defender for Cloud and evaluate their effectiveness in addressing security issues.
-
 - **Securing DevOps Pipelines:** Integrate security scanning solutions into your DevOps pipelines with GHAS and Defender for DevOps, ensuring continuous security throughout the development lifecycle.
 
 ## Pre-requisites
@@ -23,7 +20,6 @@ Understand how to utilize Azure DevOps and Defender for Cloud to enhance your cl
 - Familiarity with Microsoft Defender for Cloud.
 - Basic understanding of Logic Apps and Azure DevOps.
 - Knowledge of cloud security principles.
-
 
 ## Architecture
 
