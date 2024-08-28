@@ -1,6 +1,15 @@
 # **Lab 2 : Writing the Logic App**
 
+In this lab, will guide you through common use cases where automated triggers are beneficial, such as responding to security alerts in real-time. You will configure automated responses and observe their impact.
+
 ## Estimated Duration: 30 Minutes
+
+## Lab objectives :
+
+In this lab, you will complete the following tasks:
+
+- Task 1: Deploying/Creating the App
+- Task 2: Walkthrough of the Logic App
 
 ### Task 1: Deploying/Creating the App
 
@@ -76,11 +85,13 @@ The deployed Logic App should look like this:
 
    ![](./images/step3-remediation-api.png)
 
-### Conclusion
+### **Summary**
 
-In this module, we demonstrated how to create a Logic App for a specific recommendation, configure it for remediation, and assign the appropriate identity and permissions. We also explored using the Service REST API endpoints for executing remediation actions.
+In this Lab, we demonstrated how to create a Logic App for a specific recommendation, configure it for remediation, and assign the appropriate identity and permissions. We also explored using the Service REST API endpoints for executing remediation actions.
 
 ### Next Steps
 
 - Review how to [connect this Logic App to a recommendation](./Module%203%20-%20Remediation%20options.md).
 - Explore the [available trigger options](./Module%201%20-%20Recommendation%20triggers.md).
+
+## You have successfully completed the lab >> Click on Next

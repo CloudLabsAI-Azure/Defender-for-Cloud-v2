@@ -1,6 +1,16 @@
 # **Lab 1 : Response Triggers (Read-Only)**
 
+In this lab, you will set up a trigger in Microsoft Defender for Cloud to initiate an automated response flow. You'll explore various trigger options and configure them based on specific security events.
+
 ## Estimated Duration: 20 Minutes
+
+## Lab objectives :
+
+In this lab, you will complete the following tasks:
+
+- Task 1: Initiating the Flow
+- Task 2: Scenarios for Automated Triggers
+- Task 3: Scenarios for Manual Triggers
 
 ## Task 1: Initiating the Flow
 
@@ -29,4 +39,9 @@ Manual triggers are best suited for the following scenarios:
 
 ![Workshop Focus](./images/recommendation-manual-trigger.png "Focus areas for the workshop and manual trigger")
 
+## **Summary**
+In this lab, In this lab, you configured automated and manual response triggers in Microsoft Defender for Cloud using Logic Apps. You explored scenarios for both types of triggers to manage security findings and policy adherence effectively.
+
 Next, let's move on to [creating the response logic app](./Module%202%20-%20Writing%20Logic%20App.md).
+
+## You have successfully completed the lab >> Click on Next

@@ -1,6 +1,21 @@
 # **Lab 5 : Defender for DevOps**
 
+In this lab, we'll explore integrating GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps into your CI/CD pipeline to enhance security. We’ll focus on using GHAS and Defender for DevOps to automatically detect and address security issues within your pipeline. Instead of solely relying on traditional security measures, we’ll configure these tools to provide continuous security assessments and proactive responses directly within your DevOps environment.
+
 ## Estimated Duration: 180 Minutes
+
+## Lab objectives :
+
+In this lab, you will complete the following tasks:
+
+- Task 1: Understanding CI/CD pipelines in Azure DevOps
+- Task 2: Identifying security issues in the pipeline
+- Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]
+- Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]
+- Task 5: Securing your pipeline with GHAS
+- Task 6: Connecting and Securing your Azure DevOps environment to MDC
+- Task 7: Integrating non-MS security scan solutions with MDC
+- Task 8: Role of Defender Cloud Security Posture Management (DCSPM)
 
 ## **Task 1: Understanding CI/CD pipelines in Azure DevOps**
 
@@ -1027,6 +1042,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
  >**Note**: It may take up to 24 hours to receive all the recommendations.
 
-### Conclusion
+## **Summary**  
+In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, connecting Azure DevOps to Microsoft Defender for Cloud (MDC), and incorporating third-party security scanning solutions with MDC. Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
 
-In this module, you’ve explored essential aspects of securing your CI/CD pipelines and development environments. You started by understanding the role of CI/CD pipelines and identifying potential vulnerabilities. Using Defender for DevOps, you pinpointed and assessed security issues, while also reviewing GitHub Advanced Security (GHAS) and Defender for DevOps features and pricing. You successfully integrated GHAS and Defender for DevOps into your pipeline, connected Azure DevOps to Microsoft Defender for Cloud (MDC), and learned to incorporate third-party security scanning tools with MDC. Lastly, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module has provided you with comprehensive tools and strategies to effectively secure your development workflows.
+## You have successfully completed the lab

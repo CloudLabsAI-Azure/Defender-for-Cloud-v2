@@ -1,8 +1,15 @@
 # **Lab 3 : Remediation Options**
 
-In this module, we will explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
+In this lab, we will explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
 
 ## Estimated Duration: 40 Minutes
+
+## Lab objectives :
+
+In this lab, you will complete the following tasks:
+
+- Task 1: Setting Up Automated Remediation
+- Task 2: Manual Remediation with Governance
 
 ## Task 1: Setting Up Automated Remediation
 
@@ -95,10 +102,18 @@ In this module, we will explore how to leverage Defender for Cloud’s built-in 
 
        ![](./images/117.png)
 
+### **Summary**
+
+In this lab, you set up automated remediation in Microsoft Defender for Cloud using Workflow Automation to address storage account recommendations. You also configured manual remediation with Governance Rules for review and controlled execution of actions, demonstrating both automated and manual approaches to handling security recommendations.
+
 ### References
 
 - To review the Logic App, click [here](./Module%202%20-%20Writing%20Logic%20App.md).
 - Explore the Workflow Automation [documentation](https://learn.microsoft.com/en-us/azure/defender-for-cloud/workflow-automation).
 - Check out the [Governance Rules](https://learn.microsoft.com/en-us/azure/defender-for-cloud/episode-fifteen).
 
+### Next Steps
+
 If you’re considering performing bulk remediation for all existing "unhealthy" resources, explore the [bulk remediation](./Module%204%20-%20Bulk%20remediation.md) options.
+
+## You have successfully completed the lab >> Click on Next

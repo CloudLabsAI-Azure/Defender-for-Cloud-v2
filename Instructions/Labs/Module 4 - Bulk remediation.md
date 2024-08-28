@@ -1,8 +1,15 @@
 # **Lab 4 : Bulk Remediation**
 
-In this module, we'll explore an alternative remediation method using Azure Resource Graph (ARG). Instead of relying on Defender for Cloud triggers or governance flows, we'll directly query ARG and build our remediation process based on that data.
+In this lab, we'll explore an alternative remediation method using Azure Resource Graph (ARG). Instead of relying on Defender for Cloud triggers or governance flows, we'll directly query ARG and build our remediation process based on that data.
 
 ## Estimated Duration: 30 Minutes
+
+## Lab objectives :
+
+In this lab, you will complete the following tasks:
+
+- Task 1: Deploying the Logic App
+- Task 2: Logic App Walkthrough
 
 ## Task 1: Deploying the Logic App
 
@@ -82,7 +89,8 @@ Once deployed, the Logic App should appear as follows:
 
      ![](./images/bulk-update-step-4.png)
 
-
-### Conclusion
+### Summary
 
 In this module, you have learned how to conduct bulk remediation based on Azure Resource Graph (ARG) data. This approach can also be applied to other data queries within ARG, enhancing your ability to manage and remediate resources efficiently.
+
+## You have successfully completed the lab >> Click on Next
