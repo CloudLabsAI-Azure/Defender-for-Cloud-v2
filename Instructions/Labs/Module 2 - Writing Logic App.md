@@ -91,7 +91,6 @@ In this Lab, we demonstrated how to create a Logic App for a specific recommenda
 
 ### Next Steps
 
-- Review how to [connect this Logic App to a recommendation](./Module%203%20-%20Remediation%20options.md).
-- Explore the [available trigger options](./Module%201%20-%20Recommendation%20triggers.md).
+- If you’re considering performing remediation for all existing "unhealthy" resources, explore the  [Remediation Options](./Module%203%20-%20Remediation%20options.md).
 
 ## You have successfully completed the lab >> Click on Next
