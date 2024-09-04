@@ -221,13 +221,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/33.png)
 
-1. Click on **Add an Artifact** tab and select the **eShopOnWeb (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
+1. Click on **Add an Artifact(1)** tab and select the **eShopOnWeb (2)**  in the Source (build pipeline) field. Click **Add (3)** to confirm the selection of the artifact.
 
-   ![](images/25.png)
+   ![](images/artifact1.png)
 
-1. On the All pipelines > New Release Pipeline pane, Click on **Tasks** tab and ensure that the **stage 1** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
+1. On the All pipelines > New Release Pipeline pane, Click on **Tasks** tab and ensure that the **Stage 1** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
 
-   ![](images/28.png)
+   ![](images/stage.png)
 
    >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
