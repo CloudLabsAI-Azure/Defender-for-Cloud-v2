@@ -35,7 +35,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 6. Navigate to **Settings** and select **Identity (1)** from the list.
 
-7. Choose **System assigned (2)** and set the Status to **On (3)**.
+7. Choose **System assigned (2)** and make sure the Status is set to **On (3)**.
 
 8. Set the Permissions by clicking **Azure role assignments (4)**.
 
