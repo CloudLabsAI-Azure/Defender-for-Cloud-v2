@@ -69,7 +69,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![Azure DevOps](images/az-400-lab3-3.png)
 
-1. On the **Organization Settings** page, go to the Security section and click **Policies** (1). Enable the toggles for both **Third-party application access via OAuth** (2) and **Allow public projects** (3), then click **Save** (4) when prompted to Change policy setting.
+1. On the **Organization Settings** page, go to the Security section and click **Policies** (1). Enable the toggles for both **Third-party application access via OAuth** (2) and **Allow public projects** (3).
 
    ![](images/nls1.png)
 
@@ -150,7 +150,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. Navigate back to the **Pipelines** pane in of the **Pipelines** hub.
 
-1. In the **Create your first Pipeline** window, click **Create pipeline**.
+1. In the **Pipelines** window, click **New pipeline**.
 
    > **Note**: We will use the wizard to create a new YAML Pipeline definition based on our project.
 
@@ -201,7 +201,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
     - Create a directory called `output` and copy `index.html` to it.
     - Publish the contents of `output` as build artifacts.
    
-8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
+8. Click **Save and Run** then click **Save and Run** to start the Build Pipeline process.
 
    ![](images/14.png)
 
@@ -221,13 +221,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/33.png)
 
-1. Select the **eShopOnWeb (1)**  in the Source (build pipeline) field. Click **Add (2)** to confirm the selection of the artifact.
+1. Click on **Add an Artifact(1)** tab and select the **eShopOnWeb (2)**  in the Source (build pipeline) field. Click **Add (3)** to confirm the selection of the artifact.
 
-   ![](images/25.png)
+   ![](images/artifact1.png)
 
-1. On the All pipelines > New Release Pipeline pane, ensure that the **stage 2** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
+1. On the All pipelines > New Release Pipeline pane, Click on **Tasks** tab and ensure that the **Stage 1** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
 
-   ![](images/28.png)
+   ![](images/stage.png)
 
    >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
@@ -257,6 +257,13 @@ CD extends CI by automatically deploying all code changes to a production enviro
 1. Verify that the web page loads successfully in a new web browser tab.
 
    ![](images/31.png)
+
+<validation step="d1bea6eb-b9ab-4f67-8bbd-f90e80f58b8e"/>
+
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+>- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+>- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+>- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
 ## **Task 2: Identifying security issues in the pipeline** 
 
@@ -555,11 +562,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
                 condition: succeededOrFailed()
     ```
      
-1. Click on **Validate and save**.
-
-   ![allow-permissions](images/valv.png)
-
-1. Click **Save**. Finally, click **Run**.
+1. Click on **Save and Run** and then **Save and Run** .
 
 1. Please navigate to the pipeline and select it. The execution may take around 5 minutes to complete. Kindly wait until the build finishes, then review the pipeline result.
 

@@ -35,7 +35,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 6. Navigate to **Settings** and select **Identity (1)** from the list.
 
-7. Choose **System assigned (2)** and set the Status to **On (3)**.
+7. Choose **System assigned (2)** and make sure the Status is set to **On (3)**.
 
 8. Set the Permissions by clicking **Azure role assignments (4)**.
 
@@ -48,6 +48,14 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 10. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
 
     ![](./images/173.png)
+
+    <validation step="576d60d4-518d-4d0b-9401-77165d05aa3b"/>
+
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+>- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+>- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+>- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+
 
 ### Task 2: Walkthrough of the Logic App
 
