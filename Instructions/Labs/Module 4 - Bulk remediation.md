@@ -15,22 +15,21 @@ In this lab, you will complete the following tasks:
 
 1. Open a new tab and paste the following link to create the Logic App in your target resource group:
 
-     [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudLabsAI-Azure%2FDefender-for-Cloud-v2%2Fmain%2FInstructions%2FLabs%2Ftemplate%2Fazuredeploybulkremediation.json)
-     
+   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudLabsAI-Azure%2FDefender-for-Cloud-v2%2Fmain%2FInstructions%2FLabs%2Ftemplate%2Fazuredeploybulkremediation.json)  
 
 2. On the **Custom deployment** blade, select the **defenderforcloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
 
-    ![](./images/151.png)
+   ![](./images/151.png)
 
 3. Click **Create** to start the deployment process.
 
 4. Wait for the deployment to complete and click **Go to resource group**.
 
-    ![](./images/mod2-gr.png)
+   ![](./images/mod2-gr.png)
 
 5. In the resource group, select the **mdcremovesharedprivateaccess-bulkupdate** Logic App from the list.
 
-    ![](./images/152.png)
+   ![](./images/152.png)
 
 6. Navigate to **Settings** and select **Identity (1)** from the list.
 
@@ -38,11 +37,11 @@ In this lab, you will complete the following tasks:
 
 8. Set the Permissions by clicking **Azure role assignments (4)**.
 
-    ![](./images/153.png)
+   ![](./images/153.png)
 
 9. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**.   
 
-     ![](./images/154.png)
+   ![](./images/154.png)
 
    > **Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
 
@@ -50,12 +49,12 @@ In this lab, you will complete the following tasks:
 
     ![](./images/157.png)
 
-<validation step="b68068ee-3edd-4d46-93e8-295ca9d07975"/>
+    <validation step="b68068ee-3edd-4d46-93e8-295ca9d07975"/>
 
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
->- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
->- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
->- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+    > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+    >- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+    >- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+    >- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
 ## Task 2: Logic App Walkthrough
 
