@@ -49,7 +49,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
    
    ![](images/AZ-400-odl.png)
    
-4. On the **Almost Done...** page fill the captcha and click on continue. 
+4. On the **Almost Done...** page fill in the captcha and click on continue. 
 
    ![](images/AZ-400-almost.png)
     
@@ -129,7 +129,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/23.png)
 
-1. Add the following contnet to `index.html` file:
+1. Add the following content to `index.html` file:
 
     ```html
     <!DOCTYPE html>
@@ -194,12 +194,12 @@ CD extends CI by automatically deploying all code changes to a production enviro
      displayName: 'Publish Artifacts'
    ```
 1. This YAML file does the following:
-    - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
-    - **Pool**: Uses an Ubuntu VM image for the build.
-    - **Steps**:
-    - Set up Python (although not used in this case, you might need it for other tasks).
-    - Create a directory called `output` and copy `index.html` to it.
-    - Publish the contents of `output` as build artifacts.
+   - **Trigger**: Runs the pipeline when changes are pushed to the `main` branch.
+   - **Pool**: Uses an Ubuntu VM image for the build.
+   - **Steps**:
+   - Set up Python (although not used in this case, you might need it for other tasks).
+   - Create a directory called `output` and copy `index.html` to it.
+   - Publish the contents of `output` as build artifacts.
    
 8. Click **Save and Run** then click **Save and Run** to start the Build Pipeline process.
 
@@ -207,7 +207,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 9. Wait for the Build Pipeline to complete successfully.
 
-    > **Note**: Each task from the YAML file is available for review, including any warnings and errors.
+   > **Note**: Each task from the YAML file is available for review, including any warnings and errors.
 
 ### 4. Create a Release Pipeline
 
@@ -229,7 +229,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/stage.png)
 
-   >**Note**: After Selecting your Azure subscription and click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
+   >**Note**: After Selecting your Azure subscription click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
 1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like:
  **"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"**.
@@ -244,11 +244,11 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/29.png)
 
-1. Wait until the release pipline successfully completed.
+1. Wait until the release pipeline is completed.
 
    ![](images/30.png)
 
-1. Navigate to the Azure portal interface, navigate to the resource group **asclab**, in the list of resources, click the **asclab-app-xxxxxxxxxxxxx** web app.
+1. Navigate to the Azure portal interface, navigate to the resource group **asclab**, and in the list of resources, click the **asclab-app-xxxxxxxxxxxxx** web app.
 
 1. On the web app blade, click **Browse**.
 
@@ -258,16 +258,16 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/31.png)
 
-<validation step="d1bea6eb-b9ab-4f67-8bbd-f90e80f58b8e"/>
+   <validation step="d1bea6eb-b9ab-4f67-8bbd-f90e80f58b8e"/>
 
-> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
->- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
->- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
->- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+   > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+   >- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+   >- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+   >- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
 ## **Task 2: Identifying security issues in the pipeline** 
 
-Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infrastructure as Code (IaC) templates for security issues. This process ensures early detection of vulnerabilities, enhances compliance, and improves your overall security posture within existing DevOps workflows.
+Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infrastructure as Code (IaC) templates for security issues. This process ensures early detection of vulnerabilities, enhances compliance and improves your overall security posture within existing DevOps workflows.
 
 1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
@@ -449,7 +449,7 @@ For exact pricing details, especially as they can vary based on the size of the 
 
 ## **Task 5: Securing your pipeline with GHAS**
 
-To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s a example of how to use GHAS and Defender for DevOps for security:
+To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s an example of how to use GHAS and Defender for DevOps for security:
 
 #### Enable Advanced Security from Portal
 
@@ -469,7 +469,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
     ![](images/lab1-image12.png)
 
-1. Advanced Security and Push Protection are now enabled. You can also onboard Advanced Security at [Project-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#project-level-onboarding) and [Organization-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#organization-level-onboarding) as well but we recommend for this hands on lab to enable it only for repositry level.
+1. Advanced Security and Push Protection are now enabled. You can also onboard Advanced Security at [Project-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#project-level-onboarding) and [Organization-level](https://learn.microsoft.com/en-us/azure/devops/repos/security/configure-github-advanced-security-features?view=azure-devops&tabs=yaml#organization-level-onboarding) as well but we recommend for this hands-on lab to enable it only for repository level.
 
 #### Create a pull request
 
@@ -570,7 +570,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 ## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
 
-1. Navigate to Azure portal.
+1. Navigate to the Azure portal.
 
 1. Search and select **Microsoft Defender for Cloud** from the portal
 
@@ -697,7 +697,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![alert_detected](images/129.png)
 
-1. Navigate back to the **Recommendations** page, filter the recommendations by selecting only **Azure DevOps connections**, and then choose the **Azure Devops repositories should have dependency vulnerability scanning findings resolved** recommendation.
+1. Navigate back to the **Recommendations** page, filter the recommendations by selecting only **Azure DevOps connections**, and then choose the **Azure DevOps repositories should have dependency vulnerability scanning findings resolved** recommendation.
 
    ![alert_detected](images/144.png)
 
@@ -717,7 +717,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![alert_detected](images/145.png)
 
-1. Click on the **View recommendations for all resources** form the top.
+1. Click on the **View recommendations for all resources** from the top.
 
    ![alert_detected](images/146.png)
 
@@ -732,6 +732,6 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
  >**Note**: It may take up to 24 hours to receive all the recommendations.
 
 ## **Summary**  
-In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, connecting Azure DevOps to Microsoft Defender for Cloud (MDC) Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
+In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, and connecting Azure DevOps to Microsoft Defender for Cloud (MDC) Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
 
 ## You have successfully completed the lab
