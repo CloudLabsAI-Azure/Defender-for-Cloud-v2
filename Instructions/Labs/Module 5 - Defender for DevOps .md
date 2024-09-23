@@ -231,7 +231,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    >**Note**: After Selecting your Azure subscription click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
-1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like: **"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"**.
+1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like `"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"`
 
    ![](images/27.png)
 
