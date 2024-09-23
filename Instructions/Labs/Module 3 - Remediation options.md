@@ -13,7 +13,7 @@ In this lab, you will complete the following tasks:
 
 ## Task 1: Setting Up Automated Remediation
 
-1. Navigate to Azure portal.
+1. Navigate to the Azure portal.
 
 1. Search and select **Microsoft Defender for Cloud** from the portal
 
@@ -48,59 +48,59 @@ In this lab, you will complete the following tasks:
 
 1. **Reasons for Manual Remediation:** You may opt for manual remediation to avoid unintended consequences, ensure human review, or prevent disruptions to critical systems.
 
-2. **Using Governance Rules:** Set up Governance Rules to forward alerts to a specific distribution list for review. The control owner can then manually execute the Logic App after review.
+1. **Using Governance Rules:** Set up Governance Rules to forward alerts to a specific distribution list for review. The control owner can then manually execute the Logic App after review.
 
-   1. From the **Environment settings** page, select **Governance rule**.
+1. From the **Environment settings** page, select **Governance rule**.
 
-      ![](./images/112.png)
+   ![](./images/112.png)
 
-   2. From the **Governance rules** page, click **Create governance rule**.
+1. From the **Governance rules** page, click **Create governance rule**.
 
-      ![](./images/113.png)
+   ![](./images/113.png)
 
-   3. On the **Create governance rule** screen, fill in the following details, then click **Next (4)**:
+1. On the **Create governance rule** screen, fill in the following details, then click **Next (4)**:
 
-      | Setting  | Value |
-      -----------|---------
-      | Rule name | **Review Shared Key Access (1)** |
-      | Scope | **Subscription (2)** |
-      | Priority | **1 (3)** |
+   | Setting  | Value |
+   -----------|---------
+   | Rule name | **Review Shared Key Access (1)** |
+   | Scope | **Subscription (2)** |
+   | Priority | **1 (3)** |
 
-      ![](./images/106.png)
+   ![](./images/106.png)
 
-   4. On the Conditions page, choose **By specific recommendation**, search for **Shared**, and select the recommendation titled **Storage accounts should restrict shared key access**.
+1. On the Conditions page, choose **By specific recommendation**, search for **Shared**, and select the recommendation titled **Storage accounts should restrict shared key access**.
 
-      ![](./images/111.png)
+   ![](./images/111.png)
 
-   5. Under **Set owner**, select **By email address** and enter the email address **<inject key="AzureAdUserEmail"></inject>**. Set a 90-day remediation timeframe and configure the email notification to be sent on **Monday**. Then click **Create**.
+1. Under **Set owner**, select **By email address** and enter the email address **<inject key="AzureAdUserEmail"></inject>**. Set a 90-day remediation timeframe and configure the email notification to be sent on **Monday**. Then click **Create**.
 
-      ![](./images/109.png)
+   ![](./images/109.png)
 
-   6. If a pop-up indicates that the rule was created successfully, choose the option to apply the rule to the existing unassigned recommendation.
+1. If a pop-up indicates that the rule was created successfully, choose the option to apply the rule to the existing unassigned recommendation.
 
-      ![](./images/110.png)
+   ![](./images/110.png)
 
-   7. The Control Owner can now review the recommendation in the Defender Portal and execute the remediation on the appropriate "unhealthy" resources, as outlined in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
+1. The Control Owner can now review the recommendation in the Defender Portal and execute the remediation on the appropriate "unhealthy" resources, as outlined in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 
-   8. Navigate to the **Recommendation** tab, search for **Shared**, and select the relevant recommendation.
+1. Navigate to the **Recommendation** tab, search for **Shared**, and select the relevant recommendation.
 
-      ![](./images/107.png)
+   ![](./images/107.png)
 
-   9. Click on **View recommendation for all resources** at the top, and expand the **Remediation** and **Affected Resources** sections.
+1. Click on **View recommendation for all resources** at the top, and expand the **Remediation** and **Affected Resources** sections.
 
-      ![](./images/108.png)
+   ![](./images/108.png)
 
-   10. In the search bar, locate the **asclabsxxxxxxxx** storage account, select it, and navigate to **Configuration** in the left panel. You’ll see that the Allow storage account access key option is **enabled**.
+1. In the search bar, locate the **asclabsxxxxxxxx** storage account, select it, and navigate to **Configuration** in the left panel. You’ll see that the Allow storage account access key option is **enabled**.
 
-       ![](./images/116.png)
+   ![](./images/116.png)
 
-   11. Return to the **Storage accounts should prevent shared key access** recommendation, select the affected storage account, and click on **Trigger Logic App**. Choose the appropriate logic app and then click **Trigger**.
+1. Return to the **Storage accounts should prevent shared key access** recommendation, select the affected storage account, and click on **Trigger Logic App**. Choose the appropriate logic app and then click **Trigger**.
 
-       ![](./images/115.png)
+   ![](./images/115.png)
 
-   12. In the search bar, locate the **asclabsxxxxxxxx** storage account, select it, and navigate to **Configuration** in the left panel. You’ll see that the Allow storage account access key option is now **disabled**.
+1. In the search bar, locate the **asclabsxxxxxxxx** storage account, select it, and navigate to **Configuration** in the left panel. You’ll see that the Allow storage account access key option is now **disabled**.
 
-       ![](./images/117.png)
+   ![](./images/117.png)
 
    <validation step="f96ddd2f-b0d3-4b1e-b6bb-d833f49007a6"/>
 
