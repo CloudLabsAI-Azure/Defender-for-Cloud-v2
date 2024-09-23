@@ -66,13 +66,13 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 1. The Logic App will create a connection to Defender for Cloud to retrieve the necessary data automatically.
 
-   ![](./images/step-1-trigger.png)
+     ![](./images/step-1-trigger.png)
 
 ####  Retrieving Necessary Data:
 
 1. For the remediation recommendation *"Storage accounts should prevent shared key access"*, we need:
 
-   ![](./images/remediation-steps.png)
+     ![](./images/remediation-steps.png)
 
    - Storage Account Name
    - Resource Group
@@ -80,7 +80,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 2. The Logic App will extract these variables from the trigger schema as shown below:
 
-   ![](./images/step2-getting-remediation-data.png)
+    ![](./images/step2-getting-remediation-data.png)
 
 #### Performing the Remediation:
 
@@ -90,7 +90,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 3. Utilize the variables obtained in Step 2.
 
-   ![](./images/step3-remediation-api.png)
+    ![](./images/step3-remediation-api.png)
 
 ### **Summary**
 
