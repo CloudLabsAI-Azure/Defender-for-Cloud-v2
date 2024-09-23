@@ -49,54 +49,54 @@ In this lab, you will complete the following tasks:
 
     ![](./images/157.png)
 
-    <validation step="b68068ee-3edd-4d46-93e8-295ca9d07975"/>
+<validation step="b68068ee-3edd-4d46-93e8-295ca9d07975"/>
 
-    > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
-    >- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
-    >- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-    >- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+>- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+>- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+>- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
 ## Task 2: Logic App Walkthrough
 
-   Once deployed, the Logic App should appear as follows:
+Once deployed, the Logic App should appear as follows:
 
-   ![](./images/bulk-update-1.png)
+![](./images/bulk-update-1.png)
 
 #### Step-by-Step Walkthrough:
 
 1. **Querying Azure Resource Graph (ARG):**
    
-   - Navigate to Azure portal.
+- Navigate to Azure portal.
 
-   - Search and select **Microsoft Defender for Cloud** from the portal
+- Search and select **Microsoft Defender for Cloud** from the portal
 
-      ![alert_detected](images/mls2.png)
+   ![alert_detected](images/mls2.png)
 
-   - Use the pre-defined query to retrieve data. Each recommendation has a corresponding query available on its page in Defender for Cloud.
+- Use the pre-defined query to retrieve data. Each recommendation has a corresponding query available on its page in Defender for Cloud.
 
-      ![](./images/bulk-update-step-1-a.png)
+   ![](./images/bulk-update-step-1-a.png)
 
-   - Click **Open query** to access ARG. Copy the KQL query for use in the next step.
+- Click **Open query** to access ARG. Copy the KQL query for use in the next step.
 
-      ![](./images/bulk-update-step-1-b.png)
+   ![](./images/bulk-update-step-1-b.png)
 
 2. **Setting Up the ARG Query:**
    
-   - Use HTTP POST to execute the ARG query. Ensure authentication is done via Managed Identity.
+- Use HTTP POST to execute the ARG query. Ensure authentication is done via Managed Identity.
 
-      ![](./images/bulk-update-step-2.png)
+   ![](./images/bulk-update-step-2.png)
 
 4. **Gathering Necessary Data:**
    
-   - Parse the query results to extract the required variables for remediation. This process is similar to the steps covered in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
+- Parse the query results to extract the required variables for remediation. This process is similar to the steps covered in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
 
-      ![](./images/bulk-update-step-3.png)
+   ![](./images/bulk-update-step-3.png)
 
 6. **Conducting the Remediation:**
    
-   - Loop through each unhealthy resource to perform remediation. Ensure you use Managed Identity for authentication here as well. The remediation process is similar to what was covered in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
+- Loop through each unhealthy resource to perform remediation. Ensure you use Managed Identity for authentication here as well. The remediation process is similar to what was covered in [Module 2](./Module%202%20-%20Writing%20Logic%20App.md).
 
-      ![](./images/bulk-update-step-4.png)
+   ![](./images/bulk-update-step-4.png)
 
 ### Summary
 

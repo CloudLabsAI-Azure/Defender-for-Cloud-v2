@@ -49,30 +49,30 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
     ![](./images/173.png)
 
-    <validation step="576d60d4-518d-4d0b-9401-77165d05aa3b"/>
+<validation step="576d60d4-518d-4d0b-9401-77165d05aa3b"/>
 
-    > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
-    >- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
-    >- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-    >- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+> **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+>- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+>- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+>- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
 ### Task 2: Walkthrough of the Logic App
 
-    The deployed Logic App should look like this:
+The deployed Logic App should look like this:
 
-    ![](./images/logic-app-walkthrough.png)
+![](./images/logic-app-walkthrough.png)
 
 #### Setting the Trigger:
 
 1. The Logic App will create a connection to Defender for Cloud to retrieve the necessary data automatically.
 
-     ![](./images/step-1-trigger.png)
+   ![](./images/step-1-trigger.png)
 
 ####  Retrieving Necessary Data:
 
 1. For the remediation recommendation *"Storage accounts should prevent shared key access"*, we need:
 
-     ![](./images/remediation-steps.png)
+   ![](./images/remediation-steps.png)
 
    - Storage Account Name
    - Resource Group
@@ -80,7 +80,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 2. The Logic App will extract these variables from the trigger schema as shown below:
 
-    ![](./images/step2-getting-remediation-data.png)
+   ![](./images/step2-getting-remediation-data.png)
 
 #### Performing the Remediation:
 
