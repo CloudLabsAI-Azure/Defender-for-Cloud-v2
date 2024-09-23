@@ -17,21 +17,21 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 1. Open a new tab and paste the following link to create the Logic App in your target resource group:
 
-    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json)
+   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json)
  
 2. On the **Custom deployment** blade, select the **defender for cloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
 
-    ![](./images/mod2-cd.png)
+   ![](./images/mod2-cd.png)
 
 3. Click **Create** to start the deployment process.
 
 4. Wait for the deployment to complete and click **Go to resource group**.
 
-    ![](./images/mod2-gr.png)
+   ![](./images/mod2-gr.png)
 
 5. In the resource group, select the **mdcremovesharedprivateaccess** Logic App from the list.
 
-    ![](./images/mod2-la.png)
+   ![](./images/mod2-la.png)
 
 6. Navigate to **Settings** and select **Identity (1)** from the list.
 
@@ -39,22 +39,22 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 8. Set the Permissions by clicking **Azure role assignments (4)**.
 
-    ![](./images/mod2-ar.png)
+   ![](./images/mod2-ar.png)
 
 9. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**. 
 
-    ![](./images/155.png)
+   ![](./images/155.png)
 
 10. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
 
-    ![](./images/173.png)
+   ![](./images/173.png)
 
-    <validation step="576d60d4-518d-4d0b-9401-77165d05aa3b"/>
+   <validation step="576d60d4-518d-4d0b-9401-77165d05aa3b"/>
 
-    > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
-    >- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
-    >- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-    >- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
+   > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps: 
+   >- Hit the Validate button for the corresponding task. If you receive a success message, you can proceed to the next task.
+   >- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+   >- If you need any assistance, please contact us at labs-support@spektrasystems.com. We are available 24/7 to help you out.
 
 ### Task 2: Walkthrough of the Logic App
 
