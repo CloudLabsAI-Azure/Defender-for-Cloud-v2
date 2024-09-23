@@ -58,17 +58,17 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 ### Task 2: Walkthrough of the Logic App
 
-The deployed Logic App should look like this:
+    The deployed Logic App should look like this:
 
-![](./images/logic-app-walkthrough.png)
+    ![](./images/logic-app-walkthrough.png)
 
-**Step 2.1 - Setting the Trigger:**
+#### Setting the Trigger:
 
 1. The Logic App will create a connection to Defender for Cloud to retrieve the necessary data automatically.
 
    ![](./images/step-1-trigger.png)
 
-**Step 2.2 - Retrieving Necessary Data:**
+####  Retrieving Necessary Data:
 
 1. For the remediation recommendation *"Storage accounts should prevent shared key access"*, we need:
 
@@ -82,7 +82,7 @@ The deployed Logic App should look like this:
 
    ![](./images/step2-getting-remediation-data.png)
 
-**Step 2.3 - Performing the Remediation:**
+#### Performing the Remediation:
 
 1. Use the Storage REST API [endpoint](https://learn.microsoft.com/en-us/rest/api/storagerp/storage-accounts/update?view=rest-storagerp-2023-01-01&tabs=HTTP) to perform the remediation.
 
