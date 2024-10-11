@@ -278,9 +278,9 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 2. Enter a name for your Folder, such as `terraform` and file name such as `ask.tf`.
 
-   ![](images/.png)
+   ![](images/lab15-8.png)
 
-1. Add the following content to `index.html` file:
+1. Add the following content to `ask.tf` file:
 
    ```
    resource azurerm_kubernetes_cluster "k8s_cluster" {
@@ -320,13 +320,112 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    }
    ```
 
-1. **Clone the Azure DevOps Repository:**
-   Open your terminal or command prompt and run the following command to clone your Azure DevOps repository:
+1. After writing your code, you can commit the changes by filling in the commit message and selecting whether to commit directly to the main branch or a different one.
+
+1. Click **Commit** to save the file to your repository.
+
+1. Navigate back to **teraform** folder and Click on the three-dot menu (`...`) in the top-right corner of the repository's file explorer section.
+
+1. Click on the three-dot menu to open a dropdown list. From the list, select the **Upload file(s)** option to upload files to the repository.
+
+    ![](images/lab5-1.png)
+
+1. Click the **Browse** button in the Commit window to select files for upload.
+
+   ![](images/lab5-2.png)
+
+1. Navigate to the `C:\Allfiles\terraform-file` folder, select all files, and click **Open**.
+
+1. Click on **Commit** button in the Commit window to select files for upload.
+
+    ![](images/lab5-3.png)
+
+1. Navigate to **Github** using the link below. 
+
+   ```
+   https://github.com/login
+   ```
+1. In the sign-in to GitHub page in edge browser, enter the **GitHub UserEmail** and **GitHub Password** and click on **Sign in**.
+
+   ![](images/lab5-4.png)
+
+   >**Note**: Navigate to the **Environment** tab to view the key-value pairs of the **GitHub UserEmail**, and **GitHub Password** in the **license** section. You can use the copy buttons under the actions column to have the values copied instantly. Alternatively, it is suggested to have the values copied over onto a notepad for easy accessibility. 
+
+     ![](images/158.png)
+
+1. Open a new tab and navigate to `https://www.microsoft.com/en-us/microsoft-365/outlook/log-in` then click on **Sign-in**.
+
+   ![](images/137.png)
+
+1. You'll see the **Sign into Microsoft Outlokk** tab. Here, enter your credentials:
+ 
+   - **Email/Username:** 
+ 
+       ![Enter Your Username](images/138.png)
+ 
+1. Next, provide your password:
+ 
+   - **Password:** 
+ 
+      ![Enter Your Password](images/139.png)
+
+1. The email containing the verification code can sometimes creep into the archive/spam folders within your Outlook. Copy the verification code.
+
+   ![Enter Your Password](images/140.png)
+
+1. Navigate back to the **Device Verifition** page, enter the code you copied and click on **Verify**.
+
+   ![](images/141.png)
+
+1. Under Dashboard, click **New** next to **Top repositories**.
+
+   ![](images/lab5-9.png)
+
+1. On the **Create a new repository** page, set the repository name to **defender-for-cloud**.
+
+   ![](images/lab5-8.png)
+
+1. Scroll down and select **Create repository**.
+
+   ![](images/lab5-10.png)
+
+1. Copy the repository link to Notepad, as you'll need it to complete this task, and then click on **Creating a new file**.
+
+   ![](images/lab5-7.png)
+
+1. Enter the name **defender-for-cloud.tf** and click on **Commit changes**.
+
+   ![](images/lab5-6.png)
+
+1. Select **Commit changes**.
+
+   ![](images/lab5-5.png)
+
+1. Return to Azure DevOps, click on **eShopOnWeb (1)**, and then select **Clone (2)**.
+
+   ![](images/lab5-11.png)
+
+1. Copy the repository link to the notepad you will be needing to complete this task.
+
+   ![](images/lab5-12.png)
+
+1. In your labvm, search and select powershell and run the following command to clone your Azure DevOps repository:
 
    ```bash
    git clone <azuredevopsrepo>
    ```
-   Navigate to the directory:
+
+   >**Note**: Replace <azuredevopsrepo> with repository link you copied in the previous step.  
+
+1. Enter **Email/Username**: <inject key="AzureAdUserEmail"></inject>, then click on **Next**.
+
+    ![](images/lab5-13.png)
+
+1. Enter **Password**: <inject key="AzureAdUserPassword"></inject>, then click on **Sign in**.
+
+   ![](images/lab5-14.png)
+
+1. Navigate to the directory:
 
    ```bash
    cd eShopOnWeb
@@ -346,36 +445,66 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    cp * ~/defender-for-cloud-files/   # Copies all files
    ```
 
-4. **Clone the GitHub Repository:**
-   Navigate to the directory where you want to clone the GitHub repository, then run:
+   ![](images/lab5-15.png)
+
+4. Open a new PowerShell window and run the command to clone the GitHub repository:
 
    ```bash
-   git clone https://github.com/github-cloudlabsuser-096/defender-for-cloud.git
+   git clone <azuregithubrepo>
    ```
-   Navigate to the GitHub repo directory:
+   >**Note**: Replace <azuregithubrepo> with repository link you copied in the previous steps.  
+
+1. Navigate to the GitHub repo directory:
+
    ```bash
    cd defender-for-cloud
    ```
 
-5. **Copy Files to GitHub Repository:**
-   Copy the files from the Azure DevOps Terraform folder to the GitHub repo:
+1. Copy the files from the Azure DevOps Terraform folder to the GitHub repo:
+
    ```bash
    cp ~/defender-for-cloud-files/* .   # Copies all files to the current directory
    ```
-
-6. **Stage, Commit, and Push the Changes:**
-   Stage the changes, commit them, and push to GitHub:
+1. Set your global user email:
 
    ```bash
-   git add .
-   git commit -m "Add Terraform files from Azure DevOps repo"
-   git push origin main  # Or replace 'main' with your branch name
+   git config --global user.email "you@example.com"
    ```
+
+   >**Note**: Replace **you@example.com** with your GitHub email, for example, `github_cloudlabsuser_101@cloudlabsaiuser.com`.
+
+1. Set your global user name:
+
+   ```bash
+   git config --global user.name "Your Name"
+   ```
+
+   >**Note**: Replace **Your Name** with your GitHub username, for example, `github-cloudlabsuser-101`.
+
+1. Check the current configuration (optional, to verify):
+
+   ```bash
+   git config --list
+   ```
+1. After setting your user information, you can commit changes with:
+
+   ```bash
+   git commit -m "Added new Terraform files"
+   ```
+1. Finally, push your changes to the remote repository (replace `origin` and `main` with your specific remote and branch names if needed):
+
+   ```bash
+   git push origin main
+   ```
+1. Go to the GitHub repository to access all the available files.
+
+   ![](images/lab5-16.png)
+
 1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
 
-2. Search for **Microsoft Security DevOps** in the Marketplace and open it.
+1. Search for **Microsoft Security DevOps** in the Marketplace and open it.
 
    ![](images/62.png)
 
