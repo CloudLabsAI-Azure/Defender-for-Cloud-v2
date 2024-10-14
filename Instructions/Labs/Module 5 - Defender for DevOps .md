@@ -1011,6 +1011,17 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 1. Navigate to the **Setting > Snyc Code** and make sure **Enable Snyk code** is enable.
 
    ![](images/168.png)
+
+1. Navigate to the **Setting > Genaral** and scroll down and record Organization ID it in your notepad.
+
+   ![](images/lab15-9.png)
+
+1. Access your **Snyk account settings** to retrieve your **API token for authentication** and record it in your notepad.
+
+   ![](images/70.png)
+
+
+
 1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
@@ -1043,7 +1054,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/80.png)
 
-1. Navigate back to Azure DevOps and click on **Project Settings** at the bottom left of the **Defender_for_cloud** project.
+1. Navigate back to Azure DevOps and click on **Project Settings** at the bottom left of the **eShopOnWeb** project.
 
 1. Scroll down on the **Project Settings** page and select **Service Principal.**
 
@@ -1087,23 +1098,39 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ```yaml
    trigger:
-   - main
-
+   - master
+ 
    pool:
-     vmImage: 'ubuntu-latest'
-
+   vmImage: 'ubuntu-latest'
+  
    steps:
-   - task: UseNode@1
-     inputs:
-       version: '14.x'
-     displayName: 'Install Node.js'
-
+   - task: MicrosoftSecurityDevOps@1
+   displayName: 'Microsoft Security DevOps'
+ 
    - script: |
-      npm install -g snyk
-     displayName: 'Install Snyk CLI'
+     echo "Verifying SARIF file creation..."
+     if [ -f $(Build.ArtifactStagingDirectory)/results.sarif ]; then
+       echo "SARIF file created successfully."
+       ls -la $(Build.ArtifactStagingDirectory)
+     else
+       echo "SARIF file not found."
+       exit 1
+     fi
+   displayName: 'Verify SARIF File Creation'
+ 
+   - task: PublishBuildArtifacts@1
+   displayName: 'Publish Artifact: CodeAnalysisLogs'
+   inputs:
+     PathtoPublish: '$(Build.ArtifactStagingDirectory)/results.sarif'
+     ArtifactName: 'CodeAnalysisLogs'
+ 
+   - task: AdvancedSecurity-Publish@1
+   displayName: 'Publish SARIF Results'
+   inputs:
+     sarifFilePaths: '$(Build.ArtifactStagingDirectory)/results.sarif'
    ```
 
-1. Click on the 16th line then press enter.
+1. Click on the 10th line then press enter.
 
 1. Expand **Task** pane from the right side then search and select **Snyk Security Scan**
 
@@ -1114,62 +1141,18 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
    - For **Snyk API token**, select the API from the dropdown menu.
    - For **What do you want to test**, choose **Code**.
    - For **Code Testing severity threshold**, enter **High**.
-   - Fail build if snyk finds issues should be **enable**.
+   - Fail build if snyk finds issues should be **disable**.
+
+      ![](images/83.png)
+
+   - For project name in Snyk, enter **Run Snyk Security Scan**.
+   - For Organization name (or ID) in snyk, enter the **organization id you copied** in snyk account.
+   - For Additional command-line arge for Snyk CLI (advanced), enter **--sarif --sarif-file-output=$(Build.ArtifactStagingDirectory)/results.sarif**.
    - Click **Add**.
 
-     ![](images/83.png)
-
+     ![](images/lab5-18.png)
+  
        - This section specifies that the pipeline should be triggered whenever a commit is made to the `main` branch.
-
-   - **Pool**
- 
-      ```yaml
-      pool:
-         vmImage: 'ubuntu-latest'
-      ```
-       - The `pool` specifies the virtual machine image to be used for running the pipeline. Here, it's set to use the latest version of an Ubuntu-based image.
-
-   - **Steps**: This section defines a series of tasks that the pipeline will execute.
-
-   - **Installing Node.js**
-
-      ```yaml
-      steps:
-         - task: UseNode@1
-           inputs:
-            version: '14.x'
-         displayName: 'Install Node.js'
-      ```
-
-      - **`task: UseNode@1`**: This task is used to install a specific version of Node.js.
-      - **`version: '14.x'`**: Specifies that Node.js version 14.x should be installed.
-      - **`displayName: 'Install Node.js'`**: Provides a human-readable name for the task, making it easier to identify in the pipeline logs.
-
-   - **Installing Snyk CLI**
-      ```yaml
-      - script: |
-         npm install -g snyk
-      displayName: 'Install Snyk CLI'
-      ```
-      - **`script`**: This step runs a shell script to install the Snyk CLI globally.
-      - **`npm install -g snyk`**: Uses npm (Node Package Manager) to install the Snyk CLI globally on the virtual machine.
-      - **`displayName: 'Install Snyk CLI'`**: Provides a human-readable name for the task.
-
-   - **Running Snyk Security Scan**
-      ```yaml
-      - task: SnykSecurityScan@1
-        inputs:
-          serviceConnectionEndpoint: 'odluser1434697-eShopOnWeb-b5acb79e-5b3d-4c6f-b2dd-efc4dda52077'
-         testType: 'code'
-         codeSeverityThreshold: 'high'
-         failOnIssues: true
-      ```
-
-       - **`task: SnykSecurityScan@1`**: This task runs a Snyk security scan as part of the pipeline.
-      - **`serviceConnectionEndpoint`**: Refers to a service connection in Azure DevOps that is used to authenticate with Snyk. The identifier is `'odluser1434697-eShopOnWeb-b5acb79e-5b3d-4c6f-b2dd-efc4dda52077'`.
-      - **`testType: 'code'`**: Specifies that the scan should be run on the source code (Static Application Security Testing, or SAST).
-      - **`codeSeverityThreshold: 'high'`**: Configures the scan to only flag issues with a severity level of "high" or above.
-      - **`failOnIssues: true`**: The pipeline will fail if any issues are found that meet or exceed the specified severity threshold.
 
 1. Click **Save and Run** then again click **Save and Run** to start the Build Pipeline process.
 
