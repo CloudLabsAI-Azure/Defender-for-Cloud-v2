@@ -13,39 +13,54 @@ In this lab, you will complete the following tasks:
 
 ## Task 1: Deploying the Logic App
 
-1. Open a new tab and paste the following link to create the Logic App in your target resource group:
+1. Download the `azuredeploybulkremediation.json` template manually from the following link (assuming the template exists and is accessible):
 
-   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https://experienceazure.blob.core.windows.net/templates/defender-for-cloud-v2/azuredeploybulkremediation.json)
+   ```
+   https://experienceazure.blob.core.windows.net/templates/defender-for-cloud-v2/azuredeploybulkremediation.json
+   ```
+1. Go to the [Azure Portal](https://portal.azure.com/).
 
-2. On the **Custom deployment** blade, select the **defenderforcloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
+1. Navigate to **"Deploy a custom template"**.
+
+   - In the search bar, type **"Template"**, and select **"Deploy a custom template"**.
+
+1. Click **"Build your own template in the editor"**.
+
+1. Upload the downloaded `azuredeploybulkremediation.json` file.
+
+1. Select your target **resource group** and other deployment details.
+
+1. Review and deploy the template.
+
+1. On the **Custom deployment** blade, select the **defenderforcloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
 
    ![](./images/151.png)
 
-3. Click **Create** to start the deployment process.
+1. Click **Create** to start the deployment process.
 
-4. Wait for the deployment to complete and click **Go to resource group**.
+1. Wait for the deployment to complete and click **Go to resource group**.
 
    ![](./images/mod2-gr.png)
 
-5. In the resource group, select the **mdcremovesharedprivateaccess-bulkupdate** Logic App from the list.
+1. In the resource group, select the **mdcremovesharedprivateaccess-bulkupdate** Logic App from the list.
 
    ![](./images/152.png)
 
-6. Navigate to **Settings** and select **Identity (1)** from the list.
+1. Navigate to **Settings** and select **Identity (1)** from the list.
 
-7. Choose **System assigned (2)** and set the Status to **On (3)**.
+1. Choose **System assigned (2)** and set the Status to **On (3)**.
 
-8. Set the Permissions by clicking **Azure role assignments (4)**.
+1. Set the Permissions by clicking **Azure role assignments (4)**.
 
    ![](./images/153.png)
 
-9. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**.   
+1. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**.   
 
    ![](./images/154.png)
 
    > **Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
 
-10. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
+1. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
 
     ![](./images/157.png)
 
