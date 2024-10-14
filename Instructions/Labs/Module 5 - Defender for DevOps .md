@@ -400,7 +400,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/lab5-5.png)
 
-
 1. Click on your profile picture in the top right corner.
 
 1. Select **"Settings"** from the dropdown menu.
@@ -614,71 +613,100 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 5. **Comprehensive Security Coverage**: Microsoft Security DevOps covers a wide range of security aspects, including code analysis, dependency scanning, and configuration checks, providing comprehensive security coverage for your pipeline.
 
-## **Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]**
+Here's a detailed and updated version of the overview for GitHub Advanced Security (GHAS), broken down step by step:
 
-### Overview of GitHub Advanced Security (GHAS)
+## **Overview of GitHub Advanced Security (GHAS)**
 
-GitHub Advanced Security (GHAS) is a suite of security tools built into the GitHub platform designed to help developers secure their code and workflows. It includes features such as code scanning, secret scanning, and dependency review to identify and remediate security vulnerabilities and exposures.
+GitHub Advanced Security (GHAS) is a comprehensive suite of integrated security tools designed to help developers secure their code and workflows on the GitHub platform. By leveraging features like code scanning, secret scanning, dependency review, and more, GHAS aims to identify and remediate security vulnerabilities and exposures early in the development process. Below is a step-by-step guide on how to enable and configure GHAS effectively.
 
-1. Enable GitHub Advanced Security
-To use GHAS, you need to have GitHub Advanced Security enabled for your repository. This typically requires a GitHub Enterprise subscription.
+### 1. Enable GitHub Advanced Security
 
-   - Navigate to your repository on GitHub.
-   - Click on `Settings`.
-   - In the `Security` section, find `GitHub Advanced Security` and enable it.
+To utilize GHAS features, you need to have it enabled for your repository. This typically requires a GitHub Enterprise subscription.
 
-2. Configure Code Scanning
+#### Steps to Enable GHAS:
+- **Navigate to Your Repository**: Go to your GitHub account and select the repository where you want to enable GHAS.
+- **Access Settings**: Click on the `Settings` tab located at the top right corner of the repository page.
+- **Locate GitHub Advanced Security**: In the left sidebar, scroll down to the `Security` section.
+- **Enable GHAS**: Find `GitHub Advanced Security` and click the toggle to enable it. You may need administrative privileges to perform this action.
 
-   **Code scanning** helps detect vulnerabilities and errors in your code by running static analysis tools.
+### 2. Configure Code Scanning
 
-   - Go to the `Security` tab of your repository.
-   - Click on `Set up code scanning`.
-   - You can choose from different options like `CodeQL Analysis`, which is a powerful tool provided by GitHub. Select the `Set up this workflow` button for `CodeQL Analysis`.
-   - Review the configuration file (e.g., `.github/workflows/codeql-analysis.yml`). Modify it if needed and commit it to your repository.
+Code scanning is crucial for detecting vulnerabilities and errors in your code by utilizing static analysis tools.
 
-3. Run Code Scanning
+#### Steps to Configure Code Scanning:
+- **Go to the Security Tab**: Once GHAS is enabled, navigate to the `Security` tab of your repository.
+- **Set Up Code Scanning**: Click on `Set up code scanning`.
+- **Choose Analysis Tool**: Select `CodeQL Analysis`, which is GitHub’s powerful code analysis tool. Click the `Set up this workflow` button for `CodeQL Analysis`.
+- **Review Configuration File**: A configuration file (e.g., `.github/workflows/codeql-analysis.yml`) will be generated. Review the file to ensure it meets your project requirements, making any necessary modifications.
+- **Commit the Configuration**: After editing, commit the changes to your repository.
 
-   - Once configured, code scanning runs automatically on the specified events (like pushes and pull requests).
-   - You can also manually trigger a scan by going to the `Actions` tab, finding the `CodeQL` workflow, and clicking `Run workflow`.
+### 3. Run Code Scanning
 
-4. Review Code Scanning Results
+Once code scanning is configured, it runs automatically based on defined events.
 
-   - Navigate to the `Security` tab, and under `Code scanning alerts`, you'll see a list of detected issues.
-   - Click on any alert to get detailed information about the vulnerability and recommended fixes.
+#### Steps to Run Code Scanning:
+- **Automatic Scanning**: The configured code scanning runs automatically on events such as pushes, pull requests, and scheduled workflows.
+- **Manual Triggering**: To run a scan manually, go to the `Actions` tab, locate the `CodeQL` workflow, and click `Run workflow`. This option allows for immediate analysis if needed.
 
-5. Configure Secret Scanning
+### 4. Review Code Scanning Results
 
-   **Secret scanning** detects secrets (like API keys and tokens) that may have been accidentally committed to your repository.
+After code scanning completes, you need to review the results to address any detected issues.
 
-   - Go to the `Security` tab of your repository.
-   - Click on `Set up secret scanning`.
-   - GitHub automatically scans for patterns that match common secret types and alerts you if any are found.
+#### Steps to Review Results:
+- **Access Security Tab**: Navigate back to the `Security` tab in your repository.
+- **View Code Scanning Alerts**: Under `Code scanning alerts`, you will see a list of identified issues.
+- **Inspect Alerts**: Click on any alert to view detailed information about the vulnerability, including severity level and recommended remediation steps.
 
-6. Review Secret Scanning Results
+### 5. Configure Secret Scanning
 
-   - Navigate to the `Security` tab, and under `Secret scanning alerts`, you'll see a list of detected secrets.
-   - Click on any alert to view details and follow the steps to revoke or rotate the compromised secrets.
+Secret scanning identifies sensitive information (e.g., API keys, tokens) that may have been inadvertently committed to your repository.
 
-7. Set Up Dependency Review
+#### Steps to Configure Secret Scanning:
+- **Access Security Tab**: Go to the `Security` tab of your repository.
+- **Set Up Secret Scanning**: Click on `Set up secret scanning`. 
+- **Automatic Scanning**: GitHub will automatically scan for patterns matching common secret types and will alert you if any are detected.
 
-   **Dependency review** helps you understand and remediate vulnerable dependencies in your project.
+### 6. Review Secret Scanning Results
 
-   - Ensure your project has a dependency manifest file (e.g., `package.json`, `pom.xml`).
-   - GitHub automatically generates dependency graphs and checks for known vulnerabilities in your dependencies.
+Reviewing secret scanning results is vital to protecting sensitive information.
 
-8. Review Dependency Alerts
+#### Steps to Review Results:
+- **Navigate to Security Tab**: Return to the `Security` tab.
+- **View Secret Scanning Alerts**: Under `Secret scanning alerts`, you’ll find a list of detected secrets.
+- **Inspect Alerts**: Click on any alert for details on the compromised secret and follow the provided guidance to revoke or rotate the secret.
 
-   - Navigate to the `Security` tab, and under `Dependency review`, you'll see alerts for vulnerable dependencies.
-   - Click on any alert to see details about the vulnerability and recommended versions to update to.
+### 7. Set Up Dependency Review
 
-9. Manage Security Policies
+Dependency review helps identify and address vulnerabilities in third-party libraries and dependencies your project uses.
 
-   - In the `Security` tab, you can also manage security policies by setting up a `security.md` file to inform users about your project's security practices and how they can report vulnerabilities.
+#### Steps to Set Up Dependency Review:
+- **Ensure Dependency Manifest**: Confirm your project contains a dependency manifest file (e.g., `package.json`, `pom.xml`).
+- **Automatic Dependency Graph**: GitHub will automatically generate dependency graphs for your project and check for known vulnerabilities.
 
-10. Continuous Monitoring and Alerts
+### 8. Review Dependency Alerts
 
-      - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
-      - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
+It’s crucial to keep track of vulnerable dependencies to maintain application security.
+
+#### Steps to Review Alerts:
+- **Navigate to Security Tab**: Again, go to the `Security` tab.
+- **View Dependency Review Alerts**: Look for alerts under the `Dependency review` section.
+- **Inspect Alerts**: Click on any alert to view details about the vulnerability, including severity level and recommended updates to address the issue.
+
+### 9. Manage Security Policies
+
+Establishing clear security policies helps inform contributors about how to engage with the project securely.
+
+#### Steps to Manage Security Policies:
+- **Create a Security Policy File**: In the `Security` tab, set up a `security.md` file. This file should outline your project's security practices, how users can report vulnerabilities, and other relevant guidelines.
+- **Link the Security Policy**: Ensure that this file is easily accessible from your repository, typically via the repository's main page or settings.
+
+### 10. Continuous Monitoring and Alerts
+
+GitHub Advanced Security continuously monitors your repository for new security issues and alerts you accordingly.
+
+#### Steps for Continuous Monitoring:
+- **Regularly Check Security Tab**: Make it a habit to review the `Security` tab regularly for new alerts.
+- **Address Alerts Promptly**: Respond to alerts in a timely manner, taking necessary actions to remediate any new vulnerabilities that are identified.
 
 ## **Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]**
 
