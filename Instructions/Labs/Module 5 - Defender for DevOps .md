@@ -784,13 +784,13 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
 
    ```
-    trigger:
+   trigger:
     - main
     
-    pool:
+   pool:
       vmImage: ubuntu latest
     
-    extends: 
+   extends: 
       template: template.yaml
       parameters:
         stages:
