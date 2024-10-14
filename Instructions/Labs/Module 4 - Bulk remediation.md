@@ -16,7 +16,7 @@ In this lab, you will complete the following tasks:
 1. Download the `azuredeploybulkremediation.json` template manually from the following link (assuming the template exists and is accessible):
 
    ```
-   https://experienceazure.blob.core.windows.net/templates/defender-for-cloud-v2/azuredeploybulkremediation.json
+   https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/refs/heads/main/Instructions/Labs/template/azuredeploybulkremediation.json?token=GHSAT0AAAAAACXYP4X542Z3F533BLG4IRLGZYNGWNA
    ```
 1. Go to the [Azure Portal](https://portal.azure.com/).
 
