@@ -13,7 +13,7 @@ In this lab, you will complete the following tasks:
 
 ## Task 1: Deploying the Logic App
 
-1. Download the `azuredeploybulkremediation.json` template manually from the following link (assuming the template exists and is accessible):
+1. Open the below link in a new tab, press **Ctrl + S** and save the file as `azuredeploybulkremediation.json`.
 
    ```
    https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/refs/heads/main/Instructions/Labs/template/azuredeploybulkremediation.json?token=GHSAT0AAAAAACXYP4X542Z3F533BLG4IRLGZYNGWNA
