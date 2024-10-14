@@ -319,7 +319,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
     }
    }
    ```
-
 1. After writing your code, you can commit the changes by filling in the commit message and selecting whether to commit directly to the main branch or a different one.
 
 1. Click **Commit** to save the file to your repository.
@@ -338,7 +337,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 1. Click on **Commit** button in the Commit window to select files for upload.
 
-    ![](images/lab5-3.png)
+   ![](images/lab5-3.png)
 
 1. Navigate to **Github** using the link below. 
 
@@ -400,6 +399,29 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 1. Select **Commit changes**.
 
    ![](images/lab5-5.png)
+
+
+1. Click on your profile picture in the top right corner.
+
+1. Select **"Settings"** from the dropdown menu.
+
+1. Scroll down in the left sidebar and click on **"Developer settings."**
+
+1. **Select Personal Access Tokens:**
+   - In the Developer settings, click on **"Personal access tokens."**
+   - You may see two options: **"Tokens (classic)"** and **"Fine-grained tokens."** Click on **"Tokens (classic)"**.
+
+1. Click on the **"Generate new token"** button.
+
+1. **Configure Token Settings:**
+   - **Token name**: Enter **mypattoken**
+   - **Expiration**: Set an expiration for your token to 30 days.
+   - **Select Scopes**: Choose the scopes (permissions) for your token:
+     - select `repo`, `write:packages`, `admin:org`
+
+1. Once you've configured everything, click on the **"Generate token"** button at the bottom of the page.
+
+1. After generating, your new token will be displayed. **Copy it immediately** to the notepad as you won't be able to see it again. Store it in a secure place (e.g., password manager).
 
 1. Return to Azure DevOps, click on **eShopOnWeb (1)**, and then select **Clone (2)**.
 
@@ -481,10 +503,16 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    >**Note**: Replace **Your Name** with your GitHub username, for example, `github-cloudlabsuser-101`.
 
-1. Check the current configuration (optional, to verify):
+1. Check the current configuration :
 
    ```bash
    git config --list
+   ```
+
+1. To add files to GitHub, use the following command:
+ 
+   ```bash
+   git add .
    ```
 1. After setting your user information, you can commit changes with:
 
@@ -496,6 +524,11 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    ```bash
    git push origin main
    ```
+
+   **Note:** If prompted to connect to GitHub, select **token**, paste the token you copied earlier, and then click **Sign in**.
+
+   ![](images/lab5-17.png)
+
 1. Go to the GitHub repository to access all the available files.
 
    ![](images/lab5-16.png)
