@@ -13,24 +13,9 @@ In this lab, you will complete the following tasks:
 
 ## Task 1: Deploying the Logic App
 
-1. Open the below link in a new tab, press **Ctrl + S** and save the file as `azuredeploybulkremediation.json`.
+1. Open a new tab and paste the following link to create the Logic App in your target resource group:
 
-   ```
-   https://raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/refs/heads/main/Instructions/Labs/template/azuredeploybulkremediation.json?token=GHSAT0AAAAAACXYP4X542Z3F533BLG4IRLGZYNGWNA
-   ```
-1. Go to the [Azure Portal](https://portal.azure.com/).
-
-1. Navigate to **"Deploy a custom template"**.
-
-   - In the search bar, type **"Template"**, and select **"Deploy a custom template"**.
-
-1. Click **"Build your own template in the editor"**.
-
-1. Upload the downloaded `azuredeploybulkremediation.json` file.
-
-1. Select your target **resource group** and other deployment details.
-
-1. Review and deploy the template.
+   [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudLabsAI-Azure%2FDefender-for-Cloud-v2%2Fmain%2FInstructions%2FLabs%2Ftemplate%2Fazuredeploybulkremediation.json)  
 
 1. On the **Custom deployment** blade, select the **defenderforcloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
 
