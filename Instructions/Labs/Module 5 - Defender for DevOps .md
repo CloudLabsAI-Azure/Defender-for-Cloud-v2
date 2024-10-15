@@ -626,12 +626,13 @@ GitHub Advanced Security (GHAS) offers a robust suite of security features that 
    
 1. You will have two options to set up scanning:
    - **Use Default**: This uses GitHub’s default scanning rules.
-   - **Set up this workflow**: Choose a pre-configured GitHub Action template for scanning or configure a custom workflow.
-1. If you choose **Set up this workflow**:
+   - **Advanced**: Choose a pre-configured GitHub Action template for scanning or configure a custom workflow.
+1. If you choose **Advance**:
    - Select a scanning tool such as **CodeQL** (GitHub’s native code scanning tool).
    - You will be directed to the workflow configuration file (a YAML file).
 
-4. The workflow will automatically contain the basic configurations for scanning your code with CodeQL:
+4. Remove the exiting content and replace with following code in CodeQL YML file:
+
    ```yaml
    name: "CodeQL"
    
@@ -651,7 +652,7 @@ GitHub Advanced Security (GHAS) offers a robust suite of security features that 
        strategy:
          fail-fast: false
          matrix:
-           language: [ 'javascript', 'python', 'ruby' ] # Add languages you use
+           language: [ 'javascript'] # Add languages you use
        
        steps:
        - name: Checkout code
@@ -677,23 +678,54 @@ GitHub Advanced Security (GHAS) offers a robust suite of security features that 
    
 1. **Secret Scanning**: Enable **Secret Scanning** to automatically detect any secrets (e.g., API keys) accidentally committed to the repository.
 
-1. **Dependency Review**: Enable this to monitor and alert on vulnerable dependencies in the repository.
+1. **Dependabot**: Enable this to monitor and alert on vulnerable dependencies in the repository.
 
 1. Ensure all the security features you want to monitor are enabled.
 
-1. Go to the [Azure Portal](https://portal.azure.com) and open **Microsoft Defender for Cloud**.
+1. Navigate to the Azure portal.
 
-1. In the Microsoft Defender for Cloud menu, select **Environment settings**.
+1. Search and select **Microsoft Defender for Cloud** from the portal
 
-1. Select the Azure subscription where you want to enable Defender for DevOps.
+   ![alert_detected](images/mls2.png)
 
-1. In the selected subscription, under the **Plan** section, enable **Microsoft Defender for DevOps**.
+1. Select **skip** on **Getting started** tab.
 
-1. This will allow integration with GitHub for scanning and monitoring DevOps workflows.
+   ![alert_detected](images/mls1.png)
 
-1. From the Microsoft Defender for Cloud portal, select **DevOps Security** under the **Workload Protection** section.
+1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
 
-1. Click on the **Connect GitHub** button.
+   ![alert_detected](images/advlab51.png)
+
+1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
+
+   | Setting  | Value |
+   -----------|---------
+   | Connector name | Githubconnector **(1)** |
+   | Subscription | Choose the default subscription **(2)**  |
+   | Resource group | defenderforcloud **(3)**  |
+   | Location | East US **(4)** |
+
+   ![alert_detected](images/lab5-20.png)
+
+1. Select **Next: Configure access (5)**
+
+1. Select **Authorize (1)**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
+
+1. In the popup dialog, read the list of permission requests, and then select **Accept**.
+
+1. Select **Install (2)**.
+
+   ![alert_detected](images/lab5-19.png)
+
+   **Note:** To install Microsoft Security DevOps, follow the prompt to select the GitHub username where you would like the installation to take place.
+
+   ![alert_detected](images/lab5-21.png)
+
+1. Leave all other settings as default.
+
+1. Select **Next: Review and generate (3)**.
+
+1. Review the information, and then select **Create**.
 
 1. You will be prompted to log in to your GitHub account. Authenticate and authorize Microsoft Azure to access your GitHub organization.
 
@@ -1043,8 +1075,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/70.png)
 
-
-
 1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
 
    ![](images/61.png)
@@ -1264,7 +1294,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![alert_detected](images/128.png)
 
-1. Navigate to the **Findings** tab, where you'll find detailed information related to the identified issues.
+1. Navigate to the **Findings** tab to review detailed information about the identified issues. To resolve the errors in the `sql.tf` file, review the file in Azure DevOps and address the issue at line 31. Similarly, you can check the other IDs listed and fix the corresponding errors.
 
    ![alert_detected](images/129.png)
 
