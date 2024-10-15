@@ -619,56 +619,60 @@ GitHub Advanced Security (GHAS) offers a robust suite of security features that 
 
 1. Click on the **Settings** tab.
 
-1. Scroll down to the **Security** section and look for **GitHub Advanced Security**.
-1. If it's not enabled, enable it for the repository.
-
 1. In your repository, click on the **Security** tab, then click **Set up code scanning**.
    
 1. You will have two options to set up scanning:
    - **Use Default**: This uses GitHub’s default scanning rules.
    - **Advanced**: Choose a pre-configured GitHub Action template for scanning or configure a custom workflow.
-1. If you choose **Advance**:
-   - Select a scanning tool such as **CodeQL** (GitHub’s native code scanning tool).
-   - You will be directed to the workflow configuration file (a YAML file).
 
-4. Remove the exiting content and replace with following code in CodeQL YML file:
+   ![](images/lab5-22.png)
+
+1. Choose **Advance** and remove the exiting content and replace with following code in CodeQL YML file:
 
    ```yaml
-   name: "CodeQL"
-   
+    name: "Checkov Terraform Scan"
+
    on:
-     push:
-       branches: [ "main" ]
-     pull_request:
-       branches: [ "main" ]
-     schedule:
-       - cron: '00 1 * * 3'
+   push:
+      branches: [ "main" ]
+   pull_request:
+      branches: [ "main" ]
+   schedule:
+      - cron: '34 22 * * 1'
 
    jobs:
-     analyze:
-       name: Analyze
-       runs-on: ubuntu-latest
-       
-       strategy:
-         fail-fast: false
-         matrix:
-           language: [ 'javascript'] # Add languages you use
-       
-       steps:
-       - name: Checkout code
-         uses: actions/checkout@v2
-       - name: Initialize CodeQL
-         uses: github/codeql-action/init@v2
-         with:
-           languages: ${{ matrix.language }}
-       - name: Perform CodeQL Analysis
-         uses: github/codeql-action/analyze@v2
-   ```
+   scan:
+      name: Scan Terraform with Checkov
+      runs-on: ubuntu-latest
 
-   You can modify the above YAML file to:
-   - **Add more languages** by modifying the `language` matrix.
-   - **Set custom branches** for scanning by changing the `branches` section.
-   - **Set scan frequency** using the cron job under the `schedule` section.
+      steps:
+      - name: Checkout repository
+         uses: actions/checkout@v4
+
+      - name: Set up Python
+         uses: actions/setup-python@v4
+         with:
+         python-version: '3.x'  # Use the latest Python version
+
+      - name: Install Checkov
+         run: |
+         python -m pip install --upgrade pip
+         pip install checkov
+
+      - name: Run Checkov
+         run: |
+         checkov --directory . --quiet  # Scans the current directory for Terraform files quietly
+         continue-on-error: true  # Allows the workflow to continue even if Checkov finds issues
+
+      - name: Check Checkov Results
+         run: |
+         if [ $? -ne 0 ]; then
+            echo "Checkov found issues!"
+            exit 1  # Fail the job if issues were found
+         else
+            echo "No issues found by Checkov."
+         fi
+   ```
 
 1. Once the workflow is configured, commit the file to your repository. GitHub will automatically trigger the scanning workflow whenever there is a code push or pull request on the specified branches.
 
@@ -682,9 +686,7 @@ GitHub Advanced Security (GHAS) offers a robust suite of security features that 
 
 1. Ensure all the security features you want to monitor are enabled.
 
-1. Navigate to the Azure portal.
-
-1. Search and select **Microsoft Defender for Cloud** from the portal
+1. Navigate to the Azure portal and search and select **Microsoft Defender for Cloud** from the portal
 
    ![alert_detected](images/mls2.png)
 
@@ -1324,7 +1326,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
 1. Expand the affected resources and review the unhealthy resources.
 
-    ![alert_detected](images/147.png)
+   ![alert_detected](images/147.png)
 
  >**Note**: It may take up to 24 hours to receive all the recommendations.
 
