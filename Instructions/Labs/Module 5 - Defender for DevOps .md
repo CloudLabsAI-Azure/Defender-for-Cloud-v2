@@ -480,7 +480,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    ```bash
    cd defender-for-cloud
    ```
-
 1. Copy the files from the Azure DevOps Terraform folder to the GitHub repo:
 
    ```bash
@@ -491,7 +490,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    ```bash
    git config --global user.email "you@example.com"
    ```
-
    >**Note**: Replace **you@example.com** with your GitHub email, for example, `github_cloudlabsuser_101@cloudlabsaiuser.com`.
 
 1. Set your global user name:
@@ -499,7 +497,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    ```bash
    git config --global user.name "Your Name"
    ```
-
    >**Note**: Replace **Your Name** with your GitHub username, for example, `github-cloudlabsuser-101`.
 
 1. Check the current configuration :
@@ -507,7 +504,6 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    ```bash
    git config --list
    ```
-
 1. To add files to GitHub, use the following command:
  
    ```bash
@@ -615,98 +611,74 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 Here's a detailed and updated version of the overview for GitHub Advanced Security (GHAS), broken down step by step:
 
-## **Overview of GitHub Advanced Security (GHAS)**
+## **Task 3: Overview of GitHub Advanced Security (GHAS)**
 
-GitHub Advanced Security (GHAS) is a comprehensive suite of integrated security tools designed to help developers secure their code and workflows on the GitHub platform. By leveraging features like code scanning, secret scanning, dependency review, and more, GHAS aims to identify and remediate security vulnerabilities and exposures early in the development process. Below is a step-by-step guide on how to enable and configure GHAS effectively.
+GitHub Advanced Security (GHAS) offers a robust suite of security features that help developers secure their code and workflows on GitHub. It integrates tools like code scanning, secret scanning, and dependency reviews to detect vulnerabilities early in the development process.
 
-### 1. Enable GitHub Advanced Security
 
-To utilize GHAS features, you need to have it enabled for your repository. This typically requires a GitHub Enterprise subscription.
+1. Go to your GitHub organization and select the repository you want to secure.
 
-#### Steps to Enable GHAS:
-- **Navigate to Your Repository**: Go to your GitHub account and select the repository where you want to enable GHAS.
-- **Access Settings**: Click on the `Settings` tab located at the top right corner of the repository page.
-- **Locate GitHub Advanced Security**: In the left sidebar, scroll down to the `Security` section.
-- **Enable GHAS**: Find `GitHub Advanced Security` and click the toggle to enable it. You may need administrative privileges to perform this action.
+1. In the repository, click on the **Settings** tab.
 
-### 2. Configure Code Scanning
+1. From the side menu, select **Security** > **Code security and analysis**.
+   
+1. **Code Scanning**: Click **Set up code scanning** and configure scanning rules for code vulnerabilities.
+   
+1. **Secret Scanning**: Enable **Secret Scanning** to automatically detect any secrets (e.g., API keys) accidentally committed to the repository.
 
-Code scanning is crucial for detecting vulnerabilities and errors in your code by utilizing static analysis tools.
+1. **Dependency Review**: Enable this to monitor and alert on vulnerable dependencies in the repository.
 
-#### Steps to Configure Code Scanning:
-- **Go to the Security Tab**: Once GHAS is enabled, navigate to the `Security` tab of your repository.
-- **Set Up Code Scanning**: Click on `Set up code scanning`.
-- **Choose Analysis Tool**: Select `CodeQL Analysis`, which is GitHub’s powerful code analysis tool. Click the `Set up this workflow` button for `CodeQL Analysis`.
-- **Review Configuration File**: A configuration file (e.g., `.github/workflows/codeql-analysis.yml`) will be generated. Review the file to ensure it meets your project requirements, making any necessary modifications.
-- **Commit the Configuration**: After editing, commit the changes to your repository.
+1. Ensure all the security features you want to monitor are enabled.
 
-### 3. Run Code Scanning
+1. Go to the [Azure Portal](https://portal.azure.com) and open **Microsoft Defender for Cloud**.
 
-Once code scanning is configured, it runs automatically based on defined events.
+1. In the Microsoft Defender for Cloud menu, select **Environment settings**.
 
-#### Steps to Run Code Scanning:
-- **Automatic Scanning**: The configured code scanning runs automatically on events such as pushes, pull requests, and scheduled workflows.
-- **Manual Triggering**: To run a scan manually, go to the `Actions` tab, locate the `CodeQL` workflow, and click `Run workflow`. This option allows for immediate analysis if needed.
+1. Select the Azure subscription where you want to enable Defender for DevOps.
 
-### 4. Review Code Scanning Results
+1. In the selected subscription, under the **Plan** section, enable **Microsoft Defender for DevOps**.
 
-After code scanning completes, you need to review the results to address any detected issues.
+1. This will allow integration with GitHub for scanning and monitoring DevOps workflows.
 
-#### Steps to Review Results:
-- **Access Security Tab**: Navigate back to the `Security` tab in your repository.
-- **View Code Scanning Alerts**: Under `Code scanning alerts`, you will see a list of identified issues.
-- **Inspect Alerts**: Click on any alert to view detailed information about the vulnerability, including severity level and recommended remediation steps.
+1. From the Microsoft Defender for Cloud portal, select **DevOps Security** under the **Workload Protection** section.
 
-### 5. Configure Secret Scanning
+1. Click on the **Connect GitHub** button.
 
-Secret scanning identifies sensitive information (e.g., API keys, tokens) that may have been inadvertently committed to your repository.
+1. You will be prompted to log in to your GitHub account. Authenticate and authorize Microsoft Azure to access your GitHub organization.
 
-#### Steps to Configure Secret Scanning:
-- **Access Security Tab**: Go to the `Security` tab of your repository.
-- **Set Up Secret Scanning**: Click on `Set up secret scanning`. 
-- **Automatic Scanning**: GitHub will automatically scan for patterns matching common secret types and will alert you if any are detected.
+1. Once connected, select the GitHub repositories that you want to integrate with Defender for Cloud.
 
-### 6. Review Secret Scanning Results
+1. Review and confirm the repository connections.
 
-Reviewing secret scanning results is vital to protecting sensitive information.
+1. After the connection is established, Defender for Cloud will begin monitoring the selected repositories for vulnerabilities and other security issues.
 
-#### Steps to Review Results:
-- **Navigate to Security Tab**: Return to the `Security` tab.
-- **View Secret Scanning Alerts**: Under `Secret scanning alerts`, you’ll find a list of detected secrets.
-- **Inspect Alerts**: Click on any alert for details on the compromised secret and follow the provided guidance to revoke or rotate the secret.
+1. In the Microsoft Defender for Cloud portal, go to **Recommendations** under the **Secure Score** tab.
 
-### 7. Set Up Dependency Review
+1. Scroll to the **DevOps Security** section. This is where recommendations from GitHub Advanced Security will appear.
+   
+1. You may see recommendations such as:
+     - Code scanning issues from GitHub (e.g., vulnerabilities in code).
+     - Secret scanning alerts (e.g., exposed API keys or passwords).
+     - Dependency vulnerabilities (e.g., outdated libraries with known vulnerabilities).
 
-Dependency review helps identify and address vulnerabilities in third-party libraries and dependencies your project uses.
+1. Each recommendation will contain detailed remediation steps provided by Defender for Cloud. You can click on each issue to get more information about its severity and how to fix it.
 
-#### Steps to Set Up Dependency Review:
-- **Ensure Dependency Manifest**: Confirm your project contains a dependency manifest file (e.g., `package.json`, `pom.xml`).
-- **Automatic Dependency Graph**: GitHub will automatically generate dependency graphs for your project and check for known vulnerabilities.
+1. In your GitHub repository, go to the **Security** tab.
 
-### 8. Review Dependency Alerts
+1. You’ll see a list of issues identified by GitHub Advanced Security such as code scanning results, secret scanning alerts, and dependency alerts.
 
-It’s crucial to keep track of vulnerable dependencies to maintain application security.
+1. Follow the instructions provided in both GitHub and Defender for Cloud to resolve each issue. You may need to:
+     - Fix vulnerable code.
+     - Rotate or remove exposed secrets.
+     - Update vulnerable dependencies to safe versions.
 
-#### Steps to Review Alerts:
-- **Navigate to Security Tab**: Again, go to the `Security` tab.
-- **View Dependency Review Alerts**: Look for alerts under the `Dependency review` section.
-- **Inspect Alerts**: Click on any alert to view details about the vulnerability, including severity level and recommended updates to address the issue.
+1. As issues are resolved, both GitHub and Defender for Cloud will update the status of the recommendations.
 
-### 9. Manage Security Policies
+1. To verify everything is set up correctly, push a commit that introduces a known vulnerability (e.g., a hardcoded secret or vulnerable dependency).
+   
+1. After pushing the commit, check GitHub for security alerts and verify that the same issues appear as recommendations in Defender for Cloud under the **DevOps Security** section.
 
-Establishing clear security policies helps inform contributors about how to engage with the project securely.
-
-#### Steps to Manage Security Policies:
-- **Create a Security Policy File**: In the `Security` tab, set up a `security.md` file. This file should outline your project's security practices, how users can report vulnerabilities, and other relevant guidelines.
-- **Link the Security Policy**: Ensure that this file is easily accessible from your repository, typically via the repository's main page or settings.
-
-### 10. Continuous Monitoring and Alerts
-
-GitHub Advanced Security continuously monitors your repository for new security issues and alerts you accordingly.
-
-#### Steps for Continuous Monitoring:
-- **Regularly Check Security Tab**: Make it a habit to review the `Security` tab regularly for new alerts.
-- **Address Alerts Promptly**: Respond to alerts in a timely manner, taking necessary actions to remediate any new vulnerabilities that are identified.
+1. Defender for Cloud will continuously monitor your connected GitHub repositories and provide real-time security recommendations. You can monitor these from the **Secure Score** and **Recommendations** sections.
 
 ## **Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]**
 
@@ -1129,7 +1101,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
    inputs:
      sarifFilePaths: '$(Build.ArtifactStagingDirectory)/results.sarif'
    ```
-
 1. Click on the 10th line then press enter.
 
 1. Expand **Task** pane from the right side then search and select **Snyk Security Scan**
