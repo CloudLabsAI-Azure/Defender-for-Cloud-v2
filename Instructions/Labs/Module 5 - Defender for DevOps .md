@@ -1326,10 +1326,6 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
     ![alert_detected](images/147.png)
 
-1. Navigate back to the **Recommendations** page, select **Status**, then choose **All (1)**, and click on **Apply (2)**. You'll now see additional recommendations that are in a completed state.
-
-   ![alert_detected](images/131.png)
-
  >**Note**: It may take up to 24 hours to receive all the recommendations.
 
 ## **Summary**  
