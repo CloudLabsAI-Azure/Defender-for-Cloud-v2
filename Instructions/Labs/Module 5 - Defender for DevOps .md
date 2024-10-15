@@ -615,14 +615,65 @@ Here's a detailed and updated version of the overview for GitHub Advanced Securi
 
 GitHub Advanced Security (GHAS) offers a robust suite of security features that help developers secure their code and workflows on GitHub. It integrates tools like code scanning, secret scanning, and dependency reviews to detect vulnerabilities early in the development process.
 
+1. Navigate back to **Defender-for-cloud** repository you want to secure.
 
-1. Go to your GitHub organization and select the repository you want to secure.
+1. Click on the **Settings** tab.
 
-1. In the repository, click on the **Settings** tab.
+1. Scroll down to the **Security** section and look for **GitHub Advanced Security**.
+1. If it's not enabled, enable it for the repository.
 
-1. From the side menu, select **Security** > **Code security and analysis**.
+1. In your repository, click on the **Security** tab, then click **Set up code scanning**.
    
-1. **Code Scanning**: Click **Set up code scanning** and configure scanning rules for code vulnerabilities.
+1. You will have two options to set up scanning:
+   - **Use Default**: This uses GitHub’s default scanning rules.
+   - **Set up this workflow**: Choose a pre-configured GitHub Action template for scanning or configure a custom workflow.
+1. If you choose **Set up this workflow**:
+   - Select a scanning tool such as **CodeQL** (GitHub’s native code scanning tool).
+   - You will be directed to the workflow configuration file (a YAML file).
+
+4. The workflow will automatically contain the basic configurations for scanning your code with CodeQL:
+   ```yaml
+   name: "CodeQL"
+   
+   on:
+     push:
+       branches: [ "main" ]
+     pull_request:
+       branches: [ "main" ]
+     schedule:
+       - cron: '00 1 * * 3'
+
+   jobs:
+     analyze:
+       name: Analyze
+       runs-on: ubuntu-latest
+       
+       strategy:
+         fail-fast: false
+         matrix:
+           language: [ 'javascript', 'python', 'ruby' ] # Add languages you use
+       
+       steps:
+       - name: Checkout code
+         uses: actions/checkout@v2
+       - name: Initialize CodeQL
+         uses: github/codeql-action/init@v2
+         with:
+           languages: ${{ matrix.language }}
+       - name: Perform CodeQL Analysis
+         uses: github/codeql-action/analyze@v2
+   ```
+
+   You can modify the above YAML file to:
+   - **Add more languages** by modifying the `language` matrix.
+   - **Set custom branches** for scanning by changing the `branches` section.
+   - **Set scan frequency** using the cron job under the `schedule` section.
+
+1. Once the workflow is configured, commit the file to your repository. GitHub will automatically trigger the scanning workflow whenever there is a code push or pull request on the specified branches.
+
+1. Once code scanning is triggered, you can review the results by navigating to the **Security** tab and clicking **Code scanning alerts**.
+
+1. The results will show any vulnerabilities or issues detected, along with suggestions for fixing them.
    
 1. **Secret Scanning**: Enable **Secret Scanning** to automatically detect any secrets (e.g., API keys) accidentally committed to the repository.
 
