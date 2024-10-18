@@ -402,15 +402,23 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
 1. Click on your profile picture in the top right corner.
 
-1. Select **"Settings"** from the dropdown menu.
+1. Select **Settings** from the dropdown menu.
 
-1. Scroll down in the left sidebar and click on **"Developer settings."**
+   ![](images/lab5-26.png)
 
-1. **Select Personal Access Tokens:**
-   - In the Developer settings, click on **"Personal access tokens."**
-   - You may see two options: **"Tokens (classic)"** and **"Fine-grained tokens."** Click on **"Tokens (classic)"**.
+1. Scroll down in the left sidebar and click on **Developer settings.**
 
-1. Click on the **"Generate new token"** button.
+   ![](images/lab5-25.png)
+
+1. In the Developer settings, click on **Personal access tokens.**
+
+1. You may see two options: **Tokens (classic)** and **Fine-grained tokens** Click on **"Tokens (classic)"**.
+
+   ![](images/lab5-24.png)
+
+1. Click on the **Generate new token** button and select **Generate new token (Classic)**.
+
+   ![](images/lab5-23.png)
 
 1. **Configure Token Settings:**
    - **Token name**: Enter **mypattoken**
@@ -418,7 +426,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
    - **Select Scopes**: Choose the scopes (permissions) for your token:
      - select `repo`, `write:packages`, `admin:org`
 
-1. Once you've configured everything, click on the **"Generate token"** button at the bottom of the page.
+1. Once you've configured everything, click on the **Generate token** button at the bottom of the page.
 
 1. After generating, your new token will be displayed. **Copy it immediately** to the notepad as you won't be able to see it again. Store it in a secure place (e.g., password manager).
 
@@ -900,7 +908,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
    ![alert_detected](images/123.png)
 
-1. Navigate back to **Environment settings** under Management > **+Add environment** > **Azure DevOps**
+1. Navigate back to **Environment settings** under Management > **+Add environment** > **Github**
 
    ![alert_detected](images/advlab51.png)
 
@@ -1312,6 +1320,14 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
    ![alert_detected](images/147.png)
 
  >**Note**: It may take up to 24 hours to receive all the recommendations.
+
+#### **Remove the Azure DevOps billing**
+
+1. On the lab computer, switch to the browser window displaying Azure DevOps organization homepage and select **Organization Settings** at bottom left corner.
+
+2. Under **Organization Settings** select **Billing** and click on **Change billing** button to open Change billing pane.
+
+3. In the **Change billing** pane, select **Remove billing** setting and click on Save.
 
 ## **Summary**  
 In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, and connecting Azure DevOps to Microsoft Defender for Cloud (MDC) Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
