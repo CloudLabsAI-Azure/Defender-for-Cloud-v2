@@ -1088,19 +1088,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/65.png)
 
-1. Go to the Azure portal, search for **Entra ID (1)**, and select **Microsoft Entra ID (2)**.
-
-   ![](images/78.png)
-
-1. Scroll down and select **App registrations** under **manage**, then select the app registration named **odluser<inject key="DeploymentID" enableCopy="false"/>-Defender_for_cloud-suffix** under all application.
-
-   ![](images/77.png)
-
-1. Copy the name of the app registration and paste it into your notepad.
-
-   ![](images/80.png)
-
-1. Navigate back to Azure DevOps and click on **Project Settings** at the bottom left of the **eShopOnWeb** project.
+1. In Azure DevOps and click on **Project Settings** at the bottom left of the **eShopOnWeb** project.
 
 1. Scroll down on the **Project Settings** page and select **Service Principal.**
 
@@ -1114,7 +1102,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
    ![](images/76.png)
 
-1. Paste the **API** under **Snyk API Token (1)** and the **App registration** name under **Service connection name (2)** that you noted earlier. Then, click **Save (3)**.
+1. Paste the **API** under **Snyk API Token (1)** and under **Service connection name (2)** enter **Synkconnection**. Then, click **Save (3)**.
 
    ![](images/79.png)
 
