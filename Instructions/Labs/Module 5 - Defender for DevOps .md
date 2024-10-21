@@ -231,8 +231,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    >**Note**: After Selecting your Azure subscription click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
 
-1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like `"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html- 
-   artifact(2)"`
+1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like `"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"`
 
    ![](images/27.png)
 
@@ -1121,8 +1120,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
 1. You should see that a new service principal has been created.
 
-   ![](images/80.png)
-
 ### 2. Integrate Snyk in Azure DevOps Pipeline
 
 1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
@@ -1146,37 +1143,34 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
    ```yaml
    trigger:
    - master
- 
+
    pool:
-   vmImage: 'ubuntu-latest'
-  
+    vmImage: 'ubuntu-latest'
+
    steps:
    - task: MicrosoftSecurityDevOps@1
-   displayName: 'Microsoft Security DevOps'
- 
+     displayName: 'Microsoft Security DevOps'
+     inputs:
+       sarifOutputFile: '$(Build.ArtifactStagingDirectory)/results.sarif' # Ensures SARIF output location
+
    - script: |
-     echo "Verifying SARIF file creation..."
-     if [ -f $(Build.ArtifactStagingDirectory)/results.sarif ]; then
-       echo "SARIF file created successfully."
-       ls -la $(Build.ArtifactStagingDirectory)
-     else
-       echo "SARIF file not found."
-       exit 1
-     fi
+      echo "Verifying SARIF file creation..."
+      if [ -f "$(Build.ArtifactStagingDirectory)/results.sarif" ]; then
+         echo "SARIF file created successfully."
+         ls -la $(Build.ArtifactStagingDirectory)
+      else
+         echo "SARIF file not found."
+         exit 1
+      fi
    displayName: 'Verify SARIF File Creation'
- 
+
    - task: PublishBuildArtifacts@1
    displayName: 'Publish Artifact: CodeAnalysisLogs'
    inputs:
-     PathtoPublish: '$(Build.ArtifactStagingDirectory)/results.sarif'
-     ArtifactName: 'CodeAnalysisLogs'
- 
-   - task: AdvancedSecurity-Publish@1
-   displayName: 'Publish SARIF Results'
-   inputs:
-     sarifFilePaths: '$(Build.ArtifactStagingDirectory)/results.sarif'
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/results.sarif'
+      ArtifactName: 'CodeAnalysisLogs'
    ```
-1. Click on the 10th line then press enter.
+1. Click on the 12th line then press enter.
 
 1. Expand **Task** pane from the right side then search and select **Snyk Security Scan**
 
@@ -1209,7 +1203,6 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
     ```
     This pipeline needs permission to access a resource before this run can continue
     ```
-
 1. Click on **View**.
 
    ![](images/86.png)
