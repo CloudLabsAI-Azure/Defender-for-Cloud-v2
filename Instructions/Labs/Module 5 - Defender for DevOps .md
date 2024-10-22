@@ -536,88 +536,29 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/lab5-16.png)
 
-1. On your lab computer, open the Azure DevOps portal with the **eShopOnWeb** project in a web browser. Click on the **marketplace icon > Browse Marketplace**.
+1. Go to the **Security** tab, select **Code scanning**, and then click on **Configure scanning tool**.
 
-   ![](images/61.png)
+   ![](images/lab5-29.png)
 
-1. Search for **Microsoft Security DevOps** in the Marketplace and open it.
+1. Click **Explore workflow** next to **Other tool**.
 
-   ![](images/62.png)
+   ![](images/lab5-30.png)
 
-1. On the **Microsoft Security DevOps** page, click on **Get it for free**.
+1. In the search box, type **tfsec**, select **tfsec**, and then click **Configure**.
 
-   ![](images/63.png)
+   ![](images/lab5-31.png)
 
-1. Select the desired Azure DevOps organization and **Install**.
+1. Review the code, and then click **Commit changes**.
 
-   ![](images/64.png)
+   ![](images/lab5-32.png)
 
-1. Click **Proceed to organization** once the installation is complete.
+1. In the **Commit changes** pop-up, click **Commit changes**.
 
-   ![](images/65.png)
+   ![](images/lab5-33.png)
 
-1. Navigate to the **Pipelines** pane in the **Pipelines** hub.
+1. Go to the **Actions** tab, select the **Create tfsec.yml** pipeline, and wait for the pipeline to complete.
 
-1. Click **New pipeline** in the **Pipeline** window.
-
-1. Select **Azure Repos Git (YAML)** on the **Where is your code?** pane.
-
-   ![](images/10.png)
-
-1. Click **eShopOnWeb** on the **Select a repository** pane.
-
-   ![](images/12.png)
-
-1. Scroll down and select **Starter pipeline** on the **Configure your pipeline** pane.
-
-   ![](images/164.png)
-
-1. Define your build pipeline in a file named `azure-pipelines.yml` with the following content:
-
-   ```yaml
-   trigger:
-   - main
-
-   pool:
-     vmImage: ubuntu-latest
-
-   steps:
-   - task: MicrosoftSecurityDevOps@1
-     displayName: 'Microsoft Security DevOps'
-     inputs:    
-      categories: 'IaC'
-   ```
-1. This YAML file is designed to configure an Azure DevOps pipeline with the following specifics:
-
-   - **Trigger**: The pipeline is set to `none`, meaning it won't run automatically based on code changes or other triggers. It will need to be started manually or triggered by another pipeline or service.
-   - **Pool**: Specifies that the pipeline will use the `windows-latest` virtual machine image. This VM image is provided by Azure DevOps and ensures the pipeline runs on a fresh Windows environment with the latest updates.
-   - **Steps**: The pipeline includes a single step:
-     - **Task**: Uses the `MicrosoftSecurityDevOps@1` task, which is designed for Microsoft Security DevOps.
-     - **Display Name**: The task is labeled 'Microsoft Security DevOps' for easy identification in the pipeline UI.
-     - **Inputs**:
-       - `categories`: Set to 'IaC', indicating that the task will focus on Infrastructure as Code (IaC) security scanning.
-
-8. Click **Save and Run** then click **Run** to start the Build Pipeline process.
-
-   ![](images/68.png)
-
-9. Wait for the build pipeline to complete. Once finished, review the results, including any warnings or errors reported by the tasks. Address any issues identified, make the necessary changes, and then rerun the pipeline to ensure that all problems are resolved.
-   
-   ![](images/69.png)
-
-### Benefits of Using Microsoft Security DevOps for Scanning the Pipeline
-
-1. **Early Detection of Security Issues**: Microsoft Security DevOps integrates security scanning directly into your CI/CD pipeline, ensuring that security issues in your IaC templates are identified early in the development process.
-
-2. **Enhanced Compliance**: By incorporating automated security checks, your pipeline remains compliant with industry standards and best practices, reducing the risk of deploying insecure infrastructure.
-
-3. **Improved Security Posture**: Continuous scanning and monitoring of your IaC configurations help maintain a robust security posture by promptly addressing vulnerabilities and misconfigurations.
-
-4. **Streamlined Security Workflows**: Integrating security tools into your existing DevOps workflows simplifies the process of managing and mitigating security risks, reducing manual intervention and enhancing efficiency.
-
-5. **Comprehensive Security Coverage**: Microsoft Security DevOps covers a wide range of security aspects, including code analysis, dependency scanning, and configuration checks, providing comprehensive security coverage for your pipeline.
-
-Here's a detailed and updated version of the overview for GitHub Advanced Security (GHAS), broken down step by step:
+   ![](images/lab5-34.png)
 
 ## **Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]**
 
@@ -908,11 +849,11 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
    ![alert_detected](images/123.png)
 
-1. Navigate back to **Environment settings** under Management > **+Add environment** > **Github**
+1. Navigate back to **Environment settings** under Management > **+Add environment** > **Github**.
 
    ![alert_detected](images/advlab51.png)
 
-1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
+1. On the **Github Connection** page, under **Account details**, provide the below settings.
 
    | Setting  | Value |
    -----------|---------
@@ -937,7 +878,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
    ![alert_detected](images/lab5-21.png)
 
-1. Leave all other settings as default.
+1. On the **Install on your personal account github-cloudlabsuser-xxx** pop-up, choose **Only select repositories**, then from the list, select **defender-for-cloud** and click **Install**.
 
 1. Select **Next: Review and generate (3)**.
 
@@ -952,19 +893,21 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 1. After the connection is established, Defender for Cloud will begin monitoring the selected repositories for vulnerabilities and other security issues.
 
 1. In the Microsoft Defender for Cloud portal, go to **Recommendations** under the **Secure Score** tab.
-
-1. Scroll to the **DevOps Security** section. This is where recommendations from GitHub Advanced Security will appear.
    
-1. You may see recommendations such as:
-     - Code scanning issues from GitHub (e.g., vulnerabilities in code).
-     - Secret scanning alerts (e.g., exposed API keys or passwords).
-     - Dependency vulnerabilities (e.g., outdated libraries with known vulnerabilities).
+1. You may see recommendation such as:
+     - GitHub repositories should have code scanning findings resolved.
 
-1. Each recommendation will contain detailed remediation steps provided by Defender for Cloud. You can click on each issue to get more information about its severity and how to fix it.
+     **Note:** It may take up to 8 hours to receive recommendations in Defender for Cloud.
+
+1. Recommendation will contain detailed remediation steps provided by Defender for Cloud. You can click on each issue to get more information about its severity and how to fix it.
+
+    ![alert_detected](images/lab5-28.png)
 
 1. In your GitHub repository, go to the **Security** tab.
 
-1. You’ll see a list of issues identified by GitHub Advanced Security such as code scanning results, secret scanning alerts, and dependency alerts.
+1. You’ll see a list of issues identified by GitHub Advanced Security such as code scanning results.
+
+    ![alert_detected](images/lab5-27.png)
 
 1. Follow the instructions provided in both GitHub and Defender for Cloud to resolve each issue. You may need to:
      - Fix vulnerable code.
@@ -1301,15 +1244,37 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![alert_detected](images/147.png)
 
- >**Note**: It may take up to 24 hours to receive all the recommendations.
+   >**Note**: It may take up to 24 hours to receive all the recommendations.
 
-#### **Remove the Azure DevOps billing**
+### **Remove the Azure DevOps billing**
 
 1. On the lab computer, switch to the browser window displaying Azure DevOps organization homepage and select **Organization Settings** at bottom left corner.
 
 2. Under **Organization Settings** select **Billing** and click on **Change billing** button to open Change billing pane.
 
 3. In the **Change billing** pane, select **Remove billing** setting and click on Save.
+
+### **Deleting Github repository**
+
+1. Navigate to the Defender-for-cloud repository main page on GitHub.
+
+1. Click on the **Settings** tab.
+
+   ![](images/lab5-35.png)
+
+1. Scroll down to the **Danger Zone** section.
+
+1. Click on **Delete this repository**.
+
+   ![](images/lab5-36.png)
+
+1. If the pop-up confirms the permanent deletion of the repository and its contents, click on **I acknowledge that I have read and understand the implications of this action.**
+
+   ![](images/lab5-37.png)
+
+1. In the confirmation pop-up, type the repository name to confirm, and then click **Delete this repository**.
+
+   ![](images/lab5-38.png)
 
 ## **Summary**  
 In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, and connecting Azure DevOps to Microsoft Defender for Cloud (MDC) Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
