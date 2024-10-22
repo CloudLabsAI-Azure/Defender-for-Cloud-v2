@@ -1250,9 +1250,11 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
 1. On the lab computer, switch to the browser window displaying Azure DevOps organization homepage and select **Organization Settings** at bottom left corner.
 
-2. Under **Organization Settings** select **Billing** and click on **Change billing** button to open Change billing pane.
+2. Under **Organization Settings** select **Billing (1)** and click on **Change billing (2)** button to open Change billing pane.
 
-3. In the **Change billing** pane, select **Remove billing** setting and click on Save.
+3. In the **Change billing** pane, select **Remove billing (3)** setting and click on **Save (4)**.
+
+   ![](images/lab5-39.png)
 
 ### **Deleting Github repository**
 
@@ -1275,6 +1277,8 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 1. In the confirmation pop-up, type the repository name to confirm, and then click **Delete this repository**.
 
    ![](images/lab5-38.png)
+
+1. This will permanently delete the repository.
 
 ## **Summary**  
 In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, and connecting Azure DevOps to Microsoft Defender for Cloud (MDC) Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
