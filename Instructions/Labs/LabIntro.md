@@ -1,4 +1,4 @@
-# Microsoft Defender for DevOps (Microsoft Defender for Cloud Workshop-V2)
+# Microsoft Defender for Cloud Workshop - V2
 
 ### Overall Estimated Duration: 5 Hours
 
