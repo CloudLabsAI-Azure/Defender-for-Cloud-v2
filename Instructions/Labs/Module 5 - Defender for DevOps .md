@@ -894,10 +894,9 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 1. In the Microsoft Defender for Cloud portal, go to **Recommendations** under the **Secure Score** tab.
    
-1. You may see recommendation such as:
-     - GitHub repositories should have code scanning findings resolved.
+1. You may see recommendations such as: ` GitHub repositories should have code scanning findings resolved.`
 
-     **Note:** It may take up to 8 hours to receive recommendations in Defender for Cloud.
+   >**Note:** It may take up to 8 hours to receive recommendations in Defender for Cloud.
 
 1. Recommendation will contain detailed remediation steps provided by Defender for Cloud. You can click on each issue to get more information about its severity and how to fix it.
 
