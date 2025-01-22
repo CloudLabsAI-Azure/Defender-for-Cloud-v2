@@ -792,7 +792,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 1. Select **Environment settings** under Management > **+Add environment** > **Azure DevOps**
 
-   ![alert_detected](images/advlab51.png)
+   ![alert_detected](images/advlab51(1).png)
 
 1. On the **Azure DevOps Connection** page, under **Account details**, provide the below settings.
 
