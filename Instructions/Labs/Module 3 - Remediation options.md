@@ -49,7 +49,7 @@ In this lab, you will complete the following tasks:
 
 1. **Using Governance Rules:** Set up Governance Rules to forward alerts to a specific distribution list for review. The control owner can then manually execute the Logic App after review.
 
-1. From the **Environment settings** page, select **Governance rule**.
+1. Click on **Environment settings** page, select **Governance rule**.
 
    ![](./images/112.png)
 
@@ -62,7 +62,7 @@ In this lab, you will complete the following tasks:
    | Setting  | Value |
    -----------|---------
    | Rule name | **Review Shared Key Access (1)** |
-   | Scope | **Subscription (2)** |
+   | Scope | select the available **Subscription (2)** |
    | Priority | **1 (3)** |
 
    ![](./images/106.png)
@@ -81,7 +81,7 @@ In this lab, you will complete the following tasks:
 
 1. The Control Owner can now review the recommendation in the Defender Portal and execute the remediation on the appropriate "unhealthy" resources, as outlined in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 
-1. Navigate to the **Recommendation** tab, search for **Shared**, and select the relevant recommendation.
+1. Navigate to the **Recommendation** tab under **General**, search for **Shared**, and select the relevant recommendation.
 
    ![](./images/107.png)
 
