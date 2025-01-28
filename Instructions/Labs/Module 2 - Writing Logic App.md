@@ -20,7 +20,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
    [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fgitenterprise-cloud%2Fmdcremediationworkshop%2Fmain%2Fazuredeploy.json)
 
-2. On the **Custom deployment** blade, select the **defender for cloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
+2. On the **Custom deployment** blade, select the **defenderforcloud (1)** resource group from the drop-down menu and click **Review + create (2)**.
 
    ![](./images/mod2-cd.png)
 
@@ -46,7 +46,9 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
    ![](./images/155.png)
 
-10. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
+10. Once the **Role assignment** has succeeded navigate back to the **mdcremovesharedprivateaccess** logic app overview page.
+
+11. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
 
     ![](./images/173.png)
 
