@@ -27,7 +27,11 @@
         {
             "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%205%20-%20Defender%20for%20DevOps%20.md",
             "Order": 6
-        }
+        },
+        {
+          "RawFilePath": "https://docs-api.cloudlabs.ai/repos/raw.githubusercontent.com/CloudLabsAI-Azure/Defender-for-Cloud-v2/main/Instructions/Labs/Module%206%20-%20Secure%20Generative%20AI%20Applications.md",
+          "Order": 7
+      }
     
       ]
     }
