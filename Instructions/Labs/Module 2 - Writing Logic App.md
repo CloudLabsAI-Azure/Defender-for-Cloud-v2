@@ -1,5 +1,6 @@
 # **Lab 2 : Writing the Logic App**
 
+## Overview:
 In this lab, will guide you through common use cases where automated triggers are beneficial, such as responding to security alerts in real-time. You will configure automated responses and observe their impact.
 
 ## Estimated Duration: 30 Minutes

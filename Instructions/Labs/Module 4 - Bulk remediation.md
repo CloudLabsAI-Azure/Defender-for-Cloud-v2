@@ -1,5 +1,6 @@
 # **Lab 4 : Bulk Remediation**
 
+## Overview:
 In this lab, we'll explore an alternative remediation method using Azure Resource Graph (ARG). Instead of relying on Defender for Cloud triggers or governance flows, we'll directly query ARG and build our remediation process based on that data.
 
 ## Estimated Duration: 30 Minutes

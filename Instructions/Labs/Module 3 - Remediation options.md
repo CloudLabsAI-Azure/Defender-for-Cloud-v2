@@ -1,5 +1,6 @@
 # **Lab 3 : Remediation Options**
 
+## Overview:
 In this lab, we will explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
 
 ## Estimated Duration: 40 Minutes
@@ -13,11 +14,9 @@ In this lab, you will complete the following tasks:
 
 ## Task 1: Setting Up Automated Remediation
 
-1. Navigate to the Azure portal.
+1. In the azure portal, Search **Defender for cloud (1)** and select **Microsoft Defender for Cloud (2)**.
 
-1. Search and select **Microsoft Defender for Cloud** from the portal
-
-   ![alert_detected](images/mls2.png)
+   ![alert_detected](images/178.png)
 
 1. **Configure Workflow Automation:** Defender for Cloud provides a **Workflow Automation** feature to run your Logic App automatically. We covered this in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 

@@ -1,5 +1,6 @@
 # **Lab 1: Response Triggers (Read-Only)**
 
+## Overview:
 In this lab, you will **explore** how to set up triggers in Microsoft Defender for Cloud to initiate an automated response flow. While this lab is read-only, you will review the steps and scenarios where these triggers can be applied.
 
 ## Estimated Duration: 20 Minutes
