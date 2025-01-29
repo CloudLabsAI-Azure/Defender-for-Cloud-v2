@@ -1,4 +1,4 @@
-# **Lab 6 : Secure Generative AI Applications**
+# **Lab 6: Secure Generative AI Applications**
 
 ## Overview:
 
@@ -11,7 +11,7 @@ In this lab, we'll explore the steps involved in securing generative AI applicat
 In this lab, you will complete the following tasks:
 
 - Enable AI workload plan
-- Explore Azure AI Foundary portal
+- Explore the Azure AI Foundary portal
 - Validate Content Filter Policy
 - Create The Content Filter
 
@@ -29,7 +29,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/174.png)
 
-1. On the **Settings | Defender plans** page, verify the Defender for Cloud configuration to ensure the AI Workload Plan is enabled.
+1. Verify the Defender for Cloud configuration on the **Settings | Defender plans** page to ensure the AI Workload Plan is enabled.
 
    ![](./images/176.png)
 
@@ -49,13 +49,13 @@ In this lab, you will complete the following tasks:
 
    ![](./images/180.png)
 
-1. Right-click on the [GitHub repository](https://github.com/0xk1h0/ChatGPT_DAN), select **Copy Link**, and paste it into a new tab in the egde browser.
+1. Right-click on the [GitHub repository](https://github.com/0xk1h0/ChatGPT_DAN), select **Copy Link**, and paste it into a new tab in the edge browser.
 
 1. Under **ChatGPT "DAN" (and other "Jailbreaks") PROMPTS**, expand **The DAN 6.0 Prompt (1)** and copy the content located under **DAN 6.0 Prompt (2)**.
 
    ![](./images/181.png)
 
-1. Navigate back to the **Azure AI Foundry portal**. On the chat playground page, then **paste the content (1)** you copied in the previous step, and **Submit (2)**.
+1. Navigate back to the **Azure AI Foundry portal**. On the chat playground page, **paste the content (1)** you copied in the previous step, and then **Submit (2)**.
 
    ![](./images/182.png)
 
@@ -63,7 +63,7 @@ In this lab, you will complete the following tasks:
 
 1. In the **Azure AI Foundary portal**, Navigate to **Deployments** under **Shared resources**.
 
-1. Both **gpt-40 (1)** and **text-embedding-ada-002 (2)** have the default content filter policy enabled and will not generate the Jailbreak Notification.
+1. Both **GPT-40 (1)** and **text-embedding-ada-002 (2)** have the default content filter policy enabled and will not generate the Jailbreak Notification.
 
    ![](./images/183.png)
 
@@ -73,7 +73,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/185.png)
 
-1. Create the Content Filter with following details:
+1. Create the Content Filter with the following details:
 
     - **Basic Information:**
 
@@ -114,9 +114,11 @@ In this lab, you will complete the following tasks:
 
    ![](./images/192.png)
 
-1. In the Azure AI Foundry portal, go to **Playground** and select **Chat (1)**. Enter **What can you do? (2)** in the input field, then review the generated response **(3)**.
+1. Go to **Playground** and select **Chat (1)**in the Azure AI Foundry portal. Enter **What can you do? (2)** in the input field, then review the generated response **(3)**.
 
    ![](./images/193.png)
+
+1. Right-click on the [GitHub repository](https://github.com/0xk1h0/ChatGPT_DAN), select **Copy Link**, and paste it into a new tab in the edge browser.
 
 1. Under **ChatGPT "DAN" (and other "Jailbreaks") PROMPTS**, expand **The DAN 6.0 Prompt (1)** and copy the content located under **DAN 6.0 Prompt (2)**.
 
@@ -148,7 +150,7 @@ In this lab, you will complete the following tasks:
 
 ## **Summary:**
 
-The tasks guide users to enable AI Workload Plan in Microsoft Defender for Cloud, explore the Azure AI Foundry portal, and validate content filter policies. Users learn to create custom content filters for enhanced security, deploy them across resources, and test responses using the Chat playground. Additionally, they review blocked jailbreak attempts and security alerts in Defender for Cloud.
+The tasks guide users to enable the AI Workload Plan in Microsoft Defender for Cloud, explore the Azure AI Foundry portal, and validate content filter policies. Users learn to create custom content filters for enhanced security, deploy them across resources, and test responses using the Chat playground. Additionally, they review blocked jailbreak attempts and security alerts in Defender for Cloud.
 
 
 ## You have successfully completed the lab
