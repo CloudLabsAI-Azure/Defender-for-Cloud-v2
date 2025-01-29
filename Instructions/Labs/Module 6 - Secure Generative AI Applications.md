@@ -11,7 +11,7 @@ In this lab, we'll explore the steps involved in securing generative AI applicat
 In this lab, you will complete the following tasks:
 
 - Enable AI workload plan
-- Explore the Azure AI Foundary portal
+- Explore the Azure AI Foundry portal
 - Validate Content Filter Policy
 - Create The Content Filter
 
@@ -35,7 +35,7 @@ In this lab, you will complete the following tasks:
 
 1. Verify that the models have an active Content Filter Policy in place.
 
-## **Task 2: Explore Azure AI Foundary portal**
+## **Task 2: Explore Azure AI Foundry portal**
 
 1. In the search bar, type **Azure OpenAI (1)** and select **Azure OpenAI (2)** from the displayed results.  
 
