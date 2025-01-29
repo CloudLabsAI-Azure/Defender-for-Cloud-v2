@@ -46,6 +46,8 @@ In this lab, you will complete the following tasks:
 
    > **Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
 
+10. Once the **Role assignment** has succeeded navigate back to the **mdcremovesharedprivateaccess-bulkupdate** logic app overview page.
+
 1. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
 
     ![](./images/157.png)
@@ -73,6 +75,8 @@ Once deployed, the Logic App should appear as follows:
 
    ![alert_detected](images/mls2.png)
 
+- In the **Microsoft Defender for Cloud**, select **Recommendations** under General.
+
 - Use the pre-defined query to retrieve data. Each recommendation has a corresponding query available on its page in Defender for Cloud.
 
    ![](./images/bulk-update-step-1-a.png)
@@ -82,7 +86,10 @@ Once deployed, the Logic App should appear as follows:
    ![](./images/bulk-update-step-1-b.png)
 
 2. **Setting Up the ARG Query:**
-   
+
+- Navigate back to Logic app and select **mdcremovesharedprivateaccess-bulkupdate** Logic app.
+
+
 - Use HTTP POST to execute the ARG query. Ensure authentication is done via Managed Identity.
 
    ![](./images/bulk-update-step-2.png)

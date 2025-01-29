@@ -102,6 +102,8 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/lab1-image5.png)
 
+   > **Note**: this may take upto 5 minutes please wait till project get created 
+
 1. Once the process is complete, click on **Navigate to project**.
 
    ![](images/lab1-image6.png)
@@ -110,7 +112,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/167.png)
 
-1. Select **Project Administrators** and set **Bypass policies when pushing** to **Allow**.
+1. Select **Project Administrators** and set **Bypass policies when pushing** to **Allow** and click on **X** button.
 
    ![](images/166.png)
 
@@ -226,7 +228,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/artifact1.png)
 
-1. On the All pipelines > New Release Pipeline pane, Click on **Tasks** tab and ensure that the **Stage 1** is selected. In the **Azure subscription(2)** dropdown list, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
+1. On the All pipelines > New Release Pipeline pane, Click on **Tasks** tab and ensure that the **Stage 1** is selected. In the **Azure subscription(2)** dropdown list click on **Authentication**, Confirm the App Type is set to **Web App on Windows(3)**. Next, in the App Service name dropdown list, select the name of the **asclab-app (4)** web app.
 
    ![](images/stage.png)
 
@@ -239,6 +241,8 @@ CD extends CI by automatically deploying all code changes to a production enviro
 1. On the **All pipelines > New Release Pipeline** pane, click **Save** and, in the **Save** dialog box, click **OK**.
 
    ![](images/34.png)
+
+   ![](images/34nnew.png)
 
 1. On the **All pipelines > New Release Pipeline** pane, click **Create release** then click on **Create**.
 
@@ -806,7 +810,9 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
    ![alert_detected](images/advlab52.png)
 
-1. Select **Next: Configure access**
+1. Select **Next: Select plans**
+
+1. In **Select plans**, leave as defult and click on **Next: Configure access**
 
 1. Select **Authorize**. Ensure you're authorizing the correct Azure Tenant using the drop-down menu in Azure DevOps and by verifying you're in the correct Azure Tenant in Defender for Cloud.
 
