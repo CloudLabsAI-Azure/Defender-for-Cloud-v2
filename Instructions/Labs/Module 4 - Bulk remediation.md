@@ -5,7 +5,7 @@ In this lab, we'll explore an alternative remediation method using Azure Resourc
 
 ## Estimated Duration: 30 Minutes
 
-## Lab objectives :
+## Lab Objectives :
 
 In this lab, you will complete the following tasks:
 
@@ -44,18 +44,18 @@ In this lab, you will complete the following tasks:
 
    ![](./images/154.png)
 
-   > **Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
+   >**Note:** By assigning "Contributor" to a specific subscription, the Logic App will only query and remediate resources within that subscription.
 
 10. Once the **Role assignment** has succeeded navigate back to the **mdcremovesharedprivateaccess-bulkupdate** logic app overview page.
 
 1. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
 
-    ![](./images/157.png)
+   ![](./images/157.png)
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
-   - If you receive a success message, you can proceed to the next task.
-   - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-   - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+- If you receive a success message, you can proceed to the next task.
+- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+- If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
  
 <validation step="b68068ee-3edd-4d46-93e8-295ca9d07975" />
 

@@ -6,7 +6,7 @@ In this lab, we'll explore the steps involved in securing generative AI applicat
 
 ## Estimated Duration: 50 min
 
-## Lab objectives : 
+## Lab Objectives : 
 
 In this lab, you will complete the following tasks:
 
@@ -114,7 +114,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/192.png)
 
-1. Go to **Playground** and select **Chat (1)**in the Azure AI Foundry portal. Enter **What can you do? (2)** in the input field, then review the generated response **(3)**.
+1. Go to **Playground** and select **Chat (1)** in the Azure AI Foundry portal. Enter **What can you do? (2)** in the input field, then review the generated response **(3)**.
 
    ![](./images/193.png)
 

@@ -5,7 +5,7 @@ In this lab, will guide you through common use cases where automated triggers ar
 
 ## Estimated Duration: 30 Minutes
 
-## Lab objectives :
+## Lab Objectives :
 
 In this lab, you will complete the following tasks:
 
@@ -54,9 +54,9 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 
 > **Congratulations** on completing the task! Now, it's time to validate it. Here are the steps:
-   - If you receive a success message, you can proceed to the next task.
-   - If not, carefully read the error message and retry the step, following the instructions in the lab guide.
-   - If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
+- If you receive a success message, you can proceed to the next task.
+- If not, carefully read the error message and retry the step, following the instructions in the lab guide.
+- If you need any assistance, please contact us at cloudlabs-support@spektrasystems.com. We are available 24/7 to help you out.
  
 <validation step="576d60d4-518d-4d0b-9401-77165d05aa3b" />
 

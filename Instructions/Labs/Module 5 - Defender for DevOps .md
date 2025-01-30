@@ -5,7 +5,7 @@ In this lab, we'll explore integrating GitHub Advanced Security (GHAS) and Micro
 
 ## Estimated Duration: 180 Minutes
 
-## Lab objectives :
+## Lab Objectives :
 
 In this lab, you will complete the following tasks:
 
