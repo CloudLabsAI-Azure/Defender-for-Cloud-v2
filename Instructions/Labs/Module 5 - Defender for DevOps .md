@@ -17,11 +17,11 @@ In this lab, you will complete the following tasks:
 - Task 6: Connecting and Securing your Azure DevOps environment to MDC
 - Task 7: Role of Defender Cloud Security Posture Management (DCSPM)
 
-## **Task 1: Understanding CI/CD pipelines in Azure DevOps**
+### **Task 1: Understanding CI/CD pipelines in Azure DevOps**
 
 Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
 
-### CI/CD Pipelines in Azure DevOps
+#### CI/CD Pipelines in Azure DevOps
 
 **Continuous Integration (CI):**
 CI involves automatically building and testing your code every time a team member commits changes to version control. The key goals are to detect errors quickly and to improve software quality.
@@ -29,14 +29,14 @@ CI involves automatically building and testing your code every time a team membe
 **Continuous Deployment (CD):**
 CD extends CI by automatically deploying all code changes to a production environment after the build and test stages are successful. This ensures that the software is always in a releasable state.
 
-### 1. Components of a CI/CD Pipeline
+#### 1. Components of a CI/CD Pipeline
 
 1. **Source Control:** Where the code resides (e.g., Git repository).
 2. **Build:** The process of compiling the source code into executable artifacts.
 3. **Test:** Automated tests run to validate the code.
 4. **Release:** Deploying the artifacts to staging or production environments.
 
-### 2. Set up an Azure DevOps organization.
+#### 2. Set up an Azure DevOps organization.
 
 1. On your lab VM open **Edge Browser** on desktop and navigate to [Azure DevOps](https://go.microsoft.com/fwlink/?LinkId=307137), and if prompted sign with the credentials.
 
@@ -70,7 +70,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![Azure DevOps](images/az-400-lab3-3.png)
 
-1. On the **Organization Settings** page, go to the Security section and click **Policies** (1). Enable the toggles for both **Third-party application access via OAuth** (2) and **Allow public projects** (3).
+1. On the **Organization Settings** page, go to the Security section and click **Policies (1)** . Enable the toggles for both **Third-party application access via OAuth (2)**  and **Allow public projects (3)**.
 
    ![](images/nls1.png)
 
