@@ -2,7 +2,16 @@
 
 ## Overview:
 
-In this lab, we'll explore the steps involved in securing generative AI applications by implementing robust content filters and security measures. The lab guides you through enabling AI workload plans in Microsoft Defender for Cloud, validating and creating content filters, and exploring the Azure AI Foundry portal for managing deployments. You will learn how to mitigate risks associated with jailbreak attacks by setting up advanced security features and monitoring alerts in the Azure portal. By the end of this lab, you’ll gain hands-on experience in securing AI models to ensure they operate safely and comply with organizational policies.
+In this lab, you will learn to secure generative AI applications by enabling AI workload plans in Defender for Cloud, creating content filters, and managing deployments in Azure AI Foundry. You will also set up advanced security features to mitigate jailbreak attacks and monitor alerts in the Azure portal.
+
+## Architecture
+
+The architecture showcases a **secure DevOps and AI-driven cloud solution**, integrating **Azure, AWS, and security services**. The workflow begins with a **developer** pushing code to **Azure DevOps**, which then stores container images in **Azure Container Registry (ACR)**. These images are deployed to **AKS (Azure Kubernetes Service) or EKS (Amazon Elastic Kubernetes Service)**, while **Key Vault** manages secrets and credentials.  
+Security is enforced through **Defender for Cloud**, **API Gateway (WAF), and Entra ID** for authentication. The deployed applications interact with **Amazon Bedrock and Azure OpenAI** for AI processing, while data is stored in **Azure SQL and Storage Accounts**. **Logs are collected in Log Storage** and monitored via **Microsoft Sentinel**, ensuring security and compliance across the infrastructure.
+
+## Architecture Diagram
+
+![](images/arch.png)
 
 ## Estimated Duration: 50 min
 
@@ -15,7 +24,7 @@ In this lab, you will complete the following tasks:
 - Validate Content Filter Policy
 - Create The Content Filter
 
-## **Task 1: Enable AI workload plan**
+### **Task 1: Enable AI workload plan**
 
 1. In the search bar, type **Microsoft Defender (1)** and select **Microsoft Defender for Cloud (2)** from the results.
 
@@ -35,7 +44,7 @@ In this lab, you will complete the following tasks:
 
 1. Verify that the models have an active Content Filter Policy in place.
 
-## **Task 2: Explore Azure AI Foundry portal**
+### **Task 2: Explore Azure AI Foundry portal**
 
 1. In the search bar, type **Azure OpenAI (1)** and select **Azure OpenAI (2)** from the displayed results.  
 
@@ -59,7 +68,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/182.png)
 
-## **Task 3: Validate Content Filter Policy**
+### **Task 3: Validate Content Filter Policy**
 
 1. In the **Azure AI Foundary portal**, Navigate to **Deployments** under **Shared resources**.
 
@@ -67,7 +76,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/183.png)
 
-## **Task 4: Create The Content Filter**
+### **Task 4: Create The Content Filter**
 
 1. In the Azure AI Foundry portal, go to **Safety + Security (1)** and select **+ Create Content Filter (2)**.
 

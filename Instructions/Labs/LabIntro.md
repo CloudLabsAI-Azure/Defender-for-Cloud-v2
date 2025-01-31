@@ -10,20 +10,23 @@ In this hands-on lab, you will explore Microsoft Defender for Cloud, focusing on
 
 Understand how to utilize Azure DevOps and Defender for Cloud to enhance your cloud security posture. By the end of this lab, you will be able to:
 
-- **Getting Started with Defender for Cloud:** Learn how to trigger automated and manual responses using Defender for Cloud. Gain insight into initiating and managing cloud security alerts and responses.
+- **Response Triggers :** Learn how to trigger automated and manual responses using Defender for Cloud. Gain insight into initiating and managing cloud security alerts and responses.
 - **Writing and Deploying Logic Apps:** Develop hands-on skills in writing and deploying Logic Apps for cloud security automation. Understand how to integrate these apps into your cloud security strategy.
-- **Implementing Remediation Strategies:** Explore automated and manual remediation options within Defender for Cloud and evaluate their effectiveness in addressing security issues.
-- **Securing DevOps Pipelines:** Integrate security scanning solutions into your DevOps pipelines with GHAS and Defender for DevOps, ensuring continuous security throughout the development lifecycle.
+- **Remediation Options:** Explore automated and manual remediation options within Defender for Cloud and evaluate their effectiveness in addressing security issues.
+- **Bulk Remediation:** Explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
+- **Defender for DevOps:** Explore integrating GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps into your CI/CD pipeline to enhance security. We’ll focus on using GHAS and Defender for DevOps to automatically detect and address security issues within your pipeline. Instead of solely relying on traditional security measures, we’ll configure these tools to provide continuous security assessments and proactive responses directly within your DevOps environment.
+- **Secure Generative AI Applications:** Learn to secure generative AI applications by enabling AI workload plans in Defender for Cloud, creating content filters, and managing deployments in Azure AI Foundry. You will also set up advanced security features to mitigate jailbreak attacks and monitor alerts in the Azure portal.
 
 ## Pre-requisites
 
 - Familiarity with Microsoft Defender for Cloud.
-- Basic understanding of Logic Apps and Azure DevOps.
+- Basic understanding of Logic Apps, Azure DevOps and OpenAI.
 - Knowledge of cloud security principles.
 
 ## Architecture
 
-The architecture for this lab focuses on integrating Microsoft Defender for Cloud with various security and automation tools to secure cloud resources and development pipelines. This architecture enables the automation of security responses, continuous monitoring of cloud environments, and the protection of CI/CD pipelines. Below is a detailed explanation of the architecture components and how they interact within the context of this lab.
+The architecture follows an automation-first security approach, leveraging **Azure Logic Apps, Microsoft Defender for DevOps, and AI security measures**. It begins with **response triggers and Logic Apps** to automate security workflows, followed by defining **remediation options and bulk remediation** for large-scale security fixes.  
+Next, **Defender for DevOps** integrates security into development pipelines, ensuring compliance and threat protection. The final step focuses on **securing Generative AI applications**, applying best practices for AI security, compliance, and responsible AI principles.
 
 ## Architecture Diagram
 
@@ -48,6 +51,8 @@ The architecture for this lab focuses on integrating Microsoft Defender for Clou
 9. **Defender Cloud Security Posture Management (DCSPM)**: DCSPM provides a holistic view of your cloud security posture, offering insights, recommendations, and automated actions to improve security. It plays a critical role in maintaining and enhancing the security of your cloud environments.
 
 10. **Third-Party Security Scanning Tools**: These tools can be integrated with Defender for Cloud to provide additional security scanning capabilities beyond what is offered by Microsoft solutions. Integrating these tools allows for a more comprehensive security strategy that leverages the strengths of multiple providers.
+
+11. **OpenAI**: OpenAI can be integrated with Defender for Cloud to enhance security analysis, anomaly detection, and automated threat responses using advanced AI models. This integration enables a more proactive and intelligent security strategy beyond Microsoft’s built-in solutions.
 
 ## Getting Started with the Lab
  
