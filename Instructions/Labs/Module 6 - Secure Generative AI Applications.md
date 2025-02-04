@@ -1,4 +1,4 @@
-# **Lab 6: Secure Generative AI Applications**
+# **Lab 6: Secure Generative AI Applications (Read-Only)**
 
 ## Overview:
 
