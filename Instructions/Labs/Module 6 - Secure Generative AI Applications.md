@@ -13,7 +13,7 @@ Security is enforced through Defender for Cloud, API Gateway (WAF), and Entra ID
 
 ![](images/arch.png)
 
-## Estimated Duration: 50 min
+## Estimated Duration: 30 min
 
 ## Lab Objectives : 
 
