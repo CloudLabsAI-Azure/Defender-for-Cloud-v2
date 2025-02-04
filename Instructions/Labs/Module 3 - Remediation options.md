@@ -1,4 +1,4 @@
-# **Lab 3 : Remediation Options**
+# Lab 3 : Remediation Options
 
 ## Overview:
 In this lab, we will explore how to leverage Defender for Cloud’s built-in capabilities for automated and manual remediation. If you're interested in applying these concepts within Azure Sentinel, please inform the workshop instructor, and they can arrange a follow-up.
@@ -108,7 +108,7 @@ In this lab, you will complete the following tasks:
  
 <validation step="f96ddd2f-b0d3-4b1e-b6bb-d833f49007a6" />
 
-### **Summary**
+### Summary:
 
 In this lab, you set up automated remediation in Microsoft Defender for Cloud using Workflow Automation to address storage account recommendations. You also configured manual remediation with Governance Rules for review and controlled execution of actions, demonstrating both automated and manual approaches to handling security recommendations.
 

@@ -1,4 +1,4 @@
-# **Lab 5 : Defender for DevOps**
+# Lab 5 : Defender for DevOps
 
 ## Overview:
 In this lab, we'll explore integrating GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps into your CI/CD pipeline to enhance security. We’ll focus on using GHAS and Defender for DevOps to automatically detect and address security issues within your pipeline. Instead of solely relying on traditional security measures, we’ll configure these tools to provide continuous security assessments and proactive responses directly within your DevOps environment.
@@ -17,7 +17,7 @@ In this lab, you will complete the following tasks:
 - Task 6: Connecting and Securing your Azure DevOps environment to MDC
 - Task 7: Role of Defender Cloud Security Posture Management (DCSPM)
 
-### **Task 1: Understanding CI/CD pipelines in Azure DevOps**
+### Task 1: Understanding CI/CD pipelines in Azure DevOps
 
 Continuous Integration and Continuous Deployment (CI/CD) are critical practices in modern software development, enabling teams to deliver code changes more frequently and reliably. Azure DevOps provides a robust platform to implement CI/CD pipelines. Here’s a basic understanding and a simple pipeline example to get you started.
 
@@ -269,7 +269,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
  
 <validation step="d1bea6eb-b9ab-4f67-8bbd-f90e80f58b8e" />
 
-## **Task 2: Identifying security issues in the pipeline** 
+## Task 2: Identifying security issues in the pipeline
 
 Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infrastructure as Code (IaC) templates for security issues. This process ensures early detection of vulnerabilities, enhances compliance and improves your overall security posture within existing DevOps workflows.
 
@@ -565,7 +565,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/lab5-34.png)
 
-## **Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]**
+## Task 3: Overview of GitHub Advanced Security (GHAS) [Read-Only]
 
 ### Overview of GitHub Advanced Security (GHAS)
 
@@ -631,7 +631,7 @@ To use GHAS, you need to have GitHub Advanced Security enabled for your reposito
       - GitHub Advanced Security continuously monitors your repository and generates alerts for any new issues found.
       - Make it a habit to regularly review the `Security` tab and address any new alerts promptly.
 
-## **Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]**
+## Task 4: Overview of Defender for DevOps (including pricing) [Read-Only]
 
 Defender for DevOps is a security solution by Microsoft designed to enhance the security of DevOps environments. It provides a range of tools and features to help secure the software development lifecycle (SDLC) and protect against threats that target DevOps processes. Here's an overview:
 
@@ -662,7 +662,7 @@ For exact pricing details, especially as they can vary based on the size of the 
 
 **DevOps Security Posture** is included as part of the **Defender for CSPM** plan, which provides a unified view of your security posture across various cloud environments, including DevOps. This integration means that DevOps security capabilities are seamlessly integrated into the overall cloud security management, offering a more comprehensive approach to securing both your cloud infrastructure and development workflows.
 
-## **Task 5: Securing your pipeline with GHAS**
+## Task 5: Securing your pipeline with GHAS
 
 To secure your pipeline with GitHub Advanced Security (GHAS) and Microsoft Defender for DevOps, you can integrate these tools to enhance your pipeline's security posture. Here’s an example of how to use GHAS and Defender for DevOps for security:
 
@@ -783,7 +783,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
    ![](images/165.png)
 
-## **Task 6: Connecting and Securing your Azure DevOps environment to MDC**
+## Task 6: Connecting and Securing your Azure DevOps environment to MDC
 
 1. Navigate to the Azure portal.
 
@@ -928,7 +928,7 @@ To ensure Azure DevOps Advanced Security is enabled in your organization, you ca
 
 1. Defender for Cloud will continuously monitor your connected GitHub repositories and provide real-time security recommendations. You can monitor these from the **Secure Score** and **Recommendations** sections.
 
-## **Task 7: Integrating non-MS security scan solutions with MDC**
+## Task 7: Integrating non-MS security scan solutions with MDC
 
 To enhance your security posture comprehensively, integrating non-Microsoft security scan solutions with Microsoft Defender for Cloud (MDC) is a strategic approach. For a straightforward integration of a security scan into your Azure DevOps pipeline using **Snyk** with minimal configuration, follow these steps:
 
@@ -1164,7 +1164,7 @@ To enhance your security posture comprehensively, integrating non-Microsoft secu
 
 1. In the Microsoft Defender for Cloud dashboard, navigate to the **Recommendations** section.
 
-## **Task 8: Role of Defender Cloud Security Posture Management (DCSPM)** 
+## Task 8: Role of Defender Cloud Security Posture Management (DCSPM)
 
 DevOps Security Posture, as part of Cloud Security Posture Management (CSPM), involves assessing and enhancing the security of your development and deployment processes within the cloud. Here's a detailed discussion on what CX (Customer Experience) gets in terms of DevOps security posture within CSPM:
 
@@ -1252,7 +1252,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    >**Note**: It may take up to 24 hours to receive all the recommendations.
 
-### **Remove the Azure DevOps billing**
+### Remove the Azure DevOps billing
 
 1. On the lab computer, switch to the browser window displaying Azure DevOps organization homepage and select **Organization Settings** at bottom left corner.
 
@@ -1262,7 +1262,7 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
    ![](images/lab5-39.png)
 
-### **Deleting Github repository**
+### Deleting Github repository
 
 1. Navigate to the Defender-for-cloud repository main page on GitHub.
 
@@ -1286,7 +1286,8 @@ To showcase the DevOps security posture provided by CSPM, you can create a lab o
 
 1. This will permanently delete the repository.
 
-## **Summary**  
+## Summary:
+
 In this module, you explored various aspects of securing CI/CD pipelines in Azure DevOps. You began by understanding the role of CI/CD pipelines and identifying potential security vulnerabilities within them. Using Defender for DevOps, you pinpointed and assessed security issues, learning how they could impact your pipeline. You also reviewed GitHub Advanced Security (GHAS) and Defender for DevOps, gaining insight into their features and pricing. Integration tasks included securing your pipeline with GHAS and Defender for DevOps, and connecting Azure DevOps to Microsoft Defender for Cloud (MDC) Finally, you examined the role of Defender Cloud Security Posture Management (DCSPM) in enhancing your cloud security posture. This module provided a comprehensive approach to securing DevOps environments and pipelines, integrating various security tools to improve overall security and management.
 
 ## You have successfully completed the lab >> Click on Next
