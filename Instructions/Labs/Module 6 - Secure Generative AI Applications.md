@@ -6,8 +6,7 @@ In this lab, you will learn to secure generative AI applications by enabling AI 
 
 ## Architecture:
 
-The architecture showcases a secure DevOps and AI-driven cloud solution, integrating Azure and security services. The workflow begins with a developer pushing code to Azure DevOps, which then stores container images in Azure Container Registry (ACR). These images are deployed to AKS (Azure Kubernetes Service) or EKS (Amazon Elastic Kubernetes Service), while Key Vault manages secrets and credentials.  
-Security is enforced through Defender for Cloud, API Gateway (WAF), and Entra ID for authentication. The deployed applications interact with Azure OpenAI for AI processing, while data is stored in Azure SQL and Storage Accounts. Logs are collected in Log Storage and monitored via Microsoft Sentinel, ensuring security and compliance across the infrastructure.
+The architecture integrates Azure services for a secure DevOps and AI-driven cloud solution. Code is pushed to Azure DevOps, storing container images in Azure Container Registry (ACR) and deploying them to Azure Kubernetes Service (AKS). Azure Key Vault manages secrets, while security is enforced via Defender for Cloud, API Gateway (WAF), and Entra ID. Applications interact with Azure OpenAI, with data stored in Azure SQL and Storage Accounts. Logs are collected in Log Storage and monitored using Microsoft Sentinel for security and compliance.
 
 ## Architecture Diagram
 

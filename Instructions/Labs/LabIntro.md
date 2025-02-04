@@ -25,8 +25,7 @@ Understand how to utilize Azure DevOps and Defender for Cloud to enhance your cl
 
 ## Architecture
 
-The architecture follows an automation-first security approach, leveraging **Azure Logic Apps, Microsoft Defender for DevOps, and AI security measures**. It begins with **response triggers and Logic Apps** to automate security workflows, followed by defining **remediation options and bulk remediation** for large-scale security fixes.  
-Next, **Defender for DevOps** integrates security into development pipelines, ensuring compliance and threat protection. The final step focuses on **securing Generative AI applications**, applying best practices for AI security, compliance, and responsible AI principles.
+The architecture follows an automation-first security approach, leveraging Azure Logic Apps, Microsoft Defender for DevOps, and AI security measures. It begins with response triggers and Logic Apps to automate security workflows, followed by defining remediation options and bulk remediation for large-scale security fixes.Defender for DevOps integrates security into development pipelines, ensuring compliance and threat protection. The final step focuses on securing Generative AI applications, applying best practices for AI security, compliance, and responsible AI principles.
 
 ## Architecture Diagram
 
