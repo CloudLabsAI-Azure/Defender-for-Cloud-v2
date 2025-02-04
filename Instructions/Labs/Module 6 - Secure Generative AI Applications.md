@@ -26,7 +26,7 @@ In this lab, you will complete the following tasks:
 
 ### Task 1: Enable AI workload plan
 
-1. In the search bar, type **Defender for Cloud* (1)** and select **Microsoft Defender for Cloud (2)** from the results.
+1. In the search bar, type **Defender for Cloud (1)** and select **Microsoft Defender for Cloud (2)** from the results.
 
    ![](images/178.png)
 
