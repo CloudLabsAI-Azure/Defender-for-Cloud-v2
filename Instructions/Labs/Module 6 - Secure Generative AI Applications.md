@@ -140,7 +140,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/194.png)
 
-1. Navigate back to azure portal, Search for **Defender for cloud (1)** and select **Microsoft Defender for Cloud (2)**.
+1. Navigate back to azure portal, search for **Defender for cloud (1)** and select **Microsoft Defender for Cloud (2)**.
 
    ![](images/178.png)
 
@@ -159,6 +159,5 @@ In this lab, you will complete the following tasks:
 ## Summary:
 
 The tasks guide users to enable the AI Workload Plan in Microsoft Defender for Cloud, explore the Azure AI Foundry portal, and validate content filter policies. Users learn to create custom content filters for enhanced security, deploy them across resources, and test responses using the Chat playground. Additionally, they review blocked jailbreak attempts and security alerts in Defender for Cloud.
-
 
 ## You have successfully completed the lab
