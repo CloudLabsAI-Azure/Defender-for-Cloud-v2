@@ -18,10 +18,10 @@ The architecture integrates Azure services for a secure DevOps and AI-driven clo
 
 In this lab, you will complete the following tasks:
 
-- Enable AI workload plan
-- Explore the Azure AI Foundry portal
-- Validate Content Filter Policy
-- Create The Content Filter
+- Task 1: Enable AI workload plan
+- Task 2: Explore the Azure AI Foundry portal
+- Task 3: Validate Content Filter Policy
+- Task 4: Create The Content Filter
 
 ### Task 1: Enable AI workload plan
 
