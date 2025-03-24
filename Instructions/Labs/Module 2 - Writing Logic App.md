@@ -42,7 +42,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
    ![](./images/mod2-ar.png)
 
-9. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**. 
+9. On the **Azure role assignments (1)** page, select **+ Add role assignment (preview)**, set the **subscription (2)** as the scope, select the subscription **(3)** and choose **Contributor (4)** for the role. Then, click **Save (5)**. 
 
    ![](./images/155.png)
 
