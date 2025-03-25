@@ -32,6 +32,8 @@ In this lab, you will complete the following tasks:
 
    ![](./images/152.png)
 
+   >**Note:** If the resource is not visible, click the refresh button.
+
 1. Navigate to **Settings** and select **Identity (1)** from the list.
 
 1. Choose **System assigned (2)** and set the Status to **On (3)**.
@@ -40,7 +42,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/153.png)
 
-1. On the **Azure role assignments** page, select **+ Add role assignment (preview)**, set the **subscription** as the scope, and choose **Contributor** for the role. Then, click **Save**.   
+1. On the **Azure role assignments** page, select **+ Add role assignment (preview)** **(1)**, set the **subscription** **(2)** as the scope, select your subscription **(3)** and choose **Contributor (4)** for the role. Then, click **Save (5)**.   
 
    ![](./images/154.png)
 
@@ -89,6 +91,11 @@ Once deployed, the Logic App should appear as follows:
 
 - Navigate back to Logic app and select **mdcremovesharedprivateaccess-bulkupdate** Logic app.
 
+- Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
+
+   ![](./images/157.png)
+
+- Click on **HTTP - ARG Storage Accounts**
 
 - Use HTTP POST to execute the ARG query. Ensure authentication is done via Managed Identity.
 
