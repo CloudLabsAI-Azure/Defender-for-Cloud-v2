@@ -71,7 +71,7 @@ In this lab, you will complete the following tasks:
 
    ![](./images/111.png)
 
-1. Under **Set owner**, select **By email address** and enter the email address **<inject key="AzureAdUserEmail"></inject>**. Set a 90-day remediation timeframe and configure the email notification to be sent on **Monday**. Then click **Create**.
+1. Under **Set owner**, select **By email  (1)** and enter the email address **<inject key="AzureAdUserEmail"></inject>** **(2)**. Set a 90-day **(3)** remediation timeframe and configure the email notification to be sent on **Monday (4)**. Then click **Create** **(5)**.
 
    ![](./images/109.png)
 
@@ -81,7 +81,7 @@ In this lab, you will complete the following tasks:
 
 1. The Control Owner can now review the recommendation in the Defender Portal and execute the remediation on the appropriate "unhealthy" resources, as outlined in [Module 1](./Module%201%20-%20Recommendation%20triggers.md).
 
-1. Navigate to the **Recommendation** tab under **General**, search for **Shared**, and select the relevant recommendation.
+1. Navigate to the **Recommendation** **(1)** tab under **General**, search for **Shared** **(2)**, and select the relevant recommendation.
 
    ![](./images/107.png)
 
