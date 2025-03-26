@@ -44,21 +44,21 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    * Password: <inject key="AzureAdUserPassword"></inject>
 
-2. If prompted click **Ask later** on **Action Required** page.
+1. If prompted click **Ask later** on **Action Required** page.
 
 3. On the next page accept defaults and click on continue.
    
    ![](images/AZ-400-odl.png)
    
-4. On the **Almost Done...** page fill in the captcha and click on continue. 
+1. On the **Almost Done...** page fill in the captcha and click on continue. 
 
    ![](images/AZ-400-almost.png)
     
-5. On the Azure DevOps page click on **Azure DevOps** located at top left corner and then click on **Organization Setting** at the left down corner
+1. On the Azure DevOps page click on **Azure DevOps** located at top left corner and then click on **Organization Setting** at the left down corner
 
    ![Azure DevOps](images/az-400-lab3-(1).png)
     
-6. In the **Organization Setting** window on the left menu click on **Billing (1)** .
+1. In the **Organization Setting** window on the left menu click on **Billing (1)** .
 
    ![Azure DevOps](images/az-400-lab3-1.png)
 
@@ -66,7 +66,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![Azure DevOps](images/az-400-lab3-2.png)    
 
-7. On the **MS Hosted CI/CD (1)** section under **Paid parallel jobs** enter value **1** and at the end of the page click on **Save (2)**.
+1. On the **MS Hosted CI/CD (1)** section under **Paid parallel jobs** enter value **1** and at the end of the page click on **Save (2)**.
 
    ![Azure DevOps](images/az-400-lab3-3.png)
 
@@ -84,29 +84,83 @@ CD extends CI by automatically deploying all code changes to a production enviro
    https://azuredevopsdemogenerator.azurewebsites.net/
    ```
   
-1. Click on **Sign in** and log in using the Microsoft account associated with your Azure DevOps subscription.
+1. Navigate to **azuredevopsdemogenerator** using the link below. This utility site will automate the process of creating a new Azure DevOps project within your account that is prepopulated with content (work items, repos, etc.) required for the lab. For more information on the site, please see [https://docs.microsoft.com/en-us/azure/devops/demo-gen](https://docs.microsoft.com/en-us/azure/devops/demo-gen).
 
-   ![](images/lab1-image2.png)
+   ```
+   https://azuredevopsdemogenerator.azurewebsites.net/
+   ```
 
-1. Please click on **Accept** to grant permission to access your subscription.
+   ![](images/198.png)
 
-1. Click **Choose Template**.
+1. Since authentication is disabled, follow below steps to create the project
 
-   ![](images/lab1-image3.png)
+1. Navigate to Azure Devops Organization portal, then Click on **User settings (1)** and select **Personal access tokens (2)**.
 
-1. Select the **eShopOnWeb (1)** template and click on **Select Template (2)**.
+   ![allow-permissions](images/v1.png)
 
-   ![](images/lab1-image4.png)
+1. Select **+ New Token**.
 
-1. Provide a project name, **eShopOnWeb (1)**, and choose your **Organization (2)**, then click on **Create Project (3)** and wait for the process to complete.
+   ![](images/199.png)
 
-   ![](images/lab1-image5.png)
+1. On **Create a new personal access token** window, enter the below values and click on **Create (3)**.
 
-   > **Note**: this may take upto 5 minutes please wait till project get created 
+    | Setting | Value |
+    |----------|-------|
+    | Name | **Demogenerator (1)** |
+    | Scopes | **full access (2)** |
 
-1. Once the process is complete, click on **Navigate to project**.
+    ![allow-permissions](images/200.png)
 
-   ![](images/lab1-image6.png)
+1. Once you've generated the token, click on the **Copy** icon to the right of the secret value in the notepad. Once copied, click on **Close**.
+
+   ![allow-permissions](images/06-26-2024(1).png)
+
+1. On the LabVM, Open the Start menu **(1)** and search for **Visual Studio 2022 (2)**. Select **Visual Studio 2022 (3)** to run it.
+
+    ![Dependencies](images/201.png)
+
+1. Select **Clone a repository** option from the Get started
+
+    ![Dependencies](images/202.png)
+
+1. Provide the below URL **(1)** for Repository location and select **Clone (2)**
+
+   ```
+   https://github.com/microsoft/AzDevOpsDemoGenerator/
+   ```
+    ![Dependencies](images/2023.png)
+
+   >**Note:** If prompt visual studio installer then click on **Install**.
+
+   ![Dependencies](images/203.png)
+
+1. Switch to **Solution Explorer**, right-click on **ADOGenerator (2)** project, and select **Set as Starer Project (3)**
+
+    ![Dependencies](images/204.png)
+
+1. Right-click on the **ADOGenerator (1)** solution file and select **Build solution (2)**.
+
+    ![Dependencies](images/205.png)
+
+1. Wait for the build to complete (1), then select **Start** from the top menu to run the project.
+
+    ![Dependencies](images/206.png)
+
+1. When prompted, enter the following details to create the **eShopOnWeb** project in your Azure DevOps organization.
+
+   | Settings | Value |
+   ---------|---------
+   |Enter the template number from the list of templates above | Enter *1* to select the eShopOnWeb template |
+   |Choose authentication method | Enter *2* for PAT authentication |
+   |Enter your Azure DevOps organization name | Enter **odluser<inject key="DeploymentID" enableCopy="false"/>** |
+   |Enter your Azure Devops Personal access token | Copy and paste the **PAT Token** from the notepad |
+   |Enter the new project name | Enter **eShopOnWeb** |
+
+    ![Dependencies](images/207.png)
+
+1. You can go to your organization to confirm that the project was created once you see the Project created successfully message.
+ 
+    ![Dependencies](images/208.png)
 
 1. Click on **Repos** > **Branches**, then click the ellipsis next to your branch and select **Branch security**.
 
