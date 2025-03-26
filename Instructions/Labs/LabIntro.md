@@ -1,6 +1,6 @@
 # Microsoft Defender for Cloud Workshop - V2
 
-### Overall Estimated Duration: 5 Hours
+### Overall Estimated Duration: 8 Hours
 
 ## Overview
 
