@@ -418,9 +418,7 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/137.png)
 
-1. You'll see the **Sign into Microsoft Outlokk** tab. Here, enter your credentials:
- 
-   - **Email/Username:** 
+1. You'll see the **Sign into Microsoft Outlokk** tab. Here, enter your email:
  
        ![Enter Your Username](images/138.png)
  
