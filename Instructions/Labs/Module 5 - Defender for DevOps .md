@@ -292,15 +292,18 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/27.png)
 
-1. On the **All pipelines > New Release Pipeline** pane, click **Save** and, in the **Save** dialog box, click **OK**.
+1. On the **All pipelines > New Release Pipeline** pane, click **Save**.
 
    ![](images/34.png)
 
-   ![](images/34nnew.png)
+1. In the **Save** dialog box, click **OK**.
+
 
 1. On the **All pipelines > New Release Pipeline** pane, click **Create release** then click on **Create**.
 
    ![](images/29.png)
+   
+   ![](images/34nnew.png)
 
 1. Wait until the release pipeline is completed.
 
