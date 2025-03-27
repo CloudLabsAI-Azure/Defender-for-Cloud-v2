@@ -134,17 +134,17 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![Dependencies](images/203.png)
 
-1. Switch to **Solution Explorer**, right-click on **ADOGenerator (2)** project, and select **Set as Starer Project (3)**
+1. Switch to **Solution Explorer**, right-click on **ADOGenerator (2)** project, and select **Set as Starer Project (3)**.
 
-    ![Dependencies](images/204.png)
+   ![Dependencies](images/204.png)
 
 1. Right-click on the **ADOGenerator (1)** solution file and select **Build solution (2)**.
 
-    ![Dependencies](images/205.png)
+   ![Dependencies](images/205.png)
 
 1. Wait for the build to complete (1), then select **Start** from the top menu to run the project.
 
-    ![Dependencies](images/206.png)
+   ![Dependencies](images/206.png)
 
 1. When prompted, enter the following details to create the **eShopOnWeb** project in your Azure DevOps organization.
 
@@ -176,7 +176,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. After clicking the three-dot menu, a dropdown list appears. From this list, hover over the **New** option. This will allow you to create new items in the repository.
 
-1. Under the **New** submenu, you have the option to create a "File" or a "Folder." In this case, you would click on **File** to start creating a new file within the repository.
+1. Under the **+ New** submenu, you have the option to create a "File" or a "Folder." In this case, you would click on **File** to start creating a new file within the repository.
 
    ![](images/89.png)
 
@@ -286,11 +286,23 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
    ![](images/stage.png)
 
-   >**Note**: After Selecting your Azure subscription click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription
+   >**Note**: After Selecting your Azure subscription click Authorize. If prompted, authenticate by using the user account with the Owner role in the Azure subscription.
 
-1. Select the Task **Deploy Azure App Service**. In the **Package or Folder** field, Select Package or Folder. it shoud look like `"$(System.DefaultWorkingDirectory)/_eShopOnWeb (2)/html-artifact"`
+1. Right-click on **Deploy Azure App Service (1)** and choose **Disable selected task(s) (2)**.
 
-   ![](images/27.png)
+   ![](images/209.png)
+
+1. Click on the **+ (1)** next to "Run an agent" to add a task. Then, search for **Azure App Service Deploy (2)** and select **Azure App Service Deploy (3)** from the list.
+
+   ![](images/210.png)
+
+1. Select the **Azure App Service Deploy (1)** task, then choose the **Azure subscription (2)** from the drop-down menu. Next, select the **App Service name (3)** and, in the **Package or Folder (4)** field, select **Package or Folder**. 
+
+   ![](images/211.png)
+
+   >**Note:** To select the **Package or Folder** field, choose **Package or Folder** and then follow the steps provided in the image below.
+
+    ![](images/27.png)
 
 1. On the **All pipelines > New Release Pipeline** pane, click **Save**.
 
@@ -298,6 +310,7 @@ CD extends CI by automatically deploying all code changes to a production enviro
 
 1. In the **Save** dialog box, review your selections and click **OK** to confirm and finalize the saving process.
 
+   ![](images/212.png)
 
 1. On the **All pipelines > New Release Pipeline** pane, click **Create release** then click on **Create**.
 
@@ -418,7 +431,9 @@ Integrate Microsoft Security DevOps into your Azure DevOps pipeline to scan Infr
 
    ![](images/137.png)
 
-1. You'll see the **Sign into Microsoft Outlokk** tab. Here, enter your email:
+1. You'll see the **Sign into Microsoft Outlokk** tab. Here, enter your credentials:
+ 
+   - **Email/Username:** 
  
        ![Enter Your Username](images/138.png)
  
