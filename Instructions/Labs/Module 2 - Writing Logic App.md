@@ -48,7 +48,7 @@ In this task, you'll deploy a Logic App with pre-configured triggers based on De
 
 10. Once the **Role assignment** has succeeded navigate back to the **mdcremovesharedprivateaccess** logic app overview page.
 
-11. Click on **Edit** in the Azure Logic App interface allows which you to modify the existing workflow or configuration of the Logic App.
+11. Click on **Edit** in the Azure Logic App interface which allows you to modify the existing workflow or configuration of the Logic App.
 
     ![](./images/173.png)
 

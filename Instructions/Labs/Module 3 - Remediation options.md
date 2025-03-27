@@ -67,11 +67,11 @@ In this lab, you will complete the following tasks:
 
    ![](./images/106.png)
 
-1. On the Conditions page, choose **By specific recommendation**, search for **Shared**, and select the recommendation titled **Storage accounts should restrict shared key access**.
+1. On the Conditions page, choose **By specific recommendation**, search for **Shared**, and select the recommendation titled **Storage accounts should prevent shared key access**.
 
    ![](./images/111.png)
 
-1. Under **Set owner**, select **By email  (1)** and enter the email address **<inject key="AzureAdUserEmail"></inject>** **(2)**. Set a 90-day **(3)** remediation timeframe and configure the email notification to be sent on **Monday (4)**. Then click **Create** **(5)**.
+1. Under **Set owner**, select **By email address (1)** and enter the email address **<inject key="AzureAdUserEmail"></inject>** **(2)**. Set a 90-day **(3)** remediation timeframe and configure the email notification to be sent on **Monday (4)**. Then click **Create** **(5)**.
 
    ![](./images/109.png)
 
